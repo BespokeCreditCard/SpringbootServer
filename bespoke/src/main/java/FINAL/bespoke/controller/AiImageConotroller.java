@@ -1,5 +1,5 @@
 package FINAL.bespoke.controller;
 
-public class UserPointsController {
+public class AiImageConotroller {
 
 }

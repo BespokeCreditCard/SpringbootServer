@@ -1,5 +1,5 @@
 package FINAL.bespoke.service;
 
-public class UsersService {
+public class AddressService {
 
 }

@@ -1,5 +1,5 @@
 package FINAL.bespoke.controller;
 
-public class UsersController {
+public class ReviseMemberController {
 
 }
