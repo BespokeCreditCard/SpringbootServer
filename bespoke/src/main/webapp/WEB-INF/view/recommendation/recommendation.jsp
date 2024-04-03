@@ -5,25 +5,16 @@
     <title>AI 이미지 생성</title>
 </head>
 <body>
-    <div style="float: left; width: 50%;">
-        <h2>AI 이미지 생성</h2>
-        <img src="${aiImage}" alt="AI Image">
-    </div>
-    <div style="float: right; width: 50%;">
-        <h2>텍스트 편집</h2>
-        <!-- 텍스트 편집 관련 내용 추가 -->
-        <button>텍스트 편집 버튼</button>
-    </div>
-    <div style="clear: both;"></div>
-    <div style="float: left; width: 50%;">
-        <h2>카드 미리보기</h2>
-        <!-- 카드 미리보기 관련 내용 추가 -->
-        <button>카드 미리보기 버튼</button>
-    </div>
-    <div style="float: right; width: 50%;">
-        <h2>카드 임시저장</h2>
-        <!-- 카드 임시저장 관련 내용 추가 -->
-        <button>카드 임시저장 버튼</button>
+    <div style="width: 50%;">
+        <div> top 5 card </div>
+        <%-- RecommendationController에서 전달된 데이터를 출력하는 부분 --%>
+        <ul>
+            <li>${recommendations.recommendation1}</li>
+            <li>${recommendations.recommendation2}</li>
+            <li>${recommendations.recommendation3}</li>
+            <li>${recommendations.recommendation4}</li>
+            <li>${recommendations.recommendation5}</li>
+        </ul>
     </div>
     <div style="clear: both;"></div>
 </body>
