@@ -16,18 +16,11 @@ public class ImageController {
     public String showHomePage(Model model) {
         // 이미지 생성 로직을 통해 ImageDto 객체를 생성합니다.
  //   	ImageDto aiImage;
-    	String aiImage = "";
+    	String selectImage = "";
 		try {
-	        System.out.println("#####################################################################");
-	        System.out.println("aiImage before : " + aiImage.getClass().getName());
-	        System.out.println("#####################################################################");
-			aiImage = imageService.generateImage();
-	        System.out.println("#####################################################################");
-	        System.out.println("aiImage after : " + aiImage.getClass().getName());
-	        System.out.println("aiImage : " + aiImage);
-	        System.out.println("#####################################################################");
+			selectImage = imageService.generateImage();
 			// 모델에 ImageDto 객체를 추가합니다.
-			model.addAttribute("aiImage", aiImage);
+			model.addAttribute("selectImage", selectImage);
         
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
