@@ -9,10 +9,10 @@
 </head>
 <body>
 <%-- include로 가져올거야 --%>
-	 <%@include file = "/WEB-INF/view/include/header.jsp" %>
+	 <%-- <%@include file = "/WEB-INF/view/include/header.jsp" %> --%>
 	 Hello Web
 	 
-	 <%@include file = "/WEB-INF/view/recommendation/recommendation.jsp" %>
+	 <%@include file = "/WEB-INF/view/recommendation_view/recommendation.jsp" %>
 	 <%-- jpg 파일은 안되고 png 파일만 가능 --%>
 	 <%-- resource/static/img/shin.png --%>
 	 <%-- <img src="/img/profile.png" /> --%>
