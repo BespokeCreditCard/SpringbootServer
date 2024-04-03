@@ -12,9 +12,9 @@ db_connection = create_engine(db_url)
 conn = db_connection.connect()
 print("DB 연결 완료")
 
-df = pd.read_csv(csv_path)
+df = pd.read_csv(csv_path, index_col=False)
 # df.to_sql(name='similarity', con=db_connection, if_exists='replace',index=False)
-df.to_sql(name='top5_recommendation', con=db_connection, if_exists='replace',index=False)
+df.to_sql(name='Recommendation', con=db_connection, if_exists='replace',index=False)
 print("CSV 업로드 완료")
 
 end_time = time.time()
