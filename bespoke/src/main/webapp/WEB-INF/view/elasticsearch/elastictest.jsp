@@ -14,8 +14,9 @@
         <li>domestic_year_cost: ${elasticresults[4]}</li>
         <li>abroad_year_cost: ${elasticresults[5]}</li>
         <li>previous_month_performance: ${elasticresults[6]}</li>
-        <li>categories: ${categories}</li>
-
+        <li>categories Class: ${categories[0]}</li>
+        <li>categories Benefit: ${categories[1]}</li>
+        <li>categories Condition: ${categories[2]}</li>
     </ul>
     
 </body>

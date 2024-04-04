@@ -58,10 +58,13 @@ public class ElasticController {
         if (categoryNode != null && categoryNode.isArray()) {
             for (JsonNode node : categoryNode) {
                 String categoryClass = node.get("class").asText();
+                categories.add(categoryClass);
                 String categoryBenefit = node.get("benefit").asText();
+                categories.add(categoryBenefit);
                 String categoryCondition = node.get("condition").asText();
-                String categoryInfo = "Class: " + categoryClass + ", Benefit: " + categoryBenefit + ", Condition: " + categoryCondition;
-                categories.add(categoryInfo);
+                categories.add(categoryCondition);
+//                String categoryInfo = "Class: " + categoryClass + ", Benefit: " + categoryBenefit + ", Condition: " + categoryCondition;
+//                categories.add(categoryInfo);
             }
         }
         
