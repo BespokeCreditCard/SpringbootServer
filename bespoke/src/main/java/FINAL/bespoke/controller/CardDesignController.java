@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import FINAL.bespoke.service.CardDesignService;
 
 @Controller
-@RequestMapping("/aiimage")
+@RequestMapping("/design")
 public class CardDesignController {
 
     @Autowired
@@ -30,6 +30,6 @@ public class CardDesignController {
 			e.printStackTrace();
 		}
 		// 뷰를 반환합니다.
-		return "aiimage/carddesign";
+		return "design/carddesign";
     }
 }
