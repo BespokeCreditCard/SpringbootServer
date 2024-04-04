@@ -20,8 +20,9 @@ public class AiImageService {
     public String generatePicture(String prompt) {
     	try {
 	        CreateImageRequest createImageRequest = CreateImageRequest.builder()
-	                .prompt(prompt)
-	                .size("512x512")
+	                .model("dall-e-3")
+	        		.prompt(prompt)
+	                .size("1024x1024")
 	                .responseFormat("b64_json") //b64_json 포맷으로의 반환을 위해 이 코드 추가!
 	                .n(1)
 	                .build();
