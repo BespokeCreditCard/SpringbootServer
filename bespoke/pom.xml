@@ -26,7 +26,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -57,23 +56,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		
+		</dependency>		
 		<!-- added -->
 		<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
 		<dependency>
 		    <groupId>jakarta.servlet.jsp.jstl</groupId>
 		    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-		</dependency>
-		
-		<!--
-		https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
+		</dependency>		
+		<!--https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-		</dependency>
-		
-		
+		</dependency>		
 		<!--
 		https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
 		<dependency>
@@ -84,8 +78,7 @@
 		  <groupId>me.paulschwarz</groupId>
 		  <artifactId>spring-dotenv</artifactId>
 		  <version>4.0.0</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -96,7 +89,12 @@
 			<artifactId>s3</artifactId>
 			<version>2.17.0</version>
 		</dependency>
-		
+
+		<dependency>
+	      <groupId>co.elastic.clients</groupId>
+	      <artifactId>elasticsearch-java</artifactId>
+	      <version>8.13.1</version>
+	    </dependency>
 		<!-- DALL-E 3을 위한 MAVEN 종속성 관리 -->
 		<dependency>
 		    <groupId>io.jsonwebtoken</groupId>
@@ -147,6 +145,7 @@
 		  <artifactId>deepl-java</artifactId>
 		  <version>1.4.0</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
