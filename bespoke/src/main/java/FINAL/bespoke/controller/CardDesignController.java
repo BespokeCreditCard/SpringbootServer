@@ -24,7 +24,7 @@ public class CardDesignController {
 			selectImage = cardDesignServiceDemo.generateImage();
 			// 모델에 ImageDto 객체를 추가합니다.
 			model.addAttribute("selectImage", selectImage);
-        
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
