@@ -25,7 +25,7 @@ public class ElasticService {
         try {
 			response = esClient.get(g -> g
 			    .index("result_bulk")
-			    .id("3"),
+			    .id("101"),
 			    ObjectNode.class     
 			);
 //	        System.out.println("#####################################################################");
