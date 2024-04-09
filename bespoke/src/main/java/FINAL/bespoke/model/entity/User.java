@@ -63,6 +63,9 @@ public class User {
     @Column(columnDefinition = "TEXT")
     private String deliveryAddress;
 
+    @Column(length = 30)
+    private String role;
+    
     public UserDto toDto() {
         UserDto dto = new UserDto();
         dto.setUserID(this.getUserID());
@@ -76,6 +79,7 @@ public class User {
         dto.setAgreement(this.isAgreement());
         dto.setDigital(this.isDigital());
         dto.setContact(this.getContact());
+        dto.setRole(this.getRole());
         return dto;
     }
 }
