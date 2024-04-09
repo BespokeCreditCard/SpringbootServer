@@ -28,7 +28,7 @@ public class RecommendationService {
     	
     	List<Integer> imageList = new ArrayList<>();
     	// findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
-    	Recommendation recommendation = recommendationRepository.findBySEQ("ASP1FKF224HGA2GD7IZG");
+    	Recommendation recommendation = recommendationRepository.findBySEQ("P9FCH9IPM511GG8M8AHN");
 //		RecommendationDto recommendationDto = new RecommendationDto();
 //        recommendationDto.setTop1(recommendation.getTop1());
 //        recommendationDto.setTop2(recommendation.getTop2());
