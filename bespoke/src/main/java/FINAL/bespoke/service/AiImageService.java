@@ -1,8 +1,11 @@
 package FINAL.bespoke.service;
 
-import com.theokanning.openai.image.CreateImageRequest;
+//import com.theokanning.openai.image.CreateImageRequest;
+import com.theokanning.openai.image.*;
+import com.theokanning.openai.model.*;
 import com.theokanning.openai.service.OpenAiService;
 import jakarta.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -12,21 +15,20 @@ public class AiImageService {
 
     @Resource(name = "getOpenAiService")
     private final OpenAiService openAiService;
-    
-//    public AiImageService(OpenAiService openAiService) {
-//        this.openAiService = openAiService;
-//    }
 
     public String generatePicture(String prompt) {
     	try {
 	        CreateImageRequest createImageRequest = CreateImageRequest.builder()
-	                .model("dall-e-3")
-	        		.prompt(prompt)
-	                .size("1024x1024")
+	        		.model("dall-e-3")
+	        		.quality("hd")
+                    .prompt(prompt)
+                    .style("vivid")
+//                    .size("1024x1024")
+                    .size("1024x1792")
+                    .n(1)
+                    .responseFormat("url")
 	                .responseFormat("b64_json") //b64_json 포맷으로의 반환을 위해 이 코드 추가!
-	                .n(1)
-	                .build();
-	
+                    .build();
 //	        String url = openAiService.createImage(createImageRequest).getData().get(0).getUrl();
 //	        return url;
 	        //이미지 URL 대신 base64 data를 리턴하는 것으로 변경!
@@ -39,11 +41,4 @@ public class AiImageService {
         }
     }
     
-// // Getter와 Setter 메서드
-//    public OpenAiService getOpenAiService() {
-//        return openAiService;
-//    }
-    
 }
-
-
