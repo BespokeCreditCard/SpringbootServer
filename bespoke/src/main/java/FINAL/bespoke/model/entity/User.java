@@ -48,10 +48,10 @@ public class User {
     @Column(precision = 2)
     private BigDecimal grade;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private boolean agreement;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private boolean digital;
 
     @Column(length = 13)
