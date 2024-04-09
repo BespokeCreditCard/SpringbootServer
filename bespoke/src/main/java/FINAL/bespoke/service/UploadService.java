@@ -30,7 +30,7 @@ public class UploadService {
     // S3에 이미지 업로드
     public String uploadImage(MultipartFile file, String customerName) throws IOException {
 //        String key = "upload/" + customerName + ".png";
-        String key = "upload/" + ("8YBQA0UZ1JNAPF1LPQC3") + ".png";
+        String key = ("8YBQA0UZ1JNAPF1LPQC3") + ".png";
         System.out.println("1: " + key);
 
         try {
@@ -38,12 +38,12 @@ public class UploadService {
             RequestBody requestBody = RequestBody.fromBytes(bytes);
             
             PutObjectRequest request = PutObjectRequest.builder()
-                    .bucket("woori-fisa-bucket")
+                    .bucket("upload")
                     .key(key)
                     .contentType("image/png")
                     .build();
 
-            // PutObjectRequest를 사용하여 파일 업로드
+            // PutObjectRequest를 사용하여 파일 업로드	
             s3Client.putObject(request, requestBody);
             System.out.println("2: " + request);
             // 업로드된 객체의 URL 생성
