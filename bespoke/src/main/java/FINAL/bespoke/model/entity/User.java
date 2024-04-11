@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import FINAL.bespoke.model.dto.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class User {
     @Column(length = 20, nullable = false)
     private String name;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 100, nullable = false)
     private String password;
 
     @Column(nullable = false)
@@ -39,7 +40,7 @@ public class User {
     @Column(nullable = false)
     private LocalDate registerDate;
 
-    @Column(nullable = false, length = 1)
+    @Column(nullable = false, length = 4)
     private char gender;
 
     @Column(columnDefinition = "TEXT")

@@ -41,7 +41,7 @@ public class UserDto {
         user.setAgreement(this.isAgreement());
         user.setDigital(this.isDigital());
         user.setContact(this.getContact());
-        user.setRole(this.getRole());
+        //user.setRole(this.getRole());
         
         return user;
     }
