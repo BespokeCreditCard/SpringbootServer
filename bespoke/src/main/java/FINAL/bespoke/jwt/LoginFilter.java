@@ -59,7 +59,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String role = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(username, role, 60*60*10L);
+        String token = jwtUtil.createJwt(username, role, 60*60*1000L);
 ///    	Cookie cookie = new Cookie("Authorization", "Bearer " + token);
     	Cookie cookie = new Cookie("Authorization",token);
     	cookie.setHttpOnly(true); // JavaScript를 통한 접근 방지
