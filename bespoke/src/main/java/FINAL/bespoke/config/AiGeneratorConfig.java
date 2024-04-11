@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.time.Duration;
 
 @Configuration
-public class AiImageConfig {
+public class AiGeneratorConfig {
     @Value("${openai.key}")
     private String apiKey;
 
