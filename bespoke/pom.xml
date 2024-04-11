@@ -96,7 +96,6 @@
 	      <artifactId>elasticsearch-java</artifactId>
 	      <version>8.13.1</version>
 	    </dependency>
-		<!-- DALL-E 3을 위한 MAVEN 종속성 관리 -->
 		<dependency>
 		    <groupId>io.jsonwebtoken</groupId>
 		    <artifactId>jjwt-api</artifactId>
@@ -114,6 +113,7 @@
 		    <version>0.11.5</version>
 		    <scope>runtime</scope>
 		</dependency>
+		<!-- DALL-E 3을 위한 MAVEN 종속성 관리 -->
 		<dependency>
 		    <groupId>com.theokanning.openai-gpt3-java</groupId>
 		    <artifactId>client</artifactId>
