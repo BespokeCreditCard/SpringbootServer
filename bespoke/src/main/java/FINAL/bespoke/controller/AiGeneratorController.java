@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
-import FINAL.bespoke.service.AiImageService;
+import FINAL.bespoke.service.AiGeneratorService;
 import FINAL.bespoke.service.TranslatorService;
 @Controller
-public class AiImageController {
+public class AiGeneratorController {
 
-    private final AiImageService aiImageService;
+    private final AiGeneratorService aiGeneratorService;
     private final TranslatorService translatorService;
 
     @Autowired
-    public AiImageController(AiImageService aiImageService, TranslatorService translatorService) {
-        this.aiImageService = aiImageService;
+    public AiGeneratorController(AiGeneratorService aiGeneratorService, TranslatorService translatorService) {
+        this.aiGeneratorService = aiGeneratorService;
         this.translatorService = translatorService; 
     }
 
@@ -38,8 +38,8 @@ public class AiImageController {
     	
     	while(true) {
     		try {
-    			b64ImageData1 = aiImageService.generatePicture(prompt);
-    			b64ImageData2 = aiImageService.generatePicture(prompt);
+    			b64ImageData1 = aiGeneratorService.generatePicture(prompt);
+    			b64ImageData2 = aiGeneratorService.generatePicture(prompt);
     			if ((b64ImageData1 != null) && (b64ImageData2 != null)) {
     				break;
     			} else {
@@ -52,7 +52,7 @@ public class AiImageController {
     	}
                 
         // ModelAndView를 사용하여 aiimage_view.jsp 페이지로 이미지 데이터를 전달
-        ModelAndView modelAndView = new ModelAndView("aiimage/aiimage_view");
+        ModelAndView modelAndView = new ModelAndView("aigenerator_view/aigenerator");
         modelAndView.addObject("b64ImageData1", b64ImageData1);
         modelAndView.addObject("b64ImageData2", b64ImageData2);
 
@@ -62,7 +62,7 @@ public class AiImageController {
     // localhost에서 "/image" 엔드포인트로 GET 요청이 오면 aiimage_view.jsp 페이지로 이동
     @GetMapping("/image")
     public String getImagePage() {
-        return "aiimage/aiimage_view";
+        return "aigenerator_view/aigenerator";
     }
     
 }
