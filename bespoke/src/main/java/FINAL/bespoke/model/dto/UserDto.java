@@ -25,6 +25,7 @@ public class UserDto {
     private String contact;
     private String cardId;
     private String deliveryAdress;
+    private String role;
     
     public User toEntity() {
         User user = new User();
@@ -39,6 +40,7 @@ public class UserDto {
         user.setAgreement(this.isAgreement());
         user.setDigital(this.isDigital());
         user.setContact(this.getContact());
+        //user.setRole(this.getRole());
         
         return user;
     }

@@ -16,6 +16,9 @@
 	<description>Fisa Final Project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<!-- property 추가 -->
+		<spring.security.version>6.2.1</spring.security.version>
+		<spring.jjwt.version>0.12.3</spring.jjwt.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -96,24 +99,8 @@
 	      <artifactId>elasticsearch-java</artifactId>
 	      <version>8.13.1</version>
 	    </dependency>
-		<dependency>
-		    <groupId>io.jsonwebtoken</groupId>
-		    <artifactId>jjwt-api</artifactId>
-		    <version>0.11.5</version>
-		</dependency>
-		<dependency>
-		    <groupId>io.jsonwebtoken</groupId>
-		    <artifactId>jjwt-impl</artifactId>
-		    <version>0.11.5</version>
-		    <scope>runtime</scope>
-		</dependency>
-		<dependency>
-		    <groupId>io.jsonwebtoken</groupId>
-		    <artifactId>jjwt-jackson</artifactId>
-		    <version>0.11.5</version>
-		    <scope>runtime</scope>
-		</dependency>
 		<!-- DALL-E 3을 위한 MAVEN 종속성 관리 -->
+		
 		<dependency>
 		    <groupId>com.theokanning.openai-gpt3-java</groupId>
 		    <artifactId>client</artifactId>
@@ -140,6 +127,43 @@
 		    <version>2.2.2</version>
 		</dependency>
 		
+		<!-- jjwt -->
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-api</artifactId>
+		    <version>${spring.jjwt.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-impl</artifactId>
+		    <version>${spring.jjwt.version}</version>
+		    <scope>runtime</scope>
+		</dependency> 
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-jackson</artifactId>
+		    <version>${spring.jjwt.version}</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<!-- spring security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
 		<!-- DeepL 번역을 위한 의존성 -->
 		<dependency>
 		  <groupId>com.deepl.api</groupId>
