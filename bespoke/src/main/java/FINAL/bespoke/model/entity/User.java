@@ -2,7 +2,6 @@ package FINAL.bespoke.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
 import FINAL.bespoke.model.dto.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
