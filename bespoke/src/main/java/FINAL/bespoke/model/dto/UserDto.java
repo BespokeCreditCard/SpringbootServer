@@ -1,6 +1,5 @@
 package FINAL.bespoke.model.dto;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import FINAL.bespoke.model.entity.User;
