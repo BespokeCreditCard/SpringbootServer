@@ -34,20 +34,23 @@ public class UploadService {
         System.out.println("1: " + key);
 
         try {
-        	byte[] bytes = file.getBytes();
+            // 업로드할 파일의 바이트 배열을 가져옴
+        	byte[] bytes = file.getBytes(); 
+            // RequestBody를 생성하여 업로드할 파일 데이터를 담기
             RequestBody requestBody = RequestBody.fromBytes(bytes);
-            
+            // S3에 업로드할 객체의 요청을 생성합니다
             PutObjectRequest request = PutObjectRequest.builder()
-                    .bucket("upload")
-                    .key(key)
-                    .contentType("image/png")
+                    .bucket("upload") // 업로드할 버킷 이름을 지정
+                    .key(key) // 업로드할 객체의 키 (파일 이름)를 지정
+                    .contentType("image/png") // 업로드할 파일의 컨텐츠 타입을 지정
                     .build();
 
-            // PutObjectRequest를 사용하여 파일 업로드	
+            // PutObject를 사용하여 파일 업로드	
             s3Client.putObject(request, requestBody);
             System.out.println("2: " + request);
             // 업로드된 객체의 URL 생성
             System.out.println("3: " + generateImageUrl(key));
+            // 업로드된 객체의 URL을 생성
             String testUrl = generateImageUrl(key);
             System.out.println(testUrl);
             return testUrl;
