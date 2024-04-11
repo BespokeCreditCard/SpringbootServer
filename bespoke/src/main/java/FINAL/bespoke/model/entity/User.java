@@ -23,13 +23,13 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @Column(length = 12)
+    @Column(length = 20)
     private String userID;
 
-    @Column(length = 12, nullable = false)
+    @Column(length = 20, nullable = false)
     private String name;
 
-    @Column(length = 12, nullable = false)
+    @Column(length = 20, nullable = false)
     private String password;
 
     @Column(nullable = false)
@@ -56,7 +56,7 @@ public class User {
     @Column(length = 13)
     private String contact;
     
-    @Column(length = 12)
+    @Column(length = 20)
     private String cardId;
     
     @Column(columnDefinition = "TEXT")
