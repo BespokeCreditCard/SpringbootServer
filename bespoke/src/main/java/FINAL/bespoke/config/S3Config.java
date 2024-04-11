@@ -33,4 +33,10 @@ public class S3Config {
 				.credentialsProvider(()-> AwsBasicCredentials.create(accessKey, secretKey))
 				.build();
 	}
+	
+    // S3 엔드포인트 정보를 빈으로 등록
+    @Bean
+    public String s3Endpoint() {
+        return endpoint;
+    }
 }

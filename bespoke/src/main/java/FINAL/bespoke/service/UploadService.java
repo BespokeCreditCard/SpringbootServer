@@ -13,6 +13,9 @@ public class UploadService {
 
     @Autowired
     private S3Client s3Client;
+    
+    @Autowired
+    private String s3Endpoint; // S3 엔드포인트 정보를 주입받음
 
     // S3에 이미지 업로드
     public String uploadImage(MultipartFile file, String customerName) throws IOException {
@@ -27,7 +30,7 @@ public class UploadService {
             RequestBody requestBody = RequestBody.fromBytes(bytes);
             // S3에 업로드할 객체의 요청을 생성합니다
             PutObjectRequest request = PutObjectRequest.builder()
-                    .bucket("upload") // 업로드할 버킷 이름을 지정
+                    .bucket("upload") // 업로드할 버킷안의 폴더 이름을 지정
                     .key(key) // 업로드할 객체의 키 (파일 이름)를 지정
                     .contentType("image/png") // 업로드할 파일의 컨텐츠 타입을 지정
                     .build();
@@ -48,6 +51,6 @@ public class UploadService {
     }
     
     private String generateImageUrl(String key) {
-        return "https://woori-fisa-bucket.s3.amazonaws.com/" + key;
+        return s3Endpoint + "upload/" + key;
     }
 }
