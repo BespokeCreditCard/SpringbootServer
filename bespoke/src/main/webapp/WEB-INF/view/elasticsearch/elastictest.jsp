@@ -14,9 +14,14 @@
         <li>domestic_year_cost: ${elasticresults[4]}</li>
         <li>abroad_year_cost: ${elasticresults[5]}</li>
         <li>previous_month_performance: ${elasticresults[6]}</li>
-        <li>categories Class: ${categories[0]}</li>
-        <li>categories Benefit: ${categories[1]}</li>
-        <li>categories Condition: ${categories[2]}</li>
+		<c:forEach var="category" items="${categories}" varStatus="catStatus">
+            <li>Category ${catStatus.index + 1}:</li>
+            <ul>
+                <li>Class: ${categories[catStatus.index * 3]}</li>
+                <li>Benefit: ${categories[catStatus.index * 3 + 1]}</li>
+                <li>Condition: ${categories[catStatus.index * 3 + 2]}</li>
+            </ul>
+        </c:forEach>
     </ul>
     
 </body>
