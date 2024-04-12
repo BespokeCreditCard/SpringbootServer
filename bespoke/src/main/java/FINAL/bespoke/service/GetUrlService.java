@@ -1,5 +1,6 @@
 package FINAL.bespoke.service;
 
+import FINAL.bespoke.config.S3Config;
 import FINAL.bespoke.model.entity.ImageTemplate;
 import FINAL.bespoke.model.entity.Recommendation;
 import FINAL.bespoke.repository.ImageTemplateRepository;
@@ -10,16 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecommendationService {
+public class GetUrlService {
 
     private final RecommendationRepository recommendationRepository;
 
     private final ImageTemplateRepository imageTemplateRepository;
     
+    private final S3Config s3Config;
+    
     @Autowired
-    public RecommendationService(RecommendationRepository recommendationRepository, ImageTemplateRepository imageTemplateRepository) {
+    public GetUrlService(RecommendationRepository recommendationRepository, ImageTemplateRepository imageTemplateRepository, S3Config s3Config) {
         this.recommendationRepository = recommendationRepository;
         this.imageTemplateRepository = imageTemplateRepository;
+        this.s3Config = s3Config;
     }
 
     public List<Integer> getRecommendation() {
@@ -49,15 +53,30 @@ public class RecommendationService {
     	return imageList;
     }
     
-    public List<String> getImageUrlsByImageIds(List<Integer> imageIds) {
-        List<String> imageUrls = new ArrayList<>();
-
+    // id 가져오는 메서드
+    public List<Integer> getImageIds(List<Integer> imageIds) {
+        List<Integer> imageId = new ArrayList<>();
+        
         for (Integer id : imageIds) {
         	System.out.println(id);
             // 이미지 ID에 해당하는 URL 조회
-        	ImageTemplate imageTemplate = imageTemplateRepository.getOne(id);
+        	ImageTemplate imageTemplate = imageTemplateRepository.getOne(id); // id 가져옴
+        	imageId.add(imageTemplate.getId()); // 리스트에 추가
+        }
+        return imageId;
+    }
+    
+    // url 가져오는 메서드
+    public List<String> getImageUrls(List<Integer> imageIds) {
+        List<String> imageUrls = new ArrayList<>();
+        
+        for (Integer id : imageIds) {
+        	System.out.println(id);
+            // 이미지 ID에 해당하는 URL 조회
+        	ImageTemplate imageTemplate = imageTemplateRepository.getOne(id); // id 가져옴
+        	String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // endpoint + 그 아이디에 해당하는 url 
         	System.out.println(imageTemplate.getUrl());
-            imageUrls.add(imageTemplate.getUrl());
+            imageUrls.add(fullUrl); // 리스트에 추가
             System.out.println(imageTemplate.getUrl());
         }
         System.out.println(imageUrls);

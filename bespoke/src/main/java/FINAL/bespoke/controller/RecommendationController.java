@@ -1,6 +1,6 @@
 package FINAL.bespoke.controller;
 
-import FINAL.bespoke.service.RecommendationService;
+import FINAL.bespoke.service.GetUrlService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/recommendation_view")
 public class RecommendationController {
 
-    private final RecommendationService recommendationService;
+    private final GetUrlService recommendationService;
 
     @Autowired
-    public RecommendationController(RecommendationService recommendationService) {
+    public RecommendationController(GetUrlService recommendationService) {
         this.recommendationService = recommendationService;
     }
         
@@ -24,7 +24,7 @@ public class RecommendationController {
         // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
         List<Integer> imageList = recommendationService.getRecommendation();
 
-        List<String> imageUrls = recommendationService.getImageUrlsByImageIds(imageList);
+        List<String> imageUrls = recommendationService.getImageUrls(imageList);
         
         // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
         model.addAttribute("imageUrls", imageUrls);
