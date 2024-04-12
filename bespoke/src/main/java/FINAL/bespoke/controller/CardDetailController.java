@@ -2,12 +2,18 @@ package FINAL.bespoke.controller;
 
 import FINAL.bespoke.service.ElasticService;
 import FINAL.bespoke.service.GetUrlService;
+import co.elastic.clients.elasticsearch.core.GetResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Controller
 @RequestMapping("/carddetail_view")
@@ -35,7 +41,39 @@ public class CardDetailController {
 
         List<Integer> imageId = recommendationImageUrlService.getImageIds(imageList);
         
-        model.addAttribute("imageIds", imageId);
+        GetResponse<ObjectNode> response = getDetailService.fetchData();
+    	List<String> productNames = new ArrayList<>();
+        ObjectNode json = response.source();
+        JsonNode cardNameNode = json.get("card_name"); // 카드 이름
+        productNames.add(cardNameNode.asText()); // elasticresults[0]
+        
+        JsonNode cardTypeNode = json.get("card_type"); // 카드 타입
+        productNames.add(cardTypeNode.asText());// elasticresults[1]
+        
+        JsonNode domesticYearCostNode = json.get("domestic_year_cost"); // 카드 국내 연회비
+        productNames.add(domesticYearCostNode.asText());// elasticresults[2]
+        
+        JsonNode abroadYearCostNode = json.get("abroad_year_cost"); // 카드 해외 연회비
+        productNames.add(abroadYearCostNode.asText());// elasticresults[3]
+        
+        JsonNode previousMonthPerformanceNode = json.get("previous_month_performance"); // 카드 전월 실적
+        productNames.add(previousMonthPerformanceNode.asText());// elasticresults[4]
+        
+        JsonNode categoryNode = json.get("category");
+        List<String> categories = new ArrayList<>();
+        if (categoryNode != null && categoryNode.isArray()) {
+            for (JsonNode node : categoryNode) {
+                String categoryClass = node.get("class").asText();
+                categories.add(categoryClass);
+                String categoryBenefit = node.get("benefit").asText();
+                categories.add(categoryBenefit);
+                String categoryCondition = node.get("condition").asText();
+                categories.add(categoryCondition);
+            }
+        }
+        model.addAttribute("elasticresults", productNames);
+        model.addAttribute("categories", categories);
+        
         
         // recommendation.jsp로 이동
         return "carddetail_view/carddetail";
