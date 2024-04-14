@@ -33,7 +33,7 @@ public class UserDto {
         user.setName(this.getName());
         user.setPassword(this.getPassword());
         user.setBirthDate(this.getBirthDate());
-        user.setRegisterDate(this.getRegisterDate());
+        user.setRegisterDate(LocalDate.now());
         user.setGender(this.getGender());
         user.setAddress(this.getAddress());
         user.setGrade(this.getGrade());
