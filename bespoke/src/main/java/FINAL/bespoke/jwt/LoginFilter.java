@@ -69,15 +69,19 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addCookie(cookie);
         System.out.println("successfulAuthentication이 마지막 점일껄?");
-        response.sendRedirect("/welcome");
+        response.sendRedirect("/");
 //        System.out.println("이거는 실행디나?");
 
     }
 
-		//로그인 실패시 실행하는 메소드
+	//로그인 실패시 실행하는 메소드
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
     	System.out.println("fail");
-    	response.setStatus(401);
+    	// 로그인 실패 시 사용자에게 보여줄 메시지 설정
+        String errorMessage = "Invalid username or password";
+        
+        // 실패 URL과 함께 리다이렉션하며 쿼리 스트링으로 에러 메시지 전달
+        response.sendRedirect("/login?error=" + errorMessage);
     }
 }

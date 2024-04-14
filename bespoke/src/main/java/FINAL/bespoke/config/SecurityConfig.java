@@ -1,5 +1,7 @@
 package FINAL.bespoke.config;
 
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,13 +9,18 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import FINAL.bespoke.jwt.JWTFilter;
 import FINAL.bespoke.jwt.JWTUtil;
 import FINAL.bespoke.jwt.LoginFilter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -50,22 +57,42 @@ public class SecurityConfig {
 
 				//From 로그인 방식 disable
         http
-		        .formLogin(formLogin -> formLogin.loginPage("/lo")
-		                .loginProcessingUrl("/login")
-		                .defaultSuccessUrl("/welcome.jsp", true));
+		        .formLogin(formLogin -> formLogin.loginPage("/login")
+		                .loginProcessingUrl("/login"));
+		                //.defaultSuccessUrl("/welcome.jsp", true));
 
 				//http basic 인증 방식 disable
         http
                 .httpBasic((auth) -> auth.disable()); 
-
+        
+        http
+        		// 기존의 인증/인가 설정
+            	.logout(logout -> logout
+                .logoutSuccessUrl("/index") // 로그아웃 성공 시 리디렉션할 URL 설정
+                .permitAll()); // 모든 사용자가 로그아웃을 할 수 있도록 허용       
 				//경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth // HTTP 요청에 대한 인가 설정을 시작하는 부분입니다. auth 람다 함수의 매개변수를 통해 인가 규칙을 설정할 수 있습니다.
-                        .requestMatchers("/login", "/", "/join","/lo", "/WEB-INF/view/**","/js/**").permitAll() // "/login", "/" (루트 경로), "/join" 경로에 대한 요청은 인증 없이 모든 사용자에게 허용됩니다. 즉, 이 경로들에 대한 접근을 로그인하지 않은 사용자도 할 수 있습니다.
+                        .requestMatchers("/login", "/", "/join","/login**","/logout", "/WEB-INF/view/**","/js/**","/css/**","/img/**").permitAll() // "/login", "/" (루트 경로), "/join" 경로에 대한 요청은 인증 없이 모든 사용자에게 허용됩니다. 즉, 이 경로들에 대한 접근을 로그인하지 않은 사용자도 할 수 있습니다.
 //						.requestMatchers("/admin").hasRole("user") // "/admin" 경로에 대한 요청은 "ADMIN" 역할을 가진 사용자만 접근할 수 있습니다. 이는 관리자 권한을 가진 사용자만 "/admin" 경로에 접근할 수 있음을 의미합니다.
                         .anyRequest().permitAll()); // authenticated()); // authenticated 위에서 명시하지 않은 모든 다른 요청들은 인증된(로그인한) 사용자만 접근할 수 있습니다. 즉, 로그인하지 않은 사용자는 이 규칙에 의해 제한된 모든 다른 경로에 대해 접근할 수 없습니다.
 				//세션 설정
-		//JWTFilter 등록
+		
+        // 예외 처리 추가
+      http
+          .exceptionHandling((exceptions) -> exceptions
+              .authenticationEntryPoint(new AuthenticationEntryPoint() {
+                  @Override
+                  public void commence(HttpServletRequest request, HttpServletResponse response,
+                                       AuthenticationException authException) throws IOException, ServletException {
+                      // 401 에러 설정
+                      response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Denied");
+                  }
+              })
+          );
+//      
+        
+        //JWTFilter 등록
         http
             	.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
         
