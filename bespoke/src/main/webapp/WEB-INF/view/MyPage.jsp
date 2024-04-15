@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <%@ include file="header/header.jsp" %>
+	<style>
+	        th, td {
+	            border: 1px solid black;
+	            text-align: center;
+	        }
+	</style>
     <div class="container">
         <!-- 나의 정보 섹션 -->
         <div class="row">
@@ -9,11 +16,32 @@
                 <div class="info-section custom-bg-Sky p-3 mb-2">
                     <h2>나의 정보</h2>
                     <div class="user-info">
-                        <p><b>이름</b> : ${userData.name}</p>
-                        <p><b>생년월일</b> : ${userData.birthDate}</p>
-                        <p><b>성별</b> : ${userData.gender}</p>
-                        <p><b>주소</b> : ${userData.address}</p>
-                        <p><b>연락처</b> : ${userData.contact}</p>
+                        <table border="1" style="width: 100%; table-layout: fixed;">
+						    <colgroup>
+						        <col style="width: 25%;">
+						        <col style="width: 25%;">
+						        <col style="width: 25%;">
+						        <col style="width: 25%;">
+						    </colgroup>
+						    <tr>
+						        <td>이름</td>
+						        <td>${userData.name}</td>
+						        <td>성별</td>
+						        <td>${userData.gender}</td>
+						    </tr>
+						    <tr>
+						        <td>생년월일</td>
+						        <td colspan="3">${userData.birthDate}</td>
+						    </tr>
+						    <tr>
+						        <td>연락처</td>
+						        <td colspan="3">${userData.contact}</td>
+						    </tr>
+						    <tr>
+						        <td>주소</td>
+						        <td colspan="3">${userData.address}</td>
+						    </tr>
+						</table>
                         <div class="card-image mt-5 mb-2" >
                             <img src="${imageUrl}" alt="소유한 카드" style="width:40%">
                         </div>
@@ -27,7 +55,7 @@
             <div class="col-6">
                 <div class="card-section custom-bg-Sky rounded p-3">
                     <h2>카드 헤택</h2>
-                    <div class="additional-info bg-white p-3 mb-2 rounded">
+                    <div class="additional-info bg-white p-3 mb-2 rounded" style="overflow-y: scroll; max-height: 500px;">
                         <p class="card-text">
                            <ul>
                                <li>Product Name: ${elasticresultDetail[0]}</li>
@@ -41,7 +69,7 @@
                                        <ul>
                                            <li>Class: ${categoriesResultDetail[catStatus.index * 3]}</li>
                                            <li>Benefit: ${categoriesResultDetail[catStatus.index * 3 + 1]}</li>
-                                           <li>Condition: ${categoriesResultDetail[catStatus.index * 3 + 2]}</li>
+                                           <li><c:out value="${categoriesResultDetail[catStatus.index * 3 + 2]}" escapeXml="false" /></li>
                                        </ul>
                                    </c:if>
                                </c:forEach>
@@ -82,6 +110,6 @@
             cardSection.style.height = maxHeight + 'px';
         };
     </script>
-    
+    <div style="margin:10px;"></div>
 </body>
 </html>
