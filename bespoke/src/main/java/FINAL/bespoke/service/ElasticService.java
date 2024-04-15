@@ -87,21 +87,20 @@ public class ElasticService {
         // responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
         ObjectNode json = responseObject.source();
         
-        List<String> productNames = new ArrayList<>();
         JsonNode cardNameNode = json.get("card_name"); // 카드 이름
-        productNames.add(cardNameNode.asText()); // elasticresults[0]
+        productDetails.add(cardNameNode.asText()); // elasticresults[0]
         
         JsonNode cardTypeNode = json.get("card_type"); // 카드 타입
-        productNames.add(cardTypeNode.asText());// elasticresults[1]
+        productDetails.add(cardTypeNode.asText());// elasticresults[1]
         
         JsonNode domesticYearCostNode = json.get("domestic_year_cost"); // 카드 국내 연회비
-        productNames.add(domesticYearCostNode.asText());// elasticresults[2]
+        productDetails.add(domesticYearCostNode.asText());// elasticresults[2]
         
         JsonNode abroadYearCostNode = json.get("abroad_year_cost"); // 카드 해외 연회비
-        productNames.add(abroadYearCostNode.asText());// elasticresults[3]
+        productDetails.add(abroadYearCostNode.asText());// elasticresults[3]
         
         JsonNode previousMonthPerformanceNode = json.get("previous_month_performance"); // 카드 전월 실적
-        productNames.add(previousMonthPerformanceNode.asText());// elasticresults[4]
+        productDetails.add(previousMonthPerformanceNode.asText());// elasticresults[4]
         
         return productDetails;
     }
