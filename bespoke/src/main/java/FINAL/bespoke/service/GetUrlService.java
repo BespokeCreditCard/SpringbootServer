@@ -53,19 +53,6 @@ public class GetUrlService {
     	return imageList;
     }
     
-    // id 가져오는 메서드
-    public List<Integer> getImageIds(List<Integer> imageIds) {
-        List<Integer> imageId = new ArrayList<>();
-        
-        for (Integer id : imageIds) {
-        	System.out.println(id);
-            // 이미지 ID에 해당하는 URL 조회
-        	ImageTemplate imageTemplate = imageTemplateRepository.getOne(id); // id 가져옴
-        	imageId.add(imageTemplate.getId()); // 리스트에 추가
-        }
-        return imageId;
-    }
-    
     // url 가져오는 메서드
     public List<String> getImageUrls(List<Integer> imageIds) {
         List<String> imageUrls = new ArrayList<>();
