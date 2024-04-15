@@ -18,10 +18,14 @@ public class ReceiveCardService {
         this.jwtUtil = jwtUtil;
     }
     
+    // request Cookie 에서 String 으로 온 값을 찾는 함수
     private String getCookieValue(HttpServletRequest request, String cookieName) {
-        Cookie[] cookies = request.getCookies();
+        // request 의 모든 쿠키를 가져온다.
+    	Cookie[] cookies = request.getCookies();
+    	// coockie는 값이 있어야 한다.
         if (cookies != null) {
             for (Cookie cookie : cookies) {
+            	// 입력받은 인자 cookieName 이 cookie 의 값과 같다면 cookie를 return
                 if (cookieName.equals(cookie.getName())) {
                     return cookie.getValue();
                 }
@@ -30,9 +34,13 @@ public class ReceiveCardService {
         return null; // 쿠키를 찾지 못한 경우
     }
     
+    //request 를 인자로 받고 token 안에 userid를 return 하는 함수
 	public User findUserId(HttpServletRequest request) {
+		// cookie 에서 authorization을 찾는 함수를 사용한다.
 		String token = getCookieValue(request, "Authorization");
+		// token 에서 userId 를 찾는 함수를 사용한다.
 		String userId = jwtUtil.getUserid(token);
+		// userId로 jap를 통해 userentitiy를 찾아낸다.
         User userData = userRepository.findByuserID(userId); // db에서 userId에 맞는 행을 가져옴
         return userData;
     }
