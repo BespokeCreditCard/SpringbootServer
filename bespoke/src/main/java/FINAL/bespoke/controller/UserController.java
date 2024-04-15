@@ -87,7 +87,7 @@ public class UserController {
 //        return "redirect:/login";
     }
  	
- 	@GetMapping("/Mypage")
+ 	@GetMapping("/mypage")
  	public String goMyPage(Model model,HttpServletRequest request) {
  		// request 에 담긴 jwt 토큰에 userid가 담겨있는데 그것을 가져오는 코드
  		User user = receiveCardService.findUserId(request);
