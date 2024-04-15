@@ -15,7 +15,7 @@
                         <p><b>주소</b> : ${userData.address}</p>
                         <p><b>연락처</b> : ${userData.contact}</p>
                         <div class="card-image mt-5 mb-2" >
-                            <img src="./img/bcc_106.png" alt="소유한 카드" style="width:40%">
+                            <img src="${imageUrl}" alt="소유한 카드" style="width:40%">
                         </div>
                         
                         <!-- 기타 정보 추가 -->

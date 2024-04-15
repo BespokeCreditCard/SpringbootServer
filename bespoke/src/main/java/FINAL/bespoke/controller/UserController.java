@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import FINAL.bespoke.model.dto.UserDto;
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.service.ElasticService;
+import FINAL.bespoke.service.GetUrlService;
 import FINAL.bespoke.service.JoinService;
 import FINAL.bespoke.service.ReceiveCardService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
@@ -24,11 +25,13 @@ public class UserController {
 	private final JoinService joinService;
 	private final ReceiveCardService receiveCardService;
 	private final ElasticService elasticService;
+	private final GetUrlService getUrlService;
 	
-    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService) {
+    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService, GetUrlService getUrlService) {
         this.receiveCardService = receiveCardService;
         this.joinService = joinService;
         this.elasticService = elasticService; 
+        this.getUrlService = getUrlService;
     }
     
     @GetMapping("index")
@@ -86,16 +89,19 @@ public class UserController {
  	
  	@GetMapping("/Mypage")
  	public String goMyPage(Model model,HttpServletRequest request) {
+ 		// request 에 담긴 jwt 토큰에 userid가 담겨있는데 그것을 가져오는 코드
  		User user = receiveCardService.findUserId(request);
  		model.addAttribute("userData",user);
  		
+ 		// userid 로 imageUrl 을 가져오는 코드
+ 		String imageUrl = getUrlService.getImageUrl(user.getUserID());
+ 		model.addAttribute("imageUrl",imageUrl);
  		
- 		
+ 		//userid 로 elasticservice에 참조하는 코드
  		GetResponse<ObjectNode> response = elasticService.fetchData(user.getCardId());
         
         List<String> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
         List<String> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);
-        
         
         model.addAttribute("elasticresultDetail", productDetails);
         model.addAttribute("categoriesResultDetail", categoryDetails);
