@@ -21,7 +21,7 @@ public class ElasticService {
         this.esClient = esClient;
     }
 	
-    // test elasticsearch for 문
+
     public List<GetResponse<ObjectNode>> fetchData(List<Integer> imageId) {
     	List<GetResponse<ObjectNode>> responses = new ArrayList<>();
     	for (Integer imageIdtmp : imageId) {
@@ -39,6 +39,20 @@ public class ElasticService {
         return responses;
         
     }
+    
+    public GetResponse<ObjectNode> fetchData(String imageId) {
+        try {
+            // Elasticsearch의 Get API를 사용하여 문서를 가져옴
+            GetResponse<ObjectNode> response = esClient.get(g -> g
+                .index("result_bulk")
+                .id(imageId), ObjectNode.class);
+            return response; // 가져온 문서를 반환
+        } catch (ElasticsearchException | IOException e) {
+            e.printStackTrace();  // 에러 스택 추적을 출력하거나 로그로 남김
+            return null;  // 에러 발생 시 null 반환
+        }
+    }
+    
     
     
 //    public GetResponse<ObjectNode> fetchData(List<Integer> imageId) {
