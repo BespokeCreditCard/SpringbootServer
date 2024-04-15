@@ -9,9 +9,11 @@
                 <div class="info-section custom-bg-Sky p-3 mb-2">
                     <h2>나의 정보</h2>
                     <div class="user-info">
-                        <p>우선주 님</p>
-                        <p>소유카드: 카드의 정석</p>
-                        <p>주소: 서울 마포구 월드컵북로 434 상암 IT 타워</p>
+                        <p><b>이름</b> : ${userData.name}</p>
+                        <p><b>생년월일</b> : ${userData.birthDate}</p>
+                        <p><b>성별</b> : ${userData.gender}</p>
+                        <p><b>주소</b> : ${userData.address}</p>
+                        <p><b>연락처</b> : ${userData.contact}</p>
                         <div class="card-image mt-5 mb-2" >
                             <img src="./img/bcc_106.png" alt="소유한 카드" style="width:40%">
                         </div>

@@ -1,11 +1,15 @@
 package FINAL.bespoke.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import FINAL.bespoke.model.dto.UserDto;
+import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.service.JoinService;
+import FINAL.bespoke.service.ReceiveCardService;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,11 +17,13 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class UserController {
 	private final JoinService joinService;
-
-    public UserController(JoinService joinService) {
-        
+	private final ReceiveCardService receiveCardService;
+	
+    public UserController(JoinService joinService, ReceiveCardService receiveCardService) {
+        this.receiveCardService = receiveCardService;
         this.joinService = joinService;
     }
+    
     @GetMapping("index")
     public String goindex() {
     	return "index";
@@ -72,8 +78,9 @@ public class UserController {
     }
  	
  	@GetMapping("/Mypage")
- 	public String goMyPage() {
- 		
+ 	public String goMyPage(Model model,HttpServletRequest request) {
+ 		User user = receiveCardService.findUserId(request);
+ 		model.addAttribute("userData",user);
  		return "MyPage";
  	}
 }
