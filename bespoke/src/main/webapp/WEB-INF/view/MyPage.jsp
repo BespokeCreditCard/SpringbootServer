@@ -28,8 +28,25 @@
                 <div class="card-section custom-bg-Sky rounded p-3">
                     <h2>카드 헤택</h2>
                     <div class="additional-info bg-white p-3 mb-2 rounded">
-                        <p>혜택: ...</p>
-                        <p>연회비: ...</p>
+                        <p class="card-text">
+                           <ul>
+                               <li>Product Name: ${elasticresultDetail[0]}</li>
+                               <li>Card Type: ${elasticresultDetail[1]}</li>
+                               <li>Domestic Year Cost: ${elasticresultDetail[2]}</li>
+                               <li>Abroad Year Cost: ${elasticresultDetail[3]}</li>
+                               <li>Previous Month Performance: ${elasticresultDetail[4]}</li>
+                               <c:forEach var="category" items="${categoriesResultDetail}" varStatus="catStatus">
+                                   <c:if test="${not empty categoriesResultDetail[catStatus.index * 3]}">
+                                       <li>Category ${catStatus.index + 1}:</li>
+                                       <ul>
+                                           <li>Class: ${categoriesResultDetail[catStatus.index * 3]}</li>
+                                           <li>Benefit: ${categoriesResultDetail[catStatus.index * 3 + 1]}</li>
+                                           <li>Condition: ${categoriesResultDetail[catStatus.index * 3 + 2]}</li>
+                                       </ul>
+                                   </c:if>
+                               </c:forEach>
+                           </ul>
+						</p>			
                     </div>
                 </div>
             </div>

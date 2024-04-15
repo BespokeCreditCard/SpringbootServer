@@ -1,15 +1,20 @@
 package FINAL.bespoke.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import FINAL.bespoke.model.dto.UserDto;
 import FINAL.bespoke.model.entity.User;
+import FINAL.bespoke.service.ElasticService;
 import FINAL.bespoke.service.JoinService;
 import FINAL.bespoke.service.ReceiveCardService;
-
+import co.elastic.clients.elasticsearch.core.GetResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,10 +23,12 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UserController {
 	private final JoinService joinService;
 	private final ReceiveCardService receiveCardService;
+	private final ElasticService elasticService;
 	
-    public UserController(JoinService joinService, ReceiveCardService receiveCardService) {
+    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService) {
         this.receiveCardService = receiveCardService;
         this.joinService = joinService;
+        this.elasticService = elasticService; 
     }
     
     @GetMapping("index")
@@ -81,6 +88,18 @@ public class UserController {
  	public String goMyPage(Model model,HttpServletRequest request) {
  		User user = receiveCardService.findUserId(request);
  		model.addAttribute("userData",user);
+ 		
+ 		
+ 		
+ 		GetResponse<ObjectNode> response = elasticService.fetchData(user.getCardId());
+        
+        List<String> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
+        List<String> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);
+        
+        
+        model.addAttribute("elasticresultDetail", productDetails);
+        model.addAttribute("categoriesResultDetail", categoryDetails);
+ 		
  		return "MyPage";
  	}
 }
