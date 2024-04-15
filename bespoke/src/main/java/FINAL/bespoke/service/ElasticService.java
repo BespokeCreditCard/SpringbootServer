@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import co.elastic.clients.elasticsearch.core.GetResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
@@ -53,7 +55,99 @@ public class ElasticService {
         }
     }
     
+    public List<List<String>> ElasticSearchJsonToTextProduct(List<GetResponse<ObjectNode>> response) {
+    	List<List<String>> productDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
+    	for (GetResponse<ObjectNode> responseObject : response) {
+        	// responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
+        	ObjectNode json = responseObject.source();
+        	
+        	List<String> productNames = new ArrayList<>();
+        	JsonNode cardNameNode = json.get("card_name"); // 카드 이름
+            productNames.add(cardNameNode.asText()); // elasticresults[0]
+            
+            JsonNode cardTypeNode = json.get("card_type"); // 카드 타입
+            productNames.add(cardTypeNode.asText());// elasticresults[1]
+            
+            JsonNode domesticYearCostNode = json.get("domestic_year_cost"); // 카드 국내 연회비
+            productNames.add(domesticYearCostNode.asText());// elasticresults[2]
+            
+            JsonNode abroadYearCostNode = json.get("abroad_year_cost"); // 카드 해외 연회비
+            productNames.add(abroadYearCostNode.asText());// elasticresults[3]
+            
+            JsonNode previousMonthPerformanceNode = json.get("previous_month_performance"); // 카드 전월 실적
+            productNames.add(previousMonthPerformanceNode.asText());// elasticresults[4]
+            
+            productDetails.add(productNames);
+    	}
+    	return productDetails;
+    }
     
+    public List<String> ElasticSearchJsonToTextProduct(GetResponse<ObjectNode> responseObject) {
+        List<String> productDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
+        // responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
+        ObjectNode json = responseObject.source();
+        
+        List<String> productNames = new ArrayList<>();
+        JsonNode cardNameNode = json.get("card_name"); // 카드 이름
+        productNames.add(cardNameNode.asText()); // elasticresults[0]
+        
+        JsonNode cardTypeNode = json.get("card_type"); // 카드 타입
+        productNames.add(cardTypeNode.asText());// elasticresults[1]
+        
+        JsonNode domesticYearCostNode = json.get("domestic_year_cost"); // 카드 국내 연회비
+        productNames.add(domesticYearCostNode.asText());// elasticresults[2]
+        
+        JsonNode abroadYearCostNode = json.get("abroad_year_cost"); // 카드 해외 연회비
+        productNames.add(abroadYearCostNode.asText());// elasticresults[3]
+        
+        JsonNode previousMonthPerformanceNode = json.get("previous_month_performance"); // 카드 전월 실적
+        productNames.add(previousMonthPerformanceNode.asText());// elasticresults[4]
+        
+        return productDetails;
+    }
+    
+    public List<List<String>> ElasticSearchJsonToTextCategory(List<GetResponse<ObjectNode>> response) {
+    	List<List<String>> categoryDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
+
+        // ####################################################
+        for (GetResponse<ObjectNode> responseObject : response) {
+        	// responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
+        	ObjectNode json = responseObject.source();
+            JsonNode categoryNode = json.get("category");
+            List<String> categories = new ArrayList<>();
+            if (categoryNode != null && categoryNode.isArray()) {
+                for (JsonNode node : categoryNode) {
+                    String categoryClass = node.get("class").asText();
+                    categories.add(categoryClass);
+                    String categoryBenefit = node.get("benefit").asText();
+                    categories.add(categoryBenefit);
+                    String categoryCondition = node.get("condition").asText();
+                    categories.add(categoryCondition);
+                }
+            }
+            
+            categoryDetails.add(categories);
+        }
+    	return categoryDetails;
+    }
+    
+    public List<String> ElasticSearchJsonToTextCategory(GetResponse<ObjectNode> responseObject) {
+
+    	ObjectNode json = responseObject.source();
+        JsonNode categoryNode = json.get("category");
+        List<String> categories = new ArrayList<>();
+        if (categoryNode != null && categoryNode.isArray()) {
+            for (JsonNode node : categoryNode) {
+                String categoryClass = node.get("class").asText();
+                categories.add(categoryClass);
+                String categoryBenefit = node.get("benefit").asText();
+                categories.add(categoryBenefit);
+                String categoryCondition = node.get("condition").asText();
+                categories.add(categoryCondition);
+            }
+        }
+        return categories;
+    }
     
 //    public GetResponse<ObjectNode> fetchData(List<Integer> imageId) {
 //    	GetResponse<ObjectNode> response = null;
