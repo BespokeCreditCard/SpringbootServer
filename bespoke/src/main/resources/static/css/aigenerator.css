@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* 로컬 폰트 추가 */
+@font-face {
+    font-family: "Nanum Gothic";
+    src: url("/fonts/WooridaumR.ttf") format("truetype");
+}
+
+/* woori_text div에 폰트 적용 */
+#woori_text {
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: bold; /* 굵게 설정 */
+    font-style: italic; /* 기울임 설정 */
+    font-size: 20px;
+    color: white;
+    background: none; 
+    position: absolute; 
+    top: 3%; 
+    left: 6%; 
+    z-index: 3;
+}
+
+/* 저작권 저촉 에러 메세지 */
+#errorMessageContainer {
+    color: red; /* 글씨색 */
+    font-weight: bold; /* 글씨체 굵게 */
+    margin: 20px 0; /* 상하 여백 추가 */
+    z-index: 3;
+    opacity: 0;
+}

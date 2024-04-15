@@ -1,6 +1,5 @@
 .metadata
 /bespoke/.env
-/bespoke/src/main/resources/static
 /MySQL_query/db_info.py
 /MySQL_query/__pycache__/*
 .project
