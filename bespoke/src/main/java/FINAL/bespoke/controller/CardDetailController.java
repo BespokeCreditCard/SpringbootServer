@@ -22,12 +22,12 @@ public class CardDetailController {
 
     private final GetUrlService recommendationImageUrlService;
     
-    private final ElasticService getDetailService;
+    private final ElasticService elasticService;
 
     @Autowired
-    public CardDetailController(GetUrlService recommendationImageUrlService, ElasticService getDetailService) {
+    public CardDetailController(GetUrlService recommendationImageUrlService, ElasticService elasticService) {
         this.recommendationImageUrlService = recommendationImageUrlService;
-        this.getDetailService = getDetailService;
+        this.elasticService = elasticService;
     }
         
     @GetMapping("/carddetail")
@@ -41,7 +41,7 @@ public class CardDetailController {
         model.addAttribute("imageUrls", imageUrls); // imageUrls[0], imageUrls[1], imageUrls[2], imageUrls[3], imageUrls[4]
 
         List<Integer> jsonImageId = recommendationImageUrlService.getImageIds(imageList);
-        List<GetResponse<ObjectNode>> response = getDetailService.fetchData(jsonImageId);
+        List<GetResponse<ObjectNode>> response = elasticService.fetchData(jsonImageId);
         
         List<List<String>> productDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
         List<List<String>> categoryDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
