@@ -5,27 +5,11 @@
 <%@ include file="header/header.jsp" %>
 
 <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
         th, td {
             border: 1px solid black;
             text-align: center;
         }
-        /* 테이블 안의 td 요소 안에 가로 선을 추가합니다. */
-        td {
-            position: relative;
-        }
-        td::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            border-bottom: 1px solid black;
-        }
-    </style>
+</style>
 <body>
     <div class="container">
         <div class="row">
