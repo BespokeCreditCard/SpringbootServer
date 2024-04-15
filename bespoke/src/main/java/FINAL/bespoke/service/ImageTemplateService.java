@@ -11,7 +11,8 @@ public class ImageTemplateService {
 	
    @Autowired
     private ImageTemplateRepository imageTemplateRepository;
-
+   
+   // List<id>
     public List<ImageTemplate> getImagesByIds(List<Integer> imageIds) {
         return imageTemplateRepository.findAllById(imageIds);
     }

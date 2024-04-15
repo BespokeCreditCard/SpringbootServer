@@ -39,7 +39,6 @@ public class ElasticService {
 			}
     	}
         return responses;
-        
     }
     
     public GetResponse<ObjectNode> fetchData(String imageId) {
