@@ -1,7 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <%@ include file="header/header.jsp" %>
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+        }
+        /* 테이블 안의 td 요소 안에 가로 선을 추가합니다. */
+        td {
+            position: relative;
+        }
+        td::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-bottom: 1px solid black;
+        }
+    </style>
 <body>
     <div class="container">
         <div class="row">
@@ -43,8 +67,19 @@
             <div class="col-md-6 mb-3">
                 <div class="container-lg h-100 border border-primary bg-light rounded border-5">
                     <h2 class="card-header">카드 혜택 내역</h2>
-                    <div class="card-body">
-                        <p class="card-text">국내외 가맹점 1% 청구 할인</p>
+                    <div class="card-body" style="overflow-y: scroll; max-height: 500px;">
+                    <ul>
+                        <c:forEach var="category" items="${categoriesResultDetail}" varStatus="catStatus">
+                            <c:if test="${not empty categoriesResultDetail[catStatus.index * 3]}">
+                                <li>Category ${catStatus.index + 1}:</li>
+                                <ul>
+									<li>Class: <c:out value="${categoriesResultDetail[catStatus.index * 3]}" /></li>
+						            <li>Benefit: <c:out value="${categoriesResultDetail[catStatus.index * 3 + 1]}" /></li>
+									<li><c:out value="${categoriesResultDetail[catStatus.index * 3 + 2]}" escapeXml="false" /></li>
+                                </ul>
+                            </c:if>
+                         </c:forEach>
+                     </ul>
                     </div>
                 </div>
             </div>
