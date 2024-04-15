@@ -73,7 +73,7 @@ public class SecurityConfig {
 				//경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth // HTTP 요청에 대한 인가 설정을 시작하는 부분입니다. auth 람다 함수의 매개변수를 통해 인가 규칙을 설정할 수 있습니다.
-                        .requestMatchers("/login", "/", "/join","/login**","/logout", "/WEB-INF/view/**","/js/**","/css/**","/img/**").permitAll() // "/login", "/" (루트 경로), "/join" 경로에 대한 요청은 인증 없이 모든 사용자에게 허용됩니다. 즉, 이 경로들에 대한 접근을 로그인하지 않은 사용자도 할 수 있습니다.
+                        .requestMatchers("/login", "/", "/join","/login**","/logout", "/WEB-INF/view/**","/js/**","/css/**","/img/**","assets/img/**").permitAll() // "/login", "/" (루트 경로), "/join" 경로에 대한 요청은 인증 없이 모든 사용자에게 허용됩니다. 즉, 이 경로들에 대한 접근을 로그인하지 않은 사용자도 할 수 있습니다.
 //						.requestMatchers("/admin").hasRole("user") // "/admin" 경로에 대한 요청은 "ADMIN" 역할을 가진 사용자만 접근할 수 있습니다. 이는 관리자 권한을 가진 사용자만 "/admin" 경로에 접근할 수 있음을 의미합니다.
                         .anyRequest().permitAll()); // authenticated()); // authenticated 위에서 명시하지 않은 모든 다른 요청들은 인증된(로그인한) 사용자만 접근할 수 있습니다. 즉, 로그인하지 않은 사용자는 이 규칙에 의해 제한된 모든 다른 경로에 대해 접근할 수 없습니다.
 				//세션 설정
