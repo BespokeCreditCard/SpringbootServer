@@ -70,4 +70,10 @@ public class UserController {
 //        return "redirect:/index";
 //        return "redirect:/login";
     }
+ 	
+ 	@GetMapping("/Mypage")
+ 	public String goMyPage() {
+ 		
+ 		return "MyPage";
+ 	}
 }
