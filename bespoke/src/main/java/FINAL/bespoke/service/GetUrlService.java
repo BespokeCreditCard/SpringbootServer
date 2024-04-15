@@ -53,6 +53,13 @@ public class GetUrlService {
     	return imageList;
     }
     
+    // id에 따른 url 가져오기
+    public String getImageUrl(String userId) {
+        // 이미지 ID에 해당하는 URL 조회
+    	String fullUrl = s3Config.s3Endpoint() + "upload/" + userId + ".png"; // userId에 따라서 upload된 이미지 가져오기
+        return fullUrl;
+    }
+    
     // url 가져오는 메서드
     public List<String> getImageUrls(List<Integer> imageIds) {
         List<String> imageUrls = new ArrayList<>();
