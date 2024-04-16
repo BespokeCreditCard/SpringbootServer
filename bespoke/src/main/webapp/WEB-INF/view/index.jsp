@@ -16,10 +16,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+        <%@ include file="header/header.jsp" %>
 </head>
 <body id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+<!--     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#page-top"><img src="./img/woori.png" alt="..." /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,15 +38,23 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
     <!-- Masthead-->
-    <header class="masthead">
+<!--     <header class="masthead">
         <div class="container">
             <div class="masthead-subheading">Wooricard Platform Introduction</div>
             <div class="masthead-heading text-uppercase">안녕하세요! readme 블라 블라</div>
             <a class="btn btn-primary btn-xl text-uppercase" href="#services">더보기</a>
         </div>
-    </header>
+    </header> -->
+    <div class="masthead">
+     <div class="container">
+            <div class="masthead-subheading">Wooricard Platform Introduction</div>
+            <div class="masthead-heading text-uppercase">안녕하세요! readme 블라 블라</div>
+            <a class="btn btn-primary btn-xl text-uppercase" href="#services">더보기</a>
+        </div>
+    </div>
+        
     <!-- Services-->
     <section class="page-section" id="services">
         <div class="container">
