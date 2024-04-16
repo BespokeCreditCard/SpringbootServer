@@ -30,7 +30,7 @@ public class GetUrlService {
     	
     	List<Integer> imageList = new ArrayList<>();
     	// findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
-    	Recommendation recommendation = recommendationRepository.findBySEQ("P9FCH9IPM511GG8M8AHN");
+    	Recommendation recommendation = recommendationRepository.findBySEQ("8YBQA0UZ1JNAPF1LPQC3");
 //		RecommendationDto recommendationDto = new RecommendationDto();
 //        recommendationDto.setTop1(recommendation.getTop1());
 //        recommendationDto.setTop2(recommendation.getTop2());
