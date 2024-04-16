@@ -68,7 +68,10 @@
         <div class="benefit-card">
         	<h2 id="benefits"></h2>
         </div>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='../carddetail_view/carddetail">카드선택</button>
+		<form id="selectCardId" action="/design/carddesign" method="GET">
+			<input type="hidden" name="selectId">
+			<button type="button" class="btn btn-primary" onclick="selectCardAndSubmit()">카드선택</button>
+		</form>
     </section>
 </body>
 <script>
@@ -82,27 +85,52 @@
     document.getElementById('benefits').innerText = firstCategoryClassText;
 </script>
 <script>
-    $(document).ready(function() {
-        $('.slider-for').slick({
-            slide : 'div', //슬라이드 되어야 할 태그 ex) div, li
-            infinite : true, //무한 반복 옵션
-            slidesToShow : 3, // 한 화면에 보여질 컨텐츠 개수
-            slidesToScroll : 1, //스크롤 한번에 움직일 컨텐츠 개수
-            speed : 1000, // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
-            arrows : true, // 옆으로 이동하는 화살표 표시 여부
-            dots : false, // 스크롤바 아래 점으로 페이지네이션 여부
-            autoplay : false, // 자동 스크롤 사용 여부
-            autoplaySpeed : 3000, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
-            pauseOnHover : false, // 슬라이드 이동시 마우스 호버하면 슬라이더 멈추게 설정
-            vertical : false, // 세로 방향 슬라이드 옵션
-            prevArrow : "<button type='button' class='btn btn-info' style='position: absolute;top: 110%;left: 100px;'>이전</button>",		// 이전 화살표 모양 설정
-            nextArrow : "<button type='button' class='btn btn-info' style='position: absolute;top: 110%;right: 100px;'>다음</button>",	 	// 다음 화살표 모양 설정
-            centerMode: true, // 센터 모드
-            draggable : true, // 드래그 여부
-            focusOnSelect: true // 클릭시 이동
+    function selectCardAndSubmit() {
+        // 여기서 카드 선택에 관련된 동작 수행
+        window.location.href = '../design/carddesign'; // 카드 선택 페이지로 이동
 
-        });
-    });
+        // 여기서 확인 버튼에 관련된 동작 수행
+        document.getElementById('select').submit(); // 폼 제출
+    }
+</script>
+<script>
+	function beforeChangeHandler(event, slick, currentSlide, nextSlide) {
+	    // 다음 슬라이드의 카드 ID 가져오기
+	    var currentSlideId = $('[data-slick-index="' + currentSlide + '"] .card').attr('id');
+	    
+	    // 폼의 hidden input에 선택된 카드의 ID 설정
+	    document.getElementById('selectCardId').querySelector('input[name="selectId"]').value = currentSlideId;
+	}
+	
+	$(document).ready(function() {
+	    // 슬라이더 초기화 및 이벤트 핸들러 등록
+	    $('.slider-for').slick({
+	        slide: 'div',
+	        infinite: true,
+	        slidesToShow: 3,
+	        slidesToScroll: 1,
+	        speed: 1000,
+	        arrows: true,
+	        dots: false,
+	        autoplay: false,
+	        autoplaySpeed: 3000,
+	        pauseOnHover: false,
+	        vertical: false,
+	        prevArrow: "<button type='button' class='btn btn-info' style='position: absolute;top: 110%;left: 100px;'>이전</button>",
+	        nextArrow: "<button type='button' class='btn btn-info' style='position: absolute;top: 110%;right: 100px;'>다음</button>",
+	        centerMode: true,
+	        draggable: true,
+	        focusOnSelect: true,
+	        // 슬라이드 변경 전 이벤트 핸들러 등록
+	        onBeforeChange: beforeChangeHandler
+	    });
+	});
+	
+	// 카드 선택 및 폼 제출 함수
+	function selectCardAndSubmit() {
+	    // 여기서 카드 선택에 관련된 동작 수행 (예: 폼 제출)
+	    document.getElementById('selectCardId').submit(); // 폼 제출
+	}
 </script>
 <script>
 
