@@ -147,6 +147,26 @@ public class ElasticService {
         return categories;
     }
     
+    // category에서 class만 가져오는 메소드
+    public List<List<String>> ElasticSearchJsonToTextClassInCategory(List<GetResponse<ObjectNode>> response) {
+    	List<List<String>> categoryDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
+
+        for (GetResponse<ObjectNode> responseObject : response) {
+        	// responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
+        	ObjectNode json = responseObject.source();
+            JsonNode categoryNode = json.get("category");
+            List<String> categories = new ArrayList<>();
+            if (categoryNode != null && categoryNode.isArray()) {
+                for (JsonNode node : categoryNode) {
+                    String categoryClass = node.get("class").asText();
+                    categories.add(categoryClass);
+                }
+            }
+            categoryDetails.add(categories);
+        }
+    	return categoryDetails;
+    }
+    
 //    public GetResponse<ObjectNode> fetchData(List<Integer> imageId) {
 //    	GetResponse<ObjectNode> response = null;
 //        try {

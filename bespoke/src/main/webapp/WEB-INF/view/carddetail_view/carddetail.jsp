@@ -16,7 +16,7 @@
                             <div class="col-md-2 d-flex justify-content-center">
                                 <img src="${imageUrl}" class="card-img" alt="Card Image" style="width: 150px;">
                             </div>
-                            <div class="col-md-8" style="overflow-y: scroll; max-height: 100px;">
+                            <div class="col-md-8" style="overflow-y: scroll; max-height: 300px;">
                                 <p class="card-text">
                                     <ul>
                                         <li>Product Name: ${elasticresultDetail[cardStatus.index][0]}</li>

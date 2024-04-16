@@ -39,7 +39,7 @@ public class GetUrlService {
 //        recommendationDto.setTop5(recommendation.getTop5());
 //        return recommendationDto;
     	System.out.println("################################");
-    	System.out.println(recommendation);
+    	System.out.println("recommendation: "+ recommendation);
     	System.out.println("################################");
     	imageList.add(recommendation.getTop1());
     	imageList.add(recommendation.getTop2());
@@ -47,7 +47,7 @@ public class GetUrlService {
     	imageList.add(recommendation.getTop4());
     	imageList.add(recommendation.getTop5());
     	System.out.println("################################");
-    	System.out.println(imageList);
+    	System.out.println("imageList:"+ imageList);
     	System.out.println("################################");
     	
     	return imageList;

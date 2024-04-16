@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,67 +23,64 @@
 	    }
 	
 	    .container {
-	        width: 241.25px; height: 420px;
-	        transition : all 0.1s;
-	        align-items: center;
-	        position: relative;
-	        margin: 13% 5% 10% 23%;
-	        top: 5%;
-	
-	    }
+		    width: 241.25px;
+		    height: 420px;
+		    transition: all 0.1s;
+		    align-items: center;
+		    position: relative;
+		    margin: 13% 5% 10% 23%;
+		    top: 5%;
+		}
 	    .overlay {
-	        position: absolute;
-	        width: 241.25px;
-	        height: 375px;
-	        background: linear-gradient(105deg, transparent 40%, rgba(255, 219, 112, 0.8) 45%, rgba(132, 50, 255 ,0.6) 50%, transparent 54%);
-	        filter: brightness(1.1) opacity(0.0);
-	        mix-blend-mode: color-dodge;
-	        background-size: 150% 150%;
-	        background-position: 100%;
-	        transition: all 0.1s;
-	        /*z-index: 1;*/
-	    }
+		    position: absolute;
+		    width: 241.25px; 
+		    height: 375px; 
+		    background: linear-gradient(105deg, transparent 40%, rgba(255, 219, 112, 0.8) 45%, rgba(132, 50, 255, 0.6) 50%, transparent 54%);
+		    filter: brightness(1.1) opacity(0.0);
+		    mix-blend-mode: color-dodge;
+		    background-size: 150% 150%;
+		    background-position: 100%;
+		    transition: all 0.1s;
+		}
 	    .card {
-	        width: 241.25px; height: 375px;
-	        /*이미지 임시 설정*/
-	        background-image: url("/imgs/22.png");
-	        background-size: cover;
-	        border-radius: 1rem;
-	    }
+		    width: 241.25px; /* 변경 */
+		    height: 375px; /* 변경 */
+		    background-size: cover;
+		    border-radius: 1rem;
+		}
 </style>
 <body style="background-color: #6c757d">
     <section style="width: 100%;display: flex;align-items: center;justify-content: center">
-        <h1 class="card-title" style="align-items: center;">1순위</h1>
+        <h1 class="card-title" style="align-items: center;">1 순위</h1>
     </section>
     <section style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-        <div class="slider-for" style="width: 95%;height: 100%; min-height: 10%; align-items: center">
-            <div class="container">
-                <div class="overlay"></div>
-                <div class="card" data-img-index="1" style="background-image: url('${imageUrls[0]}');"></div>
-            </div>
-            <div class="container">
-                <div class="overlay"></div>
-                <div class="card" data-img-index="2" style="background-image: url('${imageUrls[1]}');"></div>
-            </div>
-            <div class="container">
-                <div class="overlay"></div>
-                <div class="card" data-img-index="3" style="background-image: url('${imageUrls[2]}');"></div>
-            </div>
-            <div class="container">
-                <div class="overlay"></div>
-                <div class="card" data-img-index="4" style="background-image: url('${imageUrls[3]}');"></div>
-            </div>
-            <div class="container">
-                <div class="overlay"></div>
-                <div class="card" data-img-index="5" style="background-image: url('${imageUrls[4]}');"></div>
-            </div>
-        </div>
+		<div class="slider-for" style="width: 95%; height: 100%; min-height: 10%; align-items: center;">
+			<c:forEach var="imageUrl" items="${imageUrls}" varStatus="imageStatus">
+				<div class="container">
+				    <div class="overlay"></div>
+				    <div class="card" id="${imageStatus.index}" style="background-image: url('<c:out value="${imageUrl}"/>');"></div>
+				</div>
+			</c:forEach>
+		</div>
     </section>
+    
     <section style="width: 100%; display: flex; flex-direction:column; align-items: center;justify-content: center">
-        <h2>카드혜택, 카드혜택</h2>
-        <button type="button" class="btn btn-primary">카드선택</button>
+        <div class="benefit-card">
+        	<h2 id="benefits"></h2>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='../carddetail_view/carddetail">카드선택</button>
     </section>
 </body>
+<script>
+    // JSON 문자열을 JavaScript 객체로 변환합니다.
+    var categoryClasses = JSON.parse('${categoryClassJson}');
+
+    // JSON 배열의 첫 번째 배열을 찾아서 텍스트로 결합합니다.
+    var firstCategoryClassText = categoryClasses[0].join(', ');
+
+    // 결합된 텍스트를 <h2> 태그 안에 설정합니다.
+    document.getElementById('benefits').innerText = firstCategoryClassText;
+</script>
 <script>
     $(document).ready(function() {
         $('.slider-for').slick({
@@ -135,18 +133,22 @@
         var beforeOverlay = document.querySelector('[data-slick-index="' + currentSlide + '"] .overlay');
         var container = document.querySelector('[data-slick-index="' + nextSlide + '"] .container');
         var overlay = document.querySelector('[data-slick-index="' + nextSlide + '"] .overlay');
-
+        var benefitCard = document.querySelector('body > section:nth-child(5) > .benefit-card > h2');
+        
         removeAllEventListeners(beforeContainer);
         removeAllEventListeners(beforeOverlay);
 
         container.addEventListener('mousemove', function(e) { movingContainer(e, container, overlay) });
         container.addEventListener('mouseout', function(e) { movingOut(e, container, overlay) });
-
+		
         var card = document.querySelector('[data-slick-index="' + nextSlide + '"] .card');
         var title = document.querySelector('.card-title');
         var imgIndex = card.getAttribute('data-img-index');
-        title.innerText = imgIndex+" 순위";
-
+        var categoryClasses = JSON.parse('${categoryClassJson}');
+        
+        title.innerText = (parseInt(card.getAttribute('id')) + 1).toString() + " 순위";
+        benefitCard.textContent = categoryClasses[card.getAttribute('id')];
+        
     }
     $('.slider-for').on('beforeChange', beforeChangeHandler);
     var firstContainer = document.querySelector('.container');
@@ -156,4 +158,5 @@
 
 
 </script>
+
 </html>
