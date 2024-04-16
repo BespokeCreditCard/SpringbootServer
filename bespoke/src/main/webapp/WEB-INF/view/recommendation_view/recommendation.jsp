@@ -58,23 +58,23 @@
         <div class="slider-for" style="width: 95%;height: 100%; min-height: 10%; align-items: center">
             <div class="container">
                 <div class="overlay"></div>
-                <div class="card" data-img-index="1" style="background-image: url('/imgs/21.png');"></div>
+                <div class="card" data-img-index="1" style="background-image: url('${imageUrls[0]}');"></div>
             </div>
             <div class="container">
                 <div class="overlay"></div>
-                <div class="card" data-img-index="2" style="background-image: url('/imgs/22.png');"></div>
+                <div class="card" data-img-index="2" style="background-image: url('${imageUrls[1]}');"></div>
             </div>
             <div class="container">
                 <div class="overlay"></div>
-                <div class="card" data-img-index="3" style="background-image: url('/imgs/40.png');"></div>
+                <div class="card" data-img-index="3" style="background-image: url('${imageUrls[2]}');"></div>
             </div>
             <div class="container">
                 <div class="overlay"></div>
-                <div class="card" data-img-index="4" style="background-image: url('/imgs/42.png');"></div>
+                <div class="card" data-img-index="4" style="background-image: url('${imageUrls[3]}');"></div>
             </div>
             <div class="container">
                 <div class="overlay"></div>
-                <div class="card" data-img-index="5" style="background-image: url('/imgs/44.png');"></div>
+                <div class="card" data-img-index="5" style="background-image: url('${imageUrls[4]}');"></div>
             </div>
         </div>
     </section>
