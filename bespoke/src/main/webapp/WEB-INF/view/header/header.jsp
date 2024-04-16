@@ -13,16 +13,16 @@
 </head>
 <body>  
     <nav class="navbar">
-        <a href="index.html" class="navbar__brand">우리은행</a>        
+        <a href="${pageContext.request.contextPath}/" class="navbar__brand">우리은행</a>        
         <ul class="navbar__menu">
-            <li><a href="${pageContext.request.contextPath}/recommendation">카드 추천</a></li>
-            <li><a href="${pageContext.request.contextPath}/carddesign">카드 꾸미기</a></li>
-            <li><a href="${pageContext.request.contextPath}/issuecard">카드 발급</a></li>
-            <li><a href="${pageContext.request.contextPath}/terms">약관</a></li>
+            <li><a href="${pageContext.request.contextPath}/recommendation_view/recommendation">카드 추천</a></li>
+            <li><a href="${pageContext.request.contextPath}/carddetail_view/carddetail">카드 꾸미기</a></li>
+            <li><a href="${pageContext.request.contextPath}/receivecard">카드 발급</a></li>
+            <li><a href="${pageContext.request.contextPath}/terms_view/terms">약관</a></li>
             <li><a href="${pageContext.request.contextPath}/mypage">마이 페이지</a></li>
             <li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
         </ul>
     </nav>
-    <div style="height: 50px;"></div> <!-- 본문과의 간격을 조절하기 위한 공백 -->
+   
 </body>
 </html>
