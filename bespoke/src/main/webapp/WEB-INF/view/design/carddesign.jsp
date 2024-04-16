@@ -26,14 +26,14 @@
             </div>
 
             <div class="card col-3 p-2 m-4" id="card1" style="width: 18rem; display: none;">
-                <img src="./img/bcc_024.png" class="card-img-top p-4" alt="...">
+                <img src="/imgs/1235.png" class="card-img-top p-4" alt="...">
                 <div class="btn-container d-flex justify-content-center align-items-center">
                     <a class="btn btn-primary">선택 1</a>
                 </div>
             </div>
 
             <div class="card col-3 p-2 m-4" id="card2" style="width: 18rem; display: none;">
-                <img src="./img/bcc_027.png" class="card-img-top p-4" alt="...">
+                <img src="/imgs/1235.png" class="card-img-top p-4" alt="...">
                 <div class="btn-container d-flex justify-content-center align-items-center">
                     <a class="btn btn-primary">선택 2</a>
                 </div>
@@ -112,7 +112,7 @@
             document.getElementById("nextBtnDiv").style.display = "block";
 
             // 모달 표시
-            var gifSrc = "./img/loading.gif"; // 로딩 GIF 이미지 경로
+            var gifSrc = "/img/loading.gif"; // 로딩 GIF 이미지 경로
             showGIFModal(gifSrc);
         };
 
