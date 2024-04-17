@@ -39,6 +39,9 @@ public class RecommendationController {
     @GetMapping("/recommendation")
     public String showRecommendation(Model model, HttpServletRequest request) throws JsonProcessingException {
         // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
+    	
+    	long beforeTime = System.currentTimeMillis(); // 코드 실행 전 시간
+    	
         List<Integer> imageList = recommendationService.getRecommendation();
 
         List<String> imageUrls = recommendationService.getImageUrls(imageList);
@@ -64,6 +67,12 @@ public class RecommendationController {
     	System.out.println("categoryClass: "+ categoryClass);
     	System.out.println("################################");
         // recommendation.jsp로 이동
+    	
+    	long afterTime = System.currentTimeMillis(); // 코드 실행 후 시간
+    	
+    	long secDiffTime = (afterTime - beforeTime); // 코드 실행 전후 시간 차이 계산(초 단위)
+    	
+    	System.out.println("시간차이(s) : " + secDiffTime);
         return "recommendation_view/recommendation";
     }
 }

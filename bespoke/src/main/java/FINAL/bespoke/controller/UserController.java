@@ -106,6 +106,6 @@ public class UserController {
         model.addAttribute("elasticresultDetail", productDetails);
         model.addAttribute("categoriesResultDetail", categoryDetails);
  		
- 		return "MyPage";
+ 		return "mypage";
  	}
 }
