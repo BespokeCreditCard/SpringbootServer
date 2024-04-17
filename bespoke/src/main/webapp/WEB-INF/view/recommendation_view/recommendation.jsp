@@ -72,6 +72,7 @@
 			<input type="hidden" name="selectId">
 			<button type="button" class="btn btn-primary" onclick="selectCardAndSubmit()">카드선택</button>
 		</form>
+		<button type="button" class="btn btn-primary" onclick="window.location.href='/carddetail_view/carddetail'">자세히보기</button>
     </section>
 </body>
 <script>

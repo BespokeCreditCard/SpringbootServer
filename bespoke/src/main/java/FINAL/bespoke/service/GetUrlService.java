@@ -8,6 +8,8 @@ import FINAL.bespoke.repository.RecommendationRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ScrollPosition;
+import org.springframework.data.domain.Window;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,20 +62,41 @@ public class GetUrlService {
         return fullUrl;
     }
     
+    
     // id가 list일때 url 가져오는 메서드
     public List<String> getImageUrls(List<Integer> imageIds) {
-        List<String> imageUrls = new ArrayList<>();
-        
-        for (Integer id : imageIds) {
-        	System.out.println(id);
-            // 이미지 ID에 해당하는 URL 조회
-        	ImageTemplate imageTemplate = imageTemplateRepository.getOne(id); // id 가져옴
-        	String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // endpoint + 그 아이디에 해당하는 url 
-        	System.out.println(imageTemplate.getUrl());
-            imageUrls.add(fullUrl); // 리스트에 추가
+    	List<String> imageUrls = new ArrayList<>();
+
+        if (imageIds.isEmpty()) {
+            return imageUrls; // 이미지 ID 목록이 비어있으면 빈 리스트 반환
+        }
+
+        // 이미지 ID 목록을 이용하여 이미지 정보 조회
+        Window<ImageTemplate> imageTemplates = imageTemplateRepository.findByIdIn(imageIds,ScrollPosition.offset());
+
+        // Window 객체를 순회하여 각 ImageTemplate 객체를 처리
+        for (ImageTemplate imageTemplate : imageTemplates) {
+            String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // S3 엔드포인트와 이미지 URL 조합
+            imageUrls.add(fullUrl); // 이미지 URL을 리스트에 추가
             System.out.println(imageTemplate.getUrl());
         }
-        System.out.println(imageUrls);
         return imageUrls;
     }
+
+    
+//    // id가 list일때 url 가져오는 메서드
+//    public List<String> getImageUrls(List<Integer> imageIds) {
+//        List<String> imageUrls = new ArrayList<>();
+//        
+//        for (Integer id : imageIds) {
+//        	System.out.println(id);
+//            // 이미지 ID에 해당하는 URL 조회
+//        	ImageTemplate imageTemplate = imageTemplateRepository.getOne(id); // id 가져옴
+//        	String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // endpoint + 그 아이디에 해당하는 url 
+//            imageUrls.add(fullUrl); // 리스트에 추가
+//            System.out.println(imageTemplate.getUrl());
+//        }
+//        System.out.println(imageUrls);
+//        return imageUrls;
+//    }
 }
