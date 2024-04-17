@@ -69,8 +69,8 @@
         	<h2 id="benefits"></h2>
         </div>
 		<form id="selectCardId" action="/design/carddesign" method="GET">
-			<input type="hidden" name="selectId">
-			<button type="button" class="btn btn-primary" onclick="selectCardAndSubmit()">카드선택</button>
+			<input type="hidden" id="selectId" name="selectId" value="0">
+			<button type="submit" class="btn btn-primary">카드선택</button>
 		</form>
 		<button type="button" class="btn btn-primary" onclick="window.location.href='/carddetail_view/carddetail'">자세히보기</button>
     </section>
@@ -86,22 +86,6 @@
     document.getElementById('benefits').innerText = firstCategoryClassText;
 </script>
 <script>
-    function selectCardAndSubmit() {
-        // 여기서 카드 선택에 관련된 동작 수행
-        window.location.href = '../design/carddesign'; // 카드 선택 페이지로 이동
-
-        // 여기서 확인 버튼에 관련된 동작 수행
-        document.getElementById('select').submit(); // 폼 제출
-    }
-</script>
-<script>
-	function beforeChangeHandler(event, slick, currentSlide, nextSlide) {
-	    // 다음 슬라이드의 카드 ID 가져오기
-	    var currentSlideId = $('[data-slick-index="' + currentSlide + '"] .card').attr('id');
-	    
-	    // 폼의 hidden input에 선택된 카드의 ID 설정
-	    document.getElementById('selectCardId').querySelector('input[name="selectId"]').value = currentSlideId;
-	}
 	
 	$(document).ready(function() {
 	    // 슬라이더 초기화 및 이벤트 핸들러 등록
@@ -122,16 +106,9 @@
 	        centerMode: true,
 	        draggable: true,
 	        focusOnSelect: true,
-	        // 슬라이드 변경 전 이벤트 핸들러 등록
-	        onBeforeChange: beforeChangeHandler
 	    });
 	});
-	
-	// 카드 선택 및 폼 제출 함수
-	function selectCardAndSubmit() {
-	    // 여기서 카드 선택에 관련된 동작 수행 (예: 폼 제출)
-	    document.getElementById('selectCardId').submit(); // 폼 제출
-	}
+
 </script>
 <script>
 
@@ -174,7 +151,9 @@
         var title = document.querySelector('.card-title');
         var imgIndex = card.getAttribute('data-img-index');
         var categoryClasses = JSON.parse('${categoryClassJson}');
+        var selectId = document.querySelector('#selectId');
         
+	    selectId.setAttribute('value', card.getAttribute('id')); // 데이터 속성 설정
         title.innerText = (parseInt(card.getAttribute('id')) + 1).toString() + " 순위";
         benefitCard.textContent = categoryClasses[card.getAttribute('id')];
         
