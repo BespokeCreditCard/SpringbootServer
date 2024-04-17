@@ -112,7 +112,7 @@
     <div class="container-fluid fixed-bottom" id="prevBtnDiv">
     <div class="row justify-content-start mb-3">
         <div class="col-6">
-            <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/carddesign'">이전</button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/design/carddesign'">이전</button>
         </div>
         <div class="col-6 text-end justify-content-end" id="nextBtnDiv">
                 <button type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#issueCardModal">확인</button>
