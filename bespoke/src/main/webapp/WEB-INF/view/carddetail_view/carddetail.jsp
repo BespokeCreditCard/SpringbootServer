@@ -38,7 +38,7 @@
                                 </p>
                             </div>
                             <div class="col-md-2 text-center">
-                                <button type="button" class="btn btn-secondary" onclick="window.location.href='<%= request.getContextPath() %>/carddesign'">카드 선택</button>
+                                <button type="button" class="btn btn-secondary" onclick="window.location.href='<%= request.getContextPath() %>/design/carddesign'">카드 선택</button>
                             </div>
                         </div>
                     </div>
