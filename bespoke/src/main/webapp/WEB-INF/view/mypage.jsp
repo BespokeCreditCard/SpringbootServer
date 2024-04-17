@@ -86,13 +86,13 @@
         <div class="row">
             <div class="col-6 ">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary" onclick="location.href='<%= request.getContextPath() %>/editprofile'">수정</button>
+                    <button class="btn btn-primary" onclick="location.href='<%= request.getContextPath() %>/editprofile'">대쉬보드</button>
                 </div>
             </div>
             <div class="col-6">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary me-3" onclick="location.href='<%= request.getContextPath() %>/carddesign'">디자인 수정</button>
-					<button class="btn btn-primary" onclick="location.href='<%= request.getContextPath() %>/issuecard'">카드 재발급</button>
+                    <button class="btn btn-primary me-3" onclick="location.href='<%= request.getContextPath() %>/design/	carddesign'">디자인 수정</button>
+					<button class="btn btn-primary" onclick="location.href='<%= request.getContextPath() %>/receivecard'">카드 재발급</button>
                 </div>
             </div>
         </div>

@@ -62,7 +62,7 @@
                 <div class="col-lg-4">
                     <div class="team-member">
                         <h4>류준규</h4>
-                        <p class="text-muted">Leader, Back-end, Data Analysis</p>
+                        <p class="text-muted">Leader, Back-end, Data Analysis, Front-end</p>
                         <!-- 소셜 링크 -->
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="col-lg-4">
                     <div class="team-member">
                         <h4>신연재</h4>
-                        <p class="text-muted">Data Analysis, Front-end, Back-end</p>
+                        <p class="text-muted">Data Analysis, Front-end</p>
                         <!-- 소셜 링크 -->
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                 <div class="col-lg-4">
                     <div class="team-member">
                         <h4>김준우</h4>
-                        <p class="text-muted">Back-end, Planning, PM</p>
+                        <p class="text-muted">Back-end, Planning, PM, Front-end</p>
                         <!-- 소셜 링크 -->
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="col-lg-4">
                     <div class="team-member">
                         <h4>우선주</h4>
-                        <p class="text-muted">Data Analysis, Planning, Security</p>
+                        <p class="text-muted">Data Analysis, Planning, Front-end, Back-end</p>
                         <!-- 소셜 링크 -->
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <div class="col-lg-4">
                     <div class="team-member">
                         <h4>이민수</h4>
-                        <p class="text-muted">Back-end, writes documents, planning</p>
+                        <p class="text-muted">Back-end, writes documents, planning, Front-end</p>
                         <!-- 소셜 링크 -->
                     </div>
                 </div>
