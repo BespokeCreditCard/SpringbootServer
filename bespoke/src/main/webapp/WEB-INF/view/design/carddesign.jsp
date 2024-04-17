@@ -114,10 +114,10 @@
     <div class="container-fluid fixed-bottom" id="prevBtnDiv">
         <div class="row justify-content-start mb-3">
             <div class="col-6">
-                <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/carddesign'">이전</button>
+                <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/recommendation_view/recommendation'">이전</button>
             </div>
             <div class="col-6 text-end">
-                <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/issuecard'">다음</button>
+                <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/receivecard'">다음</button>
             </div>
         </div>
     </div>
@@ -188,11 +188,11 @@
         }
 
         document.querySelector("#card1 .btn").onclick = function() {
-            window.location.href = "<%= request.getContextPath() %>/issuecard"; // 선택1을 클릭하면 IssueCard로 이동합니다.
+            window.location.href = "<%= request.getContextPath() %>/receivecard"; // 선택1을 클릭하면 IssueCard로 이동합니다.
         };
 
         document.querySelector("#card2 .btn").onclick = function() {
-            window.location.href = "<%= request.getContextPath() %>/issuecard"; // 선택2를 클릭하면 IssueCard로 이동합니다.
+            window.location.href = "<%= request.getContextPath() %>/receivecard"; // 선택2를 클릭하면 IssueCard로 이동합니다.
         };
     </script>
     <script>

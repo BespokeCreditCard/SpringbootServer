@@ -45,7 +45,7 @@
                 </div>
             </div>
         </c:forEach>
-
+ 		<button type="button" class="btn btn-primary" onclick="window.location.href='/recommendation_view/recommendation'">이전</button>
     </div>
 </body>
 </html>
