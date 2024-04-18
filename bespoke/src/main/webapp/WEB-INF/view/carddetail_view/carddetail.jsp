@@ -38,7 +38,15 @@
                                 </p>
                             </div>
                             <div class="col-md-2 text-center">
-                                <button type="button" class="btn btn-secondary" onclick="window.location.href='<%= request.getContextPath() %>/design/carddesign'">카드 선택</button>
+	                            <form id="cardSelectId" action="/design/carddesign" method="GET">
+	                           		<input type="hidden" id="cardSelectId" name="cardSelectId" value="${elasticresultDetail[cardStatus.index][5]}">
+	                                <button type="submit" class="btn btn-primary">카드 선택</button>
+	                            </form>
+	                            <!-- action 바꿔야함 워드 클라우드 페이지로 -->
+	                            <form id="keywordSelectId" action="/design/carddesign" method="GET"> 
+	                            	<input type="hidden" id="keywordSelectId" name="keywordSelectId" value="${elasticresultDetail[cardStatus.index][5]}">
+									<button type="submit" class="btn btn-primary">키워드보기</button>
+								</form>
                             </div>
                         </div>
                     </div>
