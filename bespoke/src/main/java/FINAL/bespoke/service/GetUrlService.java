@@ -55,8 +55,29 @@ public class GetUrlService {
     	return imageList;
     }
     
-    // id에 따른 url 가져오기
-    public String getImageUrl(String userId) {
+ // id에 따른 url 가져오기 index_img
+    public String getImageUrlFromIndexImg(String userId) {
+        // 이미지 ID에 해당하는 URL 조회
+    	String userIdTemp = "";
+    	int num = Integer.parseInt(userId);
+    	if (num >= 100) {
+    		userIdTemp = userId;
+    	}
+    	else if (num >= 10 && num <= 99) {
+    		userIdTemp = "0" + userId;
+    	}
+    	else {
+    		userIdTemp = "00" + userId;
+    	}
+    	
+    	System.out.println(userIdTemp);
+    	
+    	String fullUrl = s3Config.s3Endpoint() + "index_img/bcc_" + userIdTemp + ".png"; // userId에 따라서 upload된 이미지 가져오기
+        return fullUrl;
+    }
+    
+    // id에 따른 url 가져오기 upload
+    public String getImageUrlFromUpload(String userId) {
         // 이미지 ID에 해당하는 URL 조회
     	String fullUrl = s3Config.s3Endpoint() + "upload/" + userId + ".png"; // userId에 따라서 upload된 이미지 가져오기
         return fullUrl;

@@ -30,7 +30,7 @@
         <div class="row p-2 align-items-center position-relative">
 
             <div class="card col-3 m-4" style="width: 18rem;">
-                <img src="/imgs/1235.png" id="preview" class="card-img-top p-3" alt="...">
+                <img src="${selectImageUrl}" id="preview" class="card-img-top p-3" alt="...">
                 <div class="card-body h-3 mt-2 text-center">
                     <div class="btn-container mt-1">
                         <label for="fileInput" class="custom-file-label">파일 업로드</label>
