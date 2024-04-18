@@ -22,8 +22,33 @@ public class ElasticService {
     public ElasticService(ElasticsearchClient esClient) {
         this.esClient = esClient;
     }
-	
-
+    
+    
+    /**
+     * Elasticsearch에서 특정 이미지 ID에 해당하는 문서를 검색하고 반환합니다.
+     * 
+     * @param imageId 검색할 이미지 ID
+     * @return 검색된 문서의 GetResponse<ObjectNode>, 검색에 실패하면 null 반환
+     */
+    public GetResponse<ObjectNode> fetchimageIdData(String imageId) {
+    	try {
+    		// Elasticsearch의 Get API를 사용하여 문서를 가져옴
+    		GetResponse<ObjectNode> response = esClient.get(g -> g
+    				.index("result_bulk")
+    				.id(imageId), ObjectNode.class);
+    		return response; // 가져온 문서를 반환
+    	} catch (ElasticsearchException | IOException e) {
+    		e.printStackTrace();  // 에러 스택 추적을 출력하거나 로그로 남김
+    		return null;  // 에러 발생 시 null 반환
+    	}
+    }
+    
+    /**
+     * 주어진 이미지 ID 리스트를 사용하여 Elasticsearch에서 각각의 문서를 검색하고 결과를 반환합니다.
+     * 
+     * @param imageIds 검색할 이미지 ID의 리스트
+     * @return 검색된 문서들의 GetResponse<ObjectNode> 리스트
+     */
     public List<GetResponse<ObjectNode>> fetchimageIdData(List<Integer> imageId) {
     	List<GetResponse<ObjectNode>> responses = new ArrayList<>();
     	for (Integer imageIdtmp : imageId) {
@@ -41,19 +66,12 @@ public class ElasticService {
         return responses;
     }
     
-    public GetResponse<ObjectNode> fetchimageIdData(String imageId) {
-        try {
-            // Elasticsearch의 Get API를 사용하여 문서를 가져옴
-            GetResponse<ObjectNode> response = esClient.get(g -> g
-                .index("result_bulk")
-                .id(imageId), ObjectNode.class);
-            return response; // 가져온 문서를 반환
-        } catch (ElasticsearchException | IOException e) {
-            e.printStackTrace();  // 에러 스택 추적을 출력하거나 로그로 남김
-            return null;  // 에러 발생 시 null 반환
-        }
-    }
-    
+    /**
+     * Elasticsearch 응답 리스트에서 각각의 카드 정보를 추출하여 제품 상세 정보를 리스트 형태로 변환하여 반환합니다.
+     * 
+     * @param responses Elasticsearch로부터 받은 응답 리스트
+     * @return 각 카드의 정보를 담은 문자열 리스트의 리스트
+     */
     public List<List<String>> ElasticSearchJsonToTextProduct(List<GetResponse<ObjectNode>> response) {
     	List<List<String>> productDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
     	for (GetResponse<ObjectNode> responseObject : response) {
@@ -81,6 +99,12 @@ public class ElasticService {
     	return productDetails;
     }
     
+    /**
+     * 단일 Elasticsearch 응답에서 카드 정보를 추출하여 제품 상세 정보를 리스트로 반환합니다.
+     * 
+     * @param response 단일 Elasticsearch 응답
+     * @return 카드의 세부 정보를 담은 문자열 리스트
+     */
     public List<String> ElasticSearchJsonToTextProduct(GetResponse<ObjectNode> responseObject) {
         List<String> productDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
         // responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
@@ -104,6 +128,12 @@ public class ElasticService {
         return productDetails;
     }
     
+    /**
+     * 여러 Elasticsearch 응답에서 카테고리 정보를 추출하여 각 카테고리의 세부 정보를 리스트의 리스트 형태로 반환합니다.
+     * 
+     * @param responses 여러 Elasticsearch 응답 객체
+     * @return 각 카테고리의 세부 정보를 담은 문자열 리스트의 리스트
+     */
     public List<List<String>> ElasticSearchJsonToTextCategory(List<GetResponse<ObjectNode>> response) {
     	List<List<String>> categoryDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
 
@@ -129,6 +159,12 @@ public class ElasticService {
     	return categoryDetails;
     }
     
+    /**
+     * 단일 Elasticsearch 응답에서 카테고리 정보를 추출하여 리스트로 반환합니다.
+     * 
+     * @param response 단일 Elasticsearch 응답
+     * @return 카테고리의 세부 정보를 담은 문자열 리스트
+     */
     public List<String> ElasticSearchJsonToTextCategory(GetResponse<ObjectNode> responseObject) {
 
     	ObjectNode json = responseObject.source();
@@ -147,7 +183,12 @@ public class ElasticService {
         return categories;
     }
     
-    // category에서 class만 가져오는 메소드
+    /**
+     * 여러 Elasticsearch 응답에서 'class' 카테고리 정보만을 추출하여 리스트의 리스트 형태로 반환합니다.
+     * 
+     * @param responses 여러 Elasticsearch 응답 객체
+     * @return 'class' 카테고리 정보만을 포함하는 문자열 리스트의 리스트
+     */
     public List<List<String>> ElasticSearchJsonToTextClassInCategory(List<GetResponse<ObjectNode>> response) {
     	List<List<String>> categoryDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
 
