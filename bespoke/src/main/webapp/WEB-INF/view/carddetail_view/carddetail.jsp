@@ -38,8 +38,8 @@
                                 </p>
                             </div>
                             <div class="col-md-2 text-center">
-	                            <form id="cardSelectId" action="/design/carddesign" method="GET">
-	                           		<input type="hidden" id="cardSelectId" name="cardSelectId" value="${elasticresultDetail[cardStatus.index][5]}">
+	                            <form id="selectCardId" action="/design/carddesign" method="GET">
+	                           		<input type="hidden" id="cardSelectId" name="selectCardId" value="${elasticresultDetail[cardStatus.index][5]}">
 	                                <button type="submit" class="btn btn-primary">카드 선택</button>
 	                            </form>
 	                            <!-- action 바꿔야함 워드 클라우드 페이지로 -->
