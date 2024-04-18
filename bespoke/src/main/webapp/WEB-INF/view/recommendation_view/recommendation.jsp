@@ -69,7 +69,7 @@
         	<h2 id="benefits"></h2>
         </div>
 		<form id="selectCardId" action="/design/carddesign" method="GET">
-			<input type="hidden" id="selectId" name="selectId" value="0">
+			<input type="hidden" id="selectInputCardId" name="selectCardId" value="0">
 			<button type="submit" class="btn btn-primary">카드선택</button>
 		</form>
 		<button type="button" class="btn btn-primary" onclick="window.location.href='/carddetail_view/carddetail'">자세히보기</button>
@@ -151,9 +151,9 @@
         var title = document.querySelector('.card-title');
         var imgIndex = card.getAttribute('data-img-index');
         var categoryClasses = JSON.parse('${categoryClassJson}');
-        var selectId = document.querySelector('#selectId');
+        var selectInputCardId = document.querySelector('#selectInputCardId');
+        selectInputCardId.setAttribute('value', ${imageIdList}[card.getAttribute('id')]); // 데이터 속성 설정
         
-	    selectId.setAttribute('value', card.getAttribute('id')); // 데이터 속성 설정
         title.innerText = (parseInt(card.getAttribute('id')) + 1).toString() + " 순위";
         benefitCard.textContent = categoryClasses[card.getAttribute('id')];
     }

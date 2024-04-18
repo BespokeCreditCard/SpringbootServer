@@ -42,7 +42,8 @@ public class RecommendationController {
     	long beforeTime = System.currentTimeMillis(); // 코드 실행 전 시간
     	
         List<Integer> imageList = recommendationService.getRecommendation();
-
+        System.out.println("%%%%%%%%%%%%%imageList: "+imageList);
+        model.addAttribute("imageIdList", imageList);
         List<String> imageUrls = recommendationService.getImageUrls(imageList);
         
         // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
