@@ -42,7 +42,7 @@ public class ReceiveCardController {
 		model.addAttribute("userImageUrl", userImageUrl);
 
  		//userid 로 elasticservice에 참조하는 코드
- 		GetResponse<ObjectNode> response = elasticService.fetchData(userIdTemp.getCardId());
+ 		GetResponse<ObjectNode> response = elasticService.fetchimageIdData(userIdTemp.getCardId());
         
         List<String> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
         List<String> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);

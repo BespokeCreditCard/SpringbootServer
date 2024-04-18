@@ -49,7 +49,7 @@ public class RecommendationController {
         model.addAttribute("imageUrls", imageUrls);
 
         User user = receiveCardService.findUserId(request);
-        List<GetResponse<ObjectNode>> response = elasticService.fetchData(imageList);
+        List<GetResponse<ObjectNode>> response = elasticService.fetchimageIdData(imageList);
         
         List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
         

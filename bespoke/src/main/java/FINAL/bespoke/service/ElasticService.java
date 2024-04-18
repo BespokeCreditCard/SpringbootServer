@@ -24,7 +24,7 @@ public class ElasticService {
     }
 	
 
-    public List<GetResponse<ObjectNode>> fetchData(List<Integer> imageId) {
+    public List<GetResponse<ObjectNode>> fetchimageIdData(List<Integer> imageId) {
     	List<GetResponse<ObjectNode>> responses = new ArrayList<>();
     	for (Integer imageIdtmp : imageId) {
 	        try {
@@ -41,7 +41,7 @@ public class ElasticService {
         return responses;
     }
     
-    public GetResponse<ObjectNode> fetchData(String imageId) {
+    public GetResponse<ObjectNode> fetchimageIdData(String imageId) {
         try {
             // Elasticsearch의 Get API를 사용하여 문서를 가져옴
             GetResponse<ObjectNode> response = esClient.get(g -> g

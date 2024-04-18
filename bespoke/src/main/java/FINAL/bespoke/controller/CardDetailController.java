@@ -40,7 +40,7 @@ public class CardDetailController {
         // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
         model.addAttribute("imageUrls", imageUrls); // imageUrls[0], imageUrls[1], imageUrls[2], imageUrls[3], imageUrls[4]
 
-        List<GetResponse<ObjectNode>> response = elasticService.fetchData(imageList);
+        List<GetResponse<ObjectNode>> response = elasticService.fetchimageIdData(imageList);
         
         List<List<String>> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
         List<List<String>> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);
