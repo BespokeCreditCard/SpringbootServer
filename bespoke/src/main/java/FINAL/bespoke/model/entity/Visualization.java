@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Visualization {
 	@Id
 	@Column
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
     
     @Column(length = 40)
