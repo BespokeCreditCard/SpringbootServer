@@ -27,6 +27,7 @@
                 <div class="container-lg h-100 p-1 border border-primary bg-light rounded border-5">
                     <h2 class="card-header">개인 정보 확인</h2>
                     <div class="card-body">
+                   		<p class="card-text">Id: <span id="user-id">${userData.userID}</span></p>
                         <p class="card-text">이름: <span id="user-name">${userData.name}</span></p>
                         <p class="card-text">생년월일: <span id="user-birth">${userData.birthDate}</span></p>
                         <p class="card-text">주소: <span id="user-address-db">${userData.address}</span></p>
@@ -127,7 +128,8 @@
         document.getElementById("edit-address").addEventListener("click", function() {
             var addressInput = document.getElementById("user-address");
             var editButton = document.getElementById("edit-address");
-
+			var userIdTemp = document.getElementById("user-id").textContent;
+            console.log("a : " + addressInput + "a : " + editButton + "a : " + userIdTemp);
             if (addressInput.disabled) {
                 // 텍스트 상자를 활성화하여 편집 가능하게 만듭니다.
                 addressInput.disabled = false;
@@ -137,6 +139,27 @@
                 // 수정이 완료되면 텍스트 상자를 비활성화하고 버튼 텍스트를 다시 "수정"으로 변경합니다.
                 addressInput.disabled = true;
                 editButton.innerText = "수정";
+                
+             // 수정된 주소를 서버로 전송
+                var updatedAddress = addressInput.value;
+             	
+                saveAddress(updatedAddress, userIdTemp); // 주소 저장 함수 호출
+            }
+            
+         // 수정된 주소를 서버로 전송하는 함수 (Ajax)
+            function saveAddress(address, userId) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/receivecard", true); // POST 요청으로 /receivecard 엔드포인트 호출
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // 주소 업데이트가 성공적으로 처리된 경우
+                        console.log("주소가 성공적으로 업데이트되었습니다.");
+                        // 주소 업데이트 후 페이지 내 해당 부분만 업데이트
+                        alert("주소가 성공적으로 업데이트되었습니다.");
+                    }
+                };
+                xhr.send(JSON.stringify({ address: address, userId: userId }));
             }
         });
     </script>
