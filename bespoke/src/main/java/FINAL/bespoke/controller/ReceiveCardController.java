@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,15 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import FINAL.bespoke.model.dto.deliveryAddressDto;
 import FINAL.bespoke.model.entity.User;
+import FINAL.bespoke.repository.UserRepository;
 import FINAL.bespoke.service.ElasticService;
 import FINAL.bespoke.service.GetUrlService;
 import FINAL.bespoke.service.ReceiveCardService;
@@ -26,23 +32,25 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class ReceiveCardController {
 	
 	public final ReceiveCardService receiveCardService;
-	
 	public final GetUrlService getUrlService;
-	
 	public final ElasticService elasticService;
 	private final String s3Endpoint;
 
+	public final UserRepository userRepository;
+	
 	@Autowired
-	public ReceiveCardController(ReceiveCardService receiveCardService, GetUrlService getUrlService, ElasticService elasticService, String s3Endpoint) {
+	public ReceiveCardController(ReceiveCardService receiveCardService, GetUrlService getUrlService, ElasticService elasticService, String s3Endpoint, UserRepository userRepository) {
 		this.receiveCardService = receiveCardService;
 		this.getUrlService = getUrlService;
 		this.elasticService = elasticService;
 		this.s3Endpoint = s3Endpoint;
+		this.userRepository = userRepository;
 	}
 
 	@GetMapping("/receivecard")
@@ -67,7 +75,29 @@ public class ReceiveCardController {
 
 		return "receivecard";
 	}
-
+	@Transactional
+	public void updateUserAddress(String userId, String newAddress) {
+        Optional<User> userTemp =  userRepository.findById(userId);
+        if(userTemp.isPresent()) {
+        	User user = userTemp.get();
+        	user.setDeliveryAddress(newAddress);
+        	userRepository.save(user);
+        }
+    }
+	
+	@PostMapping("/modifyaddress")
+    @ResponseBody
+    public String updateAddress(@RequestBody deliveryAddressDto dto) {
+		String userId = dto.getUserId();
+		String address = dto.getAddress();
+        // 주소 업데이트 로직 구현
+        System.out.println("수정된 주소: " + dto.getAddress());
+        // 필요한 데이터베이스 업데이트 또는 서비스 호출 등의 작업 수행
+        updateUserAddress(userId, address);
+        // 성공적으로 업데이트되었음을 클라이언트에게 응답
+        return "주소가 성공적으로 업데이트되었습니다.";
+    }
+	
 	@PostMapping(path = "/receivecard", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	public String deliveryFile(@RequestPart(name = "files", required = false) MultipartFile file,
 							   HttpSession session, RedirectAttributes ra) throws Exception{
