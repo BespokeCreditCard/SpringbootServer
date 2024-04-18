@@ -156,7 +156,6 @@
 	    selectId.setAttribute('value', card.getAttribute('id')); // 데이터 속성 설정
         title.innerText = (parseInt(card.getAttribute('id')) + 1).toString() + " 순위";
         benefitCard.textContent = categoryClasses[card.getAttribute('id')];
-        
     }
     $('.slider-for').on('beforeChange', beforeChangeHandler);
     var firstContainer = document.querySelector('.container');
