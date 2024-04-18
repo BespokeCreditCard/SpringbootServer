@@ -38,7 +38,7 @@ public class ReceiveCardController {
 		User userIdTemp = receiveCardService.findUserId(request); // ReceiveCardService에서 가져온 행 
 		model.addAttribute("userData", userIdTemp);
 		
-		String userImageUrl = getUrlService.getImageUrl(userIdTemp.getUserID()); // id 가져와서 
+		String userImageUrl = getUrlService.getImageUrlFromUpload(userIdTemp.getUserID()); // id 가져와서 
 		model.addAttribute("userImageUrl", userImageUrl);
 
  		//userid 로 elasticservice에 참조하는 코드
