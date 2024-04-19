@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#errorMessageContainer {
+    color: red; /* 글씨색 */
+    font-weight: bold; /* 글씨체 굵게 */
+    margin: 20px 0; /* 상하 여백 추가 */
+    z-index: 3;
+    opacity: 0;
+}

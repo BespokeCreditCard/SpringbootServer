@@ -2,6 +2,7 @@
 /bespoke/.env
 */db_info.py
 /MySQL_query/__pycache__/*
-flask_server/__pycache__/*
+/flask_server/db_info.py
+/flask_server/__pycache__/*
 .project
 *.pyc
