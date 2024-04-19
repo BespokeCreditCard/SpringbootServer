@@ -1,5 +1,7 @@
 .metadata
 /bespoke/.env
-/MySQL_query/db_info.py
+*/db_info.py
 /MySQL_query/__pycache__/*
+flask_server/__pycache__/*
 .project
+*.pyc
