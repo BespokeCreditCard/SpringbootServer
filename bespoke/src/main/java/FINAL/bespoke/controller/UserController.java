@@ -98,7 +98,7 @@ public class UserController {
  		model.addAttribute("imageUrl",imageUrl);
  		
  		//userid 로 elasticservice에 참조하는 코드
- 		GetResponse<ObjectNode> response = elasticService.fetchimageIdData(user.getCardId());
+ 		GetResponse<ObjectNode> response = elasticService.fetchDataElastic(user.getCardId(),"result_bulk");
         
         List<String> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
         List<String> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);

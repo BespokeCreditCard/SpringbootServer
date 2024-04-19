@@ -23,7 +23,7 @@ public class WordCloudController {
 	public String goWordCloud(Model model) {
 		
 		int cardid = 1;
-		GetResponse<ObjectNode> response = elasticService.fetchCardidData(String.valueOf(cardid));
+		GetResponse<ObjectNode> response = elasticService.fetchDataElastic(String.valueOf(cardid),"card_word");
 		List<String> cardWordDetail = elasticService.ElasticSearchJsonTocardWordData(response);
 		model.addAttribute("wordcloud",cardWordDetail);
 		System.out.println(cardWordDetail); 

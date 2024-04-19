@@ -23,19 +23,6 @@ public class ElasticService {
         this.esClient = esClient;
     }
     
-    public GetResponse<ObjectNode> fetchCardidData(String cardid) {
-    	try {
-    		// Elasticsearch의 Get API를 사용하여 문서를 가져옴
-    		GetResponse<ObjectNode> response = esClient.get(g -> g
-    				.index("card_word")
-    				.id(cardid), ObjectNode.class);
-    		return response; // 가져온 문서를 반환
-    	} catch (ElasticsearchException | IOException e) {
-    		e.printStackTrace();  // 에러 스택 추적을 출력하거나 로그로 남김
-    		return null;  // 에러 발생 시 null 반환
-    	}
-    }
-    
     public List<String> ElasticSearchJsonTocardWordData(GetResponse<ObjectNode> response) {
     	List<String> cardWordDetails = new ArrayList<>();
     	ObjectNode json = response.source();
@@ -54,12 +41,12 @@ public class ElasticService {
      * @param imageId 검색할 이미지 ID
      * @return 검색된 문서의 GetResponse<ObjectNode>, 검색에 실패하면 null 반환
      */
-    public GetResponse<ObjectNode> fetchimageIdData(String imageId) {
+    public GetResponse<ObjectNode> fetchDataElastic(String Id,String elastic_index) {
     	try {
     		// Elasticsearch의 Get API를 사용하여 문서를 가져옴
     		GetResponse<ObjectNode> response = esClient.get(g -> g
-    				.index("result_bulk")
-    				.id(imageId), ObjectNode.class);
+    				.index(elastic_index)
+    				.id(Id), ObjectNode.class);
     		return response; // 가져온 문서를 반환
     	} catch (ElasticsearchException | IOException e) {
     		e.printStackTrace();  // 에러 스택 추적을 출력하거나 로그로 남김
@@ -73,12 +60,12 @@ public class ElasticService {
      * @param imageIds 검색할 이미지 ID의 리스트
      * @return 검색된 문서들의 GetResponse<ObjectNode> 리스트
      */
-    public List<GetResponse<ObjectNode>> fetchimageIdData(List<Integer> imageId) {
+    public List<GetResponse<ObjectNode>> fetchDataElastic(List<Integer> imageId,String elastic_index) {
     	List<GetResponse<ObjectNode>> responses = new ArrayList<>();
     	for (Integer imageIdtmp : imageId) {
 	        try {
 	        	GetResponse<ObjectNode> response = esClient.get(g -> g
-				    .index("result_bulk")
+				    .index(elastic_index)
 				    .id(imageIdtmp.toString()), ObjectNode.class);
 	        	responses.add(response);
 			} catch (ElasticsearchException e) {
