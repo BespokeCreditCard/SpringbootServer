@@ -98,15 +98,4 @@ public class ReceiveCardController {
         return "주소가 성공적으로 업데이트되었습니다.";
     }
 	
-	@PostMapping(path = "/receivecard", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public String deliveryFile(@RequestPart(name = "files", required = false) MultipartFile file,
-							   HttpSession session, RedirectAttributes ra) throws Exception{
-		byte[] fileBytes = file.getBytes();
-		String base64EncodedFile = Base64.getEncoder().encodeToString(fileBytes);
-		session.setAttribute("tempCard", base64EncodedFile);
-		// 파일의 경로를 리다이렉션된 페이지로 전달
-		ra.addFlashAttribute("file", base64EncodedFile);
-
-		return "redirect:/receivecard";
-	}
 }

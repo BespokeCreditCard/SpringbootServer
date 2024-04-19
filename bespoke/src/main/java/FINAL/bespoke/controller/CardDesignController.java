@@ -61,6 +61,7 @@ public class CardDesignController {
         // 모델에 이미지들을 추가하여 JSP에 전달합니다.
 //        model.addAttribute("images", images);
         System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$"+selectCardId);
+        model.addAttribute("selectCardId", selectCardId);
         String selectImageUrl = getUrlService.getImageUrlFromIndexImg(selectCardId);
     	model.addAttribute("selectImageUrl", selectImageUrl);
     	System.out.println("############################"+selectImageUrl);
