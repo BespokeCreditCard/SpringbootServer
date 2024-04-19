@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.GetResponse;
-import co.elastic.clients.elasticsearch.core.SearchResponse;
 
 @Service
 public class ElasticService {
@@ -23,6 +23,30 @@ public class ElasticService {
         this.esClient = esClient;
     }
     
+    public GetResponse<ObjectNode> fetchCardidData(String cardid) {
+    	try {
+    		// Elasticsearch의 Get API를 사용하여 문서를 가져옴
+    		GetResponse<ObjectNode> response = esClient.get(g -> g
+    				.index("card_word")
+    				.id(cardid), ObjectNode.class);
+    		return response; // 가져온 문서를 반환
+    	} catch (ElasticsearchException | IOException e) {
+    		e.printStackTrace();  // 에러 스택 추적을 출력하거나 로그로 남김
+    		return null;  // 에러 발생 시 null 반환
+    	}
+    }
+    
+    public List<String> ElasticSearchJsonTocardWordData(GetResponse<ObjectNode> response) {
+    	List<String> cardWordDetails = new ArrayList<>();
+    	ObjectNode json = response.source();
+    	JsonNode cardname = json.get("card_name"); // 카드 이름
+    	cardWordDetails.add(cardname.asText()); 
+    	JsonNode cardword = json.get("data"); // 카드 이름
+//    	cardWordDetails.add(cardword.toPrettyString()); 
+    	cardWordDetails.add(cardword.toString()); 
+    	System.out.println("service " + cardWordDetails);
+    	return cardWordDetails;
+    }
     
     /**
      * Elasticsearch에서 특정 이미지 ID에 해당하는 문서를 검색하고 반환합니다.
