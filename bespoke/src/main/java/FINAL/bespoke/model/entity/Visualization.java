@@ -1,9 +1,6 @@
 package FINAL.bespoke.model.entity;
 
 import java.math.BigDecimal;
-
-import FINAL.bespoke.model.dto.UserDto;
-import FINAL.bespoke.model.dto.VisualizationDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,105 +15,45 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Visualization")
+@Table(name = "visualization")
 public class Visualization {
-	@Id
-	@Column
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-    
-    @Column(length = 40)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(length = 20)
     private String seq;
 
-    @Column(length = 2)
-    private String age;
+    @Column(precision = 6, scale = 0)
+    private BigDecimal basYh;
 
-    @Column(length = 2)
-    private String sexCd;
+    @Column(precision = 2, scale = 0)
+	private BigDecimal age;
 
-    @Column(length = 2)
-    private String mbrRk;
+    @Column(precision = 2, scale = 0)
+    private BigDecimal sexCd;
 
-    @Column(precision = 18, scale = 0)
-    private BigDecimal crdslUseAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal funitrAm;
+    @Column(precision = 2, scale = 0)
+    private BigDecimal mbrRk;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal applncAm;
+    private BigDecimal housSidoNm;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal hlthfsAm;
+    private BigDecimal attYear;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal bldmngAm;
+    private BigDecimal attMonth;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal architAm;
+    private BigDecimal digtChnlUseYn;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal opticAm;
+    private BigDecimal totUseAm;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal agrictrAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal leisureSAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal leisurePAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal cultureAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal sanitAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal insuAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal offcomAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal bookAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal rprAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal hotelAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal goodsAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal trvlAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal fuelAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal svcAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal distbnpAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal distbpAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal groceryAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal hosAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal clothAm;
-
-    @Column(precision = 18, scale = 0)
-    private BigDecimal restrntAm;
+    private BigDecimal acdmAm;
 
     @Column(precision = 18, scale = 0)
     private BigDecimal automntAm;
@@ -125,56 +62,50 @@ public class Visualization {
     private BigDecimal autoslAm;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal kitwrAm;
+    private BigDecimal bookAm;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal fabricAm;
+    private BigDecimal cultureAm;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal acdmAm;
+    private BigDecimal distbnpAm;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal mbrshopAm;
-    
-    public VisualizationDto toDto() {
-        VisualizationDto dto = new VisualizationDto();
-        dto.setSeq(this.getSeq());
-        dto.setAge(this.getAge());
-        dto.setSexCd(this.getSexCd());
-        dto.setMbrRk(this.getMbrRk());
-        dto.setCrdslUseAm(this.getCrdslUseAm());
-        dto.setFunitrAm(this.getFunitrAm());
-        dto.setApplncAm(this.getApplncAm());
-        dto.setHlthfsAm(this.getHlthfsAm());
-        dto.setBldmngAm(this.getBldmngAm());
-        dto.setArchitAm(this.getArchitAm());
-        dto.setOpticAm(this.getOpticAm());
-        dto.setAgrictrAm(this.getAgrictrAm());
-        dto.setLeisureSAm(this.getLeisureSAm());
-        dto.setLeisurePAm(this.getLeisurePAm());
-        dto.setCultureAm(this.getCultureAm());
-        dto.setSanitAm(this.getSanitAm());
-        dto.setInsuAm(this.getInsuAm());
-        dto.setOffcomAm(this.getOffcomAm());
-        dto.setBookAm(this.getBookAm());
-        dto.setRprAm(this.getRprAm());
-        dto.setHotelAm(this.getHotelAm());
-        dto.setGoodsAm(this.getGoodsAm());
-        dto.setTrvlAm(this.getTrvlAm());
-        dto.setFuelAm(this.getFuelAm());
-        dto.setSvcAm(this.getSvcAm());
-        dto.setDistbnpAm(this.getDistbnpAm());
-        dto.setDistbpAm(this.getDistbpAm());
-        dto.setGroceryAm(this.getGroceryAm());
-        dto.setHosAm(this.getHosAm());
-        dto.setClothAm(this.getClothAm());
-        dto.setRestrntAm(this.getRestrntAm());
-        dto.setAutomntAm(this.getAutomntAm());
-        dto.setAutoslAm(this.getAutoslAm());
-        dto.setKitwrAm(this.getKitwrAm());
-        dto.setFabricAm(this.getFabricAm());
-        dto.setAcdmAm(this.getAcdmAm());
-        dto.setMbrshopAm(this.getMbrshopAm());
-        return dto;
-    }
+    private BigDecimal distbpAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal fuelAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal groceryAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal hosAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal hotelAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal insuAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal leisurePAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal leisureSAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal restrntAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal sanitAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal svcAm;
+
+    @Column(precision = 18, scale = 0)
+    private BigDecimal trvlAm;
+
+    @Column
+    private Double target;
 }
