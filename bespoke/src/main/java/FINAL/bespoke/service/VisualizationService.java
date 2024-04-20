@@ -1,5 +1,7 @@
 package FINAL.bespoke.service;
 
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,8 @@ public class VisualizationService {
         this.visualizationRepository = visualizationRepository;
     }
     
-    public Visualization getVisualization(String seq) {
-    	Visualization visual = visualizationRepository.findByseq(seq);
+    public List<Visualization> getVisualization(String seq) {
+    	List<Visualization> visual = visualizationRepository.findByseq(seq);
     	return visual; 
     }
 }

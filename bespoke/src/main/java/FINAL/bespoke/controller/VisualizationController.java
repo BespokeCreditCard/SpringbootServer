@@ -1,5 +1,7 @@
 package FINAL.bespoke.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ public class VisualizationController {
 	 @GetMapping("visualization")
 	 public String govisualization(Model model,HttpServletRequest request) {
 		 String seq = receiveCardService.findUserId(request).getUserID();
-		 Visualization visual = visualizationService.getVisualization(seq);
+		 List<Visualization> visual = visualizationService.getVisualization(seq);
 		 model.addAttribute("visual",visual);
 		 return "visualization";
 	 }
