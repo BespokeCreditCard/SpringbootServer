@@ -58,7 +58,7 @@
 			<c:forEach var="imageUrl" items="${imageUrls}" varStatus="imageStatus">
 				<div class="container">
 				    <div class="overlay"></div>
-				    <div class="card" id="${imageStatus.index}" style="background-image: url('<c:out value="${imageUrl}"/>');"></div>
+				    <div class="card" id="${imageStatus.index}" data-img-index="<c:out value="${imageUrl.idx}"/>" style="background-image: url('<c:out value="${imageUrl.imgUrl}"/>');"></div>
 				</div>
 			</c:forEach>
 		</div>

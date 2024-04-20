@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "cardimage")
+@Table
 public class ImageTemplate {
 	
 	@Id

@@ -19,6 +19,7 @@ import co.elastic.clients.elasticsearch.core.GetResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -108,4 +109,20 @@ public class UserController {
  		
  		return "mypage";
  	}
+
+//    TODO:: 페이지 이동시마다 이 쿼리가 계속 돔(개선 필요)
+    @GetMapping("/loginCheck")
+    @ResponseBody
+    public String loginCheck(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        String result = "false";
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("Authorization")) {
+                    result = "true";
+                }
+            }
+        }
+        return result;
+    }
 }
