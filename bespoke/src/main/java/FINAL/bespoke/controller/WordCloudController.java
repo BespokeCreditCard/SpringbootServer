@@ -6,27 +6,42 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import FINAL.bespoke.service.ElasticService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
+import jakarta.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class WordCloudController {
 	private final ElasticService elasticService;
-	
-	public WordCloudController(ElasticService elasticService) {
-		this.elasticService = elasticService;
-	}
+    private final ObjectMapper objectMapper;
+
+    public WordCloudController(ElasticService elasticService, ObjectMapper objectMapper) {
+        this.elasticService = elasticService;
+        this.objectMapper = objectMapper;
+    }
 	
 	@GetMapping("wordcloud")
-	public String goWordCloud(Model model) {
-		
-		int cardid = 1;
-		GetResponse<ObjectNode> response = elasticService.fetchDataElastic(String.valueOf(cardid),"card_word");
-		List<String> cardWordDetail = elasticService.ElasticSearchJsonTocardWordData(response);
-		model.addAttribute("wordcloud",cardWordDetail);
-		System.out.println(cardWordDetail); 
+	public String goWordCloud(Model model, HttpServletRequest request) {
+
+		// 세션에서 값 불러오기
+		List<Integer> cardId = List.of(22, 6, 1, 2, 3);
+		List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(cardId,"card_word");
+		List<List<String>> cardWordDetail = elasticService.ElasticSearchJsonTocardWordData(response);
+//		model.addAttribute("wordcloud",cardWordDetail);
+//		System.out.println(cardWordDetail); 
+		String json = "";
+        try {
+            json = objectMapper.writeValueAsString(cardWordDetail);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("wordcloudJson", json.replace("\"", "\\\""));
+        System.out.println("json="+json);
 		return "wordcloud";
 	}
 	

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <%@ include file="header/header.jsp" %>
@@ -14,38 +17,28 @@
             <div class="col-md-8">
                 <div id="word_container"></div>
             </div>
+
             <div class="col-md-4">
-            	            <div id="word_radio_button_group" class="d-flex flex-column align-items-start">
-                <div class="word_form-check">
-                    <div class="word_radio_button_box" >
-                        <input class="word_form-check-input" type="radio" name="options" id="option1" value="option1" checked>
-                        <label class="word_form-check-label" for="option1">
-                            ${wordcloud[0]}
-                        </label>
-                    </div>
-                </div>
-                <!-- 추가 라디오 버튼들이 필요하면 여기에 추가 -->
+                <div id="word_radio_button_group" class="d-flex flex-column align-items-start">
+                    <c:forEach var="word" items="${wordcloud}" varStatus="status">
+                    <div class="word_form-check">
+					        <div class="word_radio_button_box">
+					            <input class="word_form-check-input" type="radio" name="options" id="option${status.index}" value="option${status.index}" <c:if test="${status.first}">checked</c:if>>
+					            <label class="word_form-check-label" for="option${status.index}">
+					                ${word[0]}
+					            </label>
+					        </div>
+					</div>
+					</c:forEach>
             </div>
             </div>
             
         </div>  
     </div>
 
-    <script>
-        anychart.onDocumentReady(function () {
-            // create data   
-            var data = ${wordcloud[1]};
-
-            // create a chart and set the data
-            var chart = anychart.tagCloud(data);
-
-            // set the container id
-            chart.container("word_container");
-            chart.angles([0, 30, 90]);
-            chart.selected().fill("#1f66ad");
-            // initiate drawing the chart
-            chart.draw();
-        });
-    </script>
+	<script>
+	var wordcloudData = JSON.parse('<c:out value="${wordcloudJson}" escapeXml="true" />');
+    console.log(wordcloudData);
+	</script>
 </body>
 </html>
