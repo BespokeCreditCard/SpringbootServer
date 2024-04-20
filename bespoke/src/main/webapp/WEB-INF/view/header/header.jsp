@@ -10,6 +10,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var loginButton = document.querySelector("#loginButton");
+            var logoutButton = document.querySelector("#logoutButton");
+
+             fetch("http://localhost:8080/loginCheck", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then((response) => {
+                if(response.status == 200) {
+                    response.json().then((result) => {
+                        if(result === false) {
+                            loginButton.style.display = 'block';
+                            logoutButton.style.display = 'none';
+                        } else {
+                            logoutButton.style.display = 'block';
+                            loginButton.style.display = 'none';
+                        }
+                    })
+                }
+             });
+        });
+    </script>
 </head>
 <body>  
     <nav class="navbar">
@@ -20,7 +45,8 @@
             <li><a href="${pageContext.request.contextPath}/receivecard">카드 발급</a></li>
             <li><a href="${pageContext.request.contextPath}/terms_view/terms">약관</a></li>
             <li><a href="${pageContext.request.contextPath}/mypage">마이 페이지</a></li>
-            <li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
+            <li id="loginButton"><a href="${pageContext.request.contextPath}/login">로그인</a></li>
+            <li id="logoutButton"><a href="${pageContext.request.contextPath}/logouts">로그아웃</a></li>
         </ul>
     </nav>
    
