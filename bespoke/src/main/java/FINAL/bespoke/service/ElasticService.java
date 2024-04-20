@@ -40,7 +40,7 @@ public class ElasticService {
     	for (GetResponse<ObjectNode> responseObject : response) {
     		// 2차원 배열에 저장하기 위한 1차원 배열
     		List<String> cardWord = new ArrayList<>();
-    		
+    		System.out.println(responseObject);
         	// responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
         	ObjectNode json = responseObject.source();
         	JsonNode cardname = json.get("card_name"); // 카드 이름
