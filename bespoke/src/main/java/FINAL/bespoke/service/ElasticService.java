@@ -35,6 +35,23 @@ public class ElasticService {
     	return cardWordDetails;
     }
     
+    public List<List<String>> ElasticSearchJsonTocardWordData(List<GetResponse<ObjectNode>> response) {
+    	List<List<String>> cardWordDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
+    	for (GetResponse<ObjectNode> responseObject : response) {
+    		// 2차원 배열에 저장하기 위한 1차원 배열
+    		List<String> cardWord = new ArrayList<>();
+    		
+        	// responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
+        	ObjectNode json = responseObject.source();
+        	JsonNode cardname = json.get("card_name"); // 카드 이름
+        	cardWord.add(cardname.asText()); 
+        	JsonNode cardword = json.get("data"); // 카드 이름
+        	cardWord.add(cardword.toString()); 
+        	cardWordDetails.add(cardWord);
+    	}
+    	return cardWordDetails;
+    }
+    
     /**
      * Elasticsearch에서 특정 이미지 ID에 해당하는 문서를 검색하고 반환합니다.
      * 
@@ -90,6 +107,7 @@ public class ElasticService {
         	ObjectNode json = responseObject.source();
         	
         	List<String> productNames = new ArrayList<>();
+        	
         	JsonNode cardNameNode = json.get("card_name"); // 카드 이름
             productNames.add(cardNameNode.asText()); // elasticresults[0]
             
