@@ -74,4 +74,9 @@ public class RecommendationController {
     	System.out.println("시간차이(s) : " + secDiffTime);
         return "recommendation_view/recommendation";
     }
+
+    @GetMapping("/selectRecommendation")
+    public String getSelectRecommendationPage() {
+        return "recommendation_view/selectRecommendation";
+    }
 }

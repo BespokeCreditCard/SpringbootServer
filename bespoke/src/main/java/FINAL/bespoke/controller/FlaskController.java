@@ -41,7 +41,7 @@ public class FlaskController {
     	Object jsonResponse = flaskService.sendCardFlask(request.getSeq(), request.getSelected_benefits(), request.getCluster_num());
         Map<String, Object> result = new HashMap<>();
         result.put("jsonResponse", jsonResponse);
-        result.put("redirectURL", "http://localhost:8080/flask/getTop5Cards");
+        result.put("redirectURL", "http://localhost:8080/recommendation_view/recommendation");
         return result;
     }
     

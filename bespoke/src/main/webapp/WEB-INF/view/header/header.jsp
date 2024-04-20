@@ -15,7 +15,7 @@
     <nav class="navbar">
         <a href="${pageContext.request.contextPath}/" class="navbar__brand">우리은행</a>        
         <ul class="navbar__menu">
-            <li><a href="${pageContext.request.contextPath}/recommendation_view/recommendation">카드 추천</a></li>
+            <li><a href="${pageContext.request.contextPath}/recommendation_view/selectRecommendation">카드 추천</a></li>
             <li><a href="${pageContext.request.contextPath}/design/carddesign">카드 꾸미기</a></li>
             <li><a href="${pageContext.request.contextPath}/receivecard">카드 발급</a></li>
             <li><a href="${pageContext.request.contextPath}/terms_view/terms">약관</a></li>
