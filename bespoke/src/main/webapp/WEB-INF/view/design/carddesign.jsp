@@ -24,18 +24,30 @@
     .custom-file-label:hover {
         background-color: #2980b9;
     }
+
+    .edited {
+        background-color: #198754 !important;
+        border-color: #198754 !important;
+        color: white !important;
+    }
+
+    .edited:hover{
+        background-color: #0c4128 !important;
+        border-color: #0c4128 !important;
+    }
 </style>
 <%@ include file="../header/header.jsp" %>
     <div class="container-xxl p-2 m-auto mt-5 border border-primary bg-light rounded border-5" style="min-width: 1500px;">
         <div class="row p-2 align-items-center position-relative">
 
             <div class="card col-3 m-4" style="width: 18rem;">
-                <img src="/imgs/1235.png" id="preview" class="card-img-top p-3" alt="...">
+                <img src="/imgs/1235.png" id="preview" class="card-img-top p-3" alt="..." onerror="this.onerror=null; this.src='/imgs/1235.png';">
                 <div class="card-body h-3 mt-2 text-center">
-                    <div class="btn-container mt-1">
+                    <div class="btn-container my-1">
                         <label for="fileInput" class="custom-file-label">파일 업로드</label>
                         <input type="file" id="fileInput" class="custom-file-input" accept="image/*">
                     </div>
+                    <button type="button" id="file-edit-button" class="btn btn-dark " onclick="showModal()">파일 편집기</button>
                 </div>
             </div>
 
@@ -46,31 +58,31 @@
                     <div class=" justify-content-center text-center">
                         <div class="col d-flex">
                             <div class="w-75">
-                                <input type="text" class="form-control" placeholder="내용 입력">
+                                <input type="text" id="input1" class="form-control" placeholder="내용 입력">
                             </div>
                             <span class="col p-2">풍의</span>
                         </div>
                         <div class="col d-flex">
                             <div class="w-75">
-                                <input type="text" class="form-control" placeholder="내용 입력">
+                                <input type="text" id="input2" class="form-control" placeholder="내용 입력">
                             </div>
                             <span class="col p-2">가</span>
                         </div>
                         <div class="col d-flex">
                             <div class="w-75">
-                                <input type="text" class="form-control" placeholder="내용 입력">
+                                <input type="text" id="input3" class="form-control" placeholder="내용 입력">
                             </div>
                             <span class="col p-2">에서</span>
                         </div>
                         <div class="col d-flex">
                             <div class="w-75">
-                                <input type="text" class="form-control" placeholder="내용 입력">
+                                <input type="text" id="input4" class="form-control" placeholder="내용 입력">
                             </div>
                             <span class="col p-2">를</span>
                         </div>
                         <div class="col d-flex">
                             <div class="w-75">
-                                <input type="text" class="form-control" placeholder="내용 입력">
+                                <input type="text" id="input5" class="form-control" placeholder="내용 입력">
                             </div>
                             <span class="col p-2">한다</span>
                         </div>
@@ -129,19 +141,25 @@
     </div>
 
     <!-- 모달 창 -->
-<%--    <div class="modal fade" id="gifModal" tabindex="-1" aria-labelledby="gifModalLabel" aria-hidden="true">--%>
-<%--        <div class="modal-dialog modal-lg modal-dialog-centered">--%>
-<%--            <div class="modal-content">--%>
-<%--                <div class="modal-header ">--%>
-<%--                    <h5 class="modal-title text-center" id="gifModalLabel">프롬포트 변환 중입니다. 잠시만 기다려주세요</h5>--%>
-<%--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--                </div>--%>
-<%--                <div class="modal-body d-flex justify-content-center align-items-center"> <!-- Flexbox를 사용하여 가운데 정렬 -->--%>
-<%--                    <img id="gifImage" src="" alt="GIF Image" class="img-fluid" style="width: 500px;">--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--         </div>--%>
-<%--    </div>--%>
+    <div class="modal fade" id="gifModal" tabindex="-1" aria-labelledby="gifModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title text-center" >파일편집</h5>
+                    <div style="padding-left: 20%">
+                        <label for="brushSize">펜 굵기:</label>
+                        <input type="number" id="brushSize" value="5">
+                        <button onclick="saveImage()">Save Image</button>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center"> <!-- Flexbox를 사용하여 가운데 정렬 -->
+
+                    <canvas id="imageCanvas" ></canvas>
+                </div>
+            </div>
+         </div>
+    </div>
 
     <script>
         // 변환 버튼 클릭 시
@@ -159,6 +177,16 @@
         document.getElementById("resetBtn").onclick = function () {
             document.getElementById("card1").style.display = "none";
             document.getElementById("card2").style.display = "none";
+            document.getElementById('input1').value = '';
+            document.getElementById('input2').value = '';
+            document.getElementById('input3').value = '';
+            document.getElementById('input4').value = '';
+            document.getElementById('input5').value = '';
+
+            document.getElementById('fileInput').value = '';
+            document.getElementById('preview').src = '/imgs/1235.png';
+            document.getElementById("file-edit-button").classList.remove("edited");
+            fileDrawn = false;
         }
 
         // 모달 표시 함수
@@ -198,10 +226,13 @@
     <script>
         // 파일 업로드 하는 함수들 모음 스크립트
         function previewFile() {
+            fileDrawn = false;
+            document.getElementById("file-edit-button").classList.remove("edited");
             const preview = document.getElementById('preview');
             const fileInput = document.getElementById('fileInput');
             const file = fileInput.files[0];
             const reader = new FileReader();
+
 
             reader.addEventListener('load', function () {
                 preview.src = reader.result;
@@ -226,6 +257,97 @@
         }
 
         document.getElementById('fileInput').addEventListener('change', previewFile);
+    </script>
+    <script>
+
+        function showModal() {
+            if(document.getElementById('fileInput').files[0]) {
+                new bootstrap.Modal(document.getElementById('gifModal')).show();
+            } else {
+                alert("파일을 업로드해주세요.");
+            }
+        }
+        // 모달 이미지편집 함수들
+        let canvas = document.getElementById('imageCanvas');
+        let ctx = canvas.getContext('2d');
+        let reader = new FileReader();
+        let img = new Image();
+        let mousePressed = false;
+        let fileDrawn = false;
+        let lastX, lastY;
+
+        document.getElementById('fileInput').addEventListener('change', handleImage, false);
+
+        canvas.addEventListener('mousedown', function (e) {
+            mousePressed = true;
+            let adjustedCoords = getAdjustedCoords(e.pageX, e.pageY);
+            draw(adjustedCoords.x, adjustedCoords.y, false);
+        });
+
+        canvas.addEventListener('mousemove', function (e) {
+            if (mousePressed) {
+                let adjustedCoords = getAdjustedCoords(e.pageX, e.pageY);
+                draw(adjustedCoords.x, adjustedCoords.y, true);
+            }
+        });
+
+        canvas.addEventListener('mouseup', function (e) {
+            mousePressed = false;
+        });
+
+        canvas.addEventListener('mouseleave', function (e) {
+            mousePressed = false;
+        });
+
+        function getAdjustedCoords(pageX, pageY) {
+            // 모달 창의 위치와 크기를 확인하고, 그에 맞게 좌표값을 조정
+            let modal = document.getElementById('gifModal'); // 모달의 ID로 변경
+            let modalRect = modal.getBoundingClientRect();
+            let canvasRect = canvas.getBoundingClientRect();
+            let adjustedX = pageX - canvasRect.left + modalRect.left;
+            let adjustedY = pageY - canvasRect.top + modalRect.top;
+            return { x: adjustedX, y: adjustedY };
+        }
+
+        function draw(x, y, isDown) {
+            if(!fileDrawn) {
+                let fileEditButton = document.getElementById("file-edit-button");
+                fileEditButton.classList.add("edited");
+            }
+            fileDrawn = true;
+            if (isDown) {
+                ctx.beginPath();
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = document.getElementById('brushSize').value;
+                ctx.lineJoin = "round";
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(x, y);
+                ctx.closePath();
+                ctx.stroke();
+            }
+            lastX = x; lastY = y;
+        }
+
+        function handleImage(e) {
+            let reader = new FileReader();
+            reader.onload = function (event) {
+                img.onload = function () {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                }
+                img.src = event.target.result;
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        }
+
+        function saveImage() {
+            let image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            let link = document.createElement('a');
+            link.download = "my-image.png";
+            link.href = image;
+            link.click();
+        }
     </script>
 </body>
 </html>
