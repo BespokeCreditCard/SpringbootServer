@@ -129,7 +129,7 @@
                 <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/recommendation_view/recommendation'">이전</button>
             </div>
             <div class="col-6 text-end">
-                <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/receivecard'">다음</button>
+                <button type="button" class="btn btn-secondary btn-block" onclick="moveToReceiveCardWithUploadedImg()">다음</button>
             </div>
         </div>
     </div>
@@ -222,6 +222,27 @@
         document.querySelector("#card2 .btn").onclick = function() {
             window.location.href = "<%= request.getContextPath() %>/receivecard"; // 선택2를 클릭하면 IssueCard로 이동합니다.
         };
+
+        const moveToReceiveCardWithUploadedImg = () => {
+            let files = document.getElementById("fileInput").files[0];
+            if(files) {
+                let formData = new FormData();
+                formData.append("files", files);
+                fetch("/receivecard", {
+                    method: "POST",
+                    headers: {
+                    },
+                    body: formData
+                }).then((response) => {
+                    if(response.status === 200) {
+                        window.location.href="/receivecard";
+                    }
+                })
+            } else {
+                alert("파일을 업로드해주세오");
+                return;
+            }
+        }
     </script>
     <script>
         // 파일 업로드 하는 함수들 모음 스크립트
@@ -267,6 +288,28 @@
                 alert("파일을 업로드해주세요.");
             }
         }
+
+        function setDisable(isTrue) {
+            if(isTrue) {
+                document.getElementById("input1").value = '';
+                document.getElementById("input1").disabled = true;
+                document.getElementById("input2").value = '';
+                document.getElementById("input2").disabled = true;
+                document.getElementById("input3").value = '';
+                document.getElementById("input3").disabled = true;
+                document.getElementById("input4").value = '';
+                document.getElementById("input4").disabled = true;
+                document.getElementById("input5").value = '';
+                document.getElementById("input5").disabled = true;
+            } else {
+                document.getElementById("input1").disabled = false;
+                document.getElementById("input2").disabled = false;
+                document.getElementById("input3").disabled = false;
+                document.getElementById("input4").disabled = false;
+                document.getElementById("input5").disabled = false;
+            }
+        }
+
         // 모달 이미지편집 함수들
         let canvas = document.getElementById('imageCanvas');
         let ctx = canvas.getContext('2d');
@@ -315,9 +358,10 @@
                 fileEditButton.classList.add("edited");
             }
             fileDrawn = true;
+            setDisable(false);
             if (isDown) {
                 ctx.beginPath();
-                ctx.strokeStyle = "white";
+                ctx.globalCompositeOperation = "destination-out"
                 ctx.lineWidth = document.getElementById('brushSize').value;
                 ctx.lineJoin = "round";
                 ctx.moveTo(lastX, lastY);
@@ -329,6 +373,7 @@
         }
 
         function handleImage(e) {
+            setDisable(true);
             let reader = new FileReader();
             reader.onload = function (event) {
                 img.onload = function () {
