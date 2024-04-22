@@ -17,7 +17,7 @@ public class VisualizationService {
     }
     
     public List<Visualization> getVisualization(String seq) {
-    	List<Visualization> visual = visualizationRepository.findByseq(seq);
+    	List<Visualization> visual = visualizationRepository.findBySEQ(seq);
     	return visual; 
     }
 }
