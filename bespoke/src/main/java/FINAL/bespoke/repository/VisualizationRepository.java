@@ -9,5 +9,5 @@ import FINAL.bespoke.model.entity.Visualization;
 
 @Repository
 public interface VisualizationRepository extends JpaRepository<Visualization, Long> {
-	List<Visualization> findByseq(String seq);
+	List<Visualization> findBySEQ(String seq);
 }
