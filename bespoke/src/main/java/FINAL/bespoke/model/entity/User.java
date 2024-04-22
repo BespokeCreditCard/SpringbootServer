@@ -20,7 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
 
     @Id

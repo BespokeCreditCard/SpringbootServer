@@ -59,12 +59,12 @@ public class ElasticService {
      * @param imageId 검색할 이미지 ID
      * @return 검색된 문서의 GetResponse<ObjectNode>, 검색에 실패하면 null 반환
      */
-    public GetResponse<ObjectNode> fetchDataElastic(String Id,String elastic_index) {
+    public GetResponse<ObjectNode> fetchDataElastic(int Id,String elastic_index) {
     	try {
     		// Elasticsearch의 Get API를 사용하여 문서를 가져옴
     		GetResponse<ObjectNode> response = esClient.get(g -> g
     				.index(elastic_index)
-    				.id(Id), ObjectNode.class);
+    				.id(Integer.toString(Id)), ObjectNode.class);
     		return response; // 가져온 문서를 반환
     	} catch (ElasticsearchException | IOException e) {
     		e.printStackTrace();  // 에러 스택 추적을 출력하거나 로그로 남김
