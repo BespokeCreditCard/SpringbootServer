@@ -1,8 +1,11 @@
 package FINAL.bespoke.controller;
 
+import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.service.ElasticService;
 import FINAL.bespoke.service.GetUrlService;
+import FINAL.bespoke.service.ReceiveCardService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,23 +26,29 @@ public class CardDetailController {
     private final GetUrlService recommendationImageUrlService;
     
     private final ElasticService elasticService;
+    
+    private final ReceiveCardService receiveCardService;
 
     @Autowired
-    public CardDetailController(GetUrlService recommendationImageUrlService, ElasticService elasticService) {
+    public CardDetailController(GetUrlService recommendationImageUrlService, ElasticService elasticService, ReceiveCardService receiveCardService) {
         this.recommendationImageUrlService = recommendationImageUrlService;
         this.elasticService = elasticService;
+        this.receiveCardService = receiveCardService;
     }
         
     @GetMapping("/carddetail")
-    public String showRecommendation(Model model) {
+    public String showRecommendation(Model model, HttpServletRequest request) {
         // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
-        List<Integer> imageList = recommendationImageUrlService.getRecommendation();
+    	
+    	User userIdTemp = receiveCardService.findUserId(request);
+        List<Integer> imageList = recommendationImageUrlService.getRecommendation(userIdTemp.getUserID());
 
         List<String> imageUrls = recommendationImageUrlService.getImageUrls(imageList);
         
         // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
         model.addAttribute("imageUrls", imageUrls); // imageUrls[0], imageUrls[1], imageUrls[2], imageUrls[3], imageUrls[4]
 
+        System.out.println("### CardDetailController - imageUrls: " + imageUrls);
         List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(imageList,"result_bulk");
         
         List<List<String>> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
