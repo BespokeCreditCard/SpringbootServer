@@ -38,7 +38,7 @@ public class GetUrlService {
     	
     	List<Integer> imageList = new ArrayList<>();
     	// findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
-    	Recommendation recommendation = recommendationRepository.findById("8YBQA0UZ1JNAPF1LPQC3").orElseThrow(RuntimeException::new);
+    	Recommendation recommendation = recommendationRepository.findById("004J3BM4AIGOOG7TRIJM").orElseThrow(RuntimeException::new);
     	System.out.println("################################");
     	System.out.println("recommendation: "+ recommendation);
     	System.out.println("################################");

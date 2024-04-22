@@ -1,10 +1,6 @@
 from db_info import for_mysql
 import pymysql
-import time
-import pickle
 import pandas as pd
-import mysql.connector
-from lightgbm import LGBMModel
 import joblib
 
 def cluster_model(seq):
@@ -45,7 +41,6 @@ def cluster_model(seq):
     ################################################################################
     # 군집 분류 모델 사용해서 군집 idx 예측
     ################################################################################
-    predict_cluster_num = -1
     try:
         model_path = "flask_server/model/Light_gbm.pkl"
         # with open(model_path, 'rb') as file:

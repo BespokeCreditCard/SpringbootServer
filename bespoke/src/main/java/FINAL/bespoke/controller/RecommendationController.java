@@ -38,40 +38,8 @@ public class RecommendationController {
         
     @GetMapping("/recommendation")
     public String showRecommendation(Model model, HttpServletRequest request) throws JsonProcessingException {
-        // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
-    	long beforeTime = System.currentTimeMillis(); // 코드 실행 전 시간
-    	
-        List<Integer> imageList = recommendationService.getRecommendation();
-
-        List<String> imageUrls = recommendationService.getImageUrls(imageList);
-        
-        // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
-        model.addAttribute("imageUrls", imageUrls);
-
-        User user = receiveCardService.findUserId(request);
-        List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(imageList,"result_bulk");
-        
-        List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
-        
-        ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println(categoryClass);
-        String categoryClassJson = objectMapper.writeValueAsString(categoryClass);
-        System.out.println(categoryClassJson);
-        model.addAttribute("categoryClassJson", categoryClassJson);
-        
-        
-//        model.addAttribute("categoryClass", categoryClass);
-        
-    	System.out.println("################################");
-    	System.out.println("categoryClass: "+ categoryClass);
-    	System.out.println("################################");
-        // recommendation.jsp로 이동
-    	
-    	long afterTime = System.currentTimeMillis(); // 코드 실행 후 시간
-    	
-    	long secDiffTime = (afterTime - beforeTime); // 코드 실행 전후 시간 차이 계산(초 단위)
-    	
-    	System.out.println("시간차이(s) : " + secDiffTime);
+    	// 여기 있던 코드를 service -> showRecommendations로 넣음
+    	recommendationService.showRecommendations(model, request);
         return "recommendation_view/recommendation";
     }
 

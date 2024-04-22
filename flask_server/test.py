@@ -3,10 +3,10 @@ import boto3, json
 from werkzeug.utils import secure_filename
 from socket import *
 import get_benefits
-import get_top5_cards
+import flask_server.top5_cards_flask as top5_cards_flask
 import dall_e
 
-def get_top5_cards():
+def top5_cards_flask():
     # seq, benefits_5, cluster_num 필요
     
    	# Spring에서 받은 데이터를 출력해서 확인
@@ -27,9 +27,9 @@ def get_top5_cards():
     cluster_num = 3
     ################################################################################
 
-    result = get_top5_cards.get_top_5(seq, benefits_5, cluster_num)
+    result = top5_cards_flask.get_top_5(seq, benefits_5, cluster_num)
     return result
-result = get_top5_cards()
+result = top5_cards_flask()
 
 
 def receive_string():

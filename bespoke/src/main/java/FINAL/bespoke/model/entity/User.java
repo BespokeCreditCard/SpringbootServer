@@ -48,17 +48,17 @@ public class User {
     @Column(precision = 2)
     private BigDecimal grade;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    @Column(nullable = false, columnDefinition = "TINYINT")
     private boolean agreement;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    @Column(nullable = false, columnDefinition = "TINYINT")
     private boolean digital;
 
     @Column(length = 13)
     private String contact;
     
-    @Column(length = 20)
-    private String cardId;
+    @Column(precision = 3)
+    private int cardId;
     
     @Column(columnDefinition = "TEXT")
     private String deliveryAddress;
