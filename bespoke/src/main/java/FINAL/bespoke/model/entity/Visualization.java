@@ -1,6 +1,8 @@
 package FINAL.bespoke.model.entity;
 
 import java.math.BigDecimal;
+
+import FINAL.bespoke.model.dto.VisualizationDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,92 +22,126 @@ public class Visualization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long ID;
 
     @Column(length = 20)
-    private String seq;
+    private String SEQ;
 
     @Column(precision = 6, scale = 0)
-    private BigDecimal basYh;
+    private BigDecimal BAS_YH;
 
     @Column(precision = 2, scale = 0)
-	private BigDecimal age;
+	private BigDecimal AGE;
 
     @Column(precision = 2, scale = 0)
-    private BigDecimal sexCd;
+    private BigDecimal SEX_CD;
 
     @Column(precision = 2, scale = 0)
-    private BigDecimal mbrRk;
+    private BigDecimal MBR_RK;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal housSidoNm;
+    private BigDecimal HOUS_SIDO_NM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal attYear;
+    private BigDecimal ATT_YEAR;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal attMonth;
+    private BigDecimal ATT_MONTH;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal digtChnlUseYn;
+    private BigDecimal DIGT_CHNL_USE_YN;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal totUseAm;
+    private BigDecimal TOT_USE_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal acdmAm;
+    private BigDecimal ACDM_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal automntAm;
+    private BigDecimal AUTOMNT_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal autoslAm;
+    private BigDecimal AUTOSL_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal bookAm;
+    private BigDecimal BOOK_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal cultureAm;
+    private BigDecimal CULTURE_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal distbnpAm;
+    private BigDecimal DISTBNP_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal distbpAm;
+    private BigDecimal DISTBP_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal fuelAm;
+    private BigDecimal FUEL_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal groceryAm;
+    private BigDecimal GROCERY_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal hosAm;
+    private BigDecimal HOS_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal hotelAm;
+    private BigDecimal HOTEL_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal insuAm;
+    private BigDecimal INSU_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal leisurePAm;
+    private BigDecimal LEISURE_P_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal leisureSAm;
+    private BigDecimal LEISURE_S_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal restrntAm;
+    private BigDecimal RESTRNT_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal sanitAm;
+    private BigDecimal SANIT_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal svcAm;
+    private BigDecimal SVC_AM;
 
     @Column(precision = 18, scale = 0)
-    private BigDecimal trvlAm;
+    private BigDecimal TRVL_AM;
 
     @Column
-    private Double target;
+    private Double TARGET;
+
+    public VisualizationDto toDto() {
+        VisualizationDto dto = new VisualizationDto();
+        dto.setSEQ(this.SEQ);
+        dto.setBAS_YH(this.BAS_YH);
+        dto.setAGE(this.AGE);
+        dto.setSEX_CD(this.SEX_CD);
+        dto.setMBR_RK(this.MBR_RK);
+        dto.setHOUS_SIDO_NM(this.HOUS_SIDO_NM);
+        dto.setATT_YEAR(this.ATT_YEAR);
+        dto.setATT_MONTH(this.ATT_MONTH);
+        dto.setDIGT_CHNL_USE_YN(this.DIGT_CHNL_USE_YN);
+        dto.setTOT_USE_AM(this.TOT_USE_AM);
+        dto.setACDM_AM(this.ACDM_AM);
+        dto.setAUTOMNT_AM(this.AUTOMNT_AM);
+        dto.setAUTOSL_AM(this.AUTOSL_AM);
+        dto.setBOOK_AM(this.BOOK_AM);
+        dto.setCULTURE_AM(this.CULTURE_AM);
+        dto.setDISTBNP_AM(this.DISTBNP_AM);
+        dto.setDISTBP_AM(this.DISTBP_AM);
+        dto.setFUEL_AM(this.FUEL_AM);
+        dto.setGROCERY_AM(this.GROCERY_AM);
+        dto.setHOS_AM(this.HOS_AM);
+        dto.setHOTEL_AM(this.HOTEL_AM);
+        dto.setINSU_AM(this.INSU_AM);
+        dto.setLEISURE_P_AM(this.LEISURE_P_AM);
+        dto.setLEISURE_S_AM(this.LEISURE_S_AM);
+        dto.setRESTRNT_AM(this.RESTRNT_AM);
+        dto.setSANIT_AM(this.SANIT_AM);
+        dto.setSVC_AM(this.SVC_AM);
+        dto.setTRVL_AM(this.TRVL_AM);
+        dto.setTARGET(this.TARGET);
+        return dto;
+    }
 }
