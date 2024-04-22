@@ -19,11 +19,7 @@
 <c:if test="${not empty visual}">
     <table>
         <tr><th>Attribute</th><th>Value</th></tr>
-        <tr><td>ID</td><td>${visual[0].id}</td></tr>
-        <tr><td>Sequence</td><td>${visual[0].seq}</td></tr>
-        <tr><td>Age</td><td>${visual[0].age}</td></tr>
-        <tr><td>Sex Code</td><td>${visual[0].sexCd}</td></tr>
-        <tr><td>Member Rank</td><td>${visual[0].mbrRk}</td></tr>
+        <tr><td>Sequence</td><td>${visual[0].SEQ}</td></tr>
     </table>
 </c:if>
 </body>
