@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import FINAL.bespoke.model.dto.wordDetailsDTO;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.GetResponse;
@@ -35,21 +36,21 @@ public class ElasticService {
     	return cardWordDetails;
     }
     
-    public List<List<String>> ElasticSearchJsonTocardWordData(List<GetResponse<ObjectNode>> response) {
-    	List<List<String>> cardWordDetails = new ArrayList<>(); // 각 제품 정보를 담을 리스트의 리스트
+    public wordDetailsDTO ElasticSearchJsonTocardWordData(List<GetResponse<ObjectNode>> response) {
+    	List<String> cardWord = new ArrayList<>();
+    	List<String> cardNameList = new ArrayList<>();
     	for (GetResponse<ObjectNode> responseObject : response) {
     		// 2차원 배열에 저장하기 위한 1차원 배열
-    		List<String> cardWord = new ArrayList<>();
+    		
     		System.out.println(responseObject);
         	// responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
         	ObjectNode json = responseObject.source();
         	JsonNode cardname = json.get("card_name"); // 카드 이름
-        	cardWord.add(cardname.asText()); 
+        	cardNameList.add(cardname.asText()); 
         	JsonNode cardword = json.get("data"); // 카드 이름
         	cardWord.add(cardword.toString()); 
-        	cardWordDetails.add(cardWord);
     	}
-    	return cardWordDetails;
+    	return new wordDetailsDTO(cardNameList, cardWord);
     }
     
     /**
