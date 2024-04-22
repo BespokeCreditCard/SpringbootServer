@@ -108,11 +108,10 @@ public class Visualization {
     @Column(precision = 18, scale = 0)
     private BigDecimal TRVL_AM;
 
-    @Column
-    private Double TARGET;
 
     public VisualizationDto toDto() {
         VisualizationDto dto = new VisualizationDto();
+        dto.setID(this.ID);
         dto.setSEQ(this.SEQ);
         dto.setBAS_YH(this.BAS_YH);
         dto.setAGE(this.AGE);
@@ -141,7 +140,6 @@ public class Visualization {
         dto.setSANIT_AM(this.SANIT_AM);
         dto.setSVC_AM(this.SVC_AM);
         dto.setTRVL_AM(this.TRVL_AM);
-        dto.setTARGET(this.TARGET);
         return dto;
     }
 }

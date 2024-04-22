@@ -40,11 +40,9 @@ public class VisualizationDto {
     private BigDecimal SANIT_AM;
     private BigDecimal SVC_AM;
     private BigDecimal TRVL_AM;
-    private Double TARGET;
     
     public Visualization toEntity() {
         Visualization entity = new Visualization();
-        entity.setID(this.ID);
         entity.setSEQ(this.SEQ);
         entity.setBAS_YH(this.BAS_YH);
         entity.setAGE(this.AGE);
@@ -73,7 +71,6 @@ public class VisualizationDto {
         entity.setSANIT_AM(this.SANIT_AM);
         entity.setSVC_AM(this.SVC_AM);
         entity.setTRVL_AM(this.TRVL_AM);
-        entity.setTARGET(this.TARGET);
         return entity;
     }
 
