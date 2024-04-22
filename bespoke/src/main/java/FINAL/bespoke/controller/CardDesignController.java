@@ -34,7 +34,7 @@ public class CardDesignController {
     
     @GetMapping("/carddesign")
     public String showCardDesignPage(@RequestParam("selectCardId") String selectCardId, Model model) {
-    	System.out.println("###############cardSelectId: " + selectCardId);
+    	System.out.println("### CardDesignController - cardSelectId: " + selectCardId);
         // 이미지 생성 로직을 통해 ImageDto 객체를 생성합니다.
  //   	ImageDto aiImage;
 //    	String selectImage = "";
@@ -60,11 +60,10 @@ public class CardDesignController {
 //        System.out.println("############################################");
         // 모델에 이미지들을 추가하여 JSP에 전달합니다.
 //        model.addAttribute("images", images);
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$"+selectCardId);
+        System.out.println("### CardDesignController - selectCardId: " + selectCardId);
         model.addAttribute("selectCardId", selectCardId);
         String selectImageUrl = getUrlService.getImageUrlFromIndexImg(selectCardId);
     	model.addAttribute("selectImageUrl", selectImageUrl);
-    	System.out.println("############################"+selectImageUrl);
 		// 뷰를 반환합니다.
 		return "design/carddesign";
 	}

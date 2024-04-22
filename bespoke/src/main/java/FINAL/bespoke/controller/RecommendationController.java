@@ -29,11 +29,14 @@ public class RecommendationController {
     
     private final ReceiveCardService receiveCardService;
     
+    private final GetUrlService getUrlService;
+    
     @Autowired
-    public RecommendationController(GetUrlService recommendationService, ElasticService elasticService, ReceiveCardService receiveCardService) {
+    public RecommendationController(GetUrlService recommendationService, ElasticService elasticService, ReceiveCardService receiveCardService, GetUrlService getUrlService) {
         this.recommendationService = recommendationService;
         this.elasticService = elasticService;
         this.receiveCardService = receiveCardService;
+        this.getUrlService = getUrlService;
     }
         
     @GetMapping("/recommendation")
@@ -41,8 +44,10 @@ public class RecommendationController {
         // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
     	long beforeTime = System.currentTimeMillis(); // 코드 실행 전 시간
     	
-        List<Integer> imageList = recommendationService.getRecommendation();
-        System.out.println("%%%%%%%%%%%%%imageList: "+imageList);
+    	User userIdTemp = receiveCardService.findUserId(request); // ReceiveCardService에서 가져온 행 
+		
+        List<Integer> imageList = recommendationService.getRecommendation(userIdTemp.getUserID());
+        System.out.println("### RecommendationController - imageList: " + imageList);
         model.addAttribute("imageIdList", imageList);
         List<String> imageUrls = recommendationService.getImageUrls(imageList);
         
@@ -55,24 +60,22 @@ public class RecommendationController {
         List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
         
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println(categoryClass);
+        System.out.println("### RecommendationController - categoryClass: " + categoryClass);
         String categoryClassJson = objectMapper.writeValueAsString(categoryClass);
-        System.out.println(categoryClassJson);
+        System.out.println("### RecommendationController - categoryClassJson: " + categoryClassJson);
         model.addAttribute("categoryClassJson", categoryClassJson);
         
         
 //        model.addAttribute("categoryClass", categoryClass);
         
-    	System.out.println("################################");
-    	System.out.println("categoryClass: "+ categoryClass);
-    	System.out.println("################################");
+    	System.out.println("### RecommendationController - categoryClass: "+ categoryClass);
         // recommendation.jsp로 이동
     	
     	long afterTime = System.currentTimeMillis(); // 코드 실행 후 시간
     	
     	long secDiffTime = (afterTime - beforeTime); // 코드 실행 전후 시간 차이 계산(초 단위)
     	
-    	System.out.println("시간차이(s) : " + secDiffTime);
+    	System.out.println("### RecommendationController - secDiffTime(시간차이(s)): " + secDiffTime);
         return "recommendation_view/recommendation";
     }
 }

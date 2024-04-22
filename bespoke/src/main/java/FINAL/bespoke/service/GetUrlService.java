@@ -28,11 +28,11 @@ public class GetUrlService {
         this.s3Config = s3Config;
     }
 
-    public List<Integer> getRecommendation() {
+    public List<Integer> getRecommendation(String userId) {
     	
     	List<Integer> imageList = new ArrayList<>();
     	// findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
-    	Recommendation recommendation = recommendationRepository.findBySEQ("8YBQA0UZ1JNAPF1LPQC3");
+    	Recommendation recommendation = recommendationRepository.findBySEQ(userId);
 //		RecommendationDto recommendationDto = new RecommendationDto();
 //        recommendationDto.setTop1(recommendation.getTop1());
 //        recommendationDto.setTop2(recommendation.getTop2());
@@ -40,17 +40,13 @@ public class GetUrlService {
 //        recommendationDto.setTop4(recommendation.getTop4());
 //        recommendationDto.setTop5(recommendation.getTop5());
 //        return recommendationDto;
-    	System.out.println("################################");
-    	System.out.println("recommendation: "+ recommendation);
-    	System.out.println("################################");
+    	System.out.println("### GetUrlService - recommendation: "+ recommendation);
     	imageList.add(recommendation.getTop1());
     	imageList.add(recommendation.getTop2());
     	imageList.add(recommendation.getTop3());
     	imageList.add(recommendation.getTop4());
     	imageList.add(recommendation.getTop5());
-    	System.out.println("################################");
-    	System.out.println("imageList:"+ imageList);
-    	System.out.println("################################");
+    	System.out.println("### GetUrlService - imageList:"+ imageList);
     	
     	return imageList;
     }
@@ -70,7 +66,7 @@ public class GetUrlService {
     		userIdTemp = "00" + userId;
     	}
     	
-    	System.out.println(userIdTemp);
+    	System.out.println("### GetUrlService - userIdTemp:" + userIdTemp);
     	
     	String fullUrl = s3Config.s3Endpoint() + "index_img/bcc_" + userIdTemp + ".png"; // userId에 따라서 upload된 이미지 가져오기
         return fullUrl;
@@ -99,7 +95,7 @@ public class GetUrlService {
         for (ImageTemplate imageTemplate : imageTemplates) {
             String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // S3 엔드포인트와 이미지 URL 조합
             imageUrls.add(fullUrl); // 이미지 URL을 리스트에 추가
-            System.out.println(imageTemplate.getUrl());
+            System.out.println("### GetUrlService - imageTemplate.getUrl(): " + imageTemplate.getUrl());
         }
         return imageUrls;
     }

@@ -76,9 +76,9 @@ public class ElasticService {
             JsonNode previousMonthPerformanceNode = json.get("previous_month_performance"); // 카드 전월 실적
             productNames.add(previousMonthPerformanceNode.asText());// elasticresults[4]
             
-            JsonNode idNode = json.get("id"); // 카드 전월 실적
+            JsonNode idNode = json.get("id"); // 카드 아이디
             productNames.add(idNode.asText());// elasticresults[5]
-            
+            System.out.println("### ElasticService - productNames: " + productNames);
             productDetails.add(productNames);
     	}
     	return productDetails;
