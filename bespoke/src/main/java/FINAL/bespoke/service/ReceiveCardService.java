@@ -42,9 +42,8 @@ public class ReceiveCardService {
 		String userId = jwtUtil.getUserid(token);
 		// userId로 jap를 통해 userentitiy를 찾아낸다.
         User userData = userRepository.findByuserID(userId); // db에서 userId에 맞는 행을 가져옴
-
-        System.out.println(userId);
-        System.out.println(userData);
+        System.out.println("### ReceiveCardService - userId: " + userId);
+        System.out.println("### ReceiveCardService - userData: " + userData);
         return userData;
     }
 }

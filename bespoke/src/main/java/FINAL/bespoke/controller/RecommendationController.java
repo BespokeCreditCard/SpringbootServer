@@ -29,11 +29,14 @@ public class RecommendationController {
     
     private final ReceiveCardService receiveCardService;
     
+    private final GetUrlService getUrlService;
+    
     @Autowired
-    public RecommendationController(GetUrlService recommendationService, ElasticService elasticService, ReceiveCardService receiveCardService) {
+    public RecommendationController(GetUrlService recommendationService, ElasticService elasticService, ReceiveCardService receiveCardService, GetUrlService getUrlService) {
         this.recommendationService = recommendationService;
         this.elasticService = elasticService;
         this.receiveCardService = receiveCardService;
+        this.getUrlService = getUrlService;
     }
         
     @GetMapping("/recommendation")

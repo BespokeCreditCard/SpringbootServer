@@ -34,14 +34,12 @@ public class GetUrlService {
 
     private final ElasticService elasticService;
 
-    public List<Integer> getRecommendation() {
+    public List<Integer> getRecommendation(String userId) {
     	
     	List<Integer> imageList = new ArrayList<>();
     	// findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
-    	Recommendation recommendation = recommendationRepository.findById("004J3BM4AIGOOG7TRIJM").orElseThrow(RuntimeException::new);
-    	System.out.println("################################");
-    	System.out.println("recommendation: "+ recommendation);
-    	System.out.println("################################");
+    	Recommendation recommendation = recommendationRepository.findBySEQ(userId);
+    	System.out.println("### GetUrlService - recommendation: "+ recommendation);
 
         if (recommendation.getCardIdx1() != null) {
             imageList.add(recommendation.getCardIdx1());
@@ -80,7 +78,7 @@ public class GetUrlService {
     		userIdTemp = "00" + userId;
     	}
     	
-    	System.out.println(userIdTemp);
+    	System.out.println("### GetUrlService - userIdTemp:" + userIdTemp);
     	
     	String fullUrl = s3Config.s3Endpoint() + "index_img/bcc_" + userIdTemp + ".png"; // userId에 따라서 upload된 이미지 가져오기
         return fullUrl;
@@ -109,6 +107,62 @@ public class GetUrlService {
         for (ImageTemplate imageTemplate : imageTemplates) {
             String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // S3 엔드포인트와 이미지 URL 조합
             imageUrls.add(fullUrl); // 이미지 URL을 리스트에 추가
+            System.out.println("### GetUrlService - imageTemplate.getUrl(): " + imageTemplate.getUrl());
+        }
+        return imageUrls;
+    }
+
+    public void showRecommendations(Model model, HttpServletRequest request) throws JsonProcessingException {
+        // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
+        long beforeTime = System.currentTimeMillis(); // 코드 실행 전 시간
+        User user = receiveCardService.findUserId(request);
+
+        // user.getUserId()로 가져와야함
+        List<Integer> imageList = getRecommendation();
+
+        List<RecommendationDto> RecommendationDtoList = getImageUrlsToDto(imageList);
+
+        // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
+        model.addAttribute("imageUrls", RecommendationDtoList);
+
+        List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(imageList,"result_bulk");
+
+        List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println(categoryClass);
+        String categoryClassJson = objectMapper.writeValueAsString(categoryClass);
+        System.out.println(categoryClassJson);
+        model.addAttribute("categoryClassJson", categoryClassJson);
+
+
+        model.addAttribute("categoryClass", categoryClass);
+
+        System.out.println("################################");
+        System.out.println("categoryClass: "+ categoryClass);
+        System.out.println("################################");
+        // recommendation.jsp로 이동
+
+        long afterTime = System.currentTimeMillis(); // 코드 실행 후 시간
+
+        long secDiffTime = (afterTime - beforeTime); // 코드 실행 전후 시간 차이 계산(초 단위)
+
+        System.out.println("시간차이(s) : " + secDiffTime);
+    }
+
+    public List<RecommendationDto> getImageUrlsToDto(List<Integer> imageIds) {
+    	List<RecommendationDto> imageUrls = new ArrayList<>();
+
+        if (imageIds.isEmpty()) {
+            return imageUrls; // 이미지 ID 목록이 비어있으면 빈 리스트 반환
+        }
+
+        // imageIds를 순회하여 각 ImageTemplate 객체를 처리
+        for (Integer idx : imageIds) {
+            ImageTemplate imageTemplate = imageTemplateRepository.findById(idx).orElseThrow(RuntimeException::new);
+            // 이미지 ID 목록을 이용하여 이미지 정보 조회
+            String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // S3 엔드포인트와 이미지 URL 조합
+            imageUrls.add(new RecommendationDto(idx,fullUrl)); // 카드 인덱스와 이미지 URL을 포함한 DTO 생성
             System.out.println(imageTemplate.getUrl());
         }
         return imageUrls;

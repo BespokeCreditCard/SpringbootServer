@@ -61,6 +61,7 @@ public class ReceiveCardController {
 		model.addAttribute("userData", userIdTemp);
 		
 		String userImageUrl = getUrlService.getImageUrlFromUpload(userIdTemp.getUserID()); // id 가져와서 
+		System.out.println("### ReceiveCardController - userImageUrl: " + userImageUrl);
 		model.addAttribute("userImageUrl", userImageUrl);
 
  		//userid 로 elasticservice에 참조하는 코드
@@ -91,7 +92,7 @@ public class ReceiveCardController {
 		String userId = dto.getUserId();
 		String address = dto.getAddress();
         // 주소 업데이트 로직 구현
-        System.out.println("수정된 주소: " + dto.getAddress());
+        System.out.println("### ReceiveCardController - dto.getAddress(수정된 주소): " + dto.getAddress());
         // 필요한 데이터베이스 업데이트 또는 서비스 호출 등의 작업 수행
         updateUserAddress(userId, address);
         // 성공적으로 업데이트되었음을 클라이언트에게 응답

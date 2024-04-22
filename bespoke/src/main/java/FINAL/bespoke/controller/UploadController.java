@@ -28,7 +28,7 @@ public class UploadController {
                               @RequestParam("customerName") String customerName) {
         try {
             String imageUrl = uploadService.uploadImage(file, customerName);
-            System.out.println("4: " + imageUrl);
+            System.out.println("### UploadController - imageUrl: " + imageUrl);
             
 //            redirectView.setUrl("https://woori-fisa-bucket.s3.ap-northeast-2.amazonaws.com/upload/8YBQA0UZ1JNAPF1LPQC3.png");   // 이동할 url적어주고
             redirectView.setUrl(imageUrl);   // 이동할 url적어주고

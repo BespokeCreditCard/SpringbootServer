@@ -20,8 +20,8 @@ public class UploadService {
     // S3에 이미지 업로드
     public String uploadImage(MultipartFile file, String customerName) throws IOException {
 //        String key = "upload/" + customerName + ".png";
-        String key = ("8YBQA0UZ1JNAPF1LPQC3") + ".png";
-        System.out.println("1: " + key);
+        String key = ("K1MQLKMELFD27CMUL0XB") + ".png";
+        System.out.println("### UploadService - key: " + key);
 
         try {
             // 업로드할 파일의 바이트 배열을 가져옴
@@ -37,12 +37,12 @@ public class UploadService {
 
             // PutObject를 사용하여 파일 업로드	
             s3Client.putObject(request, requestBody);
-            System.out.println("2: " + request);
+            System.out.println("### UploadService - request: " + request);
             // 업로드된 객체의 URL 생성
-            System.out.println("3: " + generateImageUrl(key));
+            System.out.println("### UploadService - generateImageUrl(key): " + generateImageUrl(key));
             // 업로드된 객체의 URL을 생성
             String testUrl = generateImageUrl(key);
-            System.out.println(testUrl);
+            System.out.println("### UploadService - testUrl: " + testUrl);
             return testUrl;
 
         } catch (IOException e) {
