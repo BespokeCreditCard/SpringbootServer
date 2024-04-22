@@ -102,7 +102,7 @@
             </div>
 
             <div class="card col-3 p-2 m-4" id="card2" style="width: 18rem; display: none;">
-                <img src="/imgs/42ㄴ.png" class="card-img-top p-4" alt="...">
+                <img src="/imgs/42.png" class="card-img-top p-4" alt="...">
                 <div class="btn-container d-flex justify-content-center align-items-center">
                     <a class="btn btn-primary">선택 2</a>
                 </div>
