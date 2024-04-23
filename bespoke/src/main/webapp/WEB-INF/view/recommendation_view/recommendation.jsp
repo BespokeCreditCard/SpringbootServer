@@ -69,12 +69,25 @@
         	<h2 id="benefits"></h2>
         </div>
 		<form id="selectCardId" action="/design/carddesign" method="GET">
-			<input type="hidden" id="selectInputCardId" name="selectCardId" value="0">
+			<input type="hidden" id="selectInputCardId" name="selectCardId">
 			<button type="submit" class="btn btn-primary mt-3 mb-3">카드선택</button>
 		</form>
 		<button type="button" class="btn btn-primary" onclick="window.location.href='/wordcloud'">키워드보기</button>
     </section>
 </body>
+<script>
+    var imageIdListToScript = ${imageList}; 
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var selectInputCardId = document.getElementById('selectInputCardId');
+        var cardElements = document.querySelectorAll('.card');
+
+        cardElements.forEach(function(cardElement) {
+            var imgIndex = cardElement.getAttribute('data-img-index');
+            selectInputCardId.value = imageIdListToScript[imgIndex];
+        });
+    });
+</script>
 <script>
     // JSON 문자열을 JavaScript 객체로 변환합니다.
     var categoryClasses = JSON.parse('${categoryClassJson}');
@@ -152,7 +165,7 @@
         var imgIndex = card.getAttribute('data-img-index');
         var categoryClasses = JSON.parse('${categoryClassJson}');
         var selectInputCardId = document.querySelector('#selectInputCardId');
-        selectInputCardId.setAttribute('value', ${imageIdList}[card.getAttribute('data-img-index')]); // 데이터 속성 설정
+        selectInputCardId.setAttribute('value', ${imageList}[card.getAttribute('id')]); // 데이터 속성 설정
         
         /* title.innerText = (parseInt(card.getAttribute('card_name'))); */
         benefitCard.textContent = categoryClasses[card.getAttribute('id')];

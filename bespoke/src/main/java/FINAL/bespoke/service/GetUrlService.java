@@ -99,6 +99,7 @@ public class GetUrlService {
 
         List<RecommendationDto> RecommendationDtoList = getImageUrlsToDto(imageList);
 
+        model.addAttribute("imageList", imageList);
         // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
         model.addAttribute("imageUrls", RecommendationDtoList);
 
