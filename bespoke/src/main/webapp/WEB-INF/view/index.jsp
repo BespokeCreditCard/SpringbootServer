@@ -23,7 +23,7 @@
      <div class="container">
             <div class="masthead-subheading">Bespoke Credit Card</div>
             <div class="masthead-heading text-uppercase">카드 추천 서비스</div>
-            <a class="btn btn-primary btn-xl text-uppercase" href="/recommendation_view/recommendation">카드 추천 바로가기</a>
+            <a class="btn btn-primary btn-xl text-uppercase" href="/recommendation_view/selectRecommendation">카드 추천 바로가기</a>
         </div>
     </div>
         

@@ -44,10 +44,15 @@
         <div id="benefits" class="">
 <%--                <button id="benefit0" class="button" type="button" onclick="클릭이벤트" value="유형1">유형1</button>--%>
         </div>
+        <div class="container-fluid fixed-bottom" id="prevNextBtnDiv">
+            <div class="row justify-content-end mb-3">
+                <div class="col-6 text-end">
+                    <button id="sendBenefit" class="btn btn-outline-secondary">선택</button>
+                </div>
+            </div>
+        </div>
     </section>
-    <section class="d-flex justify-content-end" style="margin-right: 4%">
-        <button id="sendBenefit" class="btn btn-outline-primary">선택</button>
-    </section>
+
 </body>
 <script src="/js/getBenefitsByFlask.js"></script>
 <script src="/js/selectRecommendation.js"></script>

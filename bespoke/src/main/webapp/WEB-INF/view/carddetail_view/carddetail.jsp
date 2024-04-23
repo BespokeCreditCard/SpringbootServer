@@ -6,7 +6,7 @@
     <%@ include file="../header/header.jsp" %>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
 
         <c:forEach var="imageUrl" items="${imageUrls}" varStatus="cardStatus">
             <div class="row">
@@ -39,22 +39,24 @@
                             </div>
                             <div class="col-md-2 text-center">
 	                            <form id="selectCardId" action="/design/carddesign" method="GET">
-	                            	<p>${elasticresultDetail[cardStatus.index][5]}</p>
 	                           		<input type="hidden" id="cardSelectId" name="selectCardId" value=${elasticresultDetail[cardStatus.index][5]}>
-	                                <button type="submit" class="btn btn-primary">카드 선택</button>
+	                                <button type="submit" class="btn btn-secondary">카드 선택</button>
 	                            </form>
-	                            <!-- action 바꿔야함 워드 클라우드 페이지로 -->
-	                            <form id="keywordSelectId" action="/design/carddesign" method="GET"> 
-	                            	<input type="hidden" id="keywordSelectId" name="keywordSelectId" value=${elasticresultDetail[cardStatus.index][5]}>
-									<button type="submit" class="btn btn-primary">키워드보기</button>
-								</form>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </c:forEach>
- 		<button type="button" class="btn btn-primary" onclick="window.location.href='/recommendation_view/recommendation'">이전</button>
+        <div class="container-fluid fixed-bottom" id="prevBtnDiv">
+            <div class="row justify-content-start mb-3">
+                <div class="col-6">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='/wordcloud'">이전</button>
+                </div>
+            </div>
+        </div>
     </div>
+
 </body>
 </html>

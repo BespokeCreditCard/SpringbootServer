@@ -51,7 +51,7 @@
 </style>
 <body style="background-color: #6c757d">
     <section style="width: 100%;display: flex;align-items: center;justify-content: center">
-        <h1 class="card-title" style="align-items: center;">카드</h1>
+        <h1 class="card-title mb-2" style="align-items: center;">1</h1>
     </section>
     <section style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
 		<div class="slider-for" style="width: 95%; height: 100%; min-height: 10%; align-items: center;">
@@ -70,9 +70,9 @@
         </div>
 		<form id="selectCardId" action="/design/carddesign" method="GET">
 			<input type="hidden" id="selectInputCardId" name="selectCardId" value="0">
-			<button type="submit" class="btn btn-primary">카드선택</button>
+			<button type="submit" class="btn btn-primary mt-3 mb-3">카드선택</button>
 		</form>
-		<button type="button" class="btn btn-primary" onclick="window.location.href='/carddetail_view/carddetail'">자세히보기</button>
+		<button type="button" class="btn btn-primary" onclick="window.location.href='/wordcloud'">키워드보기</button>
     </section>
 </body>
 <script>
