@@ -6,15 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import FINAL.bespoke.model.entity.ImageTemplate;
-import FINAL.bespoke.service.AiGeneratorService;
-import FINAL.bespoke.service.GetUrlService;
 import FINAL.bespoke.service.ImageTemplateService;
-import FINAL.bespoke.service.TranslatorService;
 
 @Controller
 @RequestMapping("/design")
@@ -22,19 +16,12 @@ public class CardDesignController {
 
 //    @Autowired
 //    private CardDesignService cardDesignServiceDemo;
-	private final ImageTemplateService imageTemplateService;
-	private final GetUrlService getUrlService;
-	
-	@Autowired
-    public CardDesignController(ImageTemplateService imageTemplateService, GetUrlService getUrlService) {
-        this.imageTemplateService = imageTemplateService;
-        this.getUrlService = getUrlService;
-    }
     
+    @Autowired
+    private ImageTemplateService imageTemplateService;
     
     @GetMapping("/carddesign")
-    public String showCardDesignPage(@RequestParam("selectCardId") String selectCardId, Model model) {
-    	System.out.println("### CardDesignController - cardSelectId: " + selectCardId);
+    public String showHomePage(Model model) {
         // 이미지 생성 로직을 통해 ImageDto 객체를 생성합니다.
  //   	ImageDto aiImage;
 //    	String selectImage = "";
@@ -50,20 +37,15 @@ public class CardDesignController {
 //			e.printStackTrace();
 //		}
 
-//    	// 가져올 이미지의 ID 리스트를 작성합니다.
-//        List<Integer> imageIds = Arrays.asList(6, 10, 12, 21, 34, 55, 70, 77, 121, 122);
-//
-//        // 이미지의 ID 리스트를 기반으로 이미지들을 가져옵니다.
-//        List<ImageTemplate> images = imageTemplateService.getImagesByIds(imageIds);
-//        System.out.println("############################################");
-//        System.out.println(images.toString());
-//        System.out.println("############################################");
+    	// 가져올 이미지의 ID 리스트를 작성합니다.
+        List<Integer> imageIds = Arrays.asList(6, 10, 12, 21, 34, 55, 70, 77, 121, 122);
+
+        // 이미지의 ID 리스트를 기반으로 이미지들을 가져옵니다.
+        List<ImageTemplate> images = imageTemplateService.getImagesByIds(imageIds);
+        System.out.println("### CardDesignController - images.toString(): " + images.toString());
         // 모델에 이미지들을 추가하여 JSP에 전달합니다.
-//        model.addAttribute("images", images);
-        System.out.println("### CardDesignController - selectCardId: " + selectCardId);
-        model.addAttribute("selectCardId", selectCardId);
-        String selectImageUrl = getUrlService.getImageUrlFromIndexImg(selectCardId);
-    	model.addAttribute("selectImageUrl", selectImageUrl);
+        model.addAttribute("images", images);
+    	
 		// 뷰를 반환합니다.
 		return "design/carddesign";
 	}

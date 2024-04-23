@@ -56,36 +56,13 @@ public class GetUrlService {
         if (recommendation.getCardIdx5() != null) {
             imageList.add(recommendation.getCardIdx5());
         }
-    	System.out.println("################################");
-    	System.out.println("imageList:"+ imageList);
-    	System.out.println("################################");
+    	System.out.println("### GetUrlService - imageList: "+ imageList);
     	
     	return imageList;
     }
     
- // id에 따른 url 가져오기 index_img
-    public String getImageUrlFromIndexImg(String userId) {
-        // 이미지 ID에 해당하는 URL 조회
-    	String userIdTemp = "";
-    	int num = Integer.parseInt(userId);
-    	if (num >= 100) {
-    		userIdTemp = userId;
-    	}
-    	else if (num >= 10 && num <= 99) {
-    		userIdTemp = "0" + userId;
-    	}
-    	else {
-    		userIdTemp = "00" + userId;
-    	}
-    	
-    	System.out.println("### GetUrlService - userIdTemp:" + userIdTemp);
-    	
-    	String fullUrl = s3Config.s3Endpoint() + "index_img/bcc_" + userIdTemp + ".png"; // userId에 따라서 upload된 이미지 가져오기
-        return fullUrl;
-    }
-    
-    // id에 따른 url 가져오기 upload
-    public String getImageUrlFromUpload(String userId) {
+    // id에 따른 url 가져오기
+    public String getImageUrl(String userId) {
         // 이미지 ID에 해당하는 URL 조회
     	String fullUrl = s3Config.s3Endpoint() + "upload/" + userId + ".png"; // userId에 따라서 upload된 이미지 가져오기
         return fullUrl;
@@ -130,17 +107,15 @@ public class GetUrlService {
         List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println(categoryClass);
+        System.out.println("### GetUrlService - categoryClass: " + categoryClass);
         String categoryClassJson = objectMapper.writeValueAsString(categoryClass);
-        System.out.println(categoryClassJson);
+        System.out.println("### GetUrlService - categoryClassJson: " + categoryClassJson);
         model.addAttribute("categoryClassJson", categoryClassJson);
 
 
         model.addAttribute("categoryClass", categoryClass);
 
-        System.out.println("################################");
-        System.out.println("categoryClass: "+ categoryClass);
-        System.out.println("################################");
+        System.out.println("### GetUrlService - categoryClass: "+ categoryClass);
         // recommendation.jsp로 이동
 
         long afterTime = System.currentTimeMillis(); // 코드 실행 후 시간
@@ -163,10 +138,11 @@ public class GetUrlService {
             // 이미지 ID 목록을 이용하여 이미지 정보 조회
             String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // S3 엔드포인트와 이미지 URL 조합
             imageUrls.add(new RecommendationDto(idx,fullUrl)); // 카드 인덱스와 이미지 URL을 포함한 DTO 생성
-            System.out.println(imageTemplate.getUrl());
+            System.out.println("### GetUrlService - imageTemplate.getUrl(): " + imageTemplate.getUrl());
         }
         return imageUrls;
     }
+
     
 //    // id가 list일때 url 가져오는 메서드
 //    public List<String> getImageUrls(List<Integer> imageIds) {

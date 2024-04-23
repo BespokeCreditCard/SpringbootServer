@@ -42,9 +42,7 @@ public class AiGeneratorController {
     	
     	// 입력받은 한글 영어 프롬프트로 번역
     	String prompt = translatorService.translate(promptRaw);
-    	System.out.println("##########");
-    	System.out.println(prompt);
-    	System.out.println("##########");
+    	System.out.println("### AiGeneratorController - prompt: " + prompt);
     	
     	// 이미지 생성
     	int attempt = 1;

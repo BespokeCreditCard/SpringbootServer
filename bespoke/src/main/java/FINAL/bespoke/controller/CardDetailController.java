@@ -39,16 +39,15 @@ public class CardDetailController {
     @GetMapping("/carddetail")
     public String showRecommendation(Model model, HttpServletRequest request) {
         // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
+    	User user = receiveCardService.findUserId(request);
     	
-    	User userIdTemp = receiveCardService.findUserId(request);
-        List<Integer> imageList = recommendationImageUrlService.getRecommendation(userIdTemp.getUserID());
+        List<Integer> imageList = recommendationImageUrlService.getRecommendation(user.getUserID());
 
         List<String> imageUrls = recommendationImageUrlService.getImageUrls(imageList);
         
         // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
         model.addAttribute("imageUrls", imageUrls); // imageUrls[0], imageUrls[1], imageUrls[2], imageUrls[3], imageUrls[4]
 
-        System.out.println("### CardDetailController - imageUrls: " + imageUrls);
         List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(imageList,"result_bulk");
         
         List<List<String>> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);

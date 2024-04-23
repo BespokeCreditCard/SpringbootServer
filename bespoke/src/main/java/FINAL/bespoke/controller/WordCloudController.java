@@ -35,7 +35,7 @@ public class WordCloudController {
 		wordDetailsDTO wordDetailsDTO = elasticService.ElasticSearchJsonTocardWordData(response);
 //		model.addAttribute("wordcloud",cardWordDetail);
 //		System.out.println(cardWordDetail);
-		System.out.println(wordDetailsDTO.getCardWord());
+		System.out.println("### WordCloudController - wordDetailsDTO.getCardWord(): " + wordDetailsDTO.getCardWord());
 		String json = "";
 		try {
 			json = objectMapper.writeValueAsString(wordDetailsDTO.getCardWord());
@@ -45,7 +45,7 @@ public class WordCloudController {
 		}
         model.addAttribute("wordcloudJson",json);
         model.addAttribute("word",wordDetailsDTO.getCardWord());
-        System.out.println(json);
+        System.out.println("### WordCloudController - json: " + json);
         model.addAttribute("worddetailscardname",wordDetailsDTO.getCardName());
 		return "wordcloud";
 	}

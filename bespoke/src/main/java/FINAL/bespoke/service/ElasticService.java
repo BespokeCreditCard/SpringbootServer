@@ -32,7 +32,7 @@ public class ElasticService {
     	JsonNode cardword = json.get("data"); // 카드 이름
 //    	cardWordDetails.add(cardword.toPrettyString()); 
     	cardWordDetails.add(cardword.toString()); 
-    	System.out.println("service " + cardWordDetails);
+    	System.out.println("### ElasticService - cardWordDetails: " + cardWordDetails);
     	return cardWordDetails;
     }
     
@@ -42,7 +42,7 @@ public class ElasticService {
     	for (GetResponse<ObjectNode> responseObject : response) {
     		// 2차원 배열에 저장하기 위한 1차원 배열
     		
-    		System.out.println(responseObject);
+    		System.out.println("### ElasticService - responseObject: " + responseObject);
         	// responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
         	ObjectNode json = responseObject.source();
         	JsonNode cardname = json.get("card_name"); // 카드 이름
@@ -124,9 +124,6 @@ public class ElasticService {
             JsonNode previousMonthPerformanceNode = json.get("previous_month_performance"); // 카드 전월 실적
             productNames.add(previousMonthPerformanceNode.asText());// elasticresults[4]
             
-            JsonNode idNode = json.get("id"); // 카드 아이디
-            productNames.add(idNode.asText());// elasticresults[5]
-            System.out.println("### ElasticService - productNames: " + productNames);
             productDetails.add(productNames);
     	}
     	return productDetails;
