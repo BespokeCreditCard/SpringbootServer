@@ -14,31 +14,27 @@ public class JoinService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public JoinService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public void joinProcess(UserDto userDto) {
+    public void joinProcess(UserDto userDto){
 
-        String username = userDto.getName();
+        String userId = userDto.getUserID();
         String password = userDto.getPassword();
 
-        Boolean isExist = userRepository.existsByuserID(username);
+        Boolean isExist = userRepository.existsByuserID(userId);
 
         if (isExist) {
-        	
-        	System.out.println(userDto.getName() + "는 이미 사용중인 닉네임입니다.");
+        	System.out.println(userDto.getUserID() + "는 이미 사용중인 ID입니다.");
             return;
         }
-
-
         
         User data = userDto.toEntity();
         System.out.println("JoinService"+data);
         data.setPassword(bCryptPasswordEncoder.encode(password));
         data.setRole("ROLE_UESR");
-
+        
         userRepository.save(data);
     }
 }

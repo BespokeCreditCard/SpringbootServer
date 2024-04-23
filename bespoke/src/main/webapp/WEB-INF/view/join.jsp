@@ -97,7 +97,7 @@
 
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button type="submit" class="btn btn-secondary">가입완료</button>
+                                            <button id="joinBtn" type="submit" class="btn btn-secondary">가입완료</button>
                                         </div>
                                     </div>
                                 </div>
@@ -194,6 +194,5 @@
             $('#termsModal').modal('hide'); // 모달 숨기기
         });
     </script>
-
 </body>
 </html>

@@ -2,6 +2,8 @@ package FINAL.bespoke.service;
 
 import FINAL.bespoke.config.S3Config;
 import FINAL.bespoke.model.dto.RecommendationDto;
+import FINAL.bespoke.model.dto.RecommendationTop5Dto;
+
 import FINAL.bespoke.model.entity.ImageTemplate;
 import FINAL.bespoke.model.entity.Recommendation;
 import FINAL.bespoke.model.entity.User;
@@ -20,24 +22,22 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
-@RequiredArgsConstructor
+
 @Service
-public class GetUrlService {
+@RequiredArgsConstructor
+public class RecommendationService {
 
     private final RecommendationRepository recommendationRepository;
-
     private final ImageTemplateRepository imageTemplateRepository;
-    
     private final S3Config s3Config;
-
     private final ReceiveCardService receiveCardService;
-
     private final ElasticService elasticService;
 
-    public List<Integer> getRecommendation(String userId) {
-    	
+    public RecommendationTop5Dto getRecommendation(String userId) {
     	List<Integer> imageList = new ArrayList<>();
+    	List<String> benefitList = new ArrayList<>();
     	// findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
+    	// recommendation 테이블에서 SEQ가 일치하는 user 찾기
     	Recommendation recommendation = recommendationRepository.findBySEQ(userId);
     	System.out.println("### GetUrlService - recommendation: "+ recommendation);
 
@@ -56,9 +56,29 @@ public class GetUrlService {
         if (recommendation.getCardIdx5() != null) {
             imageList.add(recommendation.getCardIdx5());
         }
-    	System.out.println("### GetUrlService - imageList: "+ imageList);
+        if (recommendation.getBenefit1() != null) {
+        	benefitList.add(recommendation.getBenefit1());        
+        }
+        if (recommendation.getBenefit2() != null) {
+        	benefitList.add(recommendation.getBenefit2());        
+        }
+        if (recommendation.getBenefit3() != null) {
+        	benefitList.add(recommendation.getBenefit3());        
+        }
+        if (recommendation.getBenefit4() != null) {
+        	benefitList.add(recommendation.getBenefit4());        
+        }
+        if (recommendation.getBenefit5() != null) {
+        	benefitList.add(recommendation.getBenefit5());        
+        }
+        
+        RecommendationTop5Dto recommendationTop5Dto = new RecommendationTop5Dto();
+        recommendationTop5Dto.setImageList(imageList);
+        recommendationTop5Dto.setBenefitList(benefitList);
+    	System.out.println("### GetUrlService - imageList: "+ recommendationTop5Dto.getImageList());
+    	System.out.println("### GetUrlService - benefitList: "+ recommendationTop5Dto.getBenefitList());
     	
-    	return imageList;
+    	return recommendationTop5Dto;
     }
     
     // id에 따른 url 가져오기
@@ -88,26 +108,37 @@ public class GetUrlService {
         }
         return imageUrls;
     }
+    
 
+    public void getUserId(Model model, HttpServletRequest request) throws JsonProcessingException {
+        User user = receiveCardService.findUserId(request);
+        model.addAttribute("userId", user.getUserID());
+    }	
+    
     public void showRecommendations(Model model, HttpServletRequest request) throws JsonProcessingException {
-        // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
+        // json 파일로 굽기 위한 class
+    	ObjectMapper objectMapper = new ObjectMapper();
+    	// RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
         long beforeTime = System.currentTimeMillis(); // 코드 실행 전 시간
         User user = receiveCardService.findUserId(request);
 
         // user.getUserId()로 가져와야함
-        List<Integer> imageList = getRecommendation(user.getUserID());
+        RecommendationTop5Dto recommendationTop5Dto = getRecommendation(user.getUserID());;
+        List<Integer> imageList = recommendationTop5Dto.getImageList();
+        List<String> benefitList = recommendationTop5Dto.getBenefitList();
 
         List<RecommendationDto> RecommendationDtoList = getImageUrlsToDto(imageList);
 
-        model.addAttribute("imageList", imageList);
         // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
         model.addAttribute("imageUrls", RecommendationDtoList);
+        String benefitListClassJson = objectMapper.writeValueAsString(benefitList);
+        model.addAttribute("benefitList", benefitListClassJson);
 
         List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(imageList,"result_bulk");
 
         List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        
         System.out.println("### GetUrlService - categoryClass: " + categoryClass);
         String categoryClassJson = objectMapper.writeValueAsString(categoryClass);
         System.out.println("### GetUrlService - categoryClassJson: " + categoryClassJson);
@@ -128,11 +159,11 @@ public class GetUrlService {
 
     public List<RecommendationDto> getImageUrlsToDto(List<Integer> imageIds) {
     	List<RecommendationDto> imageUrls = new ArrayList<>();
-
-        if (imageIds.isEmpty()) {
+    	
+    	if (imageIds.isEmpty()) {
             return imageUrls; // 이미지 ID 목록이 비어있으면 빈 리스트 반환
-        }
-
+        } 
+    	
         // imageIds를 순회하여 각 ImageTemplate 객체를 처리
         for (Integer idx : imageIds) {
             ImageTemplate imageTemplate = imageTemplateRepository.findById(idx).orElseThrow(RuntimeException::new);
@@ -143,8 +174,9 @@ public class GetUrlService {
         }
         return imageUrls;
     }
-
- // id에 따른 url 가져오기 index_img
+    
+    
+    // id에 따른 url 가져오기 index_img
     public String getImageUrlFromIndexImg(String userId) {
         // 이미지 ID에 해당하는 URL 조회
     	String userIdTemp = "";

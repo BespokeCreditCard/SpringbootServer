@@ -33,12 +33,10 @@
 <body>
     <section class="p-3">
         <div class="">
-            <%--    seq 의 div에 값으로 유저 seq 삽입해야함 없으면 오류--%>
-            <div id="seq" class="d-none">PQWJLYMVC3XDJHYLZ4XM</div>
-            <div id="cluster_num" class="d-none"></div>
             <h2>카드 추천</h2>
             <h5>원하시는 혜택을 선택해주세요.</h5>
         </div>
+        <div id="userId" style="display: none;">${userId}</div>
     </section>
     <section class="container-lg p-3 m-auto mt-5 border border-primary bg-light rounded border-5 ">
         <div id="benefits" class="">
@@ -54,6 +52,5 @@
     </section>
 
 </body>
-<script src="/js/getBenefitsByFlask.js"></script>
 <script src="/js/selectRecommendation.js"></script>
 </html>

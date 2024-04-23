@@ -1,18 +1,21 @@
 package FINAL.bespoke.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import FINAL.bespoke.model.dto.UserDto;
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.service.ElasticService;
-import FINAL.bespoke.service.GetUrlService;
+import FINAL.bespoke.service.RecommendationService;
 import FINAL.bespoke.service.JoinService;
 import FINAL.bespoke.service.ReceiveCardService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
@@ -26,9 +29,9 @@ public class UserController {
 	private final JoinService joinService;
 	private final ReceiveCardService receiveCardService;
 	private final ElasticService elasticService;
-	private final GetUrlService getUrlService;
+	private final RecommendationService getUrlService;
 	
-    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService, GetUrlService getUrlService) {
+    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService, RecommendationService getUrlService) {
         this.receiveCardService = receiveCardService;
         this.joinService = joinService;
         this.elasticService = elasticService; 
@@ -51,11 +54,11 @@ public class UserController {
         // 쿠키 배열 가져오기
         return "welcome";
     }
-    
+        
     @PostMapping("/join")
-    public String joinProcess(UserDto userDto) {
+    public String joinProcess(UserDto userDto){
     	System.out.println(userDto);
-        joinService.joinProcess(userDto);
+    	joinService.joinProcess(userDto);        
         System.out.println("join ok");
         return "index";
     }

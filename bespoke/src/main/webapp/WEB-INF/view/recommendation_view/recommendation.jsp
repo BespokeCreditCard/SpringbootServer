@@ -51,7 +51,7 @@
 </style>
 <body style="background-color: #6c757d">
     <section style="width: 100%;display: flex;align-items: center;justify-content: center">
-        <h1 class="card-title mb-2" style="align-items: center;">1</h1>
+        <h1 class="card-title" style="align-items: center;">[${benefitList}] 혜택 카드</h1>
     </section>
     <section style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
 		<div class="slider-for" style="width: 95%; height: 100%; min-height: 10%; align-items: center;">
@@ -76,29 +76,30 @@
     </section>
 </body>
 <script>
-    var imageIdListToScript = ${imageList}; 
-
     document.addEventListener('DOMContentLoaded', function() {
-        var selectInputCardId = document.getElementById('selectInputCardId');
-        var cardElements = document.querySelectorAll('.card');
-
-        cardElements.forEach(function(cardElement) {
-            var imgIndex = cardElement.getAttribute('data-img-index');
-            selectInputCardId.value = imageIdListToScript[imgIndex];
-        });
-    });
+    // 여기에 실행할 자바스크립트 코드 작성
+		var title = document.querySelector('.card-title');
+		var benefitList = JSON.parse('${benefitList}');
+		title.innerText = benefitList[0];
+	});
 </script>
 <script>
-    // JSON 문자열을 JavaScript 객체로 변환합니다.
-    var categoryClasses = JSON.parse('${categoryClassJson}');
+    function selectCardAndSubmit() {
+        // 여기서 카드 선택에 관련된 동작 수행
+        window.location.href = '../design/carddesign'; // 카드 선택 페이지로 이동
 
-    // JSON 배열의 첫 번째 배열을 찾아서 텍스트로 결합합니다.
-    var firstCategoryClassText = categoryClasses[0].join(', ');
-
-    // 결합된 텍스트를 <h2> 태그 안에 설정합니다.
-    document.getElementById('benefits').innerText = firstCategoryClassText;
+        // 여기서 확인 버튼에 관련된 동작 수행
+        document.getElementById('select').submit(); // 폼 제출
+    }
 </script>
 <script>
+	function beforeChangeHandler(event, slick, currentSlide, nextSlide) {
+	    // 다음 슬라이드의 카드 ID 가져오기
+	    var currentSlideId = $('[data-slick-index="' + currentSlide + '"] .card').attr('id');
+	    
+	    // 폼의 hidden input에 선택된 카드의 ID 설정
+	    document.getElementById('selectCardId').querySelector('input[name="selectId"]').value = currentSlideId;
+	}
 	
 	$(document).ready(function() {
 	    // 슬라이더 초기화 및 이벤트 핸들러 등록
@@ -119,9 +120,16 @@
 	        centerMode: true,
 	        draggable: true,
 	        focusOnSelect: true,
+	        // 슬라이드 변경 전 이벤트 핸들러 등록
+	        onBeforeChange: beforeChangeHandler
 	    });
 	});
-
+	
+	// 카드 선택 및 폼 제출 함수
+	function selectCardAndSubmit() {
+	    // 여기서 카드 선택에 관련된 동작 수행 (예: 폼 제출)
+	    document.getElementById('selectCardId').submit(); // 폼 제출
+	}
 </script>
 <script>
 
@@ -161,14 +169,14 @@
         container.addEventListener('mouseout', function(e) { movingOut(e, container, overlay) });
 		
         var card = document.querySelector('[data-slick-index="' + nextSlide + '"] .card');
-        var title = document.querySelector('.card-title');
         var imgIndex = card.getAttribute('data-img-index');
         var categoryClasses = JSON.parse('${categoryClassJson}');
-        var selectInputCardId = document.querySelector('#selectInputCardId');
-        selectInputCardId.setAttribute('value', ${imageList}[card.getAttribute('id')]); // 데이터 속성 설정
-        
-        /* title.innerText = (parseInt(card.getAttribute('card_name'))); */
+        var cardId = card.getAttribute('id');
+        var title = document.querySelector('.card-title');
+		var benefitList = JSON.parse('${benefitList}');
+		title.innerText = benefitList[parseInt(card.getAttribute('id'))]
         benefitCard.textContent = categoryClasses[card.getAttribute('id')];
+        
     }
     $('.slider-for').on('beforeChange', beforeChangeHandler);
     var firstContainer = document.querySelector('.container');

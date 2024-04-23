@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.service.ElasticService;
-import FINAL.bespoke.service.GetUrlService;
+import FINAL.bespoke.service.RecommendationService;
 import FINAL.bespoke.service.ReceiveCardService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,13 +32,13 @@ public class ReceiveCardController {
 	
 	public final ReceiveCardService receiveCardService;
 	
-	public final GetUrlService getUrlService;
+	public final RecommendationService getUrlService;
 	
 	public final ElasticService elasticService;
 	private final String s3Endpoint;
 
 	@Autowired
-	public ReceiveCardController(ReceiveCardService receiveCardService, GetUrlService getUrlService, ElasticService elasticService, String s3Endpoint) {
+	public ReceiveCardController(ReceiveCardService receiveCardService, RecommendationService getUrlService, ElasticService elasticService, String s3Endpoint) {
 		this.receiveCardService = receiveCardService;
 		this.getUrlService = getUrlService;
 		this.elasticService = elasticService;
