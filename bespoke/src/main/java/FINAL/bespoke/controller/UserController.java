@@ -95,7 +95,7 @@ public class UserController {
  		model.addAttribute("userData",user);
  		
  		// userid 로 imageUrl 을 가져오는 코드
- 		String imageUrl = getUrlService.getImageUrlFromUpload(user.getUserID());
+ 		String imageUrl = getUrlService.getImageUrl(user.getUserID());
  		model.addAttribute("imageUrl",imageUrl);
  		
  		//userid 로 elasticservice에 참조하는 코드

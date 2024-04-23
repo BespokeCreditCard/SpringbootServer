@@ -20,7 +20,7 @@ public class UploadService {
     // S3에 이미지 업로드
     public String uploadImage(MultipartFile file, String customerName) throws IOException {
 //        String key = "upload/" + customerName + ".png";
-        String key = ("K1MQLKMELFD27CMUL0XB") + ".png";
+        String key = ("8YBQA0UZ1JNAPF1LPQC3") + ".png";
         System.out.println("### UploadService - key: " + key);
 
         try {
