@@ -21,8 +21,14 @@ def cluster_model(seq):
     try:
         # 쿼리 작성 필요
         # 데이터 한 행 불러오기 (예제로 id=1을 기준으로 함)
-        query = f"SELECT * FROM test WHERE SEQ = '{seq}'"
-        cursor.execute(query)
+        query = "SELECT * FROM test WHERE SEQ = %s"
+        print("=================================================================================")
+        print("mysql 연결 시도")
+        print(seq)
+        print(query)
+        print("=================================================================================")
+        params = (seq)
+        cursor.execute(query, params)
         # 결과를 DataFrame으로 변환
         row = cursor.fetchall()
         column_names = [i[0] for i in cursor.description]
@@ -32,16 +38,10 @@ def cluster_model(seq):
         print(df.shape)
         print(row)
         print("=================================================================================")
-    except Exception as e:
-        print(f"사용자 정보 연동 오류 발생: {e}")
-    finally:
-        cursor.close()
-        conn.close()
-    
-    ################################################################################
-    # 군집 분류 모델 사용해서 군집 idx 예측
-    ################################################################################
-    try:
+
+        ################################################################################
+        # Light_gbm 모델 사용해서 군집 idx 예측
+        ################################################################################
         model_path = "flask_server/model/Light_gbm.pkl"
         # with open(model_path, 'rb') as file:
         #     lgbm_model = pickle.load(file)
@@ -50,12 +50,44 @@ def cluster_model(seq):
         predicted_cluster_num = int(predict_result[0])
         print("========= 예측한 군집 인덱스 =========")
         print(f"Predicted cluster index: {predicted_cluster_num}")
+
+        # test에서 가져온 행에 target 컬럼 추가, SEQ 다시 추가
+        df['SEQ'] = seq
+        df['target'] = predicted_cluster_num
+
+        ################################################################################
+        # train 테이블에 결과를 삽입
+        ################################################################################
+        # DataFrame의 각 행을 SQL INSERT 쿼리로 변환하여 삽입
+        for _, row in df.iterrows():
+            # SEQ가 일치하는 행이 있는지 확인
+            cursor.execute("SELECT COUNT(*) FROM train WHERE SEQ = %s", (seq,))
+            result = cursor.fetchone()
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            print(result)
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+            if result['COUNT(*)'] == 0:  # SEQ가 일치하는 행이 없다면 삽입을 진행
+                placeholders = ', '.join(['%s'] * len(row))
+                columns = ', '.join(row.index)
+                sql = f"INSERT INTO train ({columns}) VALUES ({placeholders})"
+                cursor.execute(sql, tuple(row))
+            else:
+                print(f"SEQ {seq}가 이미 존재합니다. 삽입을 건너뜁니다.")
+        conn.commit()
+        print(df)
+        print("=========== train 테이블에 insert 완료 ===========")
     except Exception as e:
-        print(f"군집 예측 오류 발생: {e}")
+        print(f"오류 발생: {e}")
     finally:
         print("=========== 군집 예측 종료 ===========")
-    
-    ################################################################################
+        cursor.close()
+        conn.close()
+
     return predicted_cluster_num
 
 def get_benefits(cluster_num=3):
@@ -121,16 +153,16 @@ def model_result(seq):
     print("SEQ로 군집 예측 시작")
     
     # 사용자가 속한 군집
-    cluster_num = cluster_model(seq)
+    clusterNum = cluster_model(seq)
     print("군집 인덱스로 카드들, 혜택들 가져오기 시작")
 
     # 군집에 속한 전체 카드들, 전체 혜택들
-    card_idxs, benefits = get_benefits(cluster_num)
+    cardIdxs, benefits = get_benefits(clusterNum)
     
     # 결과 반환
     result= {"seq":seq}
-    result["cluster_num"] = cluster_num
-    result["card_idxs"] = card_idxs
+    result["clusterNum"] = clusterNum
+    result["cardIdxs"] = cardIdxs
     result["benefits"] = benefits
     print("결과:", result)
     print("혜택 길이:", len(result["benefits"]))

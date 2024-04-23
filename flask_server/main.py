@@ -9,6 +9,7 @@ import dall_e
 import time
 import base64
 import werkzeug
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -21,7 +22,8 @@ def get_cluster():
     start_time = time.time()
 
 	# Spring으로부터 String 전달받음
-    seq = request.get_json()
+    seq_dict = request.get_json()
+    seq = seq_dict["seq"]
 
 	# # Spring으로부터 JSON 객체를 전달받음
     print("=====================================")
@@ -62,8 +64,8 @@ def get_top5_cards():
 
     # # json에서 seq, selected_benefits 가져오기
     seq = dto_json["seq"]
-    selected_benefits = dto_json["selected_benefits"]
-    cluster_num = dto_json["cluster_num"]
+    selected_benefits = dto_json["selectedBenefits"]
+    cluster_num = dto_json["clusterNum"]
 
     ################################################################################
     # sample data
@@ -134,7 +136,6 @@ def generate_img():
     return response
 
 # 0.0.0.0 으로 모든 IP에 대한 연결을 허용
-from flask_cors import CORS
 CORS(app)
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
