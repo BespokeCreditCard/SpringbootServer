@@ -51,7 +51,7 @@
 </style>
 <body style="background-color: #6c757d">
     <section style="width: 100%;display: flex;align-items: center;justify-content: center">
-        <h1 class="card-title" style="align-items: center;">1 순위</h1>
+        <h1 class="card-title" style="align-items: center;">카드</h1>
     </section>
     <section style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
 		<div class="slider-for" style="width: 95%; height: 100%; min-height: 10%; align-items: center;">
@@ -152,9 +152,9 @@
         var imgIndex = card.getAttribute('data-img-index');
         var categoryClasses = JSON.parse('${categoryClassJson}');
         var selectInputCardId = document.querySelector('#selectInputCardId');
-        selectInputCardId.setAttribute('value', ${imageIdList}[card.getAttribute('id')]); // 데이터 속성 설정
+        selectInputCardId.setAttribute('value', ${imageIdList}[card.getAttribute('data-img-index')]); // 데이터 속성 설정
         
-        title.innerText = (parseInt(card.getAttribute('id')) + 1).toString() + " 순위";
+        /* title.innerText = (parseInt(card.getAttribute('card_name'))); */
         benefitCard.textContent = categoryClasses[card.getAttribute('id')];
     }
     $('.slider-for').on('beforeChange', beforeChangeHandler);
