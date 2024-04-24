@@ -1,11 +1,14 @@
 package FINAL.bespoke.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import FINAL.bespoke.jwt.JWTUtil;
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ReceiveCardService {
@@ -45,5 +48,30 @@ public class ReceiveCardService {
         System.out.println("### ReceiveCardService - userId: " + userId);
         System.out.println("### ReceiveCardService - userData: " + userData);
         return userData;
+    }
+	
+	@Transactional
+	public void updateUserAddress(String userId, String savaData, int mode) {
+		Optional<User> userTemp =  userRepository.findById(userId);
+		if (mode == 1) {
+	        if(userTemp.isPresent()) {
+	        	User user = userTemp.get();
+	        	System.out.println("### ReceiveCardController - user : " + user);
+	        	System.out.println("### ReceiveCardController - newAddress : " + savaData);
+	        	user.setDeliveryAddress(savaData);
+	        	userRepository.save(user);
+	        }
+        }
+		else if (mode == 2) {
+	        if(userTemp.isPresent()) {
+	        	User user = userTemp.get();
+	        	int savaCardId = Integer.parseInt(savaData);
+	        	System.out.println("### ReceiveCardController - user : " + user);
+	        	System.out.println("### ReceiveCardController - newAddress : " + savaData);
+	        	user.setCardId(savaCardId);
+	        	userRepository.save(user);
+	        }
+		}
+
     }
 }
