@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -66,11 +67,14 @@ public class ReceiveCardController {
         
         if(userTemp.isPresent()) {
         	User user = userTemp.get();
+        	System.out.println("### ReceiveCardController - user : " + user);
+        	System.out.println("### ReceiveCardController - newAddress : " + newAddress);
         	user.setDeliveryAddress(newAddress);
         	userRepository.save(user);
         }
     }
 	
+	@ResponseBody
 	@PostMapping("/receivecard")
     public String updateAddress(@RequestBody DeliveryAddressDto dto) {
 		String userId = dto.getUserId();
