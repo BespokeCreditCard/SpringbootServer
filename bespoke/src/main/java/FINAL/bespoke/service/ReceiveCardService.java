@@ -1,7 +1,6 @@
 package FINAL.bespoke.service;
 
 import org.springframework.stereotype.Service;
-
 import FINAL.bespoke.jwt.JWTUtil;
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.repository.UserRepository;
@@ -10,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class ReceiveCardService {
+	
     private final UserRepository userRepository;
     private final JWTUtil jwtUtil;
     
