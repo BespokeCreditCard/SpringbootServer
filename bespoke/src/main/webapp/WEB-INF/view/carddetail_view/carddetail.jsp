@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-md-2 text-center">
 	                            <form id="selectCardId" action="/design/carddesign" method="GET">
-	                           		<input type="hidden" id="cardSelectId" name="selectCardId" value=${elasticresultDetail[cardStatus.index][5]}>
+	                           		<input type="hidden" id="cardSelectId" name="selectCardId" value="${elasticresultDetail[cardStatus.index][5]}">
 	                                <button type="submit" class="btn btn-secondary">카드 선택</button>
 	                            </form>
 
