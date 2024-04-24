@@ -12,5 +12,5 @@ public interface ImageTemplateRepository extends JpaRepository<ImageTemplate, In
 	ImageTemplate getOne(Integer id);
 	
 //	@Query("Select id from team4.cardimage where id = imageId")
-	Window<ImageTemplate> findByIdIn(List<Integer> imageId, OffsetScrollPosition position);
+	List<ImageTemplate> findByIdIn(List<Integer> imageId);
 }
