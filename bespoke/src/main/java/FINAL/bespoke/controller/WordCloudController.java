@@ -10,8 +10,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import FINAL.bespoke.model.dto.RecommendationTop5Dto;
 import FINAL.bespoke.model.dto.wordDetailsDTO;
+import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.service.ElasticService;
+import FINAL.bespoke.service.ReceiveCardService;
+import FINAL.bespoke.service.RecommendationService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,21 +24,25 @@ import jakarta.servlet.http.HttpServletRequest;
 public class WordCloudController {
 	private final ElasticService elasticService;
     private final ObjectMapper objectMapper;
-
-    public WordCloudController(ElasticService elasticService, ObjectMapper objectMapper) {
+    private final RecommendationService recommendationService;
+    private final ReceiveCardService receiveCardService;
+    
+    public WordCloudController(RecommendationService recommendationService,ReceiveCardService receiveCardService, ElasticService elasticService, ObjectMapper objectMapper) {
         this.elasticService = elasticService;
         this.objectMapper = objectMapper;
+        this.recommendationService = recommendationService;
+        this.receiveCardService = receiveCardService;
     }
 	
 	@GetMapping("wordcloud")
 	public String goWordCloud(Model model, HttpServletRequest request) {
-
-		// 세션에서 값 불러오기
-		List<Integer> cardId = List.of(22, 6, 1, 2, 3);
+		User user = receiveCardService.findUserId(request);
+        // RecommendationService를 통해 recommendation 테이블의 데이터를 가져옴
+        RecommendationTop5Dto recommendationTop5Dto = recommendationService.getRecommendation(user.getUserID());;
+        List<Integer> cardId = recommendationTop5Dto.getImageList();
+        
 		List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(cardId,"card_word");
 		wordDetailsDTO wordDetailsDTO = elasticService.ElasticSearchJsonTocardWordData(response);
-//		model.addAttribute("wordcloud",cardWordDetail);
-//		System.out.println(cardWordDetail);
 		System.out.println("### WordCloudController - wordDetailsDTO.getCardWord(): " + wordDetailsDTO.getCardWord());
 		String json = "";
 		try {
