@@ -16,7 +16,7 @@ def mode_0(client, model, input_prompt, quality, style, img_size, img_quantity, 
         prompt=input_prompt,
         quality=quality[1],
         style=style[1],
-        size=img_size[1],
+        size=img_size[2],
         n=img_quantity,
         response_format=format[1]
     )
