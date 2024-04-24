@@ -68,8 +68,8 @@
         <div class="benefit-card">
         	<h2 id="benefits"></h2>
         </div>
-		<form id="selectCardId" action="/design/carddesign" method="GET">
-			<input type="hidden" id="selectInputCardId" name="selectCardId">
+ 		<form id="selectCardId" action="/design/carddesign" method="GET">
+			<input type="hidden" id="selectInputCardId" name="selectCardId" value="${imageUrls[0].idx}">
 			<button type="submit" class="btn btn-primary mt-3 mb-3">카드선택</button>
 		</form>
 		<button type="button" class="btn btn-primary" onclick="window.location.href='/wordcloud'">키워드보기</button>
@@ -82,15 +82,6 @@
 		var benefitList = JSON.parse('${benefitList}');
 		title.innerText = benefitList[0];
 	});
-</script>
-<script>
-    function selectCardAndSubmit() {
-        // 여기서 카드 선택에 관련된 동작 수행
-        window.location.href = '../design/carddesign'; // 카드 선택 페이지로 이동
-
-        // 여기서 확인 버튼에 관련된 동작 수행
-        document.getElementById('select').submit(); // 폼 제출
-    }
 </script>
 <script>
 	function beforeChangeHandler(event, slick, currentSlide, nextSlide) {
