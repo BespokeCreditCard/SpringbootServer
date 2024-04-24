@@ -164,7 +164,7 @@
             </div>
          </div>
     </div>
-    
+    <script>var contextPath = "<%= request.getContextPath() %>";</script>
 	<script src="/js/aigenerator.js"></script>
 </body>
 </html>

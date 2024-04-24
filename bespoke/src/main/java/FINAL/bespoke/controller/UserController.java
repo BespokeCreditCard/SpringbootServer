@@ -128,4 +128,12 @@ public class UserController {
         }
         return result;
     }
+    
+    // 현재 로그인된 사람의 seq를 return하는 함수
+    @GetMapping("/justGetSeq")
+    @ResponseBody
+    public String justGetSeq(HttpServletRequest request) {
+        User user = receiveCardService.findUserId(request);
+        return user.getUserID();
+    }
 }
