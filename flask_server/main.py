@@ -6,6 +6,7 @@ from socket import *
 import get_benefits
 import top5_cards_flask
 import dall_e
+import deepl_translation
 import time
 import base64
 import werkzeug
@@ -90,7 +91,7 @@ def get_top5_cards():
     # Spring으로 response 전달
     return response
 ################################################################################
-# dall-e
+# DALL-E
 ################################################################################
 @app.route('/generate_img', methods=['POST'])
 def generate_img():
@@ -133,6 +134,26 @@ def generate_img():
     print("=====================================")
 
     # Spring으로 response 전달
+    return response
+
+################################################################################
+# DeepL 번역
+################################################################################
+@app.route('/translate', methods=['POST'])
+def deepl_translate():
+    start_time = time.time()
+    print("=====================================")
+
+    promptKorean_dict = request.get_json()
+    promptKorean = promptKorean_dict["promptKorean"]
+    translated_prompt = deepl_translation.translate(promptKorean)
+
+    result = {"translatedPrompt":translated_prompt}
+    response = json.dumps(result, ensure_ascii=False)
+
+    end_time = time.time()
+    print(f"실행 시간: {end_time - start_time:.2f}초")
+    print("=====================================")
     return response
 
 # 0.0.0.0 으로 모든 IP에 대한 연결을 허용

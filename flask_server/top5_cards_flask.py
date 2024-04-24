@@ -64,20 +64,26 @@ def top5_cards(benefits, cluster_num, seq):
         
         # SEQ, cluster_num, 카드 idx 5개, 혜택 5개를 recommendation 테이블에 삽입
         if len(card_idxs) == 5:
-            insert_query = f"""
-            INSERT INTO recommendation 
-            (SEQ, cluster_num, card_idx1, card_idx2, card_idx3, card_idx4, card_idx5, benefit1, benefit2, benefit3, benefit4, benefit5)
-            VALUES 
-            ('{seq}', {cluster_num}, {card_idxs[0]}, {card_idxs[1]}, {card_idxs[2]}, {card_idxs[3]}, {card_idxs[4]}, 
-            '{benefits[0]}', '{benefits[1]}', '{benefits[2]}', '{benefits[3]}', '{benefits[4]}');
-            """
-            cursor.execute(insert_query)
-            conn.commit()
-            if cursor.rowcount == 1:  # 성공적으로 행이 추가되었는지 확인
-                print("recommendation에 행이 성공적으로 추가되었습니다.")
-                print("넣은 값들:", seq, cluster_num, card_idxs, benefits)
+            check_query = f"SELECT COUNT(*) FROM recommendation WHERE SEQ = '{seq}'"
+            cursor.execute(check_query)
+            row_count = cursor.fetchone()['COUNT(*)']  # 존재하는 행의 수 가져오기
+            if row_count == 0:
+                insert_query = f"""
+                INSERT INTO recommendation 
+                (SEQ, cluster_num, card_idx1, card_idx2, card_idx3, card_idx4, card_idx5, benefit1, benefit2, benefit3, benefit4, benefit5)
+                VALUES 
+                ('{seq}', {cluster_num}, {card_idxs[0]}, {card_idxs[1]}, {card_idxs[2]}, {card_idxs[3]}, {card_idxs[4]}, 
+                '{benefits[0]}', '{benefits[1]}', '{benefits[2]}', '{benefits[3]}', '{benefits[4]}');
+                """
+                cursor.execute(insert_query)
+                conn.commit()
+                if cursor.rowcount == 1:  # 성공적으로 행이 추가되었는지 확인
+                    print("recommendation에 행이 성공적으로 추가되었습니다.")
+                    print("넣은 값들:", seq, cluster_num, card_idxs, benefits)
+                else:
+                    print("recommendation 테이블에 행을 추가하지 못했습니다.")
             else:
-                print("recommendation 테이블에 행을 추가하지 못했습니다.")
+                print("이미 존재하는 SEQ입니다. 추가하지 않습니다.")
         else:
             print("찾은 카드가 5개가 아닙니다.")
     except Exception as e:

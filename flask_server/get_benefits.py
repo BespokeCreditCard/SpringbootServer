@@ -119,7 +119,7 @@ def get_benefits(cluster_num=3):
             benefits, card_idxs = [], []
             
             # benefits에 추가할 때 제외할 컬럼들
-            exclude_columns  = ["Unnamed: 0", "카드 인덱스", "군집 인덱스"]
+            exclude_columns  = ["Unnamed: 0", "카드 인덱스", "군집 인덱스", "card"]
 
             ################################################################################
             # 각 카드에 있는 혜택들만 가져오기
