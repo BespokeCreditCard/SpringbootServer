@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import FINAL.bespoke.model.dto.wordDetailsDTO;
+import FINAL.bespoke.model.dto.WordDetailsDto;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.GetResponse;
@@ -36,7 +36,7 @@ public class ElasticService {
     	return cardWordDetails;
     }
     
-    public wordDetailsDTO ElasticSearchJsonTocardWordData(List<GetResponse<ObjectNode>> response) {
+    public WordDetailsDto ElasticSearchJsonTocardWordData(List<GetResponse<ObjectNode>> response) {
     	List<String> cardWord = new ArrayList<>();
     	List<String> cardNameList = new ArrayList<>();
     	for (GetResponse<ObjectNode> responseObject : response) {
@@ -50,7 +50,7 @@ public class ElasticService {
         	JsonNode cardword = json.get("data"); // 카드 이름
         	cardWord.add(cardword.toString()); 
     	}
-    	return new wordDetailsDTO(cardNameList, cardWord);
+    	return new WordDetailsDto(cardNameList, cardWord);
     }
     
     /**
