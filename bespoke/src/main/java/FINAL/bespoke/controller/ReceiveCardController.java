@@ -1,6 +1,7 @@
 package FINAL.bespoke.controller;
 
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -14,6 +15,7 @@ import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.repository.UserRepository;
 import FINAL.bespoke.service.ElasticService;
 import FINAL.bespoke.service.RecommendationService;
+import co.elastic.clients.elasticsearch.core.GetResponse;
 import FINAL.bespoke.service.ReceiveCardService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Controller
 public class ReceiveCardController {
@@ -50,14 +53,14 @@ public class ReceiveCardController {
 		model.addAttribute("userImageUrl", userImageUrl);
 
  		//userid 로 elasticservice에 참조하는 코드
-// 		GetResponse<ObjectNode> response = elasticService.fetchDataElastic(userIdTemp.getCardId(),"result_bulk");
-//
-//        List<String> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
-//        List<String> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);
-//
-//        model.addAttribute("elasticresultDetail", productDetails);
-//        model.addAttribute("categoriesResultDetail", categoryDetails);
-//        System.out.println(categoryDetails);
+ 		GetResponse<ObjectNode> response = elasticService.fetchDataElastic(userIdTemp.getCardId(),"result_bulk");
+
+        List<String> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
+        List<String> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);
+
+        model.addAttribute("elasticresultDetail", productDetails);
+        model.addAttribute("categoriesResultDetail", categoryDetails);
+        System.out.println(categoryDetails);
 
 		return "receivecard";
 	}
