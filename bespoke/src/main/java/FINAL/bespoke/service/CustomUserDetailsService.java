@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import FINAL.bespoke.model.dto.CustomUserDetails;
+import FINAL.bespoke.model.dto.CustomUserDetailsDto;
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.repository.UserRepository;
 
@@ -30,6 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (userData == null) {
             throw new UsernameNotFoundException("User not found with username: " + userId);
         }
-        return new CustomUserDetails(userData);
+        return new CustomUserDetailsDto(userData);
     }
 }

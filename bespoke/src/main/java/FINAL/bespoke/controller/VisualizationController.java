@@ -1,11 +1,9 @@
 package FINAL.bespoke.controller;
 
 import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import FINAL.bespoke.model.entity.Visualization;
 import FINAL.bespoke.service.ReceiveCardService;
 import FINAL.bespoke.service.VisualizationService;
@@ -13,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class VisualizationController {
+	
 	 private final VisualizationService visualizationService;
 	 private final ReceiveCardService receiveCardService;
 	 
