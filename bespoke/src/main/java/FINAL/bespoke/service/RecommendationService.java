@@ -3,7 +3,6 @@ package FINAL.bespoke.service;
 import FINAL.bespoke.config.S3Config;
 import FINAL.bespoke.model.dto.RecommendationDto;
 import FINAL.bespoke.model.dto.RecommendationTop5Dto;
-
 import FINAL.bespoke.model.entity.ImageTemplate;
 import FINAL.bespoke.model.entity.Recommendation;
 import FINAL.bespoke.model.entity.User;
@@ -19,7 +18,6 @@ import org.springframework.data.domain.ScrollPosition;
 import org.springframework.data.domain.Window;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,11 +1,8 @@
 package FINAL.bespoke.service;
 
-//import com.theokanning.openai.image.CreateImageRequest;
 import com.theokanning.openai.image.*;
-import com.theokanning.openai.model.*;
 import com.theokanning.openai.service.OpenAiService;
 import jakarta.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import java.util.Arrays;

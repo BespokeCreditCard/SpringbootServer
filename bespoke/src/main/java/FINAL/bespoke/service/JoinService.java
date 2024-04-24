@@ -2,7 +2,6 @@ package FINAL.bespoke.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import FINAL.bespoke.model.dto.UserDto;
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.repository.UserRepository;

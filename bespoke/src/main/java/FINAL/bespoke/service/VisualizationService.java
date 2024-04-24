@@ -1,10 +1,7 @@
 package FINAL.bespoke.service;
 
 import java.util.List;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import FINAL.bespoke.model.entity.Visualization;
 import FINAL.bespoke.repository.VisualizationRepository;
 

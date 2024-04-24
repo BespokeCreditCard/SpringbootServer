@@ -2,8 +2,6 @@ package FINAL.bespoke.service;
 
 import com.deepl.api.TextResult;
 import com.deepl.api.Translator;
-import jakarta.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
