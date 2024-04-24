@@ -58,7 +58,7 @@
                     <div class=" justify-content-center text-center">
                         <div class="col d-flex">
                             <div class="w-75">
-                                <select id="select1" class="form-control">
+                                <select id="select1" class="form-control" onchange="promptStyle(this);">
 							            <option value="">없음</option>
 							            <option value="Hyperrealism">극사실주의</option>
 							            <option value="Surrealism">초현실주의</option>

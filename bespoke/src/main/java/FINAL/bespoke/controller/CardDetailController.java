@@ -7,7 +7,6 @@ import FINAL.bespoke.service.ReceiveCardService;
 import FINAL.bespoke.service.RecommendationService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +31,12 @@ public class CardDetailController {
     
     
     private final ElasticService elasticService;
-    
-    private final ReceiveCardService receiveCardService;
 
     @Autowired
     public CardDetailController(RecommendationService recommendationService, ElasticService elasticService, ReceiveCardService receiveCardService) {
         this.recommendationService = recommendationService;
 		this.receiveCardService = receiveCardService;
         this.elasticService = elasticService;
-        this.receiveCardService = receiveCardService;
     }
         
     @GetMapping("/carddetail")

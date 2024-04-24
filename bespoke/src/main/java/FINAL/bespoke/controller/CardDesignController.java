@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import FINAL.bespoke.model.entity.ImageTemplate;
 import FINAL.bespoke.service.AiGeneratorService;
-import FINAL.bespoke.service.GetUrlService;
+import FINAL.bespoke.service.RecommendationService;
 import FINAL.bespoke.service.ImageTemplateService;
 import FINAL.bespoke.service.TranslatorService;
 
@@ -23,12 +23,12 @@ public class CardDesignController {
 //    @Autowired
 //    private CardDesignService cardDesignServiceDemo;
 	private final ImageTemplateService imageTemplateService;
-	private final GetUrlService getUrlService;
+	private final RecommendationService recommendationService;
 	
 	@Autowired
-    public CardDesignController(ImageTemplateService imageTemplateService, GetUrlService getUrlService) {
+    public CardDesignController(ImageTemplateService imageTemplateService, RecommendationService recommendationService) {
         this.imageTemplateService = imageTemplateService;
-        this.getUrlService = getUrlService;
+        this.recommendationService = recommendationService;
     }
     
     
@@ -62,7 +62,7 @@ public class CardDesignController {
 //        model.addAttribute("images", images);
         System.out.println("### CardDesignController - selectCardId: " + selectCardId);
         model.addAttribute("selectCardId", selectCardId);
-        String selectImageUrl = getUrlService.getImageUrlFromIndexImg(selectCardId);
+        String selectImageUrl = recommendationService.getImageUrlFromIndexImg(selectCardId);
         System.out.println("### CardDesignController - selectImageUrl: " + selectImageUrl);
     	model.addAttribute("selectImageUrl", selectImageUrl);
 		// 뷰를 반환합니다.
