@@ -98,7 +98,7 @@
 	    var currentSlideId = $('[data-slick-index="' + currentSlide + '"] .card').attr('id');
 	    
 	    // 폼의 hidden input에 선택된 카드의 ID 설정
-	    document.getElementById('selectCardId').querySelector('input[name="selectId"]').value = currentSlideId;
+	    document.getElementById('selectCardId').querySelector('input[name="selectCardId"]').value = currentSlideId;
 	}
 	
 	$(document).ready(function() {
@@ -171,10 +171,15 @@
         var card = document.querySelector('[data-slick-index="' + nextSlide + '"] .card');
         var imgIndex = card.getAttribute('data-img-index');
         var categoryClasses = JSON.parse('${categoryClassJson}');
+        
+        
         var cardId = card.getAttribute('id');
         var title = document.querySelector('.card-title');
 		var benefitList = JSON.parse('${benefitList}');
 		title.innerText = benefitList[parseInt(card.getAttribute('id'))]
+		
+        var selectInputCardId = document.querySelector('#selectInputCardId');
+        selectInputCardId.setAttribute('value', ${imageIdList}[card.getAttribute('data-img-index')]);
         benefitCard.textContent = categoryClasses[card.getAttribute('id')];
         
     }
