@@ -197,11 +197,12 @@
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         // 주소 업데이트가 성공적으로 처리된 경우
-                        console.log("주소가 성공적으로 업데이트되었습니다.");
+                        console.log("Update Successful");
                         // 주소 업데이트 후 페이지 내 해당 부분만 업데이트
-                        alert("주소가 성공적으로 업데이트되었습니다.");
+                        alert("주소 업데이트에 성공하였습니다!");
                     }
                 };
+                var encodedAddress = encodeURIComponent(address);
                 xhr.send(JSON.stringify({ address: address, userId: userId }));
             }
         });
