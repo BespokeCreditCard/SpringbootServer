@@ -64,18 +64,6 @@ public class ReceiveCardController {
 
 		return "receivecard";
 	}
-	@Transactional
-	public void updateUserAddress(String userId, String newAddress) {
-        Optional<User> userTemp =  userRepository.findById(userId);
-        
-        if(userTemp.isPresent()) {
-        	User user = userTemp.get();
-        	System.out.println("### ReceiveCardController - user : " + user);
-        	System.out.println("### ReceiveCardController - newAddress : " + newAddress);
-        	user.setDeliveryAddress(newAddress);
-        	userRepository.save(user);
-        }
-    }
 	
 	@ResponseBody
 	@PostMapping("/receivecard")
@@ -85,7 +73,7 @@ public class ReceiveCardController {
         // 주소 업데이트 로직 구현
         System.out.println("수정된 주소: " + dto.getAddress());
         // 필요한 데이터베이스 업데이트 또는 서비스 호출 등의 작업 수행
-        updateUserAddress(userId, address);
+        receiveCardService.updateUserAddress(userId, address, 1);
         // 성공적으로 업데이트되었음을 클라이언트에게 응답
         return "주소가 성공적으로 업데이트되었습니다.";
     }
