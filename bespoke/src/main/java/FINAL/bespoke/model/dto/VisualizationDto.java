@@ -1,7 +1,6 @@
 package FINAL.bespoke.model.dto;
 
 import java.math.BigDecimal;
-
 import FINAL.bespoke.model.entity.Visualization;
 import lombok.AllArgsConstructor;
 import lombok.Data;
