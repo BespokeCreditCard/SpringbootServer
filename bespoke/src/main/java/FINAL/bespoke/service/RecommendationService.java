@@ -37,7 +37,7 @@ public class RecommendationService {
     	// findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
     	// recommendation 테이블에서 SEQ가 일치하는 user 찾기
     	Recommendation recommendation = recommendationRepository.findBySEQ(userId);
-    	System.out.println("### GetUrlService - recommendation: "+ recommendation);
+    	System.out.println("### RecommendationService - recommendation: "+ recommendation);
 
         if (recommendation.getCardIdx1() != null) {
             imageList.add(recommendation.getCardIdx1());
@@ -73,8 +73,8 @@ public class RecommendationService {
         RecommendationTop5Dto recommendationTop5Dto = new RecommendationTop5Dto();
         recommendationTop5Dto.setImageList(imageList);
         recommendationTop5Dto.setBenefitList(benefitList);
-    	System.out.println("### GetUrlService - imageList: "+ recommendationTop5Dto.getImageList());
-    	System.out.println("### GetUrlService - benefitList: "+ recommendationTop5Dto.getBenefitList());
+    	System.out.println("### RecommendationService - imageList: "+ recommendationTop5Dto.getImageList());
+    	System.out.println("### RecommendationService - benefitList: "+ recommendationTop5Dto.getBenefitList());
     	
     	return recommendationTop5Dto;
     }
@@ -96,13 +96,19 @@ public class RecommendationService {
         }
 
         // 이미지 ID 목록을 이용하여 이미지 정보 조회
-        Window<ImageTemplate> imageTemplates = imageTemplateRepository.findByIdIn(imageIds,ScrollPosition.offset());
+        List<ImageTemplate> imageTemplates = imageTemplateRepository.findByIdIn(imageIds);
 
-        // Window 객체를 순회하여 각 ImageTemplate 객체를 처리
-        for (ImageTemplate imageTemplate : imageTemplates) {
-            String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // S3 엔드포인트와 이미지 URL 조합
-            imageUrls.add(fullUrl); // 이미지 URL을 리스트에 추가
-            System.out.println("### GetUrlService - imageTemplate.getUrl(): " + imageTemplate.getUrl());
+        // imageIds에 포함된 순서대로 이미지 정보를 처리하여 imageUrls에 추가
+        for (Integer imageId : imageIds) {
+            // imageId에 해당하는 imageTemplate을 찾기
+            for (ImageTemplate imageTemplate : imageTemplates) {
+            	if (imageTemplate.getId() == imageId) {
+            	    // 일치할 때 처리할 로직
+            	    String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl();
+            	    imageUrls.add(fullUrl);
+            	    System.out.println("### RecommendationService - imageTemplate.getUrl(): " + imageTemplate.getUrl());
+            	}
+            }
         }
         return imageUrls;
     }
@@ -137,15 +143,15 @@ public class RecommendationService {
         List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
 
         
-        System.out.println("### GetUrlService - categoryClass: " + categoryClass);
+        System.out.println("### RecommendationService - categoryClass: " + categoryClass);
         String categoryClassJson = objectMapper.writeValueAsString(categoryClass);
-        System.out.println("### GetUrlService - categoryClassJson: " + categoryClassJson);
+        System.out.println("### RecommendationService - categoryClassJson: " + categoryClassJson);
         model.addAttribute("categoryClassJson", categoryClassJson);
 
 
         model.addAttribute("categoryClass", categoryClass);
 
-        System.out.println("### GetUrlService - categoryClass: "+ categoryClass);
+        System.out.println("### RecommendationService - categoryClass: "+ categoryClass);
         // recommendation.jsp로 이동
 
         long afterTime = System.currentTimeMillis(); // 코드 실행 후 시간
@@ -168,7 +174,7 @@ public class RecommendationService {
             // 이미지 ID 목록을 이용하여 이미지 정보 조회
             String fullUrl = s3Config.s3Endpoint() + imageTemplate.getUrl(); // S3 엔드포인트와 이미지 URL 조합
             imageUrls.add(new RecommendationDto(idx,fullUrl)); // 카드 인덱스와 이미지 URL을 포함한 DTO 생성
-            System.out.println("### GetUrlService - imageTemplate.getUrl(): " + imageTemplate.getUrl());
+            System.out.println("### RecommendationService - imageTemplate.getUrl(): " + imageTemplate.getUrl());
         }
         return imageUrls;
     }
@@ -189,7 +195,7 @@ public class RecommendationService {
     		userIdTemp = "00" + userId;
     	}
     	
-    	System.out.println("### GetUrlService - userIdTemp:" + userIdTemp);
+    	System.out.println("### RecommendationService - userIdTemp:" + userIdTemp);
     	
     	String fullUrl = s3Config.s3Endpoint() + "index_img/bcc_" + userIdTemp + ".png"; // userId에 따라서 upload된 이미지 가져오기
         return fullUrl;
