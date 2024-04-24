@@ -8,11 +8,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import FINAL.bespoke.model.entity.User;
 
-public class CustomUserDetails implements UserDetails {
+public class CustomUserDetailsDto implements UserDetails {
 
     private final User userEntity;
 
-    public CustomUserDetails(User userEntity) {
+    public CustomUserDetailsDto(User userEntity) {
 
         this.userEntity = userEntity;
     }
