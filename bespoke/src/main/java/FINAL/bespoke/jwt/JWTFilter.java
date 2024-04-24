@@ -1,13 +1,10 @@
 package FINAL.bespoke.jwt;
 
-
 import java.io.IOException;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import FINAL.bespoke.model.dto.CustomUserDetailsDto;
 import FINAL.bespoke.model.entity.User;
 import jakarta.servlet.FilterChain;

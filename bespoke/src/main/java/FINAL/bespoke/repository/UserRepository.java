@@ -1,7 +1,6 @@
  package FINAL.bespoke.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import FINAL.bespoke.model.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
