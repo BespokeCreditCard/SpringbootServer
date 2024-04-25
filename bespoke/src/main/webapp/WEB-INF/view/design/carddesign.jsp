@@ -75,21 +75,12 @@
             <div id="loadingDiv" class="position-absolute bg-light h-100 d-flex justify-content-center align-items-center" style="z-index: -1;right:1%;width: 50%">
                 <div class="text-center">
                     <h5>프롬포트 변환 중입니다. 잠시만 기다려주세요.</h5>
-                    <img id="gifImage2" src="#" alt="GIF Image" style="max-width: 100%; max-height: 100%;">
+                    <img id="gifImage2" src="/img/loading.gif" alt="GIF Image" style="max-width: 100%; max-height: 100%;">
                 </div>
             </div>
 			
 			<div id="errorMessageContainer" class="position-absolute bg-light h-100 d-flex justify-content-center align-items-center" style="z-index: -1;right:1%;width: 50%">
 			</div>
-			
-            <div id="loadingDiv" class="position-absolute bg-light h-100 d-flex justify-content-center align-items-center" style="z-index: -1;right:1%;width: 50%">
-                <div class="text-center">
-                    <h5>프롬포트 변환 중입니다. 잠시만 기다려주세요.</h5>
-                    <img id="gifImage2" src="#" alt="GIF Image" style="max-width: 100%; max-height: 100%;">
-                </div>
-            </div>
-			
-			<div id="errorMessageContainer" class="position-absolute bg-light h-100 d-flex justify-content-center align-items-center" style="z-index: -1;right:1%;width: 50%"></div>
 			
 			<div id="card1Div" class="card col-3 m-4" style="width: 18rem; height: 32rem; display: none;">
 	            <div id="card1" style="height: 85%; position: relative; top: 3%;  border-radius: 5%; overflow: hidden;">
