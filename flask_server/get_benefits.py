@@ -3,6 +3,76 @@ import pymysql
 import pandas as pd
 import joblib
 
+# 영어 컬럼명을 한국어로 보여주기 위한 dict
+categories = {
+    "department_store": "백화점",
+    "non_operating": "무실적",
+    "hypermarket": "대형마트",
+    "utilities_rentals": "공과금/렌탈",
+    "online_travel_agency": "온라인 여행사",
+    "national_happiness": "국민행복",
+    "theme_park": "테마파크",
+    "books": "도서",
+    "other": "기타",
+    "digital_subscription": "디지털구독",
+    "discount": "할인",
+    "easy_payment": "간편결제",
+    "low_cost_airline": "저가항공",
+    "jin_air": "진에어",
+    "rental": "렌탈",
+    "all_franchise": "모든가맹점",
+    "cafe_dessert": "카페/디저트",
+    "travel_accommodation": "여행/숙박",
+    "accumulation": "적립",
+    "convenience_store": "편의점",
+    "beauty_fitness": "뷰티/피트니스",
+    "golf": "골프",
+    "general_restaurant": "일반음식점",
+    "hospital": "병원",
+    "academy": "학원",
+    "fast_food": "패스트푸드",
+    "kakao_pay": "카카오페이",
+    "delivery_app": "배달앱",
+    "transportation": "교통",
+    "public_transportation": "대중교통",
+    "overseas_usage": "해외이용",
+    "food": "푸드",
+    "bakery": "베이커리",
+    "shopping": "쇼핑",
+    "social_commerce": "소셜커머스",
+    "performance_exhibition": "공연/전시",
+    "family_restaurant": "패밀리레스토랑",
+    "communication": "통신",
+    "airport_lounge_pp": "공항라운지/PP",
+    "airfare": "항공권",
+    "airport_lounge": "공항라운지",
+    "payco": "PAYCO",
+    "finance": "금융",
+    "gas_station": "주유소",
+    "refueling": "주유",
+    "overseas": "해외",
+    "rental_car": "렌터카",
+    "caf_": "카페",
+    "hotel": "호텔",
+    "movie_culture": "영화/문화",
+    "office_worker": "직장인",
+    "commission_discount": "수수료우대",
+    "mart_convenience_store": "마트/편의점",
+    "high_pass": "하이패스",
+    "movie": "영화",
+    "air_mileage": "항공마일리지",
+    "hospital_pharmacy": "병원/약국",
+    "duty_free_shop": "면세점",
+    "automobile": "자동차",
+    "leisure_sports": "레저/스포츠",
+    "online_shopping": "온라인쇼핑",
+    "utilities": "공과금",
+    "education_childcare": "교육/육아",
+    "life": "생활",
+    "animal_hospital": "동물병원"
+}
+
+
 def cluster_model(seq):
     ################################################################################
     # SEQ 받아서 DB에서 사용자 정보 가져오기
@@ -107,7 +177,7 @@ def get_benefits(cluster_num=3):
     try:
         with conn.cursor() as cursor:
             # `card74` 테이블에서 `군집 인덱스`에 해당하는 행 찾기
-            sql = "SELECT * FROM card74 WHERE `군집 인덱스` = %s"
+            sql = "SELECT * FROM card74 WHERE `cluster_index` = %s"
             cursor.execute(sql, (cluster_num,))
             print("군집 index 일치하는 행 추출 완료")
             rows = cursor.fetchall()
@@ -119,21 +189,23 @@ def get_benefits(cluster_num=3):
             benefits, card_idxs = [], []
             
             # benefits에 추가할 때 제외할 컬럼들
-            exclude_columns  = ["Unnamed: 0", "카드 인덱스", "군집 인덱스", "card"]
-
+            exclude_columns  = ["Unnamed: 0", "card_index", "cluster_index", "card"]
+            
             ################################################################################
             # 각 카드에 있는 혜택들만 가져오기
             ################################################################################
             # 군집에 속한 전체 카드의 전체 혜택
             # 각 컬럼별로 0이 아닌 값이 있는지 확인
             for row in rows:
-                card_idxs.append(row["카드 인덱스"])  # "카드 인덱스" 값 추가
+                card_idxs.append(row["card_index"])  # "카드 인덱스" 값 추가
                 for column in column_names:
                     # 카드 이름 컬럼(Unnamed: 0) 제외
                     if row[column] != 0 and column not in benefits and column not in exclude_columns:
-                        benefits.append(column)  # 0이 아닌 값을 가진 컬럼 이름 추가
+                        korean_column = categories[column]
+                        benefits.append(korean_column)  # 0이 아닌 값을 가진 컬럼 이름 추가
             print("컬럼 이름 추출 완료")
             return card_idxs, benefits  
+        
     except Exception as e:
         print("===================================================")
         print("군집 인덱스로 혜택들을 불러올 때 오류가 발생했습니다.")

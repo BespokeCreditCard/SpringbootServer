@@ -2,11 +2,85 @@ from sqlalchemy import create_engine, text
 import pymysql
 from db_info import for_mysql
 
+categories = {
+    "백화점": "department_store",
+    "무실적": "non_operating",
+    "대형마트": "hypermarket",
+    "공과금/렌탈": "utilities_rentals",
+    "온라인 여행사": "online_travel_agency",
+    "국민행복": "national_happiness",
+    "테마파크": "theme_park",
+    "도서": "books",
+    "기타": "other",
+    "디지털구독": "digital_subscription",
+    "할인": "discount",
+    "간편결제": "easy_payment",
+    "저가항공": "low_cost_airline",
+    "진에어": "jin_air",
+    "렌탈": "rental",
+    "모든가맹점": "all_franchise",
+    "카페/디저트": "cafe_dessert",
+    "여행/숙박": "travel_accommodation",
+    "적립": "accumulation",
+    "편의점": "convenience_store",
+    "뷰티/피트니스": "beauty_fitness",
+    "골프": "golf",
+    "일반음식점": "general_restaurant",
+    "병원": "hospital",
+    "학원": "academy",
+    "패스트푸드": "fast_food",
+    "카카오페이": "kakao_pay",
+    "배달앱": "delivery_app",
+    "교통": "transportation",
+    "대중교통": "public_transportation",
+    "해외이용": "overseas_usage",
+    "푸드": "food",
+    "베이커리": "bakery",
+    "쇼핑": "shopping",
+    "소셜커머스": "social_commerce",
+    "공연/전시": "performance_exhibition",
+    "패밀리레스토랑": "family_restaurant",
+    "통신": "communication",
+    "공항라운지/PP": "airport_lounge_pp",
+    "항공권": "airfare",
+    "공항라운지": "airport_lounge",
+    "PAYCO": "payco",
+    "금융": "finance",
+    "주유소": "gas_station",
+    "주유": "refueling",
+    "해외": "overseas",
+    "렌터카": "rental_car",
+    "카페": "caf_",
+    "호텔": "hotel",
+    "영화/문화": "movie_culture",
+    "직장인": "office_worker",
+    "수수료우대": "commission_discount",
+    "마트/편의점": "mart_convenience_store",
+    "하이패스": "high_pass",
+    "영화": "movie",
+    "항공마일리지": "air_mileage",
+    "병원/약국": "hospital_pharmacy",
+    "면세점": "duty_free_shop",
+    "자동차": "automobile",
+    "레저/스포츠": "leisure_sports",
+    "온라인쇼핑": "online_shopping",
+    "공과금": "utilities",
+    "교육/육아": "education_childcare",
+    "생활": "life",
+    "동물병원": "animal_hospital"
+}
+
+
 ################################################################################
 # 혜택 5개랑 군집 idx를 받고, DB에서 각 혜택이 가장 큰 카드 return
 ################################################################################
 def top5_cards(benefits, cluster_num, seq):
     try:
+        print("==============123123123", benefits)
+        # korean_benefits = []
+        # for benefit in benefits:
+        #     korean_benefits.append(categories[benefit])
+
         host, port, user, pw, db = for_mysql()
         conn = pymysql.connect(host=host,
                             port=port,
@@ -22,25 +96,26 @@ def top5_cards(benefits, cluster_num, seq):
         
         # 쿼리로 DB에서 혜택 컬럼별로 값이 가장 큰 카드 idx 5개 가져오기
         for benefit in benefits:
+            eng_benefit = categories[benefit]
             # 만약 card_idxs에 이미 들어있는 idx면 그 다음으로 가장 큰 값을 가져오기
             if card_idxs:
                 # card_idxs를 쿼리에 적용 가능한 문자열로 변환
                 not_in_sentence = ','.join(map(str, card_idxs))
                 query = f"""
-                SELECT `카드 인덱스`
+                SELECT `card_index`
                 FROM card74
-                WHERE `군집 인덱스` = {cluster_num}
-                AND `카드 인덱스` NOT IN ({not_in_sentence})
-                ORDER BY `{benefit}` DESC
+                WHERE `cluster_index` = {cluster_num}
+                AND `card_index` NOT IN ({not_in_sentence})
+                ORDER BY `{eng_benefit}` DESC
                 LIMIT 1;
                 """
             else:
                 # card_idxs가 비어있는 경우, 기본 쿼리 사용
                 query = f"""
-                SELECT `카드 인덱스`
+                SELECT `card_index`
                 FROM card74
-                WHERE `군집 인덱스` = {cluster_num}
-                ORDER BY `{benefit}` DESC
+                WHERE `cluster_index` = {cluster_num}
+                ORDER BY `{eng_benefit}` DESC
                 LIMIT 1;
                 """
 
@@ -50,7 +125,7 @@ def top5_cards(benefits, cluster_num, seq):
             print("=========== result 타입 ===========")
             if result:
                 print(type(result), result)
-                card_idx = result['카드 인덱스']
+                card_idx = result['card_index']
                 card_idxs.append(card_idx)
             else:
                 print("결과 없음")
