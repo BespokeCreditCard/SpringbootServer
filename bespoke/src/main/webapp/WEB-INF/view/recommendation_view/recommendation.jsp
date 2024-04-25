@@ -66,7 +66,12 @@
     
     <section style="width: 100%; display: flex; flex-direction:column; align-items: center;justify-content: center">
         <div class="benefit-card">
-        	<h2 id="benefits"></h2>
+		    <h2>
+		    <c:forEach var="categoryClass" items="${categoryClass[0]}" varStatus="status">
+			        <c:out value="${categoryClass}" />
+			        <c:if test="${not status.last}">,</c:if>
+		    </c:forEach>
+		    </h2>
         </div>
  		<form id="selectCardId" action="/design/carddesign" method="GET">
 			<input type="hidden" id="selectInputCardId" name="selectCardId" value="${imageUrls[0].idx}">
