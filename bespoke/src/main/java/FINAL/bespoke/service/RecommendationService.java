@@ -136,6 +136,7 @@ public class RecommendationService {
         // recommendationDTO를 모델에 추가하여 JSP 페이지로 전달
         model.addAttribute("imageUrls", RecommendationDtoList);
         String benefitListClassJson = objectMapper.writeValueAsString(benefitList);
+        System.out.println("### RecommendationService - benefitListClassJson: " + benefitListClassJson);
         model.addAttribute("benefitList", benefitListClassJson);
 
         List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(imageList,"result_bulk");
