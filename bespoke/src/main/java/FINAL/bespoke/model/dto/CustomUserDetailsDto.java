@@ -2,17 +2,16 @@ package FINAL.bespoke.model.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import FINAL.bespoke.model.entity.User;
 
-public class CustomUserDetails implements UserDetails {
+public class CustomUserDetailsDto implements UserDetails {
 
-    private final User userEntity;
+	private static final long serialVersionUID = 1L; // 직렬화 관련 문제 해결 코드
+	private final User userEntity;
 
-    public CustomUserDetails(User userEntity) {
+    public CustomUserDetailsDto(User userEntity) {
 
         this.userEntity = userEntity;
     }

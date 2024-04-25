@@ -3,16 +3,13 @@ package FINAL.bespoke.jwt;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import FINAL.bespoke.model.dto.CustomUserDetails;
-
+import FINAL.bespoke.model.dto.CustomUserDetailsDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,7 +46,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException {
 				
 				//UserDetailsS
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        CustomUserDetailsDto customUserDetails = (CustomUserDetailsDto) authentication.getPrincipal();
 
         String username = customUserDetails.getUsername();
 

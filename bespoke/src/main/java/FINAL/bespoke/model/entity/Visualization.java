@@ -1,7 +1,6 @@
 package FINAL.bespoke.model.entity;
 
 import java.math.BigDecimal;
-
 import FINAL.bespoke.model.dto.VisualizationDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

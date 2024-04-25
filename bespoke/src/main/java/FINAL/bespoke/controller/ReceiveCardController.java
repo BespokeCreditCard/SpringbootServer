@@ -1,48 +1,45 @@
 package FINAL.bespoke.controller;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
-
+import java.util.Optional;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import FINAL.bespoke.model.dto.DeliveryAddressDto;
 import FINAL.bespoke.model.entity.User;
+import FINAL.bespoke.repository.UserRepository;
 import FINAL.bespoke.service.ElasticService;
 import FINAL.bespoke.service.RecommendationService;
-import FINAL.bespoke.service.ReceiveCardService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
+import FINAL.bespoke.service.ReceiveCardService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Controller
 public class ReceiveCardController {
 	
 	public final ReceiveCardService receiveCardService;
-	
 	public final RecommendationService getUrlService;
-	
 	public final ElasticService elasticService;
-	private final String s3Endpoint;
+	public final UserRepository userRepository;
 
 	@Autowired
-	public ReceiveCardController(ReceiveCardService receiveCardService, RecommendationService getUrlService, ElasticService elasticService, String s3Endpoint) {
+	public ReceiveCardController(ReceiveCardService receiveCardService, RecommendationService getUrlService, ElasticService elasticService, UserRepository userRepository) {
 		this.receiveCardService = receiveCardService;
 		this.getUrlService = getUrlService;
 		this.elasticService = elasticService;
-		this.s3Endpoint = s3Endpoint;
+		this.userRepository = userRepository;
 	}
 
 	@GetMapping("/receivecard")
@@ -56,18 +53,31 @@ public class ReceiveCardController {
 		model.addAttribute("userImageUrl", userImageUrl);
 
  		//userid 로 elasticservice에 참조하는 코드
-// 		GetResponse<ObjectNode> response = elasticService.fetchDataElastic(userIdTemp.getCardId(),"result_bulk");
-//
-//        List<String> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
-//        List<String> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);
-//
-//        model.addAttribute("elasticresultDetail", productDetails);
-//        model.addAttribute("categoriesResultDetail", categoryDetails);
-//        System.out.println(categoryDetails);
+ 		GetResponse<ObjectNode> response = elasticService.fetchDataElastic(userIdTemp.getCardId(),"result_bulk");
+
+        List<String> productDetails = elasticService.ElasticSearchJsonToTextProduct(response);
+        List<String> categoryDetails = elasticService.ElasticSearchJsonToTextCategory(response);
+
+        model.addAttribute("elasticresultDetail", productDetails);
+        model.addAttribute("categoriesResultDetail", categoryDetails);
+        System.out.println(categoryDetails);
 
 		return "receivecard";
 	}
-
+	
+	@ResponseBody
+	@PostMapping("/receivecard")
+    public String updateAddress(@RequestBody DeliveryAddressDto dto) {
+		String userId = dto.getUserId();
+		String address = dto.getAddress();
+        // 주소 업데이트 로직 구현
+        System.out.println("수정된 주소: " + dto.getAddress());
+        // 필요한 데이터베이스 업데이트 또는 서비스 호출 등의 작업 수행
+        receiveCardService.updateUserAddress(userId, address, 1);
+        // 성공적으로 업데이트되었음을 클라이언트에게 응답
+        return "주소가 성공적으로 업데이트되었습니다.";
+    }
+	
 	@PostMapping(path = "/receivecard", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	public String deliveryFile(@RequestPart(name = "files", required = false) MultipartFile file,
 							   HttpSession session, RedirectAttributes ra) throws Exception{

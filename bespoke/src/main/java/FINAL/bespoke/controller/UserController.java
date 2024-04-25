@@ -1,17 +1,11 @@
 package FINAL.bespoke.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import FINAL.bespoke.model.dto.UserDto;
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.service.ElasticService;
@@ -113,7 +107,7 @@ public class UserController {
  		return "mypage";
  	}
 
-//    TODO:: 페이지 이동시마다 이 쿼리가 계속 돔(개선 필요)
+//  페이지 이동시마다 이 쿼리가 계속 돔(개선 필요)
     @GetMapping("/loginCheck")
     @ResponseBody
     public String loginCheck(HttpServletRequest request, HttpServletResponse response) {

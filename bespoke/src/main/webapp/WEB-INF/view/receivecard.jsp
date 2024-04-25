@@ -53,18 +53,18 @@
                 <div class="container-lg h-100 border border-primary bg-light rounded border-5">
                     <h2 class="card-header">카드 혜택 내역</h2>
                     <div class="card-body" style="overflow-y: scroll; max-height: 500px;">
-<%--                    <ul>--%>
-<%--                        <c:forEach var="category" items="${categoriesResultDetail}" varStatus="catStatus">--%>
-<%--                            <c:if test="${not empty categoriesResultDetail[catStatus.index * 3]}">--%>
-<%--                                <li>Category ${catStatus.index + 1}:</li>--%>
-<%--                                <ul>--%>
-<%--									<li>Class: <c:out value="${categoriesResultDetail[catStatus.index * 3]}" /></li>--%>
-<%--						            <li>Benefit: <c:out value="${categoriesResultDetail[catStatus.index * 3 + 1]}" /></li>--%>
-<%--									<li><c:out value="${categoriesResultDetail[catStatus.index * 3 + 2]}" escapeXml="false" /></li>--%>
-<%--                                </ul>--%>
-<%--                            </c:if>--%>
-<%--                         </c:forEach>--%>
-<%--                     </ul>--%>
+	                    <ul>
+	                        <c:forEach var="category" items="${categoriesResultDetail}" varStatus="catStatus">
+	                            <c:if test="${not empty categoriesResultDetail[catStatus.index * 3]}">
+	                                <li>Category ${catStatus.index + 1}:</li>
+	                                <ul>
+										<li>Class: <c:out value="${categoriesResultDetail[catStatus.index * 3]}" /></li>
+							            <li>Benefit: <c:out value="${categoriesResultDetail[catStatus.index * 3 + 1]}" /></li>
+										<li><c:out value="${categoriesResultDetail[catStatus.index * 3 + 2]}" escapeXml="false" /></li>
+	                                </ul>
+	                            </c:if>
+	                         </c:forEach>
+	                     </ul>
                     </div>
                 </div>
             </div>
@@ -197,11 +197,12 @@
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         // 주소 업데이트가 성공적으로 처리된 경우
-                        console.log("주소가 성공적으로 업데이트되었습니다.");
+                        console.log("Update Successful");
                         // 주소 업데이트 후 페이지 내 해당 부분만 업데이트
-                        alert("주소가 성공적으로 업데이트되었습니다.");
+                        alert("주소 업데이트에 성공하였습니다!");
                     }
                 };
+                var encodedAddress = encodeURIComponent(address);
                 xhr.send(JSON.stringify({ address: address, userId: userId }));
             }
         });
