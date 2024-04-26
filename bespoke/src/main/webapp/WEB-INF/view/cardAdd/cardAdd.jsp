@@ -20,11 +20,8 @@
             </div>
             <div class="d-flex w-100 align-items-center justify-content-between">
                 <!-- 파일 업로드를 위한 input -->
-                <form method="post" action="/upload/addcardpage" enctype="multipart/form-data">
-			        <label for="file">파일 선택:</label>
-			        <input type="file" id="file" name="file" accept="image/png" required><br><br>
-			        <input type="submit" value="Upload">
-			    </form>
+		        <label for="file">파일 선택:</label>
+		        <input type="file" id="file" name="files" accept="image/png" required><br><br>
                 <div class="w-75">
                     <%
                         // 3개가 하나로 들어가야하기때문에 3배수로 돌리기

@@ -4,7 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+
+import FINAL.bespoke.model.entity.User;
+import FINAL.bespoke.service.ReceiveCardService;
 import FINAL.bespoke.service.UploadService;
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +19,7 @@ public class UploadController {
 
     @Autowired
     private UploadService uploadService;
+    private ReceiveCardService receiveCardService;
     
     @GetMapping("/uploadtest")
     public String showUploadPage() {
@@ -21,11 +27,12 @@ public class UploadController {
     }
 
     @PostMapping("/uploadtest")
-    public String uploadImage(@RequestParam("file") MultipartFile file,
-                              @RequestParam("customerName") String customerName) {
+    public String uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
         try {
-            String imageUrl = uploadService.uploadImage(file, customerName);
-            System.out.println("### UploadController - imageUrl: " + imageUrl);
+        	User user = receiveCardService.findUserId(request);
+     		
+            String imageUrl = uploadService.uploadImage(file, user.getUserID(), "upload");
+            System.out.println("### UploadController - imageUrl(upload): " + imageUrl);
             
             return "redirect:/receivecard";
             
