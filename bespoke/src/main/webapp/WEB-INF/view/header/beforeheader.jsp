@@ -15,7 +15,6 @@
         document.addEventListener("DOMContentLoaded", function() {
             var loginButton = document.querySelector("#loginButton");
             var logoutButton = document.querySelector("#logoutButton");
-            var cardAddButton = document.querySelector("#cardAddButton");
 
              fetch("http://localhost:8080/loginCheck", {
                 method: "GET",
@@ -23,18 +22,12 @@
                     "Content-Type": "application/json",
                 },
             }).then((response) => {
-                if(response.status === 200) {
-                    response.text().then((result) => {
-                        if(result === 'false') {
+                if(response.status == 200) {
+                    response.json().then((result) => {
+                        if(result === false) {
                             loginButton.style.display = 'block';
                             logoutButton.style.display = 'none';
-                            cardAddButton.style.display = 'none';
-                        } else if(result === 'admin'){
-                            cardAddButton.style.display = 'block';
-                            logoutButton.style.display = 'block';
-                            loginButton.style.display = 'none';
                         } else {
-                            cardAddButton.style.display = 'none';
                             logoutButton.style.display = 'block';
                             loginButton.style.display = 'none';
                         }
@@ -48,7 +41,6 @@
     <nav class="navbar">
         <a href="${pageContext.request.contextPath}/" class="navbar__brand">우리은행</a>        
         <ul class="navbar__menu">
-            <li id="cardAddButton"><a href="${pageContext.request.contextPath}/card/cardAdd">카드 추가</a></li>
             <li><a href="${pageContext.request.contextPath}/recommendation_view/selectRecommendation">카드 추천</a></li>
             <li><a href="${pageContext.request.contextPath}/design/carddesign">카드 꾸미기</a></li>
             <li><a href="${pageContext.request.contextPath}/receivecard">카드 발급</a></li>
