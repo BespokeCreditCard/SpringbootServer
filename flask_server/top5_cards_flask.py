@@ -50,7 +50,7 @@ categories = {
     "주유": "refueling",
     "해외": "overseas",
     "렌터카": "rental_car",
-    "카페": "caf_",
+    "카페": "cafe",
     "호텔": "hotel",
     "영화/문화": "movie_culture",
     "직장인": "office_worker",

@@ -52,7 +52,7 @@ categories = {
     "refueling": "주유",
     "overseas": "해외",
     "rental_car": "렌터카",
-    "caf_": "카페",
+    "cafe": "카페",
     "hotel": "호텔",
     "movie_culture": "영화/문화",
     "office_worker": "직장인",
@@ -112,12 +112,13 @@ def cluster_model(seq):
         ################################################################################
         # Light_gbm 모델 사용해서 군집 idx 예측
         ################################################################################
-        model_path = "flask_server/model/Light_gbm.pkl"
-        # with open(model_path, 'rb') as file:
-        #     lgbm_model = pickle.load(file)
-        lgbm_model = joblib.load(model_path)
-        predict_result = lgbm_model.predict(df)
-        predicted_cluster_num = int(predict_result[0])
+        try:
+            model_path = "flask_server/model/Light_gbm.pkl"
+            lgbm_model = joblib.load(model_path)
+            predict_result = lgbm_model.predict(df)
+            predicted_cluster_num = int(predict_result[0]) 
+        except Exception as e:
+            print("ML 모델 오류 발생: ", e)
         print("========= 예측한 군집 인덱스 =========")
         print(f"Predicted cluster index: {predicted_cluster_num}")
 
@@ -133,13 +134,6 @@ def cluster_model(seq):
             # SEQ가 일치하는 행이 있는지 확인
             cursor.execute("SELECT COUNT(*) FROM train WHERE SEQ = %s", (seq,))
             result = cursor.fetchone()
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            print(result)
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
             if result['COUNT(*)'] == 0:  # SEQ가 일치하는 행이 없다면 삽입을 진행
                 placeholders = ', '.join(['%s'] * len(row))
@@ -202,7 +196,9 @@ def get_benefits(cluster_num=3):
                     # 카드 이름 컬럼(Unnamed: 0) 제외
                     if row[column] != 0 and column not in benefits and column not in exclude_columns:
                         korean_column = categories[column]
-                        benefits.append(korean_column)  # 0이 아닌 값을 가진 컬럼 이름 추가
+                        # benefits 리스트에 korean_column이 이미 존재하지 않는 경우에만 추가
+                        if korean_column not in benefits:
+                            benefits.append(korean_column)
             print("컬럼 이름 추출 완료")
             return card_idxs, benefits  
         

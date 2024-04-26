@@ -12,13 +12,13 @@ from io import BytesIO
 def mode_0(client, model, input_prompt, quality, style, img_size, img_quantity, format):
     print("========= mode 0 =========")
     response = client.images.generate(
-        model=model[1],
+        model=model,
         prompt=input_prompt,
-        quality=quality[1],
-        style=style[1],
-        size=img_size[2],
+        quality=quality,
+        style=style,
+        size=img_size,
         n=img_quantity,
-        response_format=format[1]
+        response_format=format
     )
     return response
 
@@ -28,11 +28,11 @@ def mode_0(client, model, input_prompt, quality, style, img_size, img_quantity, 
 def mode_1(client, model, input_img, img_size, img_quantity, format):
     print("========= mode 1 =========")
     response = client.images.create_variation(
-        model=model[0],
+        model=model,
         image=input_img,
         n=img_quantity,
-        size=img_size[0],
-        response_format=format[1]
+        size=img_size,
+        response_format=format
     )
     return response
 
@@ -42,13 +42,13 @@ def mode_1(client, model, input_img, img_size, img_quantity, format):
 def mode_2(client, model, input_prompt, input_img, mask_img, img_size, img_quantity, format):
     print("========= mode 2 =========")
     response = client.images.edit(
-        model=model[0],
+        model=model,
         image=input_img,
         mask=mask_img,
         prompt=input_prompt,
         n=img_quantity,
-        size=img_size[0],
-        response_format=format[1]
+        size=img_size,
+        response_format=format
     )
     return response
 
@@ -90,11 +90,11 @@ def generate_img(input_prompt, input_img=None, mask_img=None, mode=0):
     tmp = []
     for _ in range(2):
         if mode == 0:
-            response = mode_0(client, model, input_prompt, quality, style, img_size, img_quantity, format)
+            response = mode_0(client, model[1], input_prompt, quality[1], style[1], img_size[2], img_quantity, format[1])
         elif mode == 1:
-            response = mode_1(client, model, input_img, img_size, img_quantity, format)
+            response = mode_1(client, model[0], input_img, img_size[0], img_quantity, format[1])
         elif mode == 2:
-            response = mode_2(client, model, input_prompt, input_img, mask_img, img_size, img_quantity, format)
+            response = mode_2(client, model[0], input_prompt, input_img, mask_img, img_size, img_quantity, format[1])
         else:
             response = None
             print("어떤 mode에도 속하지 않음")
