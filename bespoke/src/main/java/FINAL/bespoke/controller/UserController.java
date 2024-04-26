@@ -6,8 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import FINAL.bespoke.jwt.JWTUtil;
 import FINAL.bespoke.model.dto.UserDto;
 import FINAL.bespoke.model.entity.User;
+import FINAL.bespoke.repository.UserRepository;
 import FINAL.bespoke.service.ElasticService;
 import FINAL.bespoke.service.RecommendationService;
 import FINAL.bespoke.service.JoinService;
@@ -24,12 +27,16 @@ public class UserController {
 	private final ReceiveCardService receiveCardService;
 	private final ElasticService elasticService;
 	private final RecommendationService getUrlService;
+    private final JWTUtil jwtUtil;
+    private final UserRepository userRepository;
 	
-    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService, RecommendationService getUrlService) {
+    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService, RecommendationService getUrlService, JWTUtil jwtUtil, UserRepository userRepository) {
         this.receiveCardService = receiveCardService;
         this.joinService = joinService;
         this.elasticService = elasticService; 
         this.getUrlService = getUrlService;
+        this.jwtUtil = jwtUtil;
+        this.userRepository = userRepository;
     }
     
     @GetMapping("index")
@@ -117,6 +124,17 @@ public class UserController {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("Authorization")) {
                     result = "true";
+                    String token = receiveCardService.getCookieValue(request, "Authorization");
+
+                    String userId = jwtUtil.getUserid(token);
+
+                    User user = userRepository.findByuserID(userId);
+
+                    if(user.getRole().equals("ROLE_ADMIN")) {
+
+                        result = "admin";
+
+                    }
                 }
             }
         }
