@@ -4,7 +4,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import FINAL.bespoke.jwt.JWTUtil;
+import FINAL.bespoke.model.dto.ImageTemplateDto;
+import FINAL.bespoke.model.entity.ImageTemplate;
 import FINAL.bespoke.model.entity.User;
+import FINAL.bespoke.repository.ImageTemplateRepository;
 import FINAL.bespoke.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,10 +18,12 @@ public class ReceiveCardService {
 	
     private final UserRepository userRepository;
     private final JWTUtil jwtUtil;
+    private final ImageTemplateRepository imageTemplateRepository;
     
-    public ReceiveCardService(UserRepository userRepository, JWTUtil jwtUtil) {
+    public ReceiveCardService(UserRepository userRepository, JWTUtil jwtUtil, ImageTemplateRepository imageTemplateRepository) {
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
+        this.imageTemplateRepository = imageTemplateRepository;
     }
     
     // request Cookie 에서 String 으로 온 값을 찾는 함수
@@ -72,6 +77,15 @@ public class ReceiveCardService {
 	        	userRepository.save(user);
 	        }
 		}
-
+		else if (mode == 3) {
+        	ImageTemplate imageTemplate = new ImageTemplate();
+        	int savaId = Integer.parseInt(userId);
+        	System.out.println("### ReceiveCardController - imageTemplate : " + imageTemplate);
+        	System.out.println("### ReceiveCardController - savaId : " + savaData);
+        	imageTemplate.setId(savaId);
+        	imageTemplate.setUrl(savaData);
+        	
+        	imageTemplateRepository.save(imageTemplate);
+		}
     }
 }

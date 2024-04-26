@@ -62,7 +62,10 @@ public class CardController {
     public String cardAdd(@RequestPart(name = "files", required = false) MultipartFile file,
                           @ModelAttribute CardDto cardDto, Model model, HttpServletRequest request) throws IOException {
         cardService.saveCard(cardDto);
-        
+        String imageId = "138";
+		String url = "index_img/bcc_138.png";
+		receiveCardService.updateUserAddress(imageId, url, 3);
+		
     	User user = receiveCardService.findUserId(request);
  		
         String imageUrl = uploadService.uploadImage(file, user.getUserID(), "addcard");

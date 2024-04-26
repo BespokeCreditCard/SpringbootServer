@@ -11,6 +11,5 @@ import FINAL.bespoke.model.entity.ImageTemplate;
 public interface ImageTemplateRepository extends JpaRepository<ImageTemplate, Integer> {	
 	ImageTemplate getOne(Integer id);
 	
-//	@Query("Select id from team4.cardimage where id = imageId")
 	List<ImageTemplate> findByIdIn(List<Integer> imageId);
 }
