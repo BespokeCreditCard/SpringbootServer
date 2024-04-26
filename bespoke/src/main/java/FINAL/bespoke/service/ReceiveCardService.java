@@ -22,7 +22,7 @@ public class ReceiveCardService {
     }
     
     // request Cookie 에서 String 으로 온 값을 찾는 함수
-    private String getCookieValue(HttpServletRequest request, String cookieName) {
+    public String getCookieValue(HttpServletRequest request, String cookieName) {
         // request 의 모든 쿠키를 가져온다.
     	Cookie[] cookies = request.getCookies();
     	// coockie는 값이 있어야 한다.
