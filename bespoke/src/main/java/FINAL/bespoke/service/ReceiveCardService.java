@@ -67,7 +67,7 @@ public class ReceiveCardService {
 	        	User user = userTemp.get();
 	        	int savaCardId = Integer.parseInt(savaData);
 	        	System.out.println("### ReceiveCardController - user : " + user);
-	        	System.out.println("### ReceiveCardController - newAddress : " + savaData);
+	        	System.out.println("### ReceiveCardController - savaCardId : " + savaData);
 	        	user.setCardId(savaCardId);
 	        	userRepository.save(user);
 	        }
