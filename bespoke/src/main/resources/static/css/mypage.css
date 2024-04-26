@@ -1,0 +1,330 @@
+/* 
+th, td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+User Persona 1
+
+position: relative;
+width: 1440px;
+height: 1024px;
+
+background: #FFFFFF;
+border-radius: 77px;
+
+
+pexels-carol-wd-3284698 1
+
+position: absolute;
+width: 531px;
+height: 1024px;
+left: -14px;
+top: -265px;
+
+background: url(pexels-carol-wd-3284698.jpg);
+
+
+ANNIE
+
+position: absolute;
+width: 351px;
+height: 97px;
+left: 70px;
+top: 793px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 200;
+font-size: 74px;
+line-height: 90px;
+
+color: #000000;
+
+
+
+“There's Nothing Like The Smell of Books!”
+
+position: absolute;
+width: 769px;
+height: 185px;
+left: 662px;
+top: 48px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 200;
+font-size: 40px;
+line-height: 48px;
+
+color: #000000;
+
+
+
+Accountant
+
+position: absolute;
+width: 212px;
+height: 63px;
+left: 70px;
+top: 890px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 28px;
+line-height: 34px;
+
+color: #000000;
+
+
+
+More Information
+
+position: absolute;
+width: 346px;
+height: 55px;
+left: 662px;
+top: 169px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 48px;
+
+color: #121212;
+
+
+
+About
+
+position: absolute;
+width: 139px;
+height: 55px;
+left: 662px;
+top: 342px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 48px;
+
+color: #000000;
+
+
+
+Goals
+
+position: absolute;
+width: 139px;
+height: 55px;
+left: 662px;
+top: 537px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 48px;
+
+color: #000000;
+
+
+
+Painpoints
+
+position: absolute;
+width: 220px;
+height: 55px;
+left: 662px;
+top: 759px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 48px;
+
+color: #000000;
+
+
+
+Group 1
+
+position: absolute;
+width: 517px;
+height: 29px;
+left: 662px;
+top: 239px;
+
+
+
+Age: 24
+
+position: absolute;
+width: 139px;
+height: 29px;
+left: 662px;
+top: 239px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+identical to box height
+
+color: #000000;
+
+
+
+Education: Commerce
+
+position: absolute;
+width: 267px;
+height: 29px;
+left: 912px;
+top: 239px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+identical to box height
+
+color: #000000;
+
+
+
+Group 3
+
+position: absolute;
+width: 507px;
+height: 140px;
+left: 662px;
+top: 403px;
+
+
+
+Annie lives with her family and works as an Account in Bank. She is hardworking and also a fast learner. She is interested in reading literature, novels and biography.
+
+position: absolute;
+width: 507px;
+height: 140px;
+left: 662px;
+top: 403px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+
+
+
+Group 4
+
+position: absolute;
+width: 438px;
+height: 152px;
+left: 662px;
+top: 594px;
+
+
+
+Reading novel prize winner novels Discovering new author to read Writing novels by learning from different resources Finding unique stories
+
+position: absolute;
+width: 438px;
+height: 152px;
+left: 662px;
+top: 594px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+
+
+
+Group 5
+
+position: absolute;
+width: 438px;
+height: 152px;
+left: 662px;
+top: 818px;
+
+
+
+All books are not available on local market Shipping books from foreign country gets expensive Forgetting a book launch data
+
+position: absolute;
+width: 438px;
+height: 152px;
+left: 662px;
+top: 818px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+
+
+
+Group 2
+
+position: absolute;
+width: 541px;
+height: 29px;
+left: 662px;
+top: 291px;
+
+
+
+Status: Single
+
+position: absolute;
+width: 174px;
+height: 29px;
+left: 662px;
+top: 291px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+identical to box height
+
+color: #000000;
+
+
+
+Location: Kathmandu
+
+position: absolute;
+width: 291px;
+height: 29px;
+left: 912px;
+top: 291px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+identical to box height
+
+color: #000000; */
