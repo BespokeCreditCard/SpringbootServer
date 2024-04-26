@@ -44,7 +44,7 @@
                 <div class="container-lg h-100 border border-primary bg-light rounded border-5">
                     <h2 class="card-header">선택된 카드 이미지</h2>
                     <div class="card-body">
-                        <img src="data:image/jpeg;base64,${file}" class="img-fluid" alt="선택된 카드" width="33%">
+                        <img src="${userImageUrl}" class="img-fluid" alt="선택된 카드" width="33%">
                     </div>
                 </div>
             </div>

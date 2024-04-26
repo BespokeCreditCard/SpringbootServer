@@ -8,7 +8,9 @@
         <div class="row p-2 align-items-center position-relative center-div">
 
 			<div class="card col-3 m-4" style="width: 18rem; height: 32rem;">
-                <img src="${selectImageUrl}" id="preview" style="position: relative; overflow: hidden; width: 100%; height: 100%; object-fit: contain; top: 3%;">
+				<div id="previewDiv" style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; object-fit: contain;">
+				    <img src="${selectImageUrl}" id="preview" style="max-width: 90%; max-height: 90%;">
+				</div>
                 <div class="card-body h-3 text-center">
                     <div class="btn-container my-1">
                         <label for="fileInput" class="custom-file-label">파일 업로드</label>
@@ -156,6 +158,7 @@
          </div>
     </div>
     <script>var contextPath = "<%= request.getContextPath() %>";</script>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1043.0.min.js"></script>
 	<script src="/js/aigenerator.js"></script>
 </body>
 </html>
