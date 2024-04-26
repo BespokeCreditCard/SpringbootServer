@@ -9,13 +9,13 @@ import org.hibernate.annotations.Comment;
 
 @Getter
 @Entity
-@Table(name = "card")
+@Table(name = "card74")
 @Comment("새 카드 추가용 테이블")
 @NoArgsConstructor
 public class Card {
     @Id
     @FieldComment("카드")
-    @Column(name = "card")
+    @Column(name = "card", columnDefinition = "TEXT")
     private String card; // 카드
 
     @Column(name = "card_index")

@@ -48,7 +48,7 @@ public class UploadService {
                 // S3에 업로드할 객체의 요청을 생성합니다
                 PutObjectRequest request = PutObjectRequest.builder()
                         .bucket("index_img") // 업로드할 버킷안의 폴더 이름을 지정
-                        .key("bcc_138.png") // 업로드할 객체의 키 (파일 이름)를 지정
+                        .key("bcc_140.png") // 업로드할 객체의 키 (파일 이름)를 지정
                         .contentType("image/png") // 업로드할 파일의 컨텐츠 타입을 지정
                         .build();
 
