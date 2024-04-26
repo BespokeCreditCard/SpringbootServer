@@ -55,8 +55,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         GrantedAuthority auth = iterator.next();
 
         String role = auth.getAuthority();
-
-        String token = jwtUtil.createJwt(username, role, 60*60*1000L);
+        // 60*60*10000L: 1시간, 100000000L: 10000시간
+        String token = jwtUtil.createJwt(username, role, 60*60*100000000L);
 ///    	Cookie cookie = new Cookie("Authorization", "Bearer " + token);
     	Cookie cookie = new Cookie("Authorization",token);
     	cookie.setHttpOnly(true); // JavaScript를 통한 접근 방지

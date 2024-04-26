@@ -77,7 +77,7 @@
             <div id="loadingDiv" class="position-absolute bg-light h-100 d-flex justify-content-center align-items-center" style="z-index: -1;right:1%;width: 50%">
                 <div class="text-center">
                     <h5>프롬포트 변환 중입니다. 잠시만 기다려주세요.</h5>
-                    <img id="gifImage2" src="/img/loading.gif" alt="GIF Image" style="max-width: 100%; max-height: 100%;">
+                    <img id="loadingGif" src="/img/loading.gif" alt="GIF Image" style="max-width: 100%; max-height: 100%;">
                 </div>
             </div>
 			
@@ -150,15 +150,16 @@
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body d-flex justify-content-center align-items-center"> <!-- Flexbox를 사용하여 가운데 정렬 -->
-
-                    <canvas id="imageCanvas" ></canvas>
+                <!-- Flexbox를 사용하여 가운데 정렬 -->
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                	<!-- 업로드를 안하면 preview 이미지 사용 -->
+					<img id="modalDefaultImage" src="${selectImageUrl}" style="display: none;">
+                    <canvas id="imageCanvas"></canvas>
                 </div>
             </div>
          </div>
     </div>
     <script>var contextPath = "<%= request.getContextPath() %>";</script>
-	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1043.0.min.js"></script>
 	<script src="/js/aigenerator.js"></script>
 </body>
 </html>

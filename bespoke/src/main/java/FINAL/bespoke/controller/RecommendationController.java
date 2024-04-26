@@ -15,15 +15,9 @@ import lombok.RequiredArgsConstructor;
 public class RecommendationController {
 
     private final RecommendationService recommendationService;
-//    public RecommendationController(GetUrlService recommendationService, ElasticService elasticService, ReceiveCardService receiveCardService) {
-//        this.recommendationService = recommendationService;
-//        this.elasticService = elasticService;
-//        this.receiveCardService = receiveCardService;
-//    }
     
     @GetMapping("/recommendation")
     public String showRecommendation(Model model, HttpServletRequest request) throws JsonProcessingException {
-    	// 여기 있던 코드를 service -> showRecommendations로 넣음
     	recommendationService.showRecommendations(model, request);
         return "recommendation_view/recommendation";
     }

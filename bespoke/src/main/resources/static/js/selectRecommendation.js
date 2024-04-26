@@ -1,13 +1,7 @@
-window.onload = async function () {
-	
-	// seq 가져와야함
+window.onload = async function () {	
     var seq = document.getElementById("userId").innerText;
-    console.log("### 혜택 선택 페이지 - seq 잘 받아왔나 확인");
-    console.log("### 혜택 선택 페이지 - " + seq);
     // 사용자별 혜택을 가져오는 함수
     var response = await getBenefitsByFlask(seq);
-    // 여러개를 Promise 하고 싶을 때 사용
-    // var response = await Promise.any([getBenefitsByFlask(seq)]);
     var { benefits: benefits, clusterNum: clusterNum } = response;
     makeBenefitButton(benefits);
 
@@ -19,21 +13,18 @@ window.onload = async function () {
             return;
         }
         var selectedValues = [];
-
         for (var i = 0; i < selectList.length; i++) {
             selectedValues.push(selectList[i].value);
         }
-	    
-	    console.log("################################################");
-		console.log(seq);
-		console.log(benefits);
-        console.log(clusterNum);
         sendSelectedBenefits(selectedValues, seq, clusterNum)
     });
 };
 
 var getBenefitsByFlask = async (seq) => {
-	try {
+	try {		
+	    ////////////////////////////////////
+	    //test 할 때 주석 처리 할 곳
+	    ////////////////////////////////////
 	    let response = await fetch("http://127.0.0.1:5000/get_cluster", {
 	        method: "POST",
 	        headers: {
@@ -41,8 +32,6 @@ var getBenefitsByFlask = async (seq) => {
 	        },
 	        body: JSON.stringify({seq: seq})
 	    });
-	
-	    // 응답 상태 코드가 성공적인 상태 코드 범위에 있는지 확인
 	    if (response.status != 200) {
 	        // 서버로부터 응답 메시지가 JSON 형식인 경우가 많으므로, 에러 메시지를 추출하기 위해 먼저 JSON을 파싱
 	        let errorResult = await response.json();
@@ -50,23 +39,18 @@ var getBenefitsByFlask = async (seq) => {
 	    }
 		
 	    let result = await response.json();
-	    
-	//    // result 값을 controller에서 지정한 redirectURL 주소로 전달하며 페이지 이동
-	//    if (result.redirectURL) {
-	//            window.location.href = result.redirectURL; // 페이지 이동
-	//        }
-	    
-	
-//		localStorage.setItem('benefits', JSON.stringify(json_result?.benefits));
-//		console.log("### joinBtn 눌렀을 때 local storage에 data 저장 완료.");
-
 		
 	    // 가져온 값들 - seq, benefits, cluster_num, card_idxs
 	    var seq = result?.seq;
-	    var benefits = result?.benefits;
+//	    var benefits = result?.benefits;
 	    var clusterNum = result?.clusterNum;
-//	    var card_idxs = real_result?.card_idxs;
-
+	    ////////////////////////////////////
+	    
+	    var seq = "A12ZOS8HQ3DSVT4TTDXS";
+	    var benefits = ["공항라운지", "게임", "해외이용", "카페", "주유", "영화", "대형마트", "대중교통", "소셜커머스", "간편결제", "주유소", "온라인쇼핑", "편의점", "통신", "백화점", "테마파크", "도서", "패밀리레스토랑", "동물병원"];
+	    var clusterNum = 5;
+	    ////////////////////////////////////
+	    
 		return {benefits, clusterNum};
 	} catch (error) {
         console.error("오류 발생:", error);
@@ -114,29 +98,26 @@ const makeBenefitButton = (benefits) => {
 async function sendSelectedBenefits(selectedBenefits, seq, clusterNum) {
     // 선택된 혜택들을 서버로 전송
     try {
-        //let response = await fetch("/flask/getTop5Cards", 
-        let response = await fetch("http://127.0.0.1:5000/get_top5_cards", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                selectedBenefits: selectedBenefits,
-                seq: seq,
-                clusterNum:clusterNum })
-        });
+		////////////////////////////////////
+	    //test 할 때 주석 처리 할 곳
+	    ////////////////////////////////////
+//        let response = await fetch("http://127.0.0.1:5000/get_top5_cards", {
+//            method: "POST",
+//            headers: {
+//                "Content-Type": "application/json",
+//            },
+//            body: JSON.stringify({
+//                selectedBenefits: selectedBenefits,
+//                seq: seq,
+//                clusterNum:clusterNum })
+//        });
+//
+//        let result = await response.json();
+	    ////////////////////////////////////
+		var top5_card_idxs = [14, 98, 118, 131, 50];
+		var selected_benefits = ["동물병원", "온라인쇼핑", "대중교통", "해외이용", "영화"];
+		let result = {seq: 'A12ZOS8HQ3DSVT4TTDXS', cluster_num: 5, top5_card_idxs: top5_card_idxs, selected_benefits: selected_benefits}
 
-        let result = await response.json();
-        console.log("######################################################");
-        console.log("Top5 Success:", result);
-        console.log("######################################################");
-        console.log("json_result:", result);
-        console.log("SEQ:", result?.seq);
-        console.log("cluster_num:", result?.clusterNum);
-        console.log("top5_card_idxs:", result?.top5_cardIdxs);
-        console.log("selected_benefits:", result?.selectedBenefits);
-        console.log("######################################################");
-        
         var redirectURL = "http://localhost:8080/recommendation_view/recommendation"
         result.redirectURL = redirectURL;
         
