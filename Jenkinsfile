@@ -6,7 +6,8 @@ node {
     withCredentials([file(credentialsId: 'secret-file-env', variable: 'ENV_FILE')]) {
         stage('Set Env & Docker build') {
             sh "echo 2 ${env.JOB_NAME}"
-            sh '''
+            sh """
+            
             sed 's/\r$//' $ENV_FILE > cleaned_env.sh
             sed 's/^/export /' cleaned_env.sh > temp_env.sh
             . /var/lib/jenkins/workspace/${env.JOB_NAME}/temp_env.sh
@@ -28,8 +29,11 @@ node {
                 --build-arg DEEPL=$DEEPL \
                 -t my-app .
 
-            rm temp_env.sh
-            rm cleaned_env.sh
+            """
+            
+            sh '''
+                rm temp_env.sh
+                rm cleaned_env.sh
             '''
         }
     }
