@@ -5,6 +5,7 @@ node {
 
     withCredentials([file(credentialsId: 'secret-file-env', variable: 'ENV_FILE')]) {
         stage('Set Env & Docker build') {
+            sh "echo 2 ${env.JOB_NAME}"
             sh '''
             sed 's/\r$//' $ENV_FILE > cleaned_env.sh
             sed 's/^/export /' cleaned_env.sh > temp_env.sh
