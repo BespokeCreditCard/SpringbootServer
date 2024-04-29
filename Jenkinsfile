@@ -5,15 +5,16 @@ node {
 
     withCredentials([file(credentialsId: 'secret-file-env', variable: 'ENV_FILE')]) {
         stage('Set Env & Docker build') {
+            sh 'echo 1 ${env.JOB_NAME}'
+            sh "echo 2 ${env.JOB_NAME}"
             sh '''
             sed 's/\r$//' $ENV_FILE > cleaned_env.sh
             sed 's/^/export /' cleaned_env.sh > temp_env.sh
-            
-            . /var/lib/jenkins/workspace/{env.JOB_NAME}/temp_env.sh
+            . /var/lib/jenkins/workspace/${env.JOB_NAME}/temp_env.sh
 
             yes | sudo docker image prune -a
 
-            sudo docker build -f /var/lib/jenkins/workspace/{env.JOB_NAME}/bespoke/dockerfile \
+            sudo docker build -f /var/lib/jenkins/workspace/${env.JOB_NAME}/bespoke/dockerfile \
                 --build-arg DBURL=$DBURL \
                 --build-arg DBID=$DBID \
                 --build-arg DBPW=$DBPW \
