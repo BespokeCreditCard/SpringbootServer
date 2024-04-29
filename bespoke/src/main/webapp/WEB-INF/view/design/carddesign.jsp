@@ -45,76 +45,76 @@
                 </div>
             </div>
 
-            <div class="card col-1 d-flex flex-column gap-2 align-items-center justify-content-center p-3" id="arrowCard" style="width: 60%; height: 32rem; display: none; position: relative;">
+            <div class="card col-1 d-flex flex-column gap-2 align-items-center justify-content-center p-3" id="arrowCard" style="width: 55%; height: 32rem; display: none; position: relative;">
                 <!-- 프롬프트 -->
                 <fieldset class="container-lg m-auto rounded border-5" style="height: 100%;position: relative;">
                     <div class="d-flex align-items-center justify-content-between">
-                        <legend align="center" class="fw-bold">프롬프트 작성란</legend>
+                        <legend align="center" class="fw-bold">프롬프트 작성</legend>
                         <a class="btn btn-primary" id="convertBtn" style="font-size: 17px;width: 100px;">변환</a>
                     </div>
                     <div class=" justify-content-center">
                         <span class="fw-bold">화풍</span>
                         <div class="col d-flex mb-1">
-                                <select id="select1" class="form-select" onchange="promptStyle(this);">
-							            <option value="">화풍(스타일) 선택</option>
-							            <option value="Hyperrealism">극사실주의</option>
-							            <option value="Surrealism">초현실주의</option>
-							            <option value="Animation">애니메이션</option>
-							            <option value="Futurism">미래주의</option>
-							            <option value="Pop Art">팝 아트</option>
-							            <option value="Minimalism">미니멀리즘</option>
-							            <option value="Impressionism">인상주의</option>
-							            <option value="Expressionism">표현주의</option>
-							            <option value="Cubism">입체주의</option>
-							            <option value="Abstract Art">추상주의</option>
-							            <option value="Renaissance">르네상스</option>
-							            <option value="Baroque">바로크</option>
-							            <option value="Traditional Korean Painting">전통 한국화</option>
-							            <option value="Sketch">스케치</option>
-							            <option value="Graffiti">그라피티</option>
-							            <option value="Three Kingdoms Period Murals">삼국시대 벽화</option>
-							    </select>
+							<select id="select1" class="form-select" onchange="promptStyle(this);">
+								<option value="">화풍(스타일) 선택</option>
+								<option value="Hyperrealism">극사실주의</option>
+								<option value="Surrealism">초현실주의</option>
+								<option value="Animation">애니메이션</option>
+								<option value="Futurism">미래주의</option>
+								<option value="Pop Art">팝 아트</option>
+								<option value="Minimalism">미니멀리즘</option>
+								<option value="Impressionism">인상주의</option>
+								<option value="Expressionism">표현주의</option>
+								<option value="Cubism">입체주의</option>
+								<option value="Abstract Art">추상주의</option>
+								<option value="Renaissance">르네상스</option>
+								<option value="Baroque">바로크</option>
+								<option value="Traditional Korean Painting">전통 한국화</option>
+								<option value="Sketch">스케치</option>
+								<option value="Graffiti">그라피티</option>
+								<option value="Three Kingdoms Period Murals">삼국시대 벽화</option>
+							</select>
                         </div>
                         <span class="fw-bold">프롬프트1</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptDoing" class="form-control" placeholder="~에서">
+                                <input type="text" id="promptDoing" class="form-control" placeholder="~를">
                         </div>
                         <span class="fw-bold">프롬프트2</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptWho" class="form-control" placeholder="~가">
+                                <input type="text" id="promptWho" class="form-control" placeholder="~하고/하는">
                         </div>
                         <span class="fw-bold">프롬프트3</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptWhere" class="form-control" placeholder="~에서/~와">
+                                <input type="text" id="promptWhere" class="form-control" placeholder="~로 (생략가능)">
                         </div>
                         <span class="fw-bold">프롬프트4</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptWhat" class="form-control" placeholder="~를">
+                                <input type="text" id="promptWhat" class="form-control" placeholder="~한">
                         </div>
                         <span class="fw-bold">프롬프트5</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptHow" class="form-control" placeholder="~한다">
+                                <input type="text" id="promptHow" class="form-control" placeholder="명사/동사">
                         </div>
                     </div>
                 </fieldset>
             </div>
-            <div class="card p-3 text-center"  style="width: 15%; height: 32rem; margin-left: 1.5rem; position: relative;">
-                <h4 class="fw-bold">작성안내</h4>
-
+            <div class="card p-3 text-center"  style="width: 20%; height: 32rem; margin-left: 1.5rem; position: relative;">
+                <h3 class="fw-bold">작성안내</h4>
+                <br/>
                 <h5 class="fw-bold">1. 프롬프트</h5>
-				<p>
+				<p style="text-align: left; margin-left: 25%;">
 					a. <b style="color: blue;">프롬프트</b> 작성<br/>b. <b style="color: blue;">변환</b> 버튼 클릭
 				</p>
+				<br/>
                 <h5 class="fw-bold">2. 이미지</h5>
-				<p>
+				<p style="text-align: left; margin-left: 25%;">
 					a. <b style="color: blue;">파일 업로드</b><br/>b. <b style="color: blue;">변환</b> 버튼 클릭
 				</p>
-                <p class="fw-bold">
-                    3. 이미지 + 프롬프트
-                    <p>
-                    	a. <b style="color: blue;">파일 업로드</b><br/>b. <b style="color: blue;">파일 편집기</b>로 마스킹<br/>c. <b style="color: blue;">프롬프트</b> 작성<br/>d. <b style="color: blue;">변환</b> 버튼 클릭
-                    </p>
-                </p>
+				<br/>
+                <h5 class="fw-bold">3. 이미지 + 프롬프트</h5>
+				<p style="text-align: left; margin-left: 25%;">
+					a. <b style="color: blue;">파일 업로드</b><br/>b. <b style="color: blue;">파일 편집기</b>로 마스킹<br/>c. <b style="color: blue;">프롬프트</b> 작성<br/>d. <b style="color: blue;">변환</b> 버튼 클릭
+				</p>
             </div>
         </div>
 		<div id="resultDiv" class="row p-2 align-items-center position-relative center-div justify-content-center" style="display: none; min-height: 580px">
