@@ -1,5 +1,5 @@
 node {
-    stage('Clone') {
+    stage('Pull') {
             git branch: 'deploy', credentialsId: 'bespoke-git-secret-key', url: 'https://github.com/JunGyuRyu/BespokeCreditCard.git'
     }
 
