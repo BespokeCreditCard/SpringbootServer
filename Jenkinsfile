@@ -1,34 +1,33 @@
 node {
     stage('Clone') {
-            git branch: 'deploy', credentialsId: 'bespoke-git-secret-key', url: 'https://github.com/JunGyuRyu/BespokeCreditCard.git'
+            git branch: 'develop', credentialsId: 'bespoke-git-secret-key', url: 'https://github.com/JunGyuRyu/BespokeCreditCard.git'
     }
 
     withCredentials([file(credentialsId: 'secret-file-env', variable: 'ENV_FILE')]) {
-            stage('Set Env & Docker build') {
-                sh """
-                sed 's/\\r$//' \$ENV_FILE > cleaned_env.sh
-                sed 's/^/export /' cleaned_env.sh > temp_env.sh
-                . /var/lib/jenkins/workspace/${env.JOB_NAME}/temp_env.sh
+        stage('Set Env & Docker build') {
+            sh "echo 2 ${JOB_NAME}"
+            sh '''
+            sed 's/\r$//' $ENV_FILE > cleaned_env.sh
+            sed 's/^/export /' cleaned_env.sh > temp_env.sh
+            . /var/lib/jenkins/workspace/${JOB_NAME}/temp_env.sh
 
-                yes | sudo docker image prune -a
+            yes | sudo docker image prune -a
 
-                sudo docker build -f /var/lib/jenkins/workspace/${env.JOB_NAME}/bespoke/dockerfile \
-                    --build-arg DBURL=\$DBURL \
-                    --build-arg DBID=\$DBID \
-                    --build-arg DBPW=\$DBPW \
-                    --build-arg S3Endpoint=\$S3Endpoint \
-                    --build-arg S3Region=\$S3Region \
-                    --build-arg S3Accesskey=\$S3Accesskey \
-                    --build-arg S3Secretkey=\$S3Secretkey \
-                    --build-arg DALLE=\$DALLE \
-                    --build-arg ElasticID=\$ElasticID \
-                    --build-arg ElasticPW=\$ElasticPW \
-                    --build-arg springJwtSecret=\$springJwtSecret \
-                    --build-arg DEEPL=\$DEEPL \
-                    -t my-app .
-                """
-            }
-            
+            sudo docker build -f /var/lib/jenkins/workspace/${JOB_NAME}/bespoke/dockerfile \
+                --build-arg DBURL=$DBURL \
+                --build-arg DBID=$DBID \
+                --build-arg DBPW=$DBPW \
+                --build-arg S3Endpoint=$S3Endpoint \
+                --build-arg S3Region=$S3Region \
+                --build-arg S3Accesskey=$S3Accesskey \
+                --build-arg S3Secretkey=$S3Secretkey \
+                --build-arg DALLE=$DALLE \
+                --build-arg ElasticID=$ElasticID \
+                --build-arg ElasticPW=$ElasticPW \
+                --build-arg springJwtSecret=$springJwtSecret \
+                --build-arg DEEPL=$DEEPL \
+                -t my-app .
+            '''
             sh '''
                 rm temp_env.sh
                 rm cleaned_env.sh
