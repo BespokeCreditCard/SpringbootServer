@@ -36,7 +36,7 @@ node {
                 -t my-app .
 
             rm temp_env.sh
-            rm cleaned_env.sh 
+            rm cleaned_env.sh
             '''
         }
     }
