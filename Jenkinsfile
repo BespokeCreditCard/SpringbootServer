@@ -1,12 +1,5 @@
 node {
     stage('Clone') {
-            sh '''
-            if [ -d "BespokeCreditCard" ]; then
-                echo "디렉터리 BespokeCreditCard가 이미 존재하여 삭제합니다."
-                rm -rf BespokeCreditCard
-            fi
-            echo ${env.WORKSPACE}
-            '''
             git branch: 'develop', credentialsId: 'bespoke-git-secret-key', url: 'https://github.com/JunGyuRyu/BespokeCreditCard.git'
     }
 
@@ -16,11 +9,11 @@ node {
             sed 's/\r$//' $ENV_FILE > cleaned_env.sh
             sed 's/^/export /' cleaned_env.sh > temp_env.sh
             
-            . /var/lib/jenkins/workspace/bepoke-pipeline/temp_env.sh
+            . /var/lib/jenkins/workspace/{env.JOB_NAME}/temp_env.sh
 
             yes | sudo docker image prune -a
 
-            sudo docker build -f /var/lib/jenkins/workspace/bepoke-pipeline/bespoke/dockerfile \
+            sudo docker build -f /var/lib/jenkins/workspace/{env.JOB_NAME}/bespoke/dockerfile \
                 --build-arg DBURL=$DBURL \
                 --build-arg DBID=$DBID \
                 --build-arg DBPW=$DBPW \
@@ -46,8 +39,6 @@ node {
         usernameVariable: 'DOCKER_USER_ID', 
         passwordVariable: 'DOCKER_USER_PASSWORD']]) {
             stage('Docker Tag') {
-                sh(script: 'echo $DOCKER_USER_ID')
-                sh(script: 'echo ${DOCKER_USER_ID}')
                 sh(script: '''sudo docker tag my-app ${DOCKER_USER_ID}/my-app:${BUILD_NUMBER}''') 
             }
             stage('Docker Push') {
