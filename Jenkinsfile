@@ -13,7 +13,7 @@ node {
 
             yes | sudo docker image prune -a
 
-            sudo docker build -f /var/lib/jenkins/workspace/${JOB_NAME}/bespoke/dockerfile \
+            sudo docker build -f /var/lib/jenkins/workspace/${JOB_NAME}/bespoke/Dockerfile \
                 --build-arg DBURL=$DBURL \
                 --build-arg DBID=$DBID \
                 --build-arg DBPW=$DBPW \
