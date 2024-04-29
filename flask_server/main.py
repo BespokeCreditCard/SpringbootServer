@@ -11,6 +11,8 @@ import time
 import base64
 import werkzeug
 from flask_cors import CORS
+from PIL import Image
+import io
 
 app = Flask(__name__)
 
@@ -116,12 +118,33 @@ def generate_img():
         mask_img_bytes = base64.b64decode(mask_img.split(",")[1])
     else:
         mask_img_bytes = mask_img
-
-    print(type(input_img_bytes))
-    print(type(mask_img_bytes))
     print("=====================================")
 
-    b64_img1, b64_img2 = dall_e.generate_img(prompt, input_img_bytes, mask_img_bytes, mode)
+    # dall-e 모델 사용
+    # b64_img1, b64_img2 = dall_e.generate_img(prompt, input_img_bytes, mask_img_bytes, mode)
+
+    ### 시연 영상용 b64 이미지
+    imgs = ["hamster1", "hamster2", "hamster3", "hamster4", "baby_doge1", "baby_doge2", "landscape1", "landscape2"]
+
+    with Image.open(f'flask_server/dall_e_imgs/{imgs[0]}.png') as img:
+        # PIL Image 객체를 바이트 버퍼로 변환
+        buffered = io.BytesIO()
+        img.save(buffered, format="PNG")        
+        # 바이트 버퍼를 Base64 문자열로 변환
+        b64_img1 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+    with Image.open(f'flask_server/dall_e_imgs/{imgs[1]}.png') as img:
+        # PIL Image 객체를 바이트 버퍼로 변환
+        buffered = io.BytesIO()
+        img.save(buffered, format="PNG")
+        # 바이트 버퍼를 Base64 문자열로 변환
+        b64_img2 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+    # 결과 확인을 위해 변수의 앞부분을 출력합니다.
+    print("b64_img1의 앞부분:", b64_img1[:100])
+    print("b64_img2의 앞부분:", b64_img2[:100])
+    print(type(b64_img1))
+
     result = {"b64_img1":b64_img1, "b64_img2":b64_img2}
 
     # result를 dumps 메서드를 사용하여 response에 저장
