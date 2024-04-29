@@ -7,7 +7,7 @@ node {
             fi
             echo ${env.WORKSPACE}
             '''
-            git branch: 'develop', credentialsId: 'github_access_token', url: 'https://github.com/JunGyuRyu/BespokeCreditCard.git'
+            git branch: 'develop', credentialsId: 'bespoke-git-secret-key', url: 'https://github.com/JunGyuRyu/BespokeCreditCard.git'
     }
 
     withCredentials([file(credentialsId: 'secret-file-env', variable: 'ENV_FILE')]) {
