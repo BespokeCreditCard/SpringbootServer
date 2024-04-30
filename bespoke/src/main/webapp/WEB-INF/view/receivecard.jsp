@@ -49,6 +49,7 @@
             margin-left: 3rem;
             max-width: 45rem;
             height: 35rem;
+            overflow-y: auto;
         }
 
         .cardImageMyPage img:hover {
@@ -69,7 +70,11 @@
 		    font-family: 'WooridaumR';
 		    src: url('/fonts/WooridaumR.ttf') format('truetype');
 		}
-
+		
+/* 		.scrollplz {
+			overflow-y: auto;
+		} */
+		
         .cardNameMyPage {
             font-family: 'WooridaumR';
             font-weight: bold;
@@ -107,11 +112,12 @@
 
         .cardBenefitMyPageDetail {
             max-height: 13rem;
-            overflow-y: auto;
+            
         }
         
         .card-bodys {
         	margin-right: -3rem;
+        	max-width: 30rem;
             font-family: 'Inter';
             font-weight: 500;
             font-size: 18px;
@@ -128,42 +134,48 @@
             <div class="cardNameMyPage">카드의 정석 DON CHECK</div>
         </div>
         <div class="rightdiv">
-            <div class="leftTitle">상세 정보</div>
-            <div class="personalInformation">개인정보
-                <div class="customerInfo">ID : <span id="user-id">${userData.userID}</span>&nbsp;&nbsp;&nbsp;&nbsp;이름 : <span id="user-name">${userData.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;생년월일 : <span id="user-birth">${userData.birthDate}</span></div>
-                <div class="customerInfo">연락처 : <span id="user-phone">${userData.contact}</span>&nbsp;&nbsp;&nbsp;&nbsp;주소 : <span id="user-phone">${userData.contact}</span></div>
-                <p class="card-headers">카드 수령장소</p>
-                <div class="card-bodys">
-                    <input type="text" id="user-address" style="width: 20rem;" placeholder="${userData.address}" disabled>
-                    <button class="btn btn-secondary" id="edit-address">수정</button>
-                </div>
-            </div>
-            <div class="cardBenefitMyPage">
-            	<h3 style="font-weight: bold;">카드 혜택</h3>
-                <div class="cardBenefitMyPageDetail">
-                	<ul>
-	                    <li>분류: 동물병원&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 동물병원 10% 청구할인</li>
-	                    <br>
-	                    <li>분류: 온라인쇼핑&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 온라인 쇼핑 10% 청구할인</li>
-	                    <br>
-	                    <li>분류: 간편결제&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 4대 PAY 결제 시 5% 추가 청구할인</li>
-	                    <br>
-	                    <li>분류: 쇼핑&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 백화점, 아울렛, 잡화 10% 청구할인</li>
-	                    <br>
-	                    <li>분류: 마트/편의점&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 대형할인점, 편의점 등 10% 청구할인</li>
-	                    <br>
-	                    <li>분류: 해외이용&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 해외 이용금액 1% 청구할인</li>
-	                    <br>
-	                    <li>분류: 공항라운지&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 국내외 공항라운지 무료 이용 서비스</li>
-	                    <br>
-	                    <li>분류: 주유소&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 주말 4대 주유소 리터당 60원 청구할인</li>
-	                    <br>
-	                    <li>분류: 카페&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 스타벅스, 폴바셋 10% 청구할인</li>
-       				</ul>
-                </div>
-            </div>
+        	<div class="scrollplz">
+	        	<div class="leftTitle">상세 정보</div>
+		            <div class="personalInformation">개인정보
+		                <div class="customerInfo">ID : <span id="user-id">${userData.userID}</span>&nbsp;&nbsp;&nbsp;&nbsp;이름 : <span id="user-name">${userData.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;생년월일 : <span id="user-birth">${userData.birthDate}</span></div>
+		                <div class="customerInfo">연락처 : <span id="user-phone">${userData.contact}</span>&nbsp;&nbsp;&nbsp;&nbsp;주소 : <span id="user-phone">${userData.contact}</span></div>
+		                <hr>
+		                <p class="card-headers">카드 수령장소</p>
+		                <div class="card-bodys">
+		                    <input type="text" id="user-address" style="width: 20rem;" placeholder="${userData.address}" disabled>
+		                    <button class="btn btn-secondary" id="edit-address">수정</button>
+		                </div>
+		            </div>
+		            <hr>
+		            <div class="cardBenefitMyPage">
+		            	<h3 style="font-weight: bold;">카드 혜택</h3>
+		                <div class="cardBenefitMyPageDetail">
+		                	<ul>
+			                    <li>분류: 동물병원&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 동물병원 10% 청구할인</li>
+			                    <br>
+			                    <li>분류: 온라인쇼핑&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 온라인 쇼핑 10% 청구할인</li>
+			                    <br>
+			                    <li>분류: 간편결제&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 4대 PAY 결제 시 5% 추가 청구할인</li>
+			                    <br>
+			                    <li>분류: 쇼핑&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 백화점, 아울렛, 잡화 10% 청구할인</li>
+			                    <br>
+			                    <li>분류: 마트/편의점&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 대형할인점, 편의점 등 10% 청구할인</li>
+			                    <br>
+			                    <li>분류: 해외이용&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 해외 이용금액 1% 청구할인</li>
+			                    <br>
+			                    <li>분류: 공항라운지&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 국내외 공항라운지 무료 이용 서비스</li>
+			                    <br>
+			                    <li>분류: 주유소&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 주말 4대 주유소 리터당 60원 청구할인</li>
+			                    <br>
+			                    <li>분류: 카페&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 스타벅스, 폴바셋 10% 청구할인</li>
+		       				</ul>
+		       				<br>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
         </div>
-    </div>
+            
     
     <!-- 모달 -->
     <div class="modal fade" id="issueCardModal" tabindex="-1" aria-labelledby="issueCardModalLabel" aria-hidden="true">
