@@ -151,23 +151,23 @@
 		            	<h3 style="font-weight: bold;">카드 혜택</h3>
 		                <div class="cardBenefitMyPageDetail">
 		                	<ul>
-			                    <li>분류: 동물병원&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 동물병원 10% 청구할인</li>
+			                    <li>동물병원&nbsp;&nbsp;|&nbsp;&nbsp;동물병원 10% 청구할인</li>
 			                    <br>
-			                    <li>분류: 온라인쇼핑&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 온라인 쇼핑 10% 청구할인</li>
+			                    <li> 온라인쇼핑&nbsp;&nbsp;|&nbsp;&nbsp; 온라인 쇼핑 10% 청구할인</li>
 			                    <br>
-			                    <li>분류: 간편결제&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 4대 PAY 결제 시 5% 추가 청구할인</li>
+			                    <li> 간편결제&nbsp;&nbsp;|&nbsp;&nbsp; 4대 PAY 결제 시 5% 추가 청구할인</li>
 			                    <br>
-			                    <li>분류: 쇼핑&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 백화점, 아울렛, 잡화 10% 청구할인</li>
+			                    <li> 쇼핑&nbsp;&nbsp;|&nbsp;&nbsp; 백화점, 아울렛, 잡화 10% 청구할인</li>
 			                    <br>
-			                    <li>분류: 마트/편의점&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 대형할인점, 편의점 등 10% 청구할인</li>
+			                    <li> 마트/편의점&nbsp;&nbsp;|&nbsp;&nbsp; 대형할인점, 편의점 등 10% 청구할인</li>
 			                    <br>
-			                    <li>분류: 해외이용&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 해외 이용금액 1% 청구할인</li>
+			                    <li> 해외이용&nbsp;&nbsp;|&nbsp;&nbsp; 해외 이용금액 1% 청구할인</li>
 			                    <br>
-			                    <li>분류: 공항라운지&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 국내외 공항라운지 무료 이용 서비스</li>
+			                    <li> 공항라운지&nbsp;&nbsp;|&nbsp;&nbsp; 국내외 공항라운지 무료 이용 서비스</li>
 			                    <br>
-			                    <li>분류: 주유소&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 주말 4대 주유소 리터당 60원 청구할인</li>
+			                    <li> 주유소&nbsp;&nbsp;|&nbsp;&nbsp; 주말 4대 주유소 리터당 60원 청구할인</li>
 			                    <br>
-			                    <li>분류: 카페&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 스타벅스, 폴바셋 10% 청구할인</li>
+			                    <li> 카페&nbsp;&nbsp;|&nbsp;&nbsp; 스타벅스, 폴바셋 10% 청구할인</li>
 		       				</ul>
 		       				<br>
 		                </div>
