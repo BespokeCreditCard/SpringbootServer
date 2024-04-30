@@ -6,6 +6,20 @@
 
 </head>
 <style>
+    .container-wrapper {
+        min-height: 48rem;
+        padding: 4rem;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+    }
+
+    .container-white {
+        overflow: hidden; /* 자식 요소가 float 속성을 가지면 부모 요소의 높이가 사라지는 것을 방지합니다. */
+        background-color: #ffffff;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 2);
+    }
+
+
     #benefits {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -25,31 +39,36 @@
         margin: 4px 2px;
         cursor: pointer;
         border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
     }
     .button.on {
         background-color: #0dcaf0;
     }
 </style>
 <body>
-    <section class="p-3">
-        <div class="">
-            <h2>카드 추천</h2>
-            <h5>원하시는 혜택을 선택해주세요.</h5>
-        </div>
-        <div id="userId" style="display: none;">${userId}</div>
-    </section>
-    <section class="container-lg p-3 m-auto mt-5 border border-primary bg-light rounded border-5 ">
-        <div id="benefits" class="">
-<%--                <button id="benefit0" class="button" type="button" onclick="클릭이벤트" value="유형1">유형1</button>--%>
-        </div>
-        <div class="container-fluid fixed-bottom" id="prevNextBtnDiv">
-            <div class="row justify-content-end mb-3">
-                <div class="col-6 text-end">
-                    <button id="sendBenefit" class="btn btn-outline-secondary">선택</button>
+    <div class="container-wrapper">
+        <div class="container-white">
+
+            <section class="p-3">
+                <div class="card mb-3">
+                    <h2>카드 추천</h2>
+                    <h5>원하시는 혜택을 선택해주세요</h5>
                 </div>
-            </div>
+                <div id="userId" style="display: none;">${userId}</div>
+            </section>
+                <div id="benefits" class="p-2" >
+                </div>
+
+                <div class="container-fluid fixed-bottom" id="prevNextBtnDiv">
+                    <div class="row justify-content-end mb-3">
+                        <div class="col-6 text-end">
+                            <button id="sendBenefit" class="btn btn-outline-secondary">선택</button>
+                        </div>
+                    </div>
+                </div>
+
         </div>
-    </section>
+    </div>
 
 </body>
 <script src="/js/selectRecommendation.js"></script>
