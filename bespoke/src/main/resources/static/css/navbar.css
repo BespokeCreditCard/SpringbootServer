@@ -4,7 +4,18 @@ body {
     background-color: #f4f4f4; /* 배경색을 조정해보세요 */
 }
 
+@font-face {
+    font-family: 'Sansation_Bold';
+    src: url('/fonts/Sansation_Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('/fonts/GowunBatang-Regular.ttf') format('truetype');
+}
+
 .navbar__brand {
+	font-family: 'Sansation_Bold';
     font-size: 24px; /* 로고 폰트 크기 */
     color: white; /* 로고 글자색 */
     text-decoration: none; /* 링크 밑줄 제거 */
@@ -15,12 +26,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 15px; /* 헤더 안쪽 여백 */
-    background-color: #007bff; /* 배경색 설정 */
+    padding: 30px 15px; /* 헤더 안쪽 여백 */
+    background-color: navy; /* 배경색 설정 */
     color: white; /* 글자색 설정 */
 }
 
 .navbar__menu a {
+	font-family: 'GowunBatang-Regular';
     color: white;
     text-decoration: none;
     padding: 8px 16px;

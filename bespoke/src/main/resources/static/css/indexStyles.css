@@ -1,0 +1,525 @@
+.text-right-p {
+    margin-right: 10px; /* 오른쪽 마진을 추가하여 요소를 오른쪽으로 이동시킵니다. */
+}
+
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('/fonts/GowunBatang-Regular.ttf') format('truetype');
+}
+
+.subheading-top-adjust {
+    margin-top: -30px;
+	margin-top: 50px;
+}
+
+#team {
+    margin-top: 500px; /* 원하는 거리만큼 상단 여백을 추가 */
+}
+
+.section-subheading {
+    margin-bottom: 50px; /* 하단 여백을 50px로 설정 */
+}
+
+
+.main-content {
+    margin-top: 1000px; /* 원하는 만큼 상단 여백을 추가합니다. */
+}
+
+/* 이제 "main-content" 클래스를 HTML 마크업의 적절한 섹션에 추가합니다. */
+
+.window-container {
+  	font-family: 'GowunBatang-Regular';
+    display: flex; /* 플렉스 박스로 설정하여 자식 요소들을 가로로 나열 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 세로축 중앙 정렬 */
+    width: 100%; /* 컨테이너의 너비를 전체로 설정 */
+    margin: 0 auto; /* 자동 마진으로 좌우 중앙 정렬 */
+}
+.e1_5298 { 
+	overflow:hidden;
+}
+.e1_5298 { 
+ 	font-family: 'GowunBatang-Regular';
+	max-width: 1280px; /* 최대 너비 설정 */
+	height: 800px;
+	margin: 0 auto; /* 좌우 마진을 자동으로 설정하여 중앙 정렬 */
+	position: relative; /* 자식 요소들이 상대적으로 배치되도록 변경 */
+}
+.e1_5299 { 
+	width:auto;
+	height:696px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.e1_5301 { 
+	overflow:hidden;
+}
+.e1_5301 { 
+    background-color: rgb(255, 255, 255);
+    width: 100vw; /* 전체 뷰포트 너비를 사용합니다 */
+    height: 100vh; /* 전체 뷰포트 높이를 사용합니다 */
+    position: fixed; /* 요소를 뷰포트에 고정합니다 */
+    left: 0;
+    top: 0;
+    z-index: -1; /* 다른 내용이 위에 오도록 z-index 설정 */
+}
+
+.e1_5300 { 
+	background-color:rgb(255, 255, 255);
+	width:2000px;
+	height:696px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.e1_5302 { 
+	background-image:linear-gradient(0deg,) ;
+	width:1280px;
+	height:871px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.e1_5303 { 
+	width:1458.6436767578125px;
+	height:593.7362060546875px;
+	position:absolute;
+	left:-8.5px;
+	top:82.2366943359375px;
+}
+.e1_5304 { 
+	width:1454.2203369140625px;
+	height:271.0256652832031px;
+	position:absolute;
+	left:4.423366069793701px;
+	top:322.71051025390625px;
+}
+.e1_5305 { 
+	opacity:0.05000000074505806;
+	width:1454.1318359375px;
+	height:271.0256652832031px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.e1_5306 { 
+	background-color:rgba(255, 255, 255, 1);
+	width:1454.1318359375px;
+	height:271.0256652832031px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.e1_5307 { 
+	opacity:0.10000000149011612;
+	width:1454.0706787109375px;
+	height:218.1872100830078px;
+	position:absolute;
+	left:0.14964479207992554px;
+	top:45.00981903076172px;
+}
+.e1_5308 { 
+	background-color:rgba(255, 255, 255, 1);
+	width:1454.0706787109375px;
+	height:218.1872100830078px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.e1_5309 { 
+	opacity:0.30000001192092896;
+	width: 60rem;
+	height:109.7633056640625px;
+	position:absolute;
+	left:8.5px;
+	top:0px;
+}
+.e1_5309 { 
+	border:1px solid rgba(255, 255, 255, 1);
+}
+.e1_5310 { 
+	opacity:0.4000000059604645;
+	width:1448.5px;
+	height:199.9401092529297px;
+	position:absolute;
+	left:0px;
+	top:41.323204040527344px;
+}
+.e1_5310 { 
+	border:1px solid rgba(255, 255, 255, 1);
+}
+.e1_5311 { 
+	width:466px;
+	height:46px;
+	position:absolute;
+	left:185px;
+	top:320px;
+	text-align: center;
+}
+.e1_5312 { 
+	width:221px;
+	height:45px;
+	position:absolute;
+	left:245px;
+	top:0px;
+}
+.ei1_5312_0_1193 { 
+	width:221px;
+	height:45px;
+	position:absolute;
+	left:300px;
+	top:0px;
+	display: inline-block;
+}
+.ei1_5312_0_1194 { 
+	box-shadow:0px 2px 5px rgba(100.00000163912773, 181.0000044107437, 246.0000005364418, 0.5);
+	background-color:rgb(12, 22, 161);
+	width:221px;
+	height:45px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-top-left-radius:22.5px;
+	border-top-right-radius:22.5px;
+	border-bottom-left-radius:22.5px;
+	border-bottom-right-radius:22.5px;
+}
+.ei1_5312_0_1195 { 
+	color:rgb(237, 224, 105);
+	width:221px;
+	height:19px;
+	position:absolute;
+	left:0px;
+	top:11px;
+	font-family:Open Sans;
+	text-align:center;
+	font-size:17px;
+	letter-spacing:0;
+}
+.e1_5313 { 
+	width:221px;
+	height:45px;
+	position:absolute;
+	left:0px;
+	top:1px;
+}
+.ei1_5313_0_1197 { 
+	width:221px;
+	height:45px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.ei1_5313_0_1198 { 
+	box-shadow:0px 2px 5px rgba(100.00000163912773, 181.0000044107437, 246.0000005364418, 0.5);
+	width:221px;
+	height:45px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-top-left-radius:22.5px;
+	border-top-right-radius:22.5px;
+	border-bottom-left-radius:22.5px;
+	border-bottom-right-radius:22.5px;
+}
+.i1_5313_0_1198 { 
+	border:1px solid rgba(255, 255, 255, 1);
+}
+.ei1_5313_0_1199 { 
+	color:rgba(255, 255, 255, 1);
+	width:221px;
+	height:19px;
+	position:absolute;
+	left: calc(50% - 110.5px);
+	top:13px;
+	font-family:Open Sans;
+	text-align:center;
+	font-size:14px;
+	letter-spacing:0;
+}
+.e1_5314 { 
+	font-family: 'GowunBatang-Regular';
+	color:rgba(255, 255, 255, 1);
+	width:427px;
+	height:87px;
+	position:absolute;
+	left: 680px;
+	top: 150px;
+	font-family:Open Sans;
+	text-align:center;
+	font-size:44px;
+	letter-spacing:0;
+	white-space: nowrap; /* 텍스트를 한 줄에 표시 */
+    width: auto;
+	}
+	
+
+.e1_5315 { 
+	font-family: 'GowunBatang-Regular';
+	color:rgba(255, 255, 255, 1);
+	width:472px;
+	height:30px;
+	position:absolute;
+	left: calc(50% - 213.5px);
+	top:240px;
+	text-align:center;
+	font-size:36px;
+	letter-spacing:0;
+}
+.e1_5316 { 
+	width:480px;
+	height:248px;
+	position:absolute;
+	left:300px;
+	top:450px;
+}
+.ei1_5316_0_1201 { 
+    box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+    background-color:rgba(255, 255, 255, 1);
+    opacity:0.8999999761581421;
+    width:480px;
+    height:247.5581817626953px;
+    position:absolute;
+    left:0px;
+    top:0px;
+    border-radius:24px;
+}
+.ei1_5316_0_1202 { 
+    border-radius:500px;
+    background-color:rgba(245.2363023161888, 165.84366649389267, 35.32828509807587, 1);
+    width:9.5999755859375px;
+    height:9.59999942779541px;
+    position:absolute;
+    left:423.20001220703125px;
+    top:7.199999809265137px;
+}
+.ei1_5316_0_1203 { 
+    border-radius:500px;
+    background-color:rgba(126.00836724042892, 210.6896960735321, 33.11870366334915, 1);
+    width:9.5999755859375px;
+    height:9.59999942779541px;
+    position:absolute;
+    left:439.20001220703125px;
+    top:7.199999809265137px;
+}
+.ei1_5316_0_1204 { 
+    border-radius:500px;
+    background-color:rgba(208.0000028014183, 2.000000118277967, 27.000000290572643, 1);
+    width:9.5999755859375px;
+    height:9.59999942779541px;
+    position:absolute;
+    left:455.20001220703125px;
+    top:7.199999809265137px;
+}
+
+.ei1_5316_0_1205 { 
+	width:462.1818542480469px;
+	height:215.615966796875px;
+	position:absolute;
+	left:9.471386909484863px;
+	top:20.799999237060547px;
+}
+
+.ei1_5316_0_1206 { 
+	overflow:hidden;
+	box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+	background-color:rgba(155.01251488924026, 154.98985290527344, 155.0202512741089, 1);
+	width:462.1818542480469px;
+	height:215.615966796875px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:24px;
+}
+.ei1_5316_0_1207 { 
+	box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+	background-color:rgba(155.01251488924026, 154.98985290527344, 155.0202512741089, 1);
+	opacity:0.8999999761581421;
+	width:462.1818542480469px;
+	height:215.615966796875px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:24px;
+}
+.ei1_5316_0_1208 { 
+	width:464px;
+	height:216px;
+	position:absolute;
+	left:-0.67138671875px;
+	top:0px;
+	background-image:url('/img/프롬프트.png');
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+.e1_5317 { 
+	width:480px;
+	height:248px;
+	position:absolute;
+	left:900px;
+	top:450px;
+}
+.ei1_5317_0_1201 { 
+	box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+	background-color:rgba(255, 255, 255, 1);
+	opacity:0.8999999761581421;
+	width:480px;
+	height:247.5581817626953px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:24px;
+}
+.ei1_5317_0_1202 { 
+	border-radius:500px;
+	background-color:rgba(245.2363023161888, 165.84366649389267, 35.32828509807587, 1);
+	width:9.5999755859375px;
+	height:9.59999942779541px;
+	position:absolute;
+	left:423.20001220703125px;
+	top:7.199999809265137px;
+}
+.ei1_5317_0_1203 { 
+	border-radius:500px;
+	background-color:rgba(126.00836724042892, 210.6896960735321, 33.11870366334915, 1);
+	width:9.5999755859375px;
+	height:9.59999942779541px;
+	position:absolute;
+	left:439.20001220703125px;
+	top:7.199999809265137px;
+}
+.ei1_5317_0_1204 { 
+	border-radius:500px;
+	background-color:rgba(208.0000028014183, 2.000000118277967, 27.000000290572643, 1);
+	width:9.5999755859375px;
+	height:9.59999942779541px;
+	position:absolute;
+	left:455.20001220703125px;
+	top:7.199999809265137px;
+}
+.ei1_5317_0_1205 { 
+	width:462.1818542480469px;
+	height:215.615966796875px;
+	position:absolute;
+	left:9.471386909484863px;
+	top:20.799999237060547px;
+}
+
+.ei1_5317_0_1206 { 
+	overflow:hidden;
+	box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+	background-color:rgba(155.01251488924026, 154.98985290527344, 155.0202512741089, 1);
+	width:462.1818542480469px;
+	height:215.615966796875px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:24px;
+}
+.ei1_5317_0_1207 { 
+	box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+	background-color:rgba(155.01251488924026, 154.98985290527344, 155.0202512741089, 1);
+	opacity:0.8999999761581421;
+	width:462.1818542480469px;
+	height:215.615966796875px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:24px;
+}
+.ei1_5317_0_1208 { 
+	width:464px;
+	height:216px;
+	position:absolute;
+	left:-0.67138671875px;
+	top:0px;
+	background-image:url('/img/카드추가.png');
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+.e1_5318 { 
+	width:600px;
+	height:310px;
+	position:absolute;
+	left:535px;
+	top:400px;
+}
+.ei1_5318_0_1201 { 
+	box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+	background-color:rgba(255, 255, 255, 1);
+	opacity:0.8999999761581421;
+	width:600px;
+	height:309.4477233886719px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:24px;
+}
+.ei1_5318_0_1202 { 
+	border-radius:500px;
+	background-color:rgba(245.2363023161888, 165.84366649389267, 35.32828509807587, 1);
+	width:12px;
+	height:12px;
+	position:absolute;
+	left:529px;
+	top:9px;
+}
+.ei1_5318_0_1203 { 
+	border-radius:500px;
+	background-color:rgba(126.00836724042892, 210.6896960735321, 33.11870366334915, 1);
+	width:12px;
+	height:12px;
+	position:absolute;
+	left:549px;
+	top:9px;
+}
+.ei1_5318_0_1204 { 
+	border-radius:500px;
+	background-color:rgba(208.0000028014183, 2.000000118277967, 27.000000290572643, 1);
+	width:12px;
+	height:12px;
+	position:absolute;
+	left:569px;
+	top:9px;
+}
+.ei1_5318_0_1205 { 
+	width:577.727294921875px;
+	height:269.51995849609375px;
+	position:absolute;
+	left:11.8392333984375px;
+	top:26px;
+}
+
+.ei1_5318_0_1206 { 
+	overflow:hidden;
+	box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+	background-color:rgba(155.01251488924026, 154.98985290527344, 155.0202512741089, 1);
+	width:577.727294921875px;
+	height:269.51995849609375px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:24px;
+}
+.ei1_5318_0_1207 { 
+	box-shadow:0px 0px 15px rgba(65.0000037252903, 57.00000040233135, 107.00000122189522, 0.20000000298023224);
+	background-color:rgba(155.01251488924026, 154.98985290527344, 155.0202512741089, 1);
+	opacity:0.8999999761581421;
+	width:577.727294921875px;
+	height:269.51995849609375px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:24px;
+}
+.ei1_5318_0_1208 { 
+	width:580px;
+	height:270px;
+	position:absolute;
+	left:-0.8392333984375px;
+	top:0px;
+	background-image:url('/img/캐러셀.png');
+	background-repeat:no-repeat;
+	background-size:cover;
+}
