@@ -49,9 +49,9 @@
                 <!-- 프롬프트 -->
                 <fieldset class="container-lg m-auto rounded border-5" style="height: 100%;position: relative;">
                     <div class="d-flex align-items-center justify-content-between">
-                        <legend align="center" class="fw-bold">프롬프트 작성</legend>
-                        <a class="btn btn-primary" id="convertBtn" style="font-size: 17px;width: 100px;">변환</a>
-                    </div>
+					    <h3 class="fw-bold" style="flex: 1; text-align:center;">프롬프트 작성</h3>
+					    <a class="btn btn-primary" id="convertBtn" style="font-size: 17px;width: 100px;">변환</a>
+					</div>
                     <div class=" justify-content-center">
                         <span class="fw-bold">화풍</span>
                         <div class="col d-flex mb-1">
@@ -77,29 +77,89 @@
                         </div>
                         <span class="fw-bold">프롬프트1</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptDoing" class="form-control" placeholder="~를">
+                        	<div style="width:86%;">
+	                        	<select id="prompt1" class="form-select" onchange="selectedprompt1(this);">
+									<option value="">(필수) 1번 프롬프트 선택</option>
+									<option value="선글라스">선글라스</option>
+									<option value="의자">의자</option>
+									<option value="축구공">축구공</option>
+									<option value="컴퓨터">컴퓨터</option>
+									<option value="텐트">텐트</option>
+								</select>
+							</div>
+							<div style="display: flex; align-items: center; justify-content: flex-end;">
+								<h5>&nbsp;&nbsp;<b>을/를</b></h5>
+							</div>
                         </div>
                         <span class="fw-bold">프롬프트2</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptWho" class="form-control" placeholder="~하고/하는">
+                        	<div style="width:86%;">
+	                        	<select id="prompt2" class="form-select" onchange="selectedprompt2(this);">
+									<option value="">(선택) 2번 프롬프트 선택</option>
+									<option value="구매">구매</option>
+									<option value="설치">설치</option>
+									<option value="수리">수리</option>
+									<option value="착용">착용</option>
+									<option value="활용">활용</option>
+								</select>
+							</div>
+							<div style="display: flex; align-items: center; justify-content: flex-end;">
+								<h5>&nbsp;&nbsp;<b>하고/하는</b></h5>
+							</div>
                         </div>
                         <span class="fw-bold">프롬프트3</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptWhere" class="form-control" placeholder="~로 (생략가능)">
+                        	<div style="width:86%;">
+	                        	<select id="prompt3" class="form-select" onchange="selectedprompt3(this);">
+									<option value="">(선택) 3번 프롬프트 선택</option>
+									<option value="도시">도시</option>
+									<option value="산">산</option>
+									<option value="바다">바다</option>
+									<option value="북유럽">북유럽</option>
+									<option value="판매점">판매점</option>
+								</select>
+							</div>
+							<div style="display: flex; align-items: center; justify-content: flex-end;">
+								<h5>&nbsp;&nbsp;<b>으로/로</b></h5>
+							</div>
                         </div>
                         <span class="fw-bold">프롬프트4</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptWhat" class="form-control" placeholder="~한">
+                        	<div style="width:86%;">
+	                        	<select id="prompt4" class="form-select" onchange="selectedprompt4(this);">
+									<option value="">(필수) 4번 프롬프트 선택</option>
+									<option value="놀러">놀러</option>
+									<option value="쇼핑을">쇼핑을</option>
+									<option value="싸움을">싸움을</option>
+									<option value="일하러">일하러</option>
+									<option value="평평">평평</option>
+								</select>
+							</div>
+							<div style="display: flex; align-items: center; justify-content: flex-end;">
+								<h5>&nbsp;&nbsp;<b>간/한</b></h5>
+							</div>
                         </div>
                         <span class="fw-bold">프롬프트5</span>
                         <div class="col d-flex mb-1">
-                                <input type="text" id="promptHow" class="form-control" placeholder="명사/동사">
+	                        <div style="width:86%;">
+	                        	<select id="prompt5" class="form-select" onchange="selectedprompt5(this);">
+									<option value="">(필수) 5번 프롬프트 선택</option>
+									<option value="강아지">강아지</option>
+									<option value="고양이">고양이</option>
+									<option value="사람">사람</option>
+									<option value="평지">평지</option>
+									<option value="햄스터">햄스터</option>
+								</select>
+							</div>
+							<div style="display: flex; align-items: center; justify-content: flex-end;">
+								<h5>&nbsp;&nbsp;<b>.</b></h5>
+							</div>
                         </div>
                     </div>
                 </fieldset>
             </div>
             <div class="card p-3 text-center"  style="width: 20%; height: 32rem; margin-left: 1.5rem; position: relative;">
-                <h3 class="fw-bold">작성안내</h4>
+                <h3 class="fw-bold">작성안내</h3>
                 <br/>
                 <h5 class="fw-bold">1. 프롬프트</h5>
 				<p style="text-align: left; margin-left: 25%;">
@@ -115,6 +175,7 @@
 				<p style="text-align: left; margin-left: 25%;">
 					a. <b style="color: blue;">파일 업로드</b><br/>b. <b style="color: blue;">파일 편집기</b>로 마스킹<br/>c. <b style="color: blue;">프롬프트</b> 작성<br/>d. <b style="color: blue;">변환</b> 버튼 클릭
 				</p>
+                <h6 class="fw-bold">※ 프롬프트 부분 생략 가능</h6>
             </div>
         </div>
 		<div id="resultDiv" class="row p-2 align-items-center position-relative center-div justify-content-center" style="display: none; min-height: 580px">
@@ -196,7 +257,7 @@
         </div>
     </div>
 
-    <!-- 모달 창 -->
+    <!-- 로딩 모달 창 -->
     <div class="modal fade" id="gifModal" tabindex="-1" aria-labelledby="gifModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-centered">
             <div class="modal-content">
@@ -222,6 +283,6 @@
         var selectImageUrl ='${selectImageUrl}'
     </script>
     <script>var contextPath = "<%= request.getContextPath() %>";</script>
-	<script src="/js/aigenerator.js"></script>
+	<script src="/js/CardDesign.js"></script>
 </body>
 </html>

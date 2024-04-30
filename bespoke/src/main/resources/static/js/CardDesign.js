@@ -3,12 +3,11 @@ document.getElementById("resetBtn").onclick = function () {
     document.getElementById("card2Div").style.display = "none";
     document.getElementById("card3Div").style.display = "none";
     document.getElementById('select1').value = '';
-    document.getElementById('promptDoing').value = '';
-    document.getElementById('promptWho').value = '';
-    document.getElementById('promptWhere').value = '';
-    document.getElementById('promptWhat').value = '';
-    document.getElementById('promptHow').value = '';
-
+    document.getElementById('prompt1').value = '';
+    document.getElementById('prompt2').value = '';
+    document.getElementById('prompt3').value = '';
+    document.getElementById('prompt4').value = '';
+    document.getElementById('prompt5').value = '';
     document.getElementById('preview').src = selectImageUrl;
     document.getElementById('generatedImg3').src = selectImageUrl;
     document.getElementById('fileInput').value = '';
@@ -134,24 +133,25 @@ function setDisable(isTrue) {
     if(isTrue) {
         document.getElementById("select1").value = '';
         document.getElementById("select1").disabled = true;
-        document.getElementById("promptDoing").value = '';
-        document.getElementById("promptDoing").disabled = true;
-        document.getElementById("promptWho").value = '';
-        document.getElementById("promptWho").disabled = true;
-        document.getElementById("promptWhere").value = '';
-        document.getElementById("promptWhere").disabled = true;
-        document.getElementById("promptWhat").value = '';
-        document.getElementById("promptWhat").disabled = true;
-        document.getElementById("promptHow").value = '';
-        document.getElementById("promptHow").disabled = true;
+        document.getElementById("prompt1").value = '';
+        document.getElementById("prompt1").disabled = true;
+        document.getElementById("prompt2").value = '';
+        document.getElementById("prompt2").disabled = true;
+        document.getElementById("prompt3").value = '';
+        document.getElementById("prompt3").disabled = true;
+        document.getElementById("prompt4").value = '';
+        document.getElementById("prompt4").disabled = true;
+        document.getElementById("prompt5").value = '';
+        document.getElementById("prompt5").disabled = true;
+
         document.getElementById("nonFileImgButton").disabled = true;
     } else {
         document.getElementById("select1").disabled = false;
-        document.getElementById("promptDoing").disabled = false;
-        document.getElementById("promptWho").disabled = false;
-        document.getElementById("promptWhere").disabled = false;
-        document.getElementById("promptWhat").disabled = false;
-        document.getElementById("promptHow").disabled = false;
+        document.getElementById("prompt1").disabled = false;
+        document.getElementById("prompt2").disabled = false;
+        document.getElementById("prompt3").disabled = false;
+        document.getElementById("prompt4").disabled = false;
+        document.getElementById("prompt5").disabled = false;
         document.getElementById("nonFileImgButton").disabled = false;
     }
 }
@@ -248,17 +248,63 @@ var promptStyle = function (selectObj){
        return selectedValue;
    };
 
+// 프롬프트1
+var selectedprompt1 = function (selectObj){
+       var selectedIndex = selectObj.selectedIndex;
+       var selectedValue = selectObj.options[selectedIndex].value;
+       return selectedValue;
+   };
+   
+// 프롬프트2
+var selectedprompt2 = function (selectObj){
+       var selectedIndex = selectObj.selectedIndex;
+       var selectedValue = selectObj.options[selectedIndex].value;
+       return selectedValue;
+   };
+   
+// 프롬프트3
+var selectedprompt3 = function (selectObj){
+       var selectedIndex = selectObj.selectedIndex;
+       var selectedValue = selectObj.options[selectedIndex].value;
+       return selectedValue;
+   };
+   
+// 프롬프트t4
+var selectedprompt4 = function (selectObj){
+       var selectedIndex = selectObj.selectedIndex;
+       var selectedValue = selectObj.options[selectedIndex].value;
+       return selectedValue;
+   };
+   
+// 프롬프트5
+var selectedprompt5 = function (selectObj){
+       var selectedIndex = selectObj.selectedIndex;
+       var selectedValue = selectObj.options[selectedIndex].value;
+       return selectedValue;
+   };
+
 // 변환 버튼
 document.getElementById("convertBtn").addEventListener("click", async() => {
 	var selectObj = document.getElementById("select1");	
 	var selectedStyle = promptStyle(selectObj);
 	
-	////////////////////////////////////
-    //test 할 때 주석 처리 할 곳
-    ////////////////////////////////////
+	var promptObj1 = document.getElementById("prompt1");	
+	var prompt1 = selectedprompt1(promptObj1);
+	
+	var promptObj2 = document.getElementById("prompt2");	
+	var prompt2 = selectedprompt2(promptObj2);
+	
+	var promptObj3 = document.getElementById("prompt3");	
+	var prompt3 = selectedprompt3(promptObj3);
+	
+	var promptObj4 = document.getElementById("prompt4");	
+	var prompt4 = selectedprompt4(promptObj4);
+	
+	var promptObj5 = document.getElementById("prompt5");	
+	var prompt5 = selectedprompt5(promptObj5);
+	
     var promptStyleString = selectedStyle + " style";
     var imgStyle;
-    ////////////////////////////////////
     
     // photograph이 좀 더 실사에 가까움
    	if (["Expressionism", "Surrealism", "Cubism", "Pop Art", "Abstract Art", "Minimalism", "Baroque", "Sketch", "Animation", "Graffiti"].includes(selectedStyle)) {
@@ -269,12 +315,6 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
    		// 예상치 못한 스타일 값에 대한 처리
    		imgStyle = "image";
    	}    
-    
-	var promptDoing = document.getElementById("promptDoing").value;
-	var promptWho = document.getElementById("promptWho").value;
-	var promptWhere = document.getElementById("promptWhere").value;
-	var promptWhat = document.getElementById("promptWhat").value;
-	var promptHow = document.getElementById("promptHow").value;
 	
 	// 파일 업로드 안하고 프롬프트만 써서 변환 누르면 mode 0
 	// 파일 업로드만 해서 변환 누르면 mode 1
@@ -285,13 +325,8 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
 	var isFile = uploadedImg ? true : false;
 	var mode = fileDrawn ? 2 : isFile ? 1 : 0;
 	
-	////////////////////////////////////
-    //test 할 때 주석 처리 할 곳
-    ////////////////////////////////////
-	var promptKorean = promptDoing + " " + promptWho + " " + promptWhere + " " + promptWhat + " " + promptHow;
-	////////////////////////////////////
-	
-	var promptIsNull = !promptDoing && !promptWho && !promptWhere && !promptWhat && !promptHow;
+	var promptKorean = prompt1 + "를 " + prompt2 + "하는 " + prompt3 + "로 " + prompt4 + "간 " + prompt5;
+	var promptIsNull = !prompt1 && !prompt2 && !prompt3 && !prompt4 && !prompt5;
     
     // 마스킹은 했는데 프롬프트 안쓰거나 / 업로드 안했는데 프롬프트 안쓰면 alert
     if((fileDrawn && promptIsNull) || (!isFile && promptIsNull) ) {
@@ -317,14 +352,10 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
 	async function waitAndRun(ms) {
 		await delay(ms);
 		console.log(ms);
-		console.log('n 초가 지났습니다!');
+		console.log('1초가 지났습니다!');
 	}
 	
-	
-	////////////////////////////////////
-    //test 할 때 주석 처리 할 곳
-    ////////////////////////////////////
-    // DeepL 번역 API
+	// DeepL 번역 API
 	try {
 	    let response = await fetch("http://127.0.0.1:5000/translate", {
 	        method: "POST",
@@ -351,10 +382,7 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
 	    prompt =  translatedPrompt;	
 	} else {
 	    prompt =  "A " + promptStyleString + ", " + promptStyleString + ", " + promptStyleString + " " + imgStyle + " of " + translatedPrompt;		
-	}
-    ////////////////////////////////////
-//    prompt = "test prompt";
-    
+	}    
     
 	// 하나의 json으로 보내기 위한 FormData 객체
 	var formData = new FormData();
@@ -366,9 +394,6 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
 	}
 
  	try {
-		 ////////////////////////////////////
-	     // test 할 때 주석 처리 할 곳
-	     ////////////////////////////////////
 	    let response = await fetch("http://127.0.0.1:5000/generate_img", {
 	            method: "POST",
 	            body: formData
@@ -382,16 +407,11 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
 
 	    var b64ImageData1 = result?.b64_img1;
 	    var b64ImageData2 = result?.b64_img2;
-	    
-	    console.log("b64 잘 들어오는지 확인");
-	    console.log(b64ImageData1);
-		////////////////////////////////////
-	    
+	    	    
 		// 카드 이미지 표시
 	    var card1 = document.getElementById("generatedImg1");
 	    var card2 = document.getElementById("generatedImg2");
 
-	    
 		// 이미지 두 장 다 로드 된 후 저장 실행
 	    function loadImagePromise(imageElement, imageData) {
 		    return new Promise((resolve, reject) => {

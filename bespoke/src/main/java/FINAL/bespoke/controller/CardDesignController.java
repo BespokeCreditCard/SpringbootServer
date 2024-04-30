@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import FINAL.bespoke.model.entity.ImageTemplate;
 import FINAL.bespoke.model.entity.User;
-import FINAL.bespoke.service.AiGeneratorService;
 import FINAL.bespoke.service.RecommendationService;
 import FINAL.bespoke.service.ImageTemplateService;
 import FINAL.bespoke.service.ReceiveCardService;
