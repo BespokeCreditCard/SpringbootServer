@@ -10,13 +10,25 @@
             text-align: center;
         }
         
+       	@font-face {
+		    font-family: 'KCC-Hanbit';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		@font-face {
+		    font-family: 'WooridaumR';
+		    src: url('/fonts/WooridaumR.ttf') format('truetype');
+		}
         .myPagediv {
+        	font-family: 'KCC-Hanbit';
             opacity: 0;
             position: relative;
+            min-height: 45.5rem;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 3rem;
+            padding: 5rem;
             background-color: #f1f1f1;
             animation: fadeIn 2s ease-in-out forwards;
         }
@@ -78,6 +90,7 @@
         .cardNameMyPage {
             font-family: 'WooridaumR';
             font-weight: bold;
+            text-align: center;
             font-size: 24px;
             color: #000000;
             margin-top: 1rem;
@@ -86,7 +99,6 @@
         }
 
         .leftTitle {
-            font-family: 'Inter';
             font-weight: bold;
             font-size: 30px;
             color: #000000;
@@ -94,7 +106,6 @@
         }
 
         .personalInformation, .cardBenefitMyPage .card-headers{
-            font-family: 'Inter';
             font-weight: 700;
             font-weight: bold; /* 굵은 글꼴로 변경 */
             font-size: 20px;
@@ -103,7 +114,7 @@
         }
 
         .customerInfo, .cardBenefitMyPageDetail {
-            font-family: 'Inter';
+   		    font-family: 'WooridaumR';
             font-weight: 500;
             font-size: 18px;
             color: #000000;
@@ -111,6 +122,7 @@
         }
 
         .cardBenefitMyPageDetail {
+   		    font-family: 'WooridaumR';
             max-height: 13rem;
             
         }
@@ -118,7 +130,6 @@
         .card-bodys {
         	margin-right: -3rem;
         	max-width: 30rem;
-            font-family: 'Inter';
             font-weight: 500;
             font-size: 18px;
             color: #000000;
@@ -172,6 +183,17 @@
 		       				<br>
 		                </div>
 		            </div>
+		        </div>
+		    </div>
+		    <!-- 버튼 -->
+		    <div class="container-fluid fixed-bottom" id="prevBtnDiv">
+			    <div class="row justify-content-start mb-3">
+			       <div class="col-6">
+			            <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/design/carddesign'">이전</button>
+			       </div>
+			       <div class="col-6 text-end justify-content-end" id="nextBtnDiv">
+		                <button type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#issueCardModal">확인</button>
+		           </div>
 		        </div>
 		    </div>
         </div>
@@ -258,18 +280,7 @@
         </div>
     </div>
 
-    <!-- 버튼 -->
-    <div class="container-fluid fixed-bottom" id="prevBtnDiv">
-    <div class="row justify-content-start mb-3">
-        <div class="col-6">
-            <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='<%= request.getContextPath() %>/design/carddesign'">이전</button>
-        </div>
-        <div class="col-6 text-end justify-content-end" id="nextBtnDiv">
-                <button type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#issueCardModal">확인</button>
-            </div>
-        </div>
-    </div>
-
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 

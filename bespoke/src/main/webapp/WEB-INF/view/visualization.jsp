@@ -16,12 +16,27 @@
 
 
 <style>
+	body {
+		font-family: 'KCC-Hanbit';
+	}
+
+	h3 {
+		font-size: 35px;
+	}
+
     .container-wrapper {
         padding: 3rem;
-        min-height: 48rem;
+        min-height: 45.5rem;
         background-color: #f1f1f1;
         border-radius: 5px;
     }
+    
+    @font-face {
+	    font-family: 'KCC-Hanbit';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
 </style>
 
 <body>
@@ -70,10 +85,10 @@
         };
         // 대시보드 URL을 생성하는 함수입니다.
         function generateDashboardUrl(seq) {
-            return "https://e2a9-118-131-63-236.ngrok-free.app/app/dashboards#/view/68518b80-012f-11ef-8a39-c130702c98df?embed=true&_g=(filters:!((query:(query_string:(query:'SEQ:"+seq+"')))),refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-8y%2Cto%3Anow))&hide-filter-bar=true"
+            return "https://e81c-118-131-63-236.ngrok-free.app/app/dashboards#/view/68518b80-012f-11ef-8a39-c130702c98df?embed=true&_g=(filters:!((query:(query_string:(query:'SEQ:"+seq+"')))),refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-8y%2Cto%3Anow))&hide-filter-bar=true"
         }
         function generateDashboardUrl2(seq) {
-            return "https://e2a9-118-131-63-236.ngrok-free.app/app/dashboards#/view/1c4712e0-01d0-11ef-8a39-c130702c98df?embed=true&_g=(filters:!((query:(query_string:(query:'SEQ:"+seq+"')))),refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true"
+            return "https://e81c-118-131-63-236.ngrok-free.app/app/dashboards#/view/1c4712e0-01d0-11ef-8a39-c130702c98df?embed=true&_g=(filters:!((query:(query_string:(query:'SEQ:"+seq+"')))),refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true"
         }
     </script>
 </body>

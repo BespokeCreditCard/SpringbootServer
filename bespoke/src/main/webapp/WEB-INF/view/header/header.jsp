@@ -46,11 +46,13 @@
 </head>
 <body>  
     <nav class="navbar">
-        <a href="${pageContext.request.contextPath}/" class="navbar__brand">우리은행</a>        
+        <a href="${pageContext.request.contextPath}/" class="navbar__brand">Bespoke</a>        
         <ul class="navbar__menu">
             <li id="cardAddButton"><a href="${pageContext.request.contextPath}/card/cardAdd">카드 추가</a></li>
-            <li><a href="${pageContext.request.contextPath}/recommendation_view/selectRecommendation">카드 추천</a></li>
-            <li><a href="${pageContext.request.contextPath}/design/carddesign">카드 꾸미기</a></li>
+            <li><a href="${pageContext.request.contextPath}/visualization">대시 보드</a></li>
+            <li><a href="${pageContext.request.contextPath}/recommendation_view/selectRecommendation">혜택 선택</a></li>
+            <li><a href="${pageContext.request.contextPath}/recommendation_view/recommendation">카드 추천</a></li>
+            <li><a href="${pageContext.request.contextPath}/design/carddesign?selectCardId=14">카드 꾸미기</a></li>
             <li><a href="${pageContext.request.contextPath}/receivecard">카드 발급</a></li>
             <li><a href="${pageContext.request.contextPath}/terms_view/terms">약관</a></li>
             <li><a href="${pageContext.request.contextPath}/mypage">마이 페이지</a></li>

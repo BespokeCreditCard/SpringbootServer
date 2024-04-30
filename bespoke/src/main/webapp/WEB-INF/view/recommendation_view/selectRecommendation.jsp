@@ -6,8 +6,19 @@
 
 </head>
 <style>
+	body {
+	    font-family: 'KCC-Hanbit';
+	}
+
+	@font-face {
+	    font-family: 'KCC-Hanbit';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
     .container-wrapper {
-        min-height: 48rem;
+        min-height: 45.5rem;
         padding: 4rem;
         background-color: #f1f1f1;
         border-radius: 5px;
@@ -16,7 +27,8 @@
     .container-white {
         overflow: hidden; /* 자식 요소가 float 속성을 가지면 부모 요소의 높이가 사라지는 것을 방지합니다. */
         background-color: #ffffff;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 2);
+        border-radius: 10px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 1);
     }
 
 
@@ -51,7 +63,7 @@
 
             <section class="p-3">
                 <div class="card mb-3">
-                    <h2>카드 추천</h2>
+                    <h2>카드 혜택</h2>
                     <h5>원하시는 혜택을 선택해주세요</h5>
                 </div>
                 <div id="userId" style="display: none;">${userId}</div>

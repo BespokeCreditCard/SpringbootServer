@@ -21,7 +21,14 @@
 	        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%);
 	        box-shadow: 0 0 20px rgba(255,255,255,0.2);
 	    }
-	
+	    
+		@font-face {
+		    font-family: 'KCC-Hanbit';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
 	    .container {
 		    width: 241.25px;
 		    height: 420px;
@@ -49,9 +56,9 @@
 		    border-radius: 1rem;
 		}
 </style>
-<body style="background-color: #6c757d">
+<body style="background-color: #6c757d80">
     <section style="width: 100%;display: flex;align-items: center;justify-content: center">
-        <h1 class="card-title" style="align-items: center;">[${benefitList}] 혜택 카드</h1>
+        <h1 class="card-title mt-2" style="align-items: center; font-family: 'KCC-Hanbit';">[${benefitList}] 혜택 카드</h1>
     </section>
     <section style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
 		<div class="slider-for" style="width: 95%; height: 100%; min-height: 10%; align-items: center;">
@@ -64,21 +71,23 @@
 		</div>
     </section>
     
-    <section style="width: 100%; display: flex; flex-direction:column; align-items: center;justify-content: center">
-        <div class="benefit-card">
-		    <h2>
-		    <c:forEach var="categoryClass" items="${categoryClass[0]}" varStatus="status">
-			        <c:out value="${categoryClass}" />
-			        <c:if test="${not status.last}">,</c:if>
-		    </c:forEach>
-		    </h2>
-        </div>
- 		<form id="selectCardId" action="/design/carddesign" method="GET">
-			<input type="hidden" id="selectInputCardId" name="selectCardId" value="${imageUrls[0].idx}">
-			<button type="submit" class="btn btn-primary mt-3 mb-3">카드선택</button>
-		</form>
-		<button type="button" class="btn btn-primary" onclick="window.location.href='/wordcloud'">키워드보기</button>
-    </section>
+	<section style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'KCC-Hanbit';">
+	    <div class="benefit-card mb-3" style="margin-bottom: 10px;">
+	       <h2>
+	          <c:forEach var="categoryClass" items="${categoryClass[0]}" varStatus="status">
+	             <c:out value="${categoryClass}" />
+	             <c:if test="${not status.last}">,</c:if>
+	          </c:forEach>
+	       </h2>
+	    </div>
+	    <div style="display: flex; flex-direction: row;">
+	       <form id="selectCardId" action="/design/carddesign" method="GET" style="margin-right: 10px;">
+	          <input type="hidden" id="selectInputCardId" name="selectCardId" value="${imageUrls[0].idx}">
+	          <button type="submit" class="btn btn-primary">카드선택</button>
+	       </form>
+	       <button type="button" class="btn btn-primary" onclick="window.location.href='/wordcloud'">키워드보기</button>
+	    </div>
+	</section>
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -111,8 +120,8 @@
 	        autoplaySpeed: 3000,
 	        pauseOnHover: false,
 	        vertical: false,
-	        prevArrow: "<button type='button' class='btn btn-info' style='position: absolute;top: 110%;left: 100px;'>이전</button>",
-	        nextArrow: "<button type='button' class='btn btn-info' style='position: absolute;top: 110%;right: 100px;'>다음</button>",
+	        prevArrow: "<button type='button' class='btn btn-info' style='position: absolute;top: 110%;left: 100px; font-family: 'KCC-Hanbit';'>이전</button>",
+	        nextArrow: "<button type='button' class='btn btn-info' style='position: absolute;top: 110%;right: 100px; font-family: 'KCC-Hanbit';'>다음</button>",
 	        centerMode: true,
 	        draggable: true,
 	        focusOnSelect: true,

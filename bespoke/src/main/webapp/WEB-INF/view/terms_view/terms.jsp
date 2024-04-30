@@ -4,8 +4,19 @@
 <%@ include file="../header/header.jsp" %>
 
 <style>
+	@font-face {
+	    font-family: 'KCC-Hanbit';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'WooridaumR';
+	    src: url('/fonts/WooridaumR.ttf') format('truetype');
+	}
     .container-wrapper {
-        min-height: 48rem;
+	    font-family: 'WooridaumR';
+        min-height: 45.5rem;
         padding: 2rem;
         background-color: #f1f1f1;
         border-radius: 5px;
@@ -14,7 +25,7 @@
     .container-white {
         margin: auto;
         width: 90%;
-        max-height: 40rem;
+        max-height: 37rem;
         overflow-y: scroll; /* 자식 요소가 float 속성을 가지면 부모 요소의 높이가 사라지는 것을 방지합니다. */
         background-color: #ffffff;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 2);
@@ -22,7 +33,7 @@
 </style>
 
     <div class="container-wrapper">
-        <h2 class="text-center">특약<br></h2>
+        <h2 class="text-center" style="font-family: 'KCC-Hanbit';">특약<br></h2>
         <div class="container-white p-3">
             <p>
                 제1조 약관의 적용<br>

@@ -8,7 +8,6 @@
         opacity: 0;
         animation: fadeIn 1s ease-in forwards;
     }
-
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -22,7 +21,7 @@
     }
 </style>
 <%@ include file="../header/header.jsp" %>
-    <div class="container-xxl shadow-lg p-2 m-auto mt-5 bg-white rounded border-5" style="min-width: 1500px;">
+    <div class="container-xxl shadow-lg p-2 m-auto mt-5 bg-white rounded border-5" style="min-width: 1500px; font-family: 'KCC-Hanbit';">
         <div class="d-flex p-2 align-items-center justify-content-between">
             <h2>카드꾸미기</h2>
             <a class="btn btn-danger" id="resetBtn" style="font-size: 17px;width: 100px;">초기화</a>

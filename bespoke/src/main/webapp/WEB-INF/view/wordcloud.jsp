@@ -9,7 +9,18 @@
 
 <script src="https://cdn.anychart.com/releases/8.12.1/js/anychart-core.min.js"></script>
 <script src="https://cdn.anychart.com/releases/8.12.1/js/anychart-tag-cloud.min.js"></script>
-
+<style>
+	@font-face {
+	    font-family: 'KCC-Hanbit';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
+	body {
+	    font-family: 'KCC-Hanbit';
+	}
+</style>
 <body>
 	<div class="word_container-fluid">
 		<div class="row" style="width:100%">
