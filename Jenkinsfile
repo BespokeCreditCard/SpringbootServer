@@ -26,7 +26,7 @@ node {
                 --build-arg ElasticPW=$ElasticPW \
                 --build-arg springJwtSecret=$springJwtSecret \
                 --build-arg DEEPL=$DEEPL \
-                -t my-app .
+                -t spring-app .
             '''
             sh '''
                 rm temp_env.sh
@@ -40,19 +40,19 @@ node {
         usernameVariable: 'DOCKER_USER_ID', 
         passwordVariable: 'DOCKER_USER_PASSWORD']]) {
             stage('Docker Tag') {
-                sh(script: '''sudo docker tag my-app ${DOCKER_USER_ID}/my-app:${BUILD_NUMBER}''') 
+                sh(script: '''sudo docker tag spring-app ${DOCKER_USER_ID}/spring-app:${BUILD_NUMBER}''') 
             }
             stage('Docker Push') {
                 sh(script: 'sudo docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}') 
-                sh(script: 'sudo docker push ${DOCKER_USER_ID}/my-app:${BUILD_NUMBER}') 
+                sh(script: 'sudo docker push ${DOCKER_USER_ID}/spring-app:${BUILD_NUMBER}') 
             }
     
         withCredentials([file(credentialsId: 'secret-file-env', variable: 'MY_SECRET_FILE')]) {
                 stage('Deploy') {
                     sshagent(credentials: ['aws-ssh-pem-key']) {
-                        sh(script: 'ssh -o StrictHostKeyChecking=no ubuntu@3.34.232.104 "sudo docker rm -f my-app"')
+                        sh(script: 'ssh -o StrictHostKeyChecking=no ubuntu@3.34.232.104 "sudo docker rm -f spring-app"')
                         sh(script: 'scp $MY_SECRET_FILE ubuntu@3.34.232.104:~/.env')
-                        sh(script: 'ssh ubuntu@3.34.232.104 "sudo docker run --name my-app --env-file ~/.env -e TZ=Asia/Seoul -p 80:8080 -d -t \${DOCKER_USER_ID}/my-app:\${BUILD_NUMBER}"')
+                        sh(script: 'ssh ubuntu@3.34.232.104 "sudo docker run --name spring-app --env-file ~/.env -e TZ=Asia/Seoul -p 80:8080 -d -t \${DOCKER_USER_ID}/spring-app:\${BUILD_NUMBER}"')
                     }
                 }
         }
