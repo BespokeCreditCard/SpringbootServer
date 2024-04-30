@@ -52,9 +52,11 @@ def mode_2(client, model, input_prompt, input_img, mask_img, img_size, img_quant
     )
     return response
 
-def save_result(tmp):    
-    b64_str1 = tmp[0].b64_json
-    b64_str2 = tmp[1].b64_json
+def save_result(result_images):
+    b64_str1 = result_images[0].b64_json
+    b64_str2 = result_images[1].b64_json
+    print("??????????")
+    print(type(b64_str1[:100]))
     print("DALL-E 결과1:", b64_str1[:100])
     print("DALL-E 결과2:", b64_str2[:100])
     print("=====================================")
@@ -79,32 +81,52 @@ def generate_img(input_prompt, input_img=None, mask_img=None, mode=0):
 
     model = ["dall-e-2", "dall-e-3"]
     quality = ["standard", "hd"]
-    style = ["vivid", "natural"]
+
+    # 화풍에 따라 vivid/natural 적용
+    style = None
+    style_type = ["vivid", "natural"]
+    vivid_condition = ["Expressionism", "Surrealism", "Cubism", "Pop Art", "Abstract Art", "Minimalism", "Baroque", "Sketch", "Animation", "Graffiti"]
+    natural_condition = ["Hyperrealism", "Impressionism", "Renaissance", "Traditional Korean Painting", "Three Kingdoms Period Murals", "Futurism"]
+
+    for vivid in vivid_condition:
+        if vivid.lower() in input_prompt.lower():
+            style = style_type[0]
+            break
+    if style is None:
+        for natural in natural_condition:
+            if natural.lower() in input_prompt.lower():
+                style = style_type[1]
+                break
+    # default: natural
+    else:
+        style = style_type[1]
+    
     img_size = ["1024x1024", "1024x1792", "1792x1024"]
+
     # img_quantity바꾸면 안됨
     img_quantity = 1
     format = ["url", "b64_json"]
     
     print(input_prompt)
     print("mode:", mode, type(mode))
-    tmp = []
+    result_images = []
     for _ in range(2):
         if mode == 0:
-            response = mode_0(client, model[1], input_prompt, quality[1], style[1], img_size[2], img_quantity, format[1])
+            response = mode_0(client, model[1], input_prompt, quality[1], style, img_size[1], img_quantity, format[1])
         elif mode == 1:
             response = mode_1(client, model[0], input_img, img_size[0], img_quantity, format[1])
         elif mode == 2:
-            response = mode_2(client, model[0], input_prompt, input_img, mask_img, img_size, img_quantity, format[1])
+            response = mode_2(client, model[0], input_prompt, input_img, mask_img, img_size[0], img_quantity, format[1])
         else:
             response = None
             print("어떤 mode에도 속하지 않음")
-        tmp.append(response.data[0])
+        result_images.append(response.data[0])
         
     ################################################################################
     # 생성한 이미지 로컬에 저장하고, b64 String return
     ################################################################################
     print("=====================================")
-    b64_str1, b64_str2 = save_result(tmp)
+    b64_str1, b64_str2 = save_result(result_images)
     return b64_str1, b64_str2
 
 
