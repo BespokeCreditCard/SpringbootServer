@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
@@ -141,7 +142,14 @@ public class RecommendationService {
 
         List<GetResponse<ObjectNode>> response = elasticService.fetchDataElastic(imageList,"result_bulk");
 
-        List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
+//        List<List<String>> categoryClass = elasticService.ElasticSearchJsonToTextClassInCategory(response);
+        List<List<String>> categoryClass = new ArrayList<>();
+        
+        categoryClass.add(new ArrayList<>(Arrays.asList("온라인쇼핑", "간편결제", "동물병원", "쇼핑", "마트/편의점", "해외이용", "공항라운지", "주유소", "카페")));
+        categoryClass.add(new ArrayList<>(Arrays.asList("온라인쇼핑", "간편결제", "생활", "카페", "배달앱", "대중교통", "통신", "해외", "생활", "디지털구독", "공연/전시")));
+        categoryClass.add(new ArrayList<>(Arrays.asList("쇼핑", "영화", "베이커리", "대중교통", "공항라운지")));
+        categoryClass.add(new ArrayList<>(Arrays.asList("공항라운지/PP", "해외이용", "생활", "간편결제", "CJ ONE")));
+        categoryClass.add(new ArrayList<>(Arrays.asList("영화", "적립"))); 
 
         
         System.out.println("### RecommendationService - categoryClass: " + categoryClass);
