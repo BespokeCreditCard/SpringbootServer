@@ -9,157 +9,63 @@
             border: 1px solid black;
             text-align: center;
         }
-        
-        .myPagediv {
-            opacity: 0;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 3rem;
-            background-color: #f0f0f0;
-            animation: fadeIn 2s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .leftdiv, .rightdiv {
-            padding: 2rem;
-            background-color: #ffffff;
-            border-radius: 5px;
-            flex-grow: 1;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 2);
-        }
-
-        .leftdiv {
-            flex: 1;
-            max-width: 25rem;
-            height: 35rem;
-        }
-
-        .rightdiv {
-            flex: 2;
-            margin-left: 3rem;
-            max-width: 45rem;
-            height: 35rem;
-        }
-
-        .cardImageMyPage img:hover {
-            transform: scale(1.2); /* 마우스를 가져다 대면 1.2배 확대됨 */
-        }
-        
-        .cardImageMyPage img{
-		    width: 80%; /* 부모 요소에 맞게 이미지가 가득 차도록 설정 */
-		    height: auto; /* 가로 비율에 맞추어 세로 비율 조정 */
-		    max-width: 100%; /* 최대 너비를 부모 요소의 너비에 맞추어 설정 */
-		    max-height: 100%; /* 최대 높이를 부모 요소의 높이에 맞추어 설정 */
-			margin-left: 2rem;
-            transform: scale(1);
-            transition: transform 0.5s ease-in-out;
-        }
-
-		@font-face {
-		    font-family: 'WooridaumR';
-		    src: url('/fonts/WooridaumR.ttf') format('truetype');
-		}
-
-        .cardNameMyPage {
-            font-family: 'WooridaumR';
-            font-weight: bold;
-            font-size: 24px;
-            color: #000000;
-            margin-top: 1rem;
-            padding: 0 1rem;
-            white-space: nowrap;
-        }
-
-        .leftTitle {
-            font-family: 'Inter';
-            font-weight: bold;
-            font-size: 30px;
-            color: #000000;
-            margin-bottom: 1rem;
-        }
-
-        .personalInformation, .cardBenefitMyPage .card-headers{
-            font-family: 'Inter';
-            font-weight: 700;
-            font-weight: bold; /* 굵은 글꼴로 변경 */
-            font-size: 20px;
-            color: #121212;
-            margin-bottom: 2rem;
-        }
-
-        .customerInfo, .cardBenefitMyPageDetail {
-            font-family: 'Inter';
-            font-weight: 500;
-            font-size: 18px;
-            color: #000000;
-            margin-bottom: 0.5rem;
-        }
-
-        .cardBenefitMyPageDetail {
-            max-height: 13rem;
-            overflow-y: auto;
-        }
-        
-        .card-bodys {
-        	margin-right: -3rem;
-            font-family: 'Inter';
-            font-weight: 500;
-            font-size: 18px;
-            color: #000000;
-            margin-bottom: 0.5rem;
-        }
 </style>
 <body>
-	<div class="myPagediv">
-        <div class="leftdiv">
-            <div class="cardImageMyPage">
-                <img src="${userImageUrl}" class="img-fluid" alt="선택된 카드">
-            </div>
-            <div class="cardNameMyPage">카드의 정석 DON CHECK</div>
-        </div>
-        <div class="rightdiv">
-            <div class="leftTitle">상세 정보</div>
-            <div class="personalInformation">개인정보
-                <div class="customerInfo">ID : <span id="user-id">${userData.userID}</span>&nbsp;&nbsp;&nbsp;&nbsp;이름 : <span id="user-name">${userData.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;생년월일 : <span id="user-birth">${userData.birthDate}</span></div>
-                <div class="customerInfo">연락처 : <span id="user-phone">${userData.contact}</span>&nbsp;&nbsp;&nbsp;&nbsp;주소 : <span id="user-phone">${userData.contact}</span></div>
-                <p class="card-headers">카드 수령장소</p>
-                <div class="card-bodys">
-                    <input type="text" id="user-address" style="width: 20rem;" placeholder="${userData.address}" disabled>
-                    <button class="btn btn-secondary" id="edit-address">수정</button>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="container-lg h-100 p-1 border border-primary bg-light rounded border-5">
+                    <h2 class="card-header">카드 수령장소</h2>
+                    <div class="card-body">
+                        <input type="text" class="form-control mb-3" id="user-address" placeholder="${userData.address}" disabled>
+                        <button class="btn btn-primary" id="edit-address">수정</button>
+                    </div>
                 </div>
             </div>
-            <div class="cardBenefitMyPage">
-            	<h3 style="font-weight: bold;">카드 혜택</h3>
-                <div class="cardBenefitMyPageDetail">
-                	<ul>
-	                    <li>분류: 동물병원&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 동물병원 10% 청구할인</li>
-	                    <br>
-	                    <li>분류: 온라인쇼핑&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 온라인 쇼핑 10% 청구할인</li>
-	                    <br>
-	                    <li>분류: 간편결제&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 4대 PAY 결제 시 5% 추가 청구할인</li>
-	                    <br>
-	                    <li>분류: 쇼핑&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 백화점, 아울렛, 잡화 10% 청구할인</li>
-	                    <br>
-	                    <li>분류: 마트/편의점&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 대형할인점, 편의점 등 10% 청구할인</li>
-	                    <br>
-	                    <li>분류: 해외이용&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 해외 이용금액 1% 청구할인</li>
-	                    <br>
-	                    <li>분류: 공항라운지&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 국내외 공항라운지 무료 이용 서비스</li>
-	                    <br>
-	                    <li>분류: 주유소&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 주말 4대 주유소 리터당 60원 청구할인</li>
-	                    <br>
-	                    <li>분류: 카페&nbsp;&nbsp;|&nbsp;&nbsp;혜택: 스타벅스, 폴바셋 10% 청구할인</li>
-       				</ul>
+    
+            <div class="col-md-6 mb-3">
+                <div class="container-lg h-100 p-1 border border-primary bg-light rounded border-5">
+                    <h2 class="card-header">개인 정보 확인</h2>
+                    <div class="card-body">
+                   		<p class="card-text">Id: <span id="user-id">${userData.userID}</span></p>
+                        <p class="card-text">이름: <span id="user-name">${userData.name}</span></p>
+                        <p class="card-text">생년월일: <span id="user-birth">${userData.birthDate}</span></p>
+                        <p class="card-text">주소: <span id="user-address-db">${userData.address}</span></p>
+                        <p class="card-text">전화번호: <span id="user-phone">${userData.contact}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="container-lg h-100 border border-primary bg-light rounded border-5">
+                    <h2 class="card-header">선택된 카드 이미지</h2>
+                    <div class="card-body">
+                        <img src="${userImageUrl}" class="img-fluid" alt="선택된 카드" width="33%">
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <div class="container-lg h-100 border border-primary bg-light rounded border-5">
+                    <h2 class="card-header">카드 혜택 내역</h2>
+                    <div class="card-body" style="overflow-y: scroll; max-height: 500px;">
+	                    <ul>
+	                        <c:forEach var="category" items="${categoriesResultDetail}" varStatus="catStatus">
+	                            <c:if test="${not empty categoriesResultDetail[catStatus.index * 3]}">
+	                                <li>Category ${catStatus.index + 1}:</li>
+	                                <ul>
+										<li>Class: <c:out value="${categoriesResultDetail[catStatus.index * 3]}" /></li>
+							            <li>Benefit: <c:out value="${categoriesResultDetail[catStatus.index * 3 + 1]}" /></li>
+										<li><c:out value="${categoriesResultDetail[catStatus.index * 3 + 2]}" escapeXml="false" /></li>
+	                                </ul>
+	                            </c:if>
+	                         </c:forEach>
+	                     </ul>
+                    </div>
                 </div>
             </div>
         </div>

@@ -5,53 +5,59 @@
 <!DOCTYPE html>
 <html lang="ko">
 <%@ include file="header/header.jsp" %>
-	<style>
-	        th, td {
-	            border: 1px solid black;
-	            text-align: center;
-	        }
-	</style>
-    <div class="container mt-5">
-        <!-- 나의 정보 섹션 -->
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="info-section custom-bg-Sky p-3 mb-2">
-                    <h2>나의 정보</h2>
-                    <div class="user-info">
-                        <table border="1" style="width: 100%; table-layout: fixed;">
-						    <colgroup>
-						        <col style="width: 25%;">
-						        <col style="width: 25%;">
-						        <col style="width: 25%;">
-						        <col style="width: 25%;">
-						    </colgroup>
-						    <tr>
-						        <td>이름</td>
-						        <td>${userData.name}</td>
-						        <td>성별</td>
-						        <td>
-									<c:choose>
-									    <c:when test="${fn:trim(userData.gender) eq '1'}">
-									        남성
-									    </c:when>
-									    <c:otherwise>
-									        여성
-									    </c:otherwise>
-									</c:choose>
-						        </td>
-						    </tr>
-						    <tr>
-						        <td>생년월일</td>
-						        <td colspan="3">${userData.birthDate}</td>
-						    </tr>
-						    <tr>
-						        <td>연락처</td>
-						        <td colspan="3">${userData.contact}</td>
-						    </tr>
-						    <tr>
-						        <td>주소</td>
-						        <td colspan="3">${userData.address}</td>
-						    </tr>
+<style>
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .left {
+            width: 33.33%;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+        .right {
+            width: 66.67%;
+            padding: 20px;
+        }
+        .card {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .info {
+            margin-top: 20px;
+        }
+</style>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <img src="profile.jpg" alt="Profile Picture" width="100%">
+            <div class="card">
+                <h3>Card Name</h3>
+            </div>
+        </div>
+        <div class="right">
+            <div class="info">
+                <h2>Personal Information</h2>
+                <p>Name: John Doe</p>
+                <p>Age: 30</p>
+                <p>Address: 123 Main St, Anytown USA</p>
+            </div>
+            <div class="data">
+                <h2>Data</h2>
+                <%
+                    // Fetch data from a database or other source and display it here
+                    String[] data = {"Data 1", "Data 2", "Data 3", "Data 4", "Data 5"};
+                    for (String item : data) {
+                        out.println("<p>" + item + "</p>");
+                    }
+                %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
 						</table>
                         <div class="card-image mt-5 mb-2" >
                             <img src="${imageUrl}" alt="소유한 카드" style="width:40%">
