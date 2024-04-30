@@ -17,7 +17,7 @@
             justify-content: center;
             align-items: flex-start;
             padding: 3rem;
-            background-color: #f0f0f0;
+            background-color: #f1f1f1;
             animation: fadeIn 2s ease-in-out forwards;
         }
 
