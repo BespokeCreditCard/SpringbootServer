@@ -2,10 +2,14 @@ package FINAL.bespoke.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
 import FINAL.bespoke.model.dto.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,8 +60,9 @@ public class User {
     @Column(length = 13)
     private String contact;
     
-    @Column(precision = 3)
-    private int cardId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cardId", referencedColumnName = "id")
+    private ImageTemplate imageTemplate;
     
     @Column(columnDefinition = "TEXT")
     private String deliveryAddress;

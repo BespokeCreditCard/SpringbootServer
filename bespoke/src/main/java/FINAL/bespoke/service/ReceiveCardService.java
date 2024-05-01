@@ -73,7 +73,7 @@ public class ReceiveCardService {
 	        	int savaCardId = Integer.parseInt(savaData);
 	        	System.out.println("### ReceiveCardController - user : " + user);
 	        	System.out.println("### ReceiveCardController - savaCardId : " + savaData);
-	        	user.setCardId(savaCardId);
+	        	user.setImageTemplate(imageTemplateRepository.getOne(savaCardId));
 	        	userRepository.save(user);
 	        }
 		}
