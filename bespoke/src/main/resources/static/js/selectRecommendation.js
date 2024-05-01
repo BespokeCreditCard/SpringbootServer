@@ -25,7 +25,7 @@ var getBenefitsByFlask = async (seq) => {
 	    ////////////////////////////////////
 	    //test 할 때 주석 처리 할 곳
 	    ////////////////////////////////////
-	    let response = await fetch("http://15.165.82.28/get_cluster", {
+	    let response = await fetch("http://15.165.82.28:5000/get_cluster", {
 	        method: "POST",
 	        headers: {
 	            "Content-Type": "application/json"
