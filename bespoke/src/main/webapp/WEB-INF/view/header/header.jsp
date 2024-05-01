@@ -17,7 +17,7 @@
             var logoutButton = document.querySelector("#logoutButton");
             var cardAddButton = document.querySelector("#cardAddButton");
 
-             fetch("http://localhost:8080/loginCheck", {
+             fetch("http://3.34.232.104/loginCheck", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
