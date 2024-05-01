@@ -6,19 +6,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import FINAL.bespoke.model.entity.User;
+import FINAL.bespoke.service.CardService;
 import FINAL.bespoke.service.ReceiveCardService;
 import FINAL.bespoke.service.UploadService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/upload")
 public class UploadController {
 
     @Autowired
     private UploadService uploadService;
+    @Autowired
     private ReceiveCardService receiveCardService;
     
     @GetMapping("/uploadtest")
@@ -30,7 +34,7 @@ public class UploadController {
     public String uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
         try {
         	User user = receiveCardService.findUserId(request);
-     		
+     		System.out.print(user);
             String imageUrl = uploadService.uploadImage(file, user.getUserID(), "upload");
             System.out.println("### UploadController - imageUrl(upload): " + imageUrl);
             
