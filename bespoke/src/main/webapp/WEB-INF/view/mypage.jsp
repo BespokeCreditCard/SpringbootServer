@@ -68,7 +68,7 @@
     <div class="container-wrapper">
         <div class="container-white">
             <div class="left text-center" style="width: 40%;">
-                <img src="./imgs/40.png" alt="Profile Picture" class="mx-auto" style="width: 45%;">
+                <img src="${imageUrl}" alt="Profile Picture" class="mx-auto" style="width: 45%;">
                 <div class="card mb-3 pt-4">
                     <h3>카드의정석 댕댕냥이(강아지)</h3>
                 </div>
