@@ -118,7 +118,7 @@ async function sendSelectedBenefits(selectedBenefits, seq, clusterNum) {
 		var selected_benefits = ["동물병원", "온라인쇼핑", "대중교통", "해외이용", "영화"];
 		let result = {seq: 'A12ZOS8HQ3DSVT4TTDXS', cluster_num: 5, top5_card_idxs: top5_card_idxs, selected_benefits: selected_benefits}
 
-        var redirectURL = "http://localhost:8080/recommendation_view/recommendation"
+        var redirectURL = "http://3.34.232.104/recommendation_view/recommendation"
         result.redirectURL = redirectURL;
         
         if (result.redirectURL) {
