@@ -25,7 +25,7 @@ var getBenefitsByFlask = async (seq) => {
 	    ////////////////////////////////////
 	    //test 할 때 주석 처리 할 곳
 	    ////////////////////////////////////
-	    let response = await fetch("http://127.0.0.1:5000/get_cluster", {
+	    let response = await fetch("http://15.165.82.28/get_cluster", {
 	        method: "POST",
 	        headers: {
 	            "Content-Type": "application/json"
@@ -101,7 +101,7 @@ async function sendSelectedBenefits(selectedBenefits, seq, clusterNum) {
 		////////////////////////////////////
 	    //test 할 때 주석 처리 할 곳
 	    ////////////////////////////////////
-//        let response = await fetch("http://127.0.0.1:5000/get_top5_cards", {
+//        let response = await fetch("http://15.165.82.28/get_top5_cards", {
 //            method: "POST",
 //            headers: {
 //                "Content-Type": "application/json",

@@ -357,7 +357,7 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
 	
 	// DeepL 번역 API
 	try {
-	    let response = await fetch("http://127.0.0.1:5000/translate", {
+	    let response = await fetch("http://15.165.82.28/translate", {
 	        method: "POST",
 	        headers: {
 	            "Content-Type": "application/json"
@@ -394,7 +394,7 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
 	}
 
  	try {
-	    let response = await fetch("http://127.0.0.1:5000/generate_img", {
+	    let response = await fetch("http://15.165.82.28/generate_img", {
 	            method: "POST",
 	            body: formData
 	        });
