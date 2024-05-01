@@ -56,10 +56,10 @@
     <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-md-6">
-                <iframe id="kibanaDashboard" height="280%" width="100%"></iframe>
+                <iframe id="kibanaDashboard" height="280%" width="765px"></iframe>
             </div>
             <div class="col-md-6">
-                <iframe id="kibanaDashboard2" height="280%" width="100%"></iframe>
+                <iframe id="kibanaDashboard2" height="280%" width="765px"></iframe>
             </div>
         </div>
     </div>
