@@ -33,7 +33,7 @@
 </style>
 
     <div class="container-wrapper">
-        <h2 class="text-center" style="font-family: 'KCC-Hanbit';">특약<br></h2>
+        <h2 class="text-center" style="font-family: 'KCC-Hanbit';">카드 발급 약관<br></h2>
         <div class="container-white p-3">
             <p>
                 제1조 약관의 적용<br>
