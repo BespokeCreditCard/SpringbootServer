@@ -1,12 +1,19 @@
 package FINAL.bespoke.model.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Entity;
 
 @Entity
 @Data
@@ -14,26 +21,36 @@ import jakarta.persistence.Entity;
 @NoArgsConstructor
 @Table(name = "recommendation")
 public class Recommendation {
-    @Id
-    private String SEQ;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SEQ", referencedColumnName = "userID", foreignKey = @ForeignKey(name = "FK_SEQ"))
+    private User user;
 
     @Column(name = "cluster_num")
     private Integer clusterNum;
 
-    @Column(name = "card_idx1")
-    private Integer cardIdx1;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_idx1", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_cardimg_1"))
+    private ImageTemplate imageTemplate1;
 
-    @Column(name = "card_idx2")
-    private Integer cardIdx2;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_idx2", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_cardimg_2"))
+    private ImageTemplate imageTemplate2;
 
-    @Column(name = "card_idx3")
-    private Integer cardIdx3;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_idx3", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_cardimg_3"))
+    private ImageTemplate imageTemplate3;
 
-    @Column(name = "card_idx4")
-    private Integer cardIdx4;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_idx4", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_cardimg_4"))
+    private ImageTemplate imageTemplate4;
 
-    @Column(name = "card_idx5")
-    private Integer cardIdx5;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_idx5", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_cardimg_5"))
+    private ImageTemplate imageTemplate5;
 
     @Column(name = "benefit1", length = 30)
     private String benefit1;

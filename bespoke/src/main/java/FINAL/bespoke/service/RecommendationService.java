@@ -35,41 +35,16 @@ public class RecommendationService {
     public RecommendationTop5Dto getRecommendation(String userId) {
     	List<Integer> imageList = new ArrayList<>();
     	List<String> benefitList = new ArrayList<>();
-    	// findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
+//    	 findBySEQ("ASP1FKF224HGA2GD7IZG") 할 때 반드시 "" 써야함. '' 사용하면 오류 발생
     	// recommendation 테이블에서 SEQ가 일치하는 user 찾기
-    	Recommendation recommendation = recommendationRepository.findBySEQ(userId);
+    	Recommendation recommendation = recommendationRepository.findByUser_UserID(userId);
     	System.out.println("### RecommendationService - recommendation: "+ recommendation);
 
-        if (recommendation.getCardIdx1() != null) {
-            imageList.add(recommendation.getCardIdx1());
-        }
-        if (recommendation.getCardIdx2() != null) {
-            imageList.add(recommendation.getCardIdx2());
-        }
-        if (recommendation.getCardIdx3() != null) {
-            imageList.add(recommendation.getCardIdx3());
-        }
-        if (recommendation.getCardIdx4() != null) {
-            imageList.add(recommendation.getCardIdx4());
-        }
-        if (recommendation.getCardIdx5() != null) {
-            imageList.add(recommendation.getCardIdx5());
-        }
-        if (recommendation.getBenefit1() != null) {
-        	benefitList.add(recommendation.getBenefit1());        
-        }
-        if (recommendation.getBenefit2() != null) {
-        	benefitList.add(recommendation.getBenefit2());        
-        }
-        if (recommendation.getBenefit3() != null) {
-        	benefitList.add(recommendation.getBenefit3());        
-        }
-        if (recommendation.getBenefit4() != null) {
-        	benefitList.add(recommendation.getBenefit4());        
-        }
-        if (recommendation.getBenefit5() != null) {
-        	benefitList.add(recommendation.getBenefit5());        
-        }
+    	imageList.add(recommendation.getImageTemplate1().getId());
+    	imageList.add(recommendation.getImageTemplate2().getId());
+    	imageList.add(recommendation.getImageTemplate3().getId());
+    	imageList.add(recommendation.getImageTemplate4().getId());
+    	imageList.add(recommendation.getImageTemplate5().getId());
         
         RecommendationTop5Dto recommendationTop5Dto = new RecommendationTop5Dto();
         recommendationTop5Dto.setImageList(imageList);

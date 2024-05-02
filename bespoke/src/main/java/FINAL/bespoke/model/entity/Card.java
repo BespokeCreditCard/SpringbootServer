@@ -18,10 +18,11 @@ public class Card {
     @Column(name = "card", columnDefinition = "TEXT")
     private String card; // 카드
 
-    @Column(name = "card_index")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cardIndex", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_CARD_INDEX"))
     @FieldComment("카드 인덱스")
     @Comment("카드 인덱스")
-    private Long cardIndex;
+    private ImageTemplate imageTemplate;
 
     @Column(name = "cluster_index")
     @FieldComment("군집 인덱스")
@@ -355,7 +356,7 @@ public class Card {
 
     public Card(CardDto dto) {
         this.card = dto.getCard();
-        this.cardIndex = dto.getCardIndex();
+        this.imageTemplate = dto.getImageTemplate();
         this.clusterIndex = dto.getClusterIndex();
         this.departmentStore = dto.getDepartmentStore();
         this.nonOperating = dto.getNonOperating();

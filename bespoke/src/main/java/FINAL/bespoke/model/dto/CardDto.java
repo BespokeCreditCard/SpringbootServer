@@ -1,18 +1,18 @@
 package FINAL.bespoke.model.dto;
 
+import java.io.Serializable;
+
+import FINAL.bespoke.model.entity.ImageTemplate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class CardDto implements Serializable {
     String card;
-    Long cardIndex;
+    ImageTemplate imageTemplate;
     Long clusterIndex;
     Double departmentStore;
     Double nonOperating;
