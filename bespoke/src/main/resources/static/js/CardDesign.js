@@ -60,7 +60,7 @@ const moveToReceiveCardWithUploadedImg = () => {
 			fetch('/justGetSeq')
 	        .then(response => response.text())
 	        .then(async seq => {
-	            await saveUploadedImg("preview", seq);
+	            await saveCanvas("card3Div", seq);
 	            window.location.href = contextPath + "/receivecard";
 	        })
 	        .catch(error => console.error('업로드한 파일 S3 업로드 오류 발생:', error));
@@ -79,7 +79,7 @@ const moveToReceiveCardWithUploadedImg = () => {
 	}
 }
 
-// 파일 업로드 하는 함수들 모음 스크립트
+// 파일 업로드 하는 함수들 모음 스  크립트
 function previewFile() {
     fileDrawn = false;
     document.getElementById("file-edit-button").classList.remove("edited");

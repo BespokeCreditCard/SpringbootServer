@@ -17,7 +17,7 @@
             var logoutButton = document.querySelector("#logoutButton");
             var cardAddButton = document.querySelector("#cardAddButton");
 
-             fetch("http://3.34.232.104/loginCheck", {
+             fetch("${pageContext.request.contextPath}/loginCheck", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

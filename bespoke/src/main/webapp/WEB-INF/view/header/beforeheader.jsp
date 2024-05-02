@@ -16,7 +16,7 @@
             var loginButton = document.querySelector("#loginButton");
             var logoutButton = document.querySelector("#logoutButton");
 
-             fetch("http://3.34.232.104//loginCheck", {
+             fetch("${pageContext.request.contextPath}/loginCheck", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
