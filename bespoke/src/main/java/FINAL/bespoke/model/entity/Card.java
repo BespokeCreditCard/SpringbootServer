@@ -19,7 +19,7 @@ public class Card {
     private String card; // 카드
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cardIndex", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_CARD_INDEX"))
+    @JoinColumn(name = "card_index", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_CARD_INDEX"))
     @FieldComment("카드 인덱스")
     @Comment("카드 인덱스")
     private ImageTemplate imageTemplate;
