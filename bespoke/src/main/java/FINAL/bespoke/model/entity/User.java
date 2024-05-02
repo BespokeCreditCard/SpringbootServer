@@ -60,7 +60,7 @@ public class User {
     @Column(length = 13)
     private String contact;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cardId", referencedColumnName = "id")
     private ImageTemplate imageTemplate;
     
