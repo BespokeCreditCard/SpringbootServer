@@ -16,9 +16,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="./css/indexStyles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fastly.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://fastly.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <style>
         .main-webpage {
 	        background-image: url('./img/배경화면.png');
@@ -167,16 +167,19 @@
                 <h3 class="section-subheading text-muted subheading-top-adjust" style="font-family: 'Roboto Slab', serif; margin-top: -10px;">Bespoke Credit Card service</h3>                
             </div>
 </div>
-            <div class="row text-center">  
+            <div class="row text-center justify-content-center">    
                 <div class="col-md-4">
                     <img src="./img/give-money_4000578.png" alt="카드 꾸미기 아이콘" width="200" height="200">
                     <h4 class="my-3">카드 꾸미기</h4>
-                    <p class="text-muted text-right-p">내가 원하는 카드 혜택을 선택할 수 있습니다. AI으로 이미지를 변경할 수도 있습니다.</p>
+                    <p class="text-muted text-right-p" style="padding-left: 20px;">
+    내가 원하는 카드 혜택을 선택할 수 있습니다. <br>AI으로 이미지를 변경할 수도 있습니다.
+</p>
+
                 </div>
                 <div class="col-md-4">
                     <img src="./img/credit_1198299.png" alt="카드 추천 아이콘" width="200" height="200">
                     <h4 class="my-3">카드 추천</h4>
-                    <p class="text-muted">나와 비슷한 성향의 고객이 사용한 좋은 카드 상품을 소개드립니다.</p>
+                    <p class="text-muted">나와 비슷한 고객이 사용한 카드 상품을 추천합니다.</p>
                 </div>
                 <div class="col-md-4">
                     <img src="./img/account_5186010.png" alt="마이 페이지 아이콘" width="200" height="200">
@@ -192,50 +195,66 @@
                 <h2 class="section-heading text-uppercase" style="margin-bottom: 100px;">AI엔지니어링 4팀 소개</h2>
             </div>
             <!-- 팀 멤버 시작 -->
+            <div style="display: flex; justify-content: center; margin-left: 150px;">
             <div class="row">
                 <!-- 첫 번째 팀 멤버 -->
-                <div class="col-lg-4">
-                    <div class="team-member">
-                        <h4>류준규</h4>
-                        <p class="text-muted">Leader, Back-end, Data Analysis, Front-end</p>
-                        <!-- 소셜 링크 -->
-                    </div>
-                </div>
-                <!-- 두 번째 팀 멤버 -->
-                <div class="col-lg-4">
-                    <div class="team-member">
-                        <h4>신연재</h4>
-                        <p class="text-muted">Data Analysis, Front-end, Write documents, Planning</p>
-                        <!-- 소셜 링크 -->
-                    </div>
-                </div>
-                <!-- 세 번째 팀 멤버 -->
-                <div class="col-lg-4">
-                    <div class="team-member">
-                        <h4>김준우</h4>
-                        <p class="text-muted">Back-end, Planning, PM, Front-end</p>
-                        <!-- 소셜 링크 -->
-                    </div>
-                </div>
-                <!-- 네 번째 팀 멤버 -->
-                <div class="col-lg-4" style="margin-top: 50px;">
-                    <div class="team-member">
-                        <h4>우선주</h4>
-                        <p class="text-muted">Data Analysis, Planning, Front-end, Back-end</p>
-                        <!-- 소셜 링크 -->
-                    </div>
-                </div>
-                <!-- 다섯 번째 팀 멤버 -->
-                <div class="col-lg-4" style="margin-top: 50px;">
-                    <div class="team-member">
-                        <h4>이민수</h4>
-                        <p class="text-muted">Back-end, Writes Documents, Planning, Front-end</p>
-                        <!-- 소셜 링크 -->
-                    </div>
-                </div>
-            </div>
-            <!-- 팀 멤버 종료 -->
-        </div>
+			    <div class="col-lg-4">
+			        <div class="team-member" style="width: 200px;">
+			        	<div style=" width: 200px; height: 200px; border-radius: 70%; overflow: hidden; border: 12px solid #ADD8E6;">
+				            <img src="./img/류준규.png" alt="류준규" style="width: 100%;  height: 100%; border-radius: 70%; object-fit: cover;">
+				            </div>
+			            <div style="display: inline-block; vertical-align: middle;">
+			                <h4 style="margin-top: 40px;">류준규</h4>
+			                <p class="text-muted">Leader, Back-end, Data Analysis, Front-end</p>
+			            </div>
+			        </div>
+			    </div>
+			
+			    <!-- 두 번째 팀 멤버 -->
+			    <div class="col-lg-4">
+			        <div class="team-member" style="width: 200px;">
+			        	<div style=" width: 200px; height: 200px; border-radius: 70%; overflow: hidden; border: 12px solid #ADD8E6;">
+			            	<img src="./img/신연재.png" alt="신연재" style="width: 100%;  height: 100%; border-radius: 70%; object-fit: cover;">
+			            </div>
+			                <h4 style="margin-top: 40px;">신연재</h4>
+			            <p class="text-muted">Data Analysis, Front-end, Write documents, Planning</p>
+			        </div>
+			    </div>
+			
+			    <!-- 세 번째 팀 멤버 -->
+			    <div class="col-lg-4">
+    				<div class="team-member" style="width: 200px;">
+			        	<div style=" width: 200px; height: 200px; border-radius: 70%; overflow: hidden; border: 12px solid #ADD8E6;">
+			            	<img src="./img/김준우.jpg" alt="김준우" style="width: 100%; height: 100%; border-radius: 70%; object-fit: cover;">
+			            </div>
+			            <h4 style="margin-top: 40px;">김준우</h4>
+			            <p class="text-muted">Back-end, Planning, PM, Front-end</p>			            
+    					</div>
+			        </div>
+			
+			    <!-- 네 번째 팀 멤버 -->
+ 				<div class="col-lg-4">
+    				<div class="team-member" style="width: 200px;">
+			        	<div style=" width: 200px; height: 200px; border-radius: 70%; overflow: hidden; border: 12px solid #ADD8E6;">
+			            	<img src="./img/우선주.jpg" alt="우선주" style="width: 100%; height: 100%; border-radius: 70%; object-fit: cover;">
+			            	</div>
+			            <h4 style="margin-top: 40px;">우선주</h4>
+			            <p class="text-muted">Data Analysis, Planning, Front-end, Back-end</p>
+			        </div>
+			    </div>
+			
+			    <!-- 다섯 번째 팀 멤버 -->
+				<div class="col-lg-4">
+    				<div class="team-member" style="width: 200px;">
+			        	<div style=" width: 200px; height: 200px; border-radius: 70%; overflow: hidden; border: 12px solid #ADD8E6">
+			            <img src="./img/이민수.png" alt="이민수" style="width: 100%; height: 100%; border-radius: 70%; object-fit: cover;">
+			            </div>
+			            <h4 style="margin-top: 40px;">이민수</h4>
+			            <p class="text-muted">Back-end, Writes Documents, Distribution, Front-end</p>
+			        </div>
+			    </div>
+			</div>
+</div>	
     </section>
     
 

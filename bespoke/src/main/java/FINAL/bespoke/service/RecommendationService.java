@@ -45,6 +45,11 @@ public class RecommendationService {
     	imageList.add(recommendation.getImageTemplate3().getId());
     	imageList.add(recommendation.getImageTemplate4().getId());
     	imageList.add(recommendation.getImageTemplate5().getId());
+        benefitList.add(recommendation.getBenefit1());
+        benefitList.add(recommendation.getBenefit2());
+        benefitList.add(recommendation.getBenefit3());
+        benefitList.add(recommendation.getBenefit4());
+        benefitList.add(recommendation.getBenefit5());
         
         RecommendationTop5Dto recommendationTop5Dto = new RecommendationTop5Dto();
         recommendationTop5Dto.setImageList(imageList);
