@@ -21,77 +21,86 @@ public class ElasticService {
         this.esClient = esClient;
     }
     
+    /**
+     * 단일 Elasticsearch 응답을 받아 카드의 이름과 데이터를 추출하고, 이를 리스트로 반환합니다.
+     * 
+     * @param response Elasticsearch에서 받은 단일 문서 응답, GetResponse<ObjectNode> 타입
+     * @return 카드 이름과 데이터를 담은 문자열 리스트, List<String> 타입
+     */
     public List<String> ElasticSearchJsonTocardWordData(GetResponse<ObjectNode> response) {
-    	List<String> cardWordDetails = new ArrayList<>();
-    	ObjectNode json = response.source();
-    	JsonNode cardname = json.get("card_name"); // 카드 이름
-    	cardWordDetails.add(cardname.asText()); 
-    	JsonNode cardword = json.get("data"); // 카드 이름
-//    	cardWordDetails.add(cardword.toPrettyString()); 
-    	cardWordDetails.add(cardword.toString()); 
-    	System.out.println("### ElasticService - cardWordDetails: " + cardWordDetails);
-    	return cardWordDetails;
+        List<String> cardWordDetails = new ArrayList<>();
+        ObjectNode json = response.source(); // Elasticsearch 응답에서 소스 데이터를 추출
+        JsonNode cardname = json.get("card_name"); // Json 객체에서 "card_name" 키에 해당하는 값을 추출
+        cardWordDetails.add(cardname.asText()); // 추출된 카드 이름을 리스트에 추가
+        JsonNode cardword = json.get("data"); // Json 객체에서 "data" 키에 해당하는 값을 추출
+        cardWordDetails.add(cardword.toString()); // 추출된 카드 데이터를 리스트에 추가
+        System.out.println("### ElasticService - cardWordDetails: " + cardWordDetails);
+        return cardWordDetails;
     }
     
+    /**
+     * 여러 Elasticsearch 응답을 받아 각 응답에서 카드의 이름과 데이터를 추출하고, 이를 담은 DTO 객체를 반환합니다.
+     * 
+     * @param response Elasticsearch에서 받은 여러 문서 응답 리스트, List<GetResponse<ObjectNode>> 타입
+     * @return 카드 이름과 데이터를 담은 WordDetailsDto 객체, WordDetailsDto 타입
+     */
     public WordDetailsDto ElasticSearchJsonTocardWordData(List<GetResponse<ObjectNode>> response) {
-    	List<String> cardWord = new ArrayList<>();
-    	List<String> cardNameList = new ArrayList<>();
-    	for (GetResponse<ObjectNode> responseObject : response) {
-    		// 2차원 배열에 저장하기 위한 1차원 배열
-    		
-    		System.out.println("### ElasticService - responseObject: " + responseObject);
-        	// responseObject는 response 에서 하나씩 jsonImageId 값을 하나씪 받음
-        	ObjectNode json = responseObject.source();
-        	JsonNode cardname = json.get("card_name"); // 카드 이름
-        	cardNameList.add(cardname.asText()); 
-        	JsonNode cardword = json.get("data"); // 카드 이름
-        	cardWord.add(cardword.toString()); 
-    	}
-    	return new WordDetailsDto(cardNameList, cardWord);
+        List<String> cardWord = new ArrayList<>();
+        List<String> cardNameList = new ArrayList<>();
+        for (GetResponse<ObjectNode> responseObject : response) {
+            // 반복문: Elasticsearch 응답 리스트를 순회하며 각 응답에서 카드 정보를 추출
+            ObjectNode json = responseObject.source(); // 각 응답에서 Json 데이터를 추출
+            JsonNode cardname = json.get("card_name"); // Json 객체에서 "card_name" 키에 해당하는 값을 추출
+            cardNameList.add(cardname.asText()); // 추출된 카드 이름을 리스트에 추가
+            JsonNode cardword = json.get("data"); // Json 객체에서 "data" 키에 해당하는 값을 추출
+            cardWord.add(cardword.toString()); // 추출된 카드 데이터를 리스트에 추가
+        }
+        return new WordDetailsDto(cardNameList, cardWord);
     }
-    
+
+
     /**
-     * Elasticsearch에서 특정 이미지 ID에 해당하는 문서를 검색하고 반환합니다.
+     * 주어진 ID와 인덱스를 사용하여 Elasticsearch에서 특정 문서를 검색하고 결과를 반환합니다.
      * 
-     * @param imageId 검색할 이미지 ID
-     * @return 검색된 문서의 GetResponse<ObjectNode>, 검색에 실패하면 null 반환
+     * @param Id 검색할 문서의 ID, int 타입
+     * @param elastic_index 사용할 Elasticsearch의 인덱스, String 타입
+     * @return 검색된 문서의 GetResponse<ObjectNode>, 검색에 실패하면 null 반환, GetResponse<ObjectNode> 타입
      */
-    public GetResponse<ObjectNode> fetchDataElastic(int Id,String elastic_index) {
-    	try {
-    		// Elasticsearch의 Get API를 사용하여 문서를 가져옴
-    		GetResponse<ObjectNode> response = esClient.get(g -> g
-    				.index(elastic_index)
-    				.id(Integer.toString(Id)), ObjectNode.class);
-    		return response; // 가져온 문서를 반환
-    	} catch (ElasticsearchException | IOException e) {
-    		e.printStackTrace();  // 에러 스택 추적을 출력하거나 로그로 남김
-    		return null;  // 에러 발생 시 null 반환
-    	}
+    public GetResponse<ObjectNode> fetchDataElastic(int Id, String elastic_index) {
+        try {
+            GetResponse<ObjectNode> response = esClient.get(g -> g
+                    .index(elastic_index)
+                    .id(Integer.toString(Id)), ObjectNode.class); // Elasticsearch의 Get API를 호출하여 문서를 검색
+            return response; // 검색된 문서 반환
+        } catch (ElasticsearchException | IOException e) {
+            e.printStackTrace();  // 에러 발생 시 로깅
+            return null;  // 에러 발생 시 null 반환
+        }
     }
-    
+
     /**
-     * 주어진 이미지 ID 리스트를 사용하여 Elasticsearch에서 각각의 문서를 검색하고 결과를 반환합니다.
+     * 주어진 이미지 ID 리스트를 사용하여 Elasticsearch에서 각각의 문서를 검색하고 결과 리스트를 반환합니다.
      * 
-     * @param imageIds 검색할 이미지 ID의 리스트
-     * @return 검색된 문서들의 GetResponse<ObjectNode> 리스트
+     * @param imageIds 검색할 이미지 ID의 리스트, List<Integer> 타입
+     * @param elastic_index 사용할 Elasticsearch의 인덱스, String 타입
+     * @return 검색된 문서들의 GetResponse<ObjectNode> 리스트, List<GetResponse<ObjectNode>> 타입
      */
-    public List<GetResponse<ObjectNode>> fetchDataElastic(List<Integer> imageId,String elastic_index) {
-    	List<GetResponse<ObjectNode>> responses = new ArrayList<>();
-    	for (Integer imageIdtmp : imageId) {
-	        try {
-	        	GetResponse<ObjectNode> response = esClient.get(g -> g
-				    .index(elastic_index)
-				    .id(imageIdtmp.toString()), ObjectNode.class);
-	        	responses.add(response);
-			} catch (ElasticsearchException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    	}
+    public List<GetResponse<ObjectNode>> fetchDataElastic(List<Integer> imageId, String elastic_index) {
+        List<GetResponse<ObjectNode>> responses = new ArrayList<>();
+        for (Integer imageIdtmp : imageId) {
+            // 반복문: 이미지 ID 리스트를 순회하며 각 ID에 해당하는 문서를 검색
+            try {
+                GetResponse<ObjectNode> response = esClient.get(g -> g
+                    .index(elastic_index)
+                    .id(imageIdtmp.toString()), ObjectNode.class); // 각 이미지 ID에 대해 문서 검색
+                responses.add(response); // 검색된 문서를 리스트에 추가
+            } catch (ElasticsearchException | IOException e) {
+                e.printStackTrace(); // 에러 발생 시 로깅
+            }
+        }
         return responses;
     }
-    
+
     /**
      * Elasticsearch 응답 리스트에서 각각의 카드 정보를 추출하여 제품 상세 정보를 리스트 형태로 변환하여 반환합니다.
      * 
