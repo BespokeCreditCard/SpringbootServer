@@ -124,9 +124,9 @@ def generate_img():
     # b64_img1, b64_img2 = dall_e.generate_img(prompt, input_img_bytes, mask_img_bytes, mode)
 
     ### 시연 영상용 b64 이미지
-    imgs = ["hamster1", "hamster2", "hamster3", "hamster4", "baby_doge1", "baby_doge2", "landscape1", "landscape2"]
+    imgs = ["hamster1", "hamster2", "hamster3", "hamster4", "baby_doge1", "baby_doge2", "landscape1", "landscape2", "test"]
 
-    with Image.open(f'flask_server/dall_e_imgs/{imgs[0]}.png') as img:
+    with Image.open(f'flask_server/dall_e_imgs/{imgs[8]}.png') as img:
         # PIL Image 객체를 바이트 버퍼로 변환
         buffered = io.BytesIO()
         img.save(buffered, format="PNG")        

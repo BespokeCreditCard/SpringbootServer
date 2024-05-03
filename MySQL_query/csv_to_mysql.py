@@ -44,7 +44,7 @@ for csv_path in csv_path_list:
     # pattern = r'datas/(.*?)\.csv'
     # match = re.search(pattern, csv_path)
     # table_name = match.group(1)
-    table_name = "card74"
+    table_name = "train"
     print(csv_path)
     print(table_name)
     encoding = ["cp949", "utf-8-sig"]
@@ -54,7 +54,7 @@ for csv_path in csv_path_list:
     #     df = pd.read_csv(csv_path, index_col=False, encoding=encoding[1])
     # df.to_sql(name='financial_data', con=db_connection, if_exists='replace',index=False)
 
-    df = pd.read_csv(csv_path, index_col=False, encoding=encoding[0])
+    df = pd.read_csv(csv_path, index_col=False, encoding=encoding[1])
     
     to_mysql(batch_size, table_name, df, db_connection)
 

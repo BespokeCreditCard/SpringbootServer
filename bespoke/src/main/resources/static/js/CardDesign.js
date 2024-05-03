@@ -60,7 +60,8 @@ const moveToReceiveCardWithUploadedImg = () => {
 			fetch('/justGetSeq')
 	        .then(response => response.text())
 	        .then(async seq => {
-	            await saveCanvas("card3Div", seq);
+//	            await saveUploadedImg("preview", seq);
+	            await saveCanvas("card3", seq);
 	            window.location.href = contextPath + "/receivecard";
 	        })
 	        .catch(error => console.error('업로드한 파일 S3 업로드 오류 발생:', error));
@@ -500,6 +501,16 @@ async function saveCanvas (generatedCard, name) {
     let canvas = await html2canvas(selectedDiv, {useCORS: true});
     
     canvas.toBlob(async function(blob) {
+		let url = URL.createObjectURL(blob);
+        // 임시 다운로드 링크 생성
+        let a = document.createElement('a');
+        a.href = url;
+        a.download = name + ".png"; // 파일 이름 지정
+        document.body.appendChild(a);  // 임시 링크 문서에 추가
+        a.click(); // 프로그램적으로 클릭 이벤트 발생시키기
+        document.body.removeChild(a); // 다운로드 후 임시 링크 제거
+        URL.revokeObjectURL(url); // 사용한 URL 해제
+        ///////////////////////////////////
         var formData = new FormData();
         formData.append('file', blob, name + ".png");
         formData.append('customerName', name);
