@@ -7,12 +7,12 @@
 <%@ include file="header/header.jsp" %>
 <link href="/css/wordcloud.css" rel="stylesheet">
 
-<script src="https://cdn.anychart.com/releases/8.12.1/js/anychart-core.min.js"></script>
-<script src="https://cdn.anychart.com/releases/8.12.1/js/anychart-tag-cloud.min.js"></script>
+<script src="https://fastly.anychart.com/releases/8.12.1/js/anychart-core.min.js"></script>
+<script src="https://fastly.anychart.com/releases/8.12.1/js/anychart-tag-cloud.min.js"></script>
 <style>
 	@font-face {
 	    font-family: 'KCC-Hanbit';
-	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
 	    font-weight: normal;
 	    font-style: normal;
 	}

@@ -12,7 +12,7 @@
         
        	@font-face {
 		    font-family: 'KCC-Hanbit';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
 		    font-weight: normal;
 		    font-style: normal;
 		}
@@ -253,7 +253,7 @@
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="agreementPersonalInfo">
                         <label class="form-check-label" for="agreementPersonalInfo">
-                            개인정보 수집 및 이용 동의
+                            유의사항 동의
                         </label>
                     </div>
                 </div>
@@ -267,7 +267,7 @@
 
     
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://fastly.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         document.getElementById("edit-address").addEventListener("click", function() {
