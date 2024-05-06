@@ -149,7 +149,7 @@
 	        	<div class="leftTitle">상세 정보</div>
 		            <div class="personalInformation">개인정보
 		                <div class="customerInfo">ID : <span id="user-id">${userData.userID}</span>&nbsp;&nbsp;&nbsp;&nbsp;이름 : <span id="user-name">${userData.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;생년월일 : <span id="user-birth">${userData.birthDate}</span></div>
-		                <div class="customerInfo">연락처 : <span id="user-phone">${userData.contact}</span>&nbsp;&nbsp;&nbsp;&nbsp;주소 : <span id="user-phone">${userData.contact}</span></div>
+		                <div class="customerInfo">연락처 : <span id="user-phone">${userData.contact}</span>&nbsp;&nbsp;&nbsp;&nbsp;주소 : <span id="user-phone">${userData.address}</span></div>
 		                <hr>
 		                <p class="card-headers">카드 수령장소</p>
 		                <div class="card-bodys">
