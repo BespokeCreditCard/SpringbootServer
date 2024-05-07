@@ -54,7 +54,7 @@
             <li><a href="${pageContext.request.contextPath}/recommendation_view/recommendation">카드 추천</a></li>
             <li><a href="${pageContext.request.contextPath}/design/carddesign?selectCardId=14">카드 꾸미기</a></li>
             <li><a href="${pageContext.request.contextPath}/receivecard">카드 발급</a></li>
-            <li><a href="${pageContext.request.contextPath}/terms_view/terms">약관</a></li>
+            <li><a href="${pageContext.request.contextPath}/terms_view/terms">게시판</a></li>
             <li><a href="${pageContext.request.contextPath}/mypage">마이 페이지</a></li>
             <li id="loginButton"><a href="${pageContext.request.contextPath}/login">로그인</a></li>
             <li id="logoutButton"><a href="${pageContext.request.contextPath}/logouts">로그아웃</a></li>
