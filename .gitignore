@@ -6,6 +6,7 @@
 /flask_server/__pycache__/*
 .project
 *.pyc
+.idea
 
 # mac 환경 제거
 *.DS_Store
