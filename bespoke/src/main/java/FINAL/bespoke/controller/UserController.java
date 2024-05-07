@@ -1,25 +1,34 @@
 package FINAL.bespoke.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import FINAL.bespoke.jwt.JWTUtil;
+import FINAL.bespoke.model.dto.DeliveryPasswordDto;
 import FINAL.bespoke.model.dto.UserDto;
 import FINAL.bespoke.model.entity.User;
 import FINAL.bespoke.repository.UserRepository;
 import FINAL.bespoke.service.ElasticService;
-import FINAL.bespoke.service.RecommendationService;
 import FINAL.bespoke.service.JoinService;
 import FINAL.bespoke.service.ReceiveCardService;
+import FINAL.bespoke.service.RecommendationService;
 import co.elastic.clients.elasticsearch.core.GetResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -29,14 +38,16 @@ public class UserController {
 	private final RecommendationService getUrlService;
     private final JWTUtil jwtUtil;
     private final UserRepository userRepository;
-	
-    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService, RecommendationService getUrlService, JWTUtil jwtUtil, UserRepository userRepository) {
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    
+    public UserController(JoinService joinService, ReceiveCardService receiveCardService,ElasticService elasticService, RecommendationService getUrlService, JWTUtil jwtUtil, UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.receiveCardService = receiveCardService;
         this.joinService = joinService;
         this.elasticService = elasticService; 
         this.getUrlService = getUrlService;
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     
     @GetMapping("index")
@@ -113,7 +124,30 @@ public class UserController {
  		
  		return "mypage";
  	}
-
+ 	
+ 	
+ 	@PostMapping("/revise-mypage")
+ 	public String reviseMypage(@ModelAttribute UserDto dto) {
+ 		User user = userRepository.findByuserID(dto.getUserID());
+ 		 // 이름이 null이 아닌 경우에만 업데이트
+ 	    if (dto.getName() != null) user.setName(dto.getName());
+ 	    // 비밀번호가 null이 아닌 경우에만 업데이트
+ 	    if (dto.getPassword() != null) user.setPassword(dto.getPassword());
+ 	    // 생일이 null이 아닌 경우에만 업데이트
+ 	    if (dto.getBirthDate() != null) user.setBirthDate(dto.getBirthDate());
+ 	    // 성별은 char 타입이며 char 타입은 null 값을 가질 수 없습니다. 따라서 '0'이 유효하지 않은 값으로 간주되는 경우에만 체크
+ 	    if (dto.getGender() != 0) user.setGender(dto.getGender());
+ 	    // 주소가 null이 아닌 경우에만 업데이트
+ 	    if (dto.getAddress() != null) user.setAddress(dto.getAddress());
+ 	    // 등급이 null이 아닌 경우에만 업데이트
+ 	    if (dto.getGrade() != null) user.setGrade(dto.getGrade());
+ 	    // 연락처가 null이 아닌 경우에만 업데이트
+ 	    if (dto.getContact() != null) user.setContact(dto.getContact());
+ 		userRepository.save(dto.toEntity());
+ 		return "redirect:/mypage";
+ 	}
+ 	
+ 	
 //  페이지 이동시마다 이 쿼리가 계속 돔(개선 필요)
     @GetMapping("/loginCheck")
     @ResponseBody
@@ -147,5 +181,18 @@ public class UserController {
     public String justGetSeq(HttpServletRequest request) {
         User user = receiveCardService.findUserId(request);
         return user.getUserID();
+    }
+    
+    @PostMapping("/update-password")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updatePassword(@RequestBody DeliveryPasswordDto deliveryPasswordDto, HttpServletRequest request) {
+    	User user = receiveCardService.findUserId(request);
+    	Map<String, Object> response = new HashMap<>();    	
+    	if (!user.getPassword().equals(bCryptPasswordEncoder.encode(deliveryPasswordDto.getCurrentPassword()))) {
+    		response.put("fail_current", response);
+    	}
+    	user.setPassword(bCryptPasswordEncoder.encode(deliveryPasswordDto.getNewPassword()));
+    	response.put("success", true);
+    	return ResponseEntity.ok(response);
     }
 }
