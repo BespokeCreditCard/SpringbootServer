@@ -127,8 +127,8 @@ public class UserController {
  	
  	
  	@PostMapping("/revise-mypage")
- 	public String reviseMypage(@ModelAttribute UserDto dto) {
- 		User user = userRepository.findByuserID(dto.getUserID());
+ 	public String reviseMypage(HttpServletRequest request, @ModelAttribute UserDto dto) {
+ 		User user = receiveCardService.findUserId(request);
  		 // 이름이 null이 아닌 경우에만 업데이트
  	    if (dto.getName() != null) user.setName(dto.getName());
  	    // 비밀번호가 null이 아닌 경우에만 업데이트
@@ -139,11 +139,9 @@ public class UserController {
  	    if (dto.getGender() != 0) user.setGender(dto.getGender());
  	    // 주소가 null이 아닌 경우에만 업데이트
  	    if (dto.getAddress() != null) user.setAddress(dto.getAddress());
- 	    // 등급이 null이 아닌 경우에만 업데이트
- 	    if (dto.getGrade() != null) user.setGrade(dto.getGrade());
  	    // 연락처가 null이 아닌 경우에만 업데이트
  	    if (dto.getContact() != null) user.setContact(dto.getContact());
- 		userRepository.save(dto.toEntity());
+ 		userRepository.save(user);
  		return "redirect:/mypage";
  	}
  	
