@@ -115,7 +115,7 @@
     <div class="title-body">
         <span class="e1_5314" style="font-weight: bold;">카드 추천 서비스</span>
 
-        <span class="e1_5315" style="font-family: 'Roboto Slab', serif;">Bespoke Credit Card&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span class="e1_5315" style="font-family: 'Roboto Slab', serif;">Bespoke Card&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         
 
         <div class="window-container">
@@ -164,7 +164,7 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase" style="font-family: 'Montserrat', sans-serif; margin-bottom: 20px;">Services</h2>
-                <h3 class="section-subheading text-muted subheading-top-adjust" style="font-family: 'Roboto Slab', serif; margin-top: -10px;">Bespoke Credit Card service</h3>                
+                <h3 class="section-subheading text-muted subheading-top-adjust" style="font-family: 'Roboto Slab', serif; margin-top: -10px;">Bespoke Card Service</h3>                
             </div>
 </div>
             <div class="row text-center justify-content-center">    
