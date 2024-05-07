@@ -189,8 +189,8 @@
 			<div id="errorMessageContainer" class="position-absolute bg-light h-100 d-flex justify-content-center align-items-center" style="z-index: -1;right:1%;width: 50%">
 			</div>
 
-			<div id="card1Div" class="card col-3 m-4" style="width: 18rem; height: 32rem; display: none;border:none">
-	            <div id="card1" class="fade-in" style="height: 85%; position: relative; top: 3%;  border-radius: 5%; overflow: hidden;">
+			<div id="card1Div" class="card fade-in col-3 m-4" style="width: 18rem; height: 32rem; display: none;border:none">
+	            <div id="card1" style="height: 85%; position: relative; top: 3%;  border-radius: 5%; overflow: hidden;">
     			    <!-- 위쪽 20%를 차지하는 네모 박스 -->
 				    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 30%; background-color: black; opacity: 0.45; z-index: 3;"></div>
 					<!-- 로컬 폰트를 적용할 div -->
@@ -205,8 +205,8 @@
                 </div>
 			</div>
 
-			<div id="card2Div" class="card col-3 m-4" style="width: 18rem; height: 32rem; display: none;border:none">
-	            <div id="card2" class="fade-in" style="height: 85%; position: relative; top: 3%;  border-radius: 5%; overflow: hidden;">
+			<div id="card2Div" class="card fade-in col-3 m-4" style="width: 18rem; height: 32rem; display: none;border:none">
+	            <div id="card2" style="height: 85%; position: relative; top: 3%;  border-radius: 5%; overflow: hidden;">
 					<!-- 위쪽 20%를 차지하는 네모 박스 -->
 				    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 30%; background-color: black; opacity: 0.45; z-index: 3;"></div>
 					<!-- 로컬 폰트를 적용할 div -->
@@ -220,8 +220,8 @@
                     <a class="btn btn-primary w-75" id="selectGeneratedImg2">선택 2</a>
                 </div>
             </div>
-            <div id="card3Div" class="card col-3 m-4" style="width: 18rem; height: 32rem; display: none;border:none">
-                <div id="card3" class="fade-in" style="height: 85%; position: relative; top: 3%;  border-radius: 5%; overflow: hidden;">
+            <div id="card3Div" class="card fade-in col-3 m-4" style="width: 18rem; height: 32rem; display: none;border:none">
+                <div id="card3" style="height: 85%; position: relative; top: 3%;  border-radius: 5%; overflow: hidden;">
                     <!-- 위쪽 20%를 차지하는 네모 박스 -->
                     <div class="img3-shadow" style="position: absolute; top: 0; left: 0; width: 100%; height: 30%; background-color: black; opacity: 0.45; z-index: 3;"></div>
                     <!-- 로컬 폰트를 적용할 div -->
@@ -232,7 +232,7 @@
                     <img id="masterCardLogo" class="img3-logo" src="${pageContext.request.contextPath}/imgs/master.png" style="height: 25%; position: absolute; top: 77%; left: 60%; z-index: 3;" />
                 </div>
                 <div class="btn-container d-flex justify-content-center align-items-center" style="position: absolute; bottom: 10px; left: 0; right: 0;">
-                    <a class="btn btn-primary w-75" onclick="moveToReceiveCardWithUploadedImg()">기존 이미지 선택</a>
+                    <a class="btn btn-primary w-75" onclick="selectDefaultImg()">기존 이미지 선택</a>
                 </div>
             </div>
         </div>

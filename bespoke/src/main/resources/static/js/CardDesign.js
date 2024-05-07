@@ -52,7 +52,7 @@ async function saveUploadedImg (previewDiv, name) {
 	}
 }
 
-const moveToReceiveCardWithUploadedImg = () => {
+const selectDefaultImg = () => {
 	const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
     try {
@@ -60,7 +60,7 @@ const moveToReceiveCardWithUploadedImg = () => {
 			fetch('/justGetSeq')
 	        .then(response => response.text())
 	        .then(async seq => {
-	            await saveCanvas("card3Div", seq);
+	            await saveCanvas("card3", seq);
 	            window.location.href = contextPath + "/receivecard";
 	        })
 	        .catch(error => console.error('업로드한 파일 S3 업로드 오류 발생:', error));
@@ -241,6 +241,17 @@ function saveImage() {
     link.click();
 }
 
+// timeout주는 함수
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function waitAndRun(ms) {
+	await delay(ms);
+	console.log(ms);
+	console.log('1초가 지났습니다!');
+}
+
 // 스타일 - 화풍
 var promptStyle = function (selectObj){
        var selectedIndex = selectObj.selectedIndex;
@@ -343,18 +354,7 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
     document.getElementById("arrowCard").style.display = "block";
     document.getElementById('resultDiv').style.display = "";// block 인데 ''로 대체
     document.getElementById('generateDiv').style.display = "none";
-    
-    // 로딩 gif 확인을 위한 test용 timeout
-    function delay(ms) {
-	  return new Promise(resolve => setTimeout(resolve, ms));
-	}
-	
-	async function waitAndRun(ms) {
-		await delay(ms);
-		console.log(ms);
-		console.log('1초가 지났습니다!');
-	}
-	
+    	
 	// DeepL 번역 API
 	try {
 	    let response = await fetch("http://15.165.82.28:5000/translate", {
@@ -464,12 +464,20 @@ document.getElementById("convertBtn").addEventListener("click", async() => {
 	
 });
 
+// 이미지 Css(애니메이션) 기다리는 함수
+function animationEnded(element) {
+    return new Promise((resolve) => {
+        element.addEventListener('animationend', () => {
+            resolve();
+        }, { once: true }); // 이벤트 리스너가 한 번 실행되고 제거되도록 설정
+    });
+}
+
 document.querySelector("#selectGeneratedImg1").onclick = async function() {
 	try {
 		fetch('/justGetSeq')
         .then(response => response.text())
         .then(async seq => {
-            // 받아온 SEQ 값을 saveCanvas 함수에 인자로 넘겨줌
             await saveCanvas("card1", seq);
             window.location.href = contextPath + "/receivecard";
         })
@@ -493,12 +501,12 @@ document.querySelector("#selectGeneratedImg2").onclick = async function() {
 	}
 };
 
+
 // 이미지 서버로 전송
 async function saveCanvas (generatedCard, name) {
     var selectedDiv = document.getElementById(generatedCard);
     selectedDiv.style.opacity = "1";
     let canvas = await html2canvas(selectedDiv, {useCORS: true});
-    
     canvas.toBlob(async function(blob) {
         var formData = new FormData();
         formData.append('file', blob, name + ".png");

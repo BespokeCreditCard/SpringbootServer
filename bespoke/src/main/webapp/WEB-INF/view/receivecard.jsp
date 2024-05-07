@@ -140,7 +140,7 @@
 	<div class="myPagediv">
         <div class="leftdiv">
             <div class="cardImageMyPage">
-                <img src="./imgs/nobackground.png" class="img-fluid" alt="선택된 카드">
+                <img src="${userImageUrl}" class="img-fluid" alt="선택된 카드">
             </div>
             <div class="cardNameMyPage">카드의 정석 DON CHECK</div>
         </div>
