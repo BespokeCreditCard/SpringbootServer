@@ -107,8 +107,8 @@
 						            <tr>
 						                <th>성별</th>
 						                <td>
-			                                    <label><input type="radio" name="gender" value="0" ${fn:trim(userData.gender) eq "1" ? 'checked' : ''}/> 남성</label>
-                								<label><input type="radio" name="gender" value="1" ${fn:trim(userData.gender) eq "2" ? 'checked' : ''}/> 여성</label>
+			                                    <label><input type="radio" name="gender" value="1" ${fn:trim(userData.gender) eq "1" ? 'checked' : ''}/> 남성</label>
+                								<label><input type="radio" name="gender" value="2" ${fn:trim(userData.gender) eq "2" ? 'checked' : ''}/> 여성</label>
 						                </td>
 						            </tr>
 						            <tr>
@@ -278,6 +278,7 @@
 				} else if(data.success) {
 					$('#passwordModal').modal('hide');
                     alert('비밀번호가 성공적으로 변경되었습니다.');
+					$('.modal-backdrop.fade.show').remove();
                 } else {
 					alert('비밀번호 변경에 실패하였습니다.');
 				}
