@@ -115,7 +115,7 @@
     <div class="title-body">
         <span class="e1_5314" style="font-weight: bold;">카드 추천 서비스</span>
 
-        <span class="e1_5315" style="font-family: 'Roboto Slab', serif;">Bespoke Credit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span class="e1_5315" style="font-family: 'Roboto Slab', serif;">Bespoke Credit Card&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         
 
         <div class="window-container">
@@ -205,32 +205,32 @@
 				            </div>
 			            <div style="display: inline-block; vertical-align: middle;">
 			                <h4 style="margin-top: 40px;">류준규</h4>
-			                <p class="text-muted">Leader, Back-end, Data Analysis, Front-end</p>
+			                <p class="text-muted">Project Owner, Product Manager, Data Analysis, Back-End, Front-End, 기획</p>
 			            </div>
 			        </div>
 			    </div>
 			
 			    <!-- 두 번째 팀 멤버 -->
 			    <div class="col-lg-4">
-			        <div class="team-member" style="width: 200px;">
-			        	<div style=" width: 200px; height: 200px; border-radius: 70%; overflow: hidden; border: 12px solid #ADD8E6;">
-			            	<img src="./img/신연재.png" alt="신연재" style="width: 100%;  height: 100%; border-radius: 70%; object-fit: cover;">
-			            </div>
-			                <h4 style="margin-top: 40px;">신연재</h4>
-			            <p class="text-muted">Data Analysis, Front-end, Write documents, Planning</p>
-			        </div>
-			    </div>
-			
-			    <!-- 세 번째 팀 멤버 -->
-			    <div class="col-lg-4">
     				<div class="team-member" style="width: 200px;">
 			        	<div style=" width: 200px; height: 200px; border-radius: 70%; overflow: hidden; border: 12px solid #ADD8E6;">
 			            	<img src="./img/김준우.jpg" alt="김준우" style="width: 100%; height: 100%; border-radius: 70%; object-fit: cover;">
 			            </div>
 			            <h4 style="margin-top: 40px;">김준우</h4>
-			            <p class="text-muted">Back-end, Planning, PM, Front-end</p>			            
+			            <p class="text-muted">Back-end, Front-end, Security, 기획</p>			            
     					</div>
 			        </div>
+
+			    <!-- 세 번째 팀 멤버 -->
+			    <div class="col-lg-4">
+			        <div class="team-member" style="width: 200px;">
+			        	<div style=" width: 200px; height: 200px; border-radius: 70%; overflow: hidden; border: 12px solid #ADD8E6;">
+			            	<img src="./img/신연재.png" alt="신연재" style="width: 100%;  height: 100%; border-radius: 70%; object-fit: cover;">
+			            </div>
+			                <h4 style="margin-top: 40px;">신연재</h4>
+			            <p class="text-muted">Data Analysis, Front-end, 기획</p>
+			        </div>
+			    </div>
 			
 			    <!-- 네 번째 팀 멤버 -->
  				<div class="col-lg-4">
@@ -239,7 +239,7 @@
 			            	<img src="./img/우선주.jpg" alt="우선주" style="width: 100%; height: 100%; border-radius: 70%; object-fit: cover;">
 			            	</div>
 			            <h4 style="margin-top: 40px;">우선주</h4>
-			            <p class="text-muted">Data Analysis, Planning, Front-end, Back-end</p>
+			            <p class="text-muted">Data Analysis, Front-end, 기획</p>
 			        </div>
 			    </div>
 			
@@ -250,7 +250,7 @@
 			            <img src="./img/이민수.png" alt="이민수" style="width: 100%; height: 100%; border-radius: 70%; object-fit: cover;">
 			            </div>
 			            <h4 style="margin-top: 40px;">이민수</h4>
-			            <p class="text-muted">Back-end, Writes Documents, Distribution, Front-end</p>
+			            <p class="text-muted">Product Manager, Back-end, Security, DevOps, 기획</p>
 			        </div>
 			    </div>
 			</div>
