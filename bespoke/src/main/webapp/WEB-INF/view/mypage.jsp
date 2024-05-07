@@ -246,6 +246,7 @@
     	    } else {
     	        // 두 번째 클릭, 폼 제출
     	        document.getElementById('userForm').submit();
+				alert("성공적으로 수정되었습니다.");
     	    }
     	}
 	    
