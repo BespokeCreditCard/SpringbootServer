@@ -2,14 +2,24 @@
 <%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html lang="ko">
-
+<head>
     <%@include file="header/header.jsp"%>
- <style> 
+    <title>에러 발생</title>
+    <style> 
     @font-face {
         font-family: 'Sansation_Bold';
         src: url('/fonts/Sansation_Bold.ttf') format('truetype');
     }
-
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f7f7f7;
+        color: #333;
+        font-family: 'Sansation_Bold', Arial, sans-serif;
+    }
     .error-container {
         text-align: center;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -25,7 +35,8 @@
         color: #666;
     }
     </style>
-
+</head>
+<body>
     <div class="error-container">
         <h2>오류 발생</h2>
         <p>잘못된 접근입니다.</p>

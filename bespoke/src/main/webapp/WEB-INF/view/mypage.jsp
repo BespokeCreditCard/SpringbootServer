@@ -72,8 +72,13 @@
 	    margin-top: 10px;
 	    margin-bottom: 10px; /* 수정된 부분 */
     }
-    input[type="text"] {
+    input[type="text"]{
         width: 100%;
+        border: none;
+        font-family: 'WooridaumR';
+        color: black;
+    }
+    input[type="radio"]{
         border: none;
         font-family: 'WooridaumR';
         color: black;
@@ -107,8 +112,10 @@
 						            <tr>
 						                <th>성별</th>
 						                <td>
-			                                    <label><input type="radio" name="gender" value="1" ${fn:trim(userData.gender) eq "1" ? 'checked' : ''}/> 남성</label>
-                								<label><input type="radio" name="gender" value="2" ${fn:trim(userData.gender) eq "2" ? 'checked' : ''}/> 여성</label>
+						                	<div id="can_revise">
+			                                    <label><input id="can_revise" disabled='disabled' type="radio" name="gender" value="1" ${fn:trim(userData.gender) eq "1" ? 'checked' : ''}/> 남성</label>
+                								<label><input id="can_revise" disabled='disabled' type="radio" name="gender" value="2" ${fn:trim(userData.gender) eq "2" ? 'checked' : ''}/> 여성</label>
+						                	</div>
 						                </td>
 						            </tr>
 						            <tr>
@@ -278,7 +285,6 @@
 				} else if(data.success) {
 					$('#passwordModal').modal('hide');
                     alert('비밀번호가 성공적으로 변경되었습니다.');
-					$('.modal-backdrop.fade.show').remove();
                 } else {
 					alert('비밀번호 변경에 실패하였습니다.');
 				}

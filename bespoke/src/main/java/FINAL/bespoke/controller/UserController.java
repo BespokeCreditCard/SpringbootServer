@@ -186,13 +186,11 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> updatePassword(@RequestBody DeliveryPasswordDto deliveryPasswordDto, HttpServletRequest request) {
     	User user = receiveCardService.findUserId(request);
     	Map<String, Object> response = new HashMap<>();    	
-        if (!bCryptPasswordEncoder.matches(deliveryPasswordDto.getCurrentPassword(), user.getPassword())) {
-            response.put("fail_current", "현재 비밀번호가 일치하지 않습니다.");
-        } else {
-            user.setPassword(bCryptPasswordEncoder.encode(deliveryPasswordDto.getNewPassword()));
-            userRepository.save(user);
-            response.put("success", true);
-        }
-        return ResponseEntity.ok(response);
+    	if (!user.getPassword().equals(bCryptPasswordEncoder.encode(deliveryPasswordDto.getCurrentPassword()))) {
+    		response.put("fail_current", response);
+    	}
+    	user.setPassword(bCryptPasswordEncoder.encode(deliveryPasswordDto.getNewPassword()));
+    	response.put("success", true);
+    	return ResponseEntity.ok(response);
     }
 }
