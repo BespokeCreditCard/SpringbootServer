@@ -107,7 +107,7 @@
 						            </colgroup>
 						            <tr>
 						                <th>이름</th>
-						                <td><input id="can_revise" type="text" name="name" value="${userData.name}" /></td>
+						                <td><input id="can_revise" disabled='disabled' type="text" name="name" value="${userData.name}" /></td>
 						            </tr>
 						            <tr>
 						                <th>성별</th>
@@ -120,7 +120,7 @@
 						            </tr>
 						            <tr>
 						                <th>생년월일</th>
-						                <td><input id="can_revise" type="text" name="birthDate" value="${userData.birthDate}" /></td>
+						                <td><input id="can_revise" disabled='disabled' type="text" name="birthDate" value="${userData.birthDate}" /></td>
 						            </tr>
 						            <tr>
 						                <th>연락처</th>
