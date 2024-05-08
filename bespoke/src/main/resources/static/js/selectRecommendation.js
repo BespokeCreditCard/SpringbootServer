@@ -117,7 +117,16 @@ async function sendSelectedBenefits(selectedBenefits, seq, clusterNum) {
 		var top5_card_idxs = [14, 98, 118, 131, 50];
 		var selected_benefits = ["동물병원", "온라인쇼핑", "대중교통", "해외이용", "영화"];
 		let result = {seq: 'A12ZOS8HQ3DSVT4TTDXS', cluster_num: 5, top5_card_idxs: top5_card_idxs, selected_benefits: selected_benefits}
-
+		
+		try {
+	        await fetch('/selectBenefitLog', {
+	            method: 'POST',
+	            body: JSON.stringify(result)
+	        });
+        } catch(error) {
+            console.error('### 로그 생성 실패:', error);			
+		}
+		
         var redirectURL = contextPath + "/recommendation_view/recommendation"
         result.redirectURL = redirectURL;
         
