@@ -83,5 +83,6 @@
     </div>
 
 </body>
+<script>var contextPath = "<%= request.getContextPath() %>";</script>
 <script src="/js/selectRecommendation.js"></script>
 </html>
