@@ -10,7 +10,7 @@ import java.time.Duration;
 public class AiGeneratorConfig {
 	
     @Value("${openai.key}")
-    private String apiKey;
+    private String apiKey="A";
 
     @Bean
     public OpenAiService getOpenAiService() {

@@ -10,16 +10,7 @@
         font-family: 'Sansation_Bold';
         src: url('/fonts/Sansation_Bold.ttf') format('truetype');
     }
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f7f7f7;
-        color: #333;
-        font-family: 'Sansation_Bold', Arial, sans-serif;
-    }
+
     .error-container {
         text-align: center;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
