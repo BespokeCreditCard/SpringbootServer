@@ -54,7 +54,7 @@
 <img src="./imgs/ERD.png">
 
 ### 그 외의 문서들
-<style>
+<!-- <style>
     table {
         width: 100%;
         border-collapse: collapse;
@@ -74,7 +74,7 @@
         width: 100%;
         height: 100%;
     }
-</style>
+</style> -->
 
 <table>
         <tr>
